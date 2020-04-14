@@ -18,15 +18,15 @@ public class DBUser extends DBManagerImpl {
 	 * @return
 	 * 			true if it is registered, false otherwise
 	 */
-	public boolean existUser(String user) {
+	public boolean existUser(String email) {
 		
 		try
 		{
 			String query = "select * from USER ";
 			rs = open().executeQuery(query);
 			while(rs.next()) {
-				if(rs.getString("nome").contentEquals(user)) {
-				System.out.println("User exist! (" + user + ")");
+				if(rs.getString("email").contentEquals(email)) {
+				System.out.println("User exist! (" + email + ")");
 					return true;
 				}
 			}
@@ -89,9 +89,9 @@ public class DBUser extends DBManagerImpl {
 	}
 	
 	
-	public User login(String username, String password) {
+	public User login(String email, String password) {
 		
-		if(!this.existUser(username))
+		if(!this.existUser(email))
 			return null;
 		
 		User user = null;
@@ -101,8 +101,8 @@ public class DBUser extends DBManagerImpl {
 			query = "select * from USER ";
 			rs = open().executeQuery(query);
 			while(rs.next()) {
-				if(rs.getString("nome").contentEquals(username) && rs.getString("password").contentEquals(password)) {
-				System.out.println("Welcome " + username + " :)");
+				if(rs.getString("email").contentEquals(email) && rs.getString("password").contentEquals(password)) {
+				System.out.println("Welcome " + email + " :)");
 					user = new User(rs.getInt("id_user"), rs.getString("nome"),rs.getString("password")
 							,rs.getString("email"),rs.getBoolean("isModeratore"));
 				}
