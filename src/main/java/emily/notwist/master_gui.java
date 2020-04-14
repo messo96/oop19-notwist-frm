@@ -5,6 +5,10 @@
  */
 package emily.notwist;
 
+import java.awt.event.ActionListener;
+
+import notwist.database.DBUser;
+
 /**
  *
  * @author emily
@@ -12,9 +16,15 @@ package emily.notwist;
 public class master_gui extends javax.swing.JFrame {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
      * Creates new form master_gui
      */
-    public master_gui() {
+	private DBUser user = new DBUser();
+	
+	public master_gui() {
         initComponents();
     }
 
@@ -98,7 +108,14 @@ public class master_gui extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton1.setText("LOGIN");
         jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, 300, 60));
+        this.jButton1.addActionListener(e ->{
+        	if(this.getCredential())
+        		System.out.println("Credenziali corrette");
+        	else
 
+        		System.out.println("Credenziali errate");
+        });
+        
         jLabel2.setText("Non hai un account? Registrati");
         jLabel2.setToolTipText("");
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 350, 170, -1));
@@ -129,7 +146,7 @@ public class master_gui extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(67, 71, 91));
 
-        jLabel7.setIcon(new javax.swing.ImageIcon("C:\\Users\\emily\\Desktop\\Progetto\\font_test_1.png")); // NOI18N
+        jLabel7.setIcon(new javax.swing.ImageIcon("src/main/java/emily/notwist/font_test_1.png")); // NOI18N
         jLabel7.setDoubleBuffered(true);
         jLabel7.setFocusable(false);
         jLabel7.setRequestFocusEnabled(false);
@@ -199,42 +216,68 @@ public class master_gui extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(0, 150, 0));
     }//GEN-LAST:event_pssw_fieldFocusGained
 
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(master_gui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(master_gui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(master_gui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(master_gui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+    public String getMail() {
+    	return this.mail_field.getText();
+    }
+    
+    public String getPassword() {
+    	return this.pssw_field.getPassword().toString();
+    }
+    
+    public boolean getCredential() {
+    	return user.login(getMail(), getPassword()) != null;
+    }
+    
+    
+    public void start() {
+    	if(this.jButton1.getActionListeners().length == 0)
+    		throw new IllegalStateException();
+    	
+    	java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new master_gui().setVisible(true);
             }
         });
-    }
 
+    	
+    }
+    
+    /**
+     * @param args the command line arguments
+     */
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//    	
+//    	
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(master_gui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(master_gui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(master_gui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(master_gui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new master_gui().setVisible(true);
+//            }
+//        });
+//}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Padre;
     private javax.swing.JButton jButton1;
