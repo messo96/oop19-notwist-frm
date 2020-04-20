@@ -42,7 +42,7 @@ public class DBDiscussion extends DBManagerImpl{
 		
 	}
 	
-	public boolean createDiscussion(User user, Discussion discussion, Topic topic) {
+	public boolean createDiscussion(User user, Discussion discussion, Category topic) {
 				
 		 try {
 			 

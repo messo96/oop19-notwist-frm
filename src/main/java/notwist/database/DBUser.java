@@ -41,8 +41,6 @@ public class DBUser extends DBManagerImpl {
 
 		return false;
 	}
-	
-
 	/**
 	 * 
 	 * @param user
@@ -71,7 +69,7 @@ public class DBUser extends DBManagerImpl {
 		        PreparedStatement prepared = super.getConn()
 		        		.prepareStatement("insert into USER (id_user,nome, password, email,isModeratore) values (?,?,?,?,?)");
 		     	prepared.setInt(1, index+1);
-		        prepared.setString(2, this.Crypt(user));
+		        prepared.setString(2, user);
 		     	prepared.setString(3, this.Crypt(password));
 		     	prepared.setString(4,this.Crypt(email));
 		     	prepared.setBoolean(5, isModerator);
@@ -91,27 +89,23 @@ public class DBUser extends DBManagerImpl {
 	
 	public User login(String email, String password) {
 		
-		if(!this.existUser(email))
-			return null;
-		
 		User user = null;
-		open();
 		try
 		{
 			query = "select * from USER ";
 			rs = open().executeQuery(query);
 			while(rs.next()) {
-				if(rs.getString("email").contentEquals(email) && rs.getString("password").contentEquals(password)) {
-					user = new User(rs.getInt("id_user"), this.Decrypt(rs.getString("nome")),this.Decrypt(rs.getString("password"))
+				if(rs.getString("email").contentEquals(this.Crypt(email)) && rs.getString("password").contentEquals(this.Crypt(password))) {
+					user = new User(rs.getInt("id_user"), rs.getString("nome"),this.Decrypt(rs.getString("password"))
 							,this.Decrypt(rs.getString("email")),rs.getBoolean("isModeratore"));
-					System.out.println("Welcome " + user.getName()+ " :)");
+					System.out.println("Welcome " +user.getName() +" \t:)");
 					
 				}
 			}
 		}
 		catch(Exception e)
 		{
-			System.out.println("User doesn't exist!"+e);
+			System.out.println("User doesn't exist!\n"+e);
 			
 		}
 		finally {
