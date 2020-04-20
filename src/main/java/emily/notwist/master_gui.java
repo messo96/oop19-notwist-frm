@@ -6,8 +6,11 @@
 package emily.notwist;
 
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import notwist.database.DBUser;
+import sign_up.register;
 
 /**
  *
@@ -118,6 +121,39 @@ public class master_gui extends javax.swing.JFrame {
         
         jLabel2.setText("Non hai un account? Registrati");
         jLabel2.setToolTipText("");
+        jLabel2.addMouseListener( new MouseListener(){
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				new register().start();
+				
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+        	
+        });
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 350, 170, -1));
 
         jLabel5.setText(".");
