@@ -9,7 +9,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import homepage.Homepage_gui;
 import notwist.database.DBUser;
+import notwist.database.User;
 import sign_up.register;
 
 /**
@@ -112,15 +114,19 @@ public class master_gui extends javax.swing.JFrame {
         jButton1.setText("LOGIN");
         jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, 300, 60));
         this.jButton1.addActionListener(e ->{
-        	if(this.getCredential())
+        	User user = this.getCredential();
+        	if(user != null) {
         		System.out.println("Credenziali corrette");
+        		new Homepage_gui().start(user);// Aggiungere User in parametro??
+        		super.dispose();
+        	}
         	else
-
         		System.out.println("Credenziali errate");
+        	
         });
         
         jLabel2.setText("Non hai un account? Registrati");
-        jLabel2.setToolTipText("");
+        jLabel2.setToolTipText("Hai bisogno di un account per poter entrare");
         jLabel2.addMouseListener( new MouseListener(){
 
 			@Override
@@ -257,11 +263,14 @@ public class master_gui extends javax.swing.JFrame {
     }
     
     public String getPassword() {
-    	return this.pssw_field.getPassword().toString();
+    	return this.pssw_field.getText();
     }
-    
-    public boolean getCredential() {
-    	return user.login(getMail(), getPassword()) != null;
+    /**
+     * Control if user exist
+     * if not exist, return null, otherwise return corrent User
+     */
+    public User getCredential() {
+    	return user.login(getMail(), getPassword());
     }
     
     
