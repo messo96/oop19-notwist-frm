@@ -5,7 +5,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-abstract class DBManagerImpl{
+import rombo.crypt.CrypterImplementation;
+
+abstract class DBManagerImpl extends CrypterImplementation{
 
 	private Connection conn;
     private Statement stmt;
