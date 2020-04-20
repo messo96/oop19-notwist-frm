@@ -71,9 +71,9 @@ public class DBUser extends DBManagerImpl {
 		        PreparedStatement prepared = super.getConn()
 		        		.prepareStatement("insert into USER (id_user,nome, password, email,isModeratore) values (?,?,?,?,?)");
 		     	prepared.setInt(1, index+1);
-		        prepared.setString(2, user);
-		     	prepared.setString(3, password);
-		     	prepared.setString(4,email);
+		        prepared.setString(2, this.Crypt(user));
+		     	prepared.setString(3, this.Crypt(password));
+		     	prepared.setString(4,this.Crypt(email));
 		     	prepared.setBoolean(5, isModerator);
 		     	
 		     	prepared.executeUpdate();
@@ -102,9 +102,10 @@ public class DBUser extends DBManagerImpl {
 			rs = open().executeQuery(query);
 			while(rs.next()) {
 				if(rs.getString("email").contentEquals(email) && rs.getString("password").contentEquals(password)) {
-				System.out.println("Welcome " + email + " :)");
-					user = new User(rs.getInt("id_user"), rs.getString("nome"),rs.getString("password")
-							,rs.getString("email"),rs.getBoolean("isModeratore"));
+					user = new User(rs.getInt("id_user"), this.Decrypt(rs.getString("nome")),this.Decrypt(rs.getString("password"))
+							,this.Decrypt(rs.getString("email")),rs.getBoolean("isModeratore"));
+					System.out.println("Welcome " + user.getName()+ " :)");
+					
 				}
 			}
 		}
