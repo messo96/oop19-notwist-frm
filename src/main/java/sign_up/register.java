@@ -5,6 +5,10 @@
  */
 package sign_up;
 
+import javax.swing.JOptionPane;
+import javax.swing.WindowConstants;
+
+import notwist.database.DBUser;
 
 /**
  *
@@ -31,7 +35,7 @@ public class register extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDialog1 = new javax.swing.JDialog();
+    	jDialog1 = new javax.swing.JDialog();
         jPanel4 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -166,7 +170,23 @@ public class register extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton1.setText("REGISTER");
+        /*
+         * Send data to class DBImplementation
+         * (Try to register new user)
+         * #default isModerator = false
+         */
+        jButton1.addActionListener(e ->{
+        	if(new DBUser().addUser(this.getUsername(), this.getPassword(), this.getEmail(), false)) {
+        		JOptionPane.showMessageDialog(null, "Account created succesfully! :) ");
+        		super.dispose();
+        	}
+        		
+        	else
+        		JOptionPane.showMessageDialog(null, "Error, something goes wrong!:(\nRetry ");
+        		
+        });
         jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 360, 300, 60));
+        
 
         jLabel2.setText("Hai già un account? Loggati");
         jLabel2.setToolTipText("");
@@ -319,7 +339,7 @@ public class register extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-jDialog1.dispose();        // TODO add your handling code here:
+    	jDialog1.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -329,8 +349,7 @@ jDialog1.dispose();        // TODO add your handling code here:
         	
 
             
-            jDialog1.getContentPane();
-         
+            jDialog1.getContentPane();         
             jDialog1.setSize(400, 350);
         
             jDialog1.pack();
