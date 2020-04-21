@@ -5,9 +5,13 @@
  */
 package sign_up;
 
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
 import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 
+import emily.notwist.master_gui;
 import notwist.database.DBUser;
 
 /**
@@ -185,19 +189,53 @@ public class register extends javax.swing.JFrame {
         		JOptionPane.showMessageDialog(null, "Error, something goes wrong!:(\nRetry ");
         		
         });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 360, 300, 60));
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 360, 300, 60));
         
 
         jLabel2.setText("Hai già un account? Loggati");
         jLabel2.setToolTipText("");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 440, 170, -1));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 440, 170, -1));
 
         jLabel5.setText(".");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 440, 30, -1));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 440, 30, -1));
 
         jLabel4.setForeground(new java.awt.Color(250, 0, 0));
         jLabel4.setText("qui");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 440, 20, -1));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 440, 20, -1));
+        
+        jLabel4.addMouseListener( new MouseListener(){
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				dispose();
+				new master_gui().start();
+				
+				
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}});
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setText("Mail");

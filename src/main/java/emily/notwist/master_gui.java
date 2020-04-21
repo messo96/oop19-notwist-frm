@@ -127,11 +127,13 @@ public class master_gui extends javax.swing.JFrame {
         
         jLabel2.setText("Non hai un account? Registrati");
         jLabel2.setToolTipText("Hai bisogno di un account per poter entrare");
-        jLabel2.addMouseListener( new MouseListener(){
+        jLabel4.addMouseListener( new MouseListener(){
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				dispose();
 				new register().start();
+				
 				
 			}
 
@@ -160,14 +162,14 @@ public class master_gui extends javax.swing.JFrame {
 			}
         	
         });
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 350, 170, -1));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 350, 190, -1));
 
         jLabel5.setText(".");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 350, 30, -1));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 350, 30, -1));
 
         jLabel4.setForeground(new java.awt.Color(250, 0, 0));
         jLabel4.setText("qui");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 350, 20, -1));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 350, 20, -1));
 
         Padre.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 40, 420, 470));
 
