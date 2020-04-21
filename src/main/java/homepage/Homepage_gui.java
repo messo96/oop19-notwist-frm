@@ -5,6 +5,11 @@
  */
 package homepage;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import notwist.database.Category;
 import notwist.database.DBCategory;
 import notwist.database.User;
 
@@ -318,9 +323,9 @@ public class Homepage_gui extends javax.swing.JFrame {
         jList1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
         	DBCategory cat = new DBCategory();
-        	String[] strings = cat.getNameOfAllTheCategories();
-        	public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+        	List<Category> list = cat.getCategories().get();
+        	public int getSize() { return list.size();}
+            public String getElementAt(int i) { return list.get(i).getName();}
         });
         jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         category_list.setViewportView(jList1);
