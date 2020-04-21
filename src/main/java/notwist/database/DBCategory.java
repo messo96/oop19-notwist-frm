@@ -76,17 +76,16 @@ public class DBCategory {
 	 * NON mi piace ma è per far vedere nella lista della HomePage
 	 * @return
 	 */
-	public String[] getNameOfAllTheCategories() {
+	public Optional< List<Category> > getNameOfAllTheCategories() {
 		
-			String[] list = new String[this.getNumberOfCategories()];
-			int i=0;
+			List<Category> list = new ArrayList<>();
 			query = "Select * from TOPIC";
 			try {
 				rs = database.open().executeQuery(query);
 				while(rs.next()) {
-					list[i] = rs.getString("titolo");
-					i++;
-				}					
+					list.add(new CategoryImpl(rs.getInt("id_macro"),rs.getString("titolo")));
+				}
+				return Optional.of(list);
 			}
 			catch(Exception e) {
 				System.out.println("Error String[] categories");
@@ -94,6 +93,6 @@ public class DBCategory {
 			finally {
 				database.close();
 			}
-			return list;
+			return Optional.of(list);
 		}
 }
