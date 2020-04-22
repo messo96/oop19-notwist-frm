@@ -4,6 +4,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Optional;
 
+import javax.swing.JOptionPane;
+
 import notwist.base.User;
 
 /**
@@ -77,14 +79,17 @@ public class DBUserImpl extends DBManagerImpl implements DBUser {
 		User user = null;
 		try
 		{
-			query = "select * from USER ";
+			query = "select * from USER";
 			rs = open().executeQuery(query);
 			while(rs.next()) {
-				if(rs.getString("email").contentEquals(this.Crypt(email)) && rs.getString("password").contentEquals(this.Crypt(password))) {
+				if(rs.getString("email").contentEquals(this.Crypt(email)) 
+														&& rs.getString("password").contentEquals(this.Crypt(password))) {
 					user = new User(rs.getInt("id_user"), rs.getString("nome"),this.Decrypt(rs.getString("password"))
 							,this.Decrypt(rs.getString("email")),rs.getBoolean("isModeratore"));
-					System.out.println("Welcome " +user.getUsername() +" \t:)");	
+					System.out.println("Welcome " +user.getUsername() +"  :)");
+					break;
 				}
+
 			}
 		}
 		catch(Exception e)

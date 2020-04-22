@@ -317,7 +317,9 @@ public class register extends javax.swing.JFrame {
         //Button that create new User from DBUserImpl
         //isModerator to default false
         jButton1.addActionListener(e ->{
-        	if(new DBUserImpl().register(this.getUsername(), this.getPassword(), this.getEmail(), false)) {
+        	if(!jCheckBox1.isSelected())
+        		JOptionPane.showMessageDialog(null, "You have to accept our rules before sign up :0");
+        	else if(new DBUserImpl().register(this.getUsername(), this.getPassword(), this.getEmail(), false)) {
         		JOptionPane.showMessageDialog(null, "Account created succesfully! :) ");
         		super.dispose();
         	}

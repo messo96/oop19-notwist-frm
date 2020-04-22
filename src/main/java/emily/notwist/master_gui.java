@@ -195,12 +195,14 @@ public class master_gui extends javax.swing.JFrame {
         		JOptionPane.showMessageDialog(null, "Credenziali corrette, Benvenuto!");
         		System.out.println("Credenziali corrette");
         		super.dispose();
-        		new Homepage_gui().start(user.get());
+        		new Homepage_gui(user.get());
+        		System.out.println(user.get() + "A");
         		
         	}
-        	else
+        	else {
         		JOptionPane.showMessageDialog(null, "Credenziali errate, riprovare! :(");
         		System.out.println("Credenziali errate");
+        	}
         	
         });
         

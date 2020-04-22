@@ -56,25 +56,7 @@ public class DBCategory {
 		}
 		return flag;
 	}
-	
-	public Integer getNumberOfCategories() {
-		Integer count = 0;
-		query = "Select * from TOPIC";
-		try {
-			rs = database.open().executeQuery(query);
-			while(rs.next()) {
-				count++;
-			}					
-		}
-		catch(Exception e) {
-			System.out.println("Error Counting categories");
-		}
-		finally {
-			database.close();
-		}
-		return count;
-	}
-	
+
 	/**
 	 * NON mi piace ma è per far vedere nella lista della HomePage
 	 * @return
@@ -98,4 +80,8 @@ public class DBCategory {
 			}
 			return Optional.of(list);
 		}
+	
+	public Category getCategoryByName(final String name) {
+		return this.getNameOfAllTheCategories().get().stream().filter(c -> c.getName().equals(name)).findFirst().get();
+	}
 }

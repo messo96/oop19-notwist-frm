@@ -22,15 +22,14 @@ public interface DBDiscussion {
 	/**
 	 * Create a new discussion and load on database
 	 * 
-	 * @param user
-	 * 			Creator of the discussion
+	 * 
 	 * @param discussion
 	 * 			Discussion to load
 	 * @param topic
 	 * 			Category of the discussion
 	 * @return
 	 */
-	public boolean createDiscussion(final User user, final Discussion discussion, final Category topic);
+	public boolean createDiscussion(final Discussion discussion, final Category topic);
 		
 	/**
 	 * 

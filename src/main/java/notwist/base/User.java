@@ -35,6 +35,10 @@ public class User {
 		return isModerator;
 	}
 	
+	public String toString() {
+		return this.getUsername() + " (" + this.getId() + ")";
+	}
+	
 	
 	
 }

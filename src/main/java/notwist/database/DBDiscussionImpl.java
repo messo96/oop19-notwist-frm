@@ -10,6 +10,7 @@ import java.util.Optional;
 
 import notwist.base.Category;
 import notwist.base.Discussion;
+import notwist.base.DiscussionImpl;
 import notwist.base.User;
 
 public class DBDiscussionImpl extends DBManagerImpl implements DBDiscussion{
@@ -29,7 +30,7 @@ public class DBDiscussionImpl extends DBManagerImpl implements DBDiscussion{
 	              
 	     while (rs.next()) {
 	    	 if(rs.getInt("id_creator") == (user.getId()))
-	       	discussion.add(new Discussion(user.getId(),rs.getString("title"), rs.getString("description")));
+	       	discussion.add(new DiscussionImpl(user.getId(),rs.getString("title"), rs.getString("description")));
 	     }
 		}
 	     catch(SQLException e) {
@@ -44,22 +45,25 @@ public class DBDiscussionImpl extends DBManagerImpl implements DBDiscussion{
 			return Optional.of(discussion);
 	}
 	
-	public boolean createDiscussion(final User user, final Discussion discussion, final Category topic) {			
+	public boolean createDiscussion(final Discussion discussion, final Category topic) {			
 		 try {
-			 
-			 	PreparedStatement prepared = super.getConn()
-		        		.prepareStatement("insert into DISCUSSION (id_creator,title,description,id_macro) values (?,?,?,?)");
-		     	prepared.setInt(1,user.getId());
+			 System.out.println(discussion);
+			 System.out.println(topic.getName());
+			 query = "insert into DISCUSSION (id_user,title,description,id_macro) values (?,?,?,?)";
+			 	open();
+			 	PreparedStatement prepared = super.getConn().prepareStatement(query);
+		     	prepared.setInt(1,discussion.getIdUser());
 		        prepared.setString(2, discussion.getTitle());
 		     	prepared.setString(3, discussion.getDescription());
 		     	prepared.setInt(4,topic.getId());
 		     	
 		     	prepared.executeUpdate();
-		     	System.out.println("Discussion create successfully(" + discussion.getTitle() + " | " + user.getUsername());
+		     	System.out.println("Discussion create successfully(" + discussion.getTitle() + " | " + 
+		     													new DBUserImpl().getUserFromId(discussion.getIdUser()));
 		     	return true;
 		}
 		catch(Exception e) {
-			System.out.println("\nError while adding new user " + e);
+			System.out.println("\nError while adding new discussion " + e);
 			return false;
 		}
 		finally {
@@ -77,7 +81,7 @@ public class DBDiscussionImpl extends DBManagerImpl implements DBDiscussion{
 		 
 	              
 	     while (rs.next()) {
-	    		discussion.add(new Discussion(rs.getInt("id_user"),rs.getString("title"), rs.getString("description")));
+	    		discussion.add(new DiscussionImpl(rs.getInt("id_user"),rs.getString("title"), rs.getString("description")));
 	     }
 		}
 	     catch(SQLException e) {
@@ -91,8 +95,7 @@ public class DBDiscussionImpl extends DBManagerImpl implements DBDiscussion{
 		else
 			return Optional.of(discussion);
 	}
-	
-	
+
 
 	
 }
