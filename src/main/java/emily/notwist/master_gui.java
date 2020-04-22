@@ -117,45 +117,10 @@ public class master_gui extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton1.setText("LOGIN");
         jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, 300, 60));
-        this.jButton1.addActionListener(e ->{
-        	Optional<User> user = this.getCredential();
-        	if(user.isPresent()) {
-        		JOptionPane.showMessageDialog(null, "Credenziali corrette, Benvenuto!");
-        		System.out.println("Credenziali corrette");
-        		super.dispose();
-        		new Homepage_gui().start(user.get());
-        		
-        	}
-        	else
-        		JOptionPane.showMessageDialog(null, "Credenziali errate, riprovare! :(");
-        		System.out.println("Credenziali errate");
-        	
-        });
         
         jLabel2.setText("Non hai un account? Registrati");
         jLabel2.setToolTipText("Hai bisogno di un account per poter entrare");
-        jLabel4.addMouseListener( new MouseListener(){
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				new register().start();
-				dispose();
-
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {}
-
-			@Override
-			public void mouseExited(MouseEvent e) {}
-        	
-        });
+        
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 350, -1, -1));
 
         jLabel5.setText(".");
@@ -220,6 +185,51 @@ public class master_gui extends javax.swing.JFrame {
             }
         });
 		
+        //<Personalization> of GUI with Methods NOTWIST
+        //############################################
+        
+        //Button Login
+        this.jButton1.addActionListener(e ->{
+        	Optional<User> user = this.getCredential();
+        	if(user.isPresent()) {
+        		JOptionPane.showMessageDialog(null, "Credenziali corrette, Benvenuto!");
+        		System.out.println("Credenziali corrette");
+        		super.dispose();
+        		new Homepage_gui().start(user.get());
+        		
+        	}
+        	else
+        		JOptionPane.showMessageDialog(null, "Credenziali errate, riprovare! :(");
+        		System.out.println("Credenziali errate");
+        	
+        });
+        
+        //Button register
+        jLabel4.addMouseListener( new MouseListener(){
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				new register().start();
+				dispose();
+
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {}
+
+			@Override
+			public void mouseExited(MouseEvent e) {}
+        	
+        });
+        
+        
+        
     }
 
     private void mail_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mail_fieldActionPerformed
@@ -254,6 +264,8 @@ public class master_gui extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(0, 150, 0));
     }//GEN-LAST:event_pssw_fieldFocusGained
 
+    
+    
     public String getMail() {
     	return this.mail_field.getText();
     }

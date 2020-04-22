@@ -175,23 +175,7 @@ public class register extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton1.setText("REGISTER");
-        
-        
-        /**
-         * Send data to class DBImplementation
-         * (Try to register new user)
-         * #default isModerator = false
-         */
-        jButton1.addActionListener(e ->{
-        	if(new DBUserImpl().register(this.getUsername(), this.getPassword(), this.getEmail(), false)) {
-        		JOptionPane.showMessageDialog(null, "Account created succesfully! :) ");
-        		super.dispose();
-        	}
-        		
-        	else
-        		JOptionPane.showMessageDialog(null, "Error, something goes wrong!:(\nRetry ");
-        		
-        });
+      
         jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 360, 300, 60));
         
 
@@ -206,39 +190,7 @@ public class register extends javax.swing.JFrame {
         jLabel4.setText("qui");
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 440, -1, -1));
         
-        jLabel4.addMouseListener( new MouseListener(){
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				dispose();
-				new master_gui().start();
-				
-				
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}});
+       
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setText("Mail");
@@ -333,6 +285,50 @@ public class register extends javax.swing.JFrame {
             }
         });
         pack();
+        
+
+        //<Personalization> of GUI with Methods NOTWIST
+        //############################################
+        
+        //Label link to login GUI
+        jLabel4.addMouseListener( new MouseListener(){
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				dispose();
+				new master_gui().start();
+				
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {}
+
+			@Override
+			public void mouseExited(MouseEvent e) {}  
+			
+        });
+        
+        //Button that create new User from DBUserImpl
+        //isModerator to default false
+        jButton1.addActionListener(e ->{
+        	if(new DBUserImpl().register(this.getUsername(), this.getPassword(), this.getEmail(), false)) {
+        		JOptionPane.showMessageDialog(null, "Account created succesfully! :) ");
+        		super.dispose();
+        	}
+        		
+        	else
+        		JOptionPane.showMessageDialog(null, "Error, something goes wrong!:(\nRetry ");
+        		
+        });
+        
+        
+        
     }// </editor-fold>//GEN-END:initComponents
 
 		

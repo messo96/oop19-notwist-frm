@@ -184,9 +184,8 @@ public class Homepage_gui extends javax.swing.JFrame {
         body_panel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(3, 3, 3, 3, new java.awt.Color(0, 0, 0)), "What's new", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
         body_panel.setName(""); // NOI18N
         jTable1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-//#########
-        jTable1.setModel(this.loadDiscussion());
-        jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+
+       jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jTable1.setAutoscrolls(true);
         jTable1.setEnabled(true);
         jTable1.setCellSelectionEnabled(false);
@@ -194,20 +193,6 @@ public class Homepage_gui extends javax.swing.JFrame {
         jTable1.setShowGrid(true);
         jTable1.setRequestFocusEnabled(true);
         jTable1.setFocusable(true);
-//############
-        
-        jTable1.addFocusListener(new FocusListener() {
-
-			@Override
-			public void focusGained(FocusEvent e) {
-				      JOptionPane.showMessageDialog(null,jTable1.getValueAt(jTable1.getSelectedRow(), 0));
-				      jTable1.setFocusable(false);
-				      jTable1.setFocusable(true);
-			}
-			@Override
-			public void focusLost(FocusEvent e) {}
-        	
-        });
        
         main_table.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
@@ -311,13 +296,7 @@ public class Homepage_gui extends javax.swing.JFrame {
         categorie_panel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jList1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-//##########
-        	DBCategory cat = new DBCategory();
-        	List<Category> list = cat.getCategories().get();
-        	public int getSize() { return list.size();}
-            public String getElementAt(int i) { return list.get(i).getName();}
-        });
+     
         jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         category_list.setViewportView(jList1);
 
@@ -368,6 +347,39 @@ public class Homepage_gui extends javax.swing.JFrame {
         });
         
         pack();
+        
+        //<Personalization> of GUI with Methods NOTWIST
+        //############################################
+        
+        //List of category on the right
+        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+        	
+        	        	DBCategory cat = new DBCategory();
+        	        	List<Category> list = cat.getCategories().get();
+        	        	public int getSize() { return list.size();}
+        	            public String getElementAt(int i) { return list.get(i).getName();}
+        	        });
+        
+        //Table of discussion in center of the Homepage
+        jTable1.setModel(this.loadDiscussion());
+        
+        //When click on a discussion, open new Window
+        jTable1.addFocusListener(new FocusListener() {
+
+			@Override
+			public void focusGained(FocusEvent e) {
+				      JOptionPane.showMessageDialog(null,jTable1.getValueAt(jTable1.getSelectedRow(), 0));
+				      jTable1.setFocusable(false);
+				      jTable1.setFocusable(true);
+			}
+			@Override
+			public void focusLost(FocusEvent e) {}
+        	
+        });
+        
+        
+        
+        
     }// </editor-fold>//GEN-END:initComponents
 
     private void exitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitMouseClicked
@@ -394,6 +406,11 @@ public class Homepage_gui extends javax.swing.JFrame {
     
     //GEN-LAST:event_search_buttonActionPerformed
 
+    
+    
+    
+    
+    
     private DBDiscussion discussion = new DBDiscussionImpl();
     
     private DefaultTableModel loadDiscussion() {
