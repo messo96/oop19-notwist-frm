@@ -5,12 +5,21 @@
  */
 package homepage;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
+
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 import notwist.database.Category;
 import notwist.database.DBCategory;
+import notwist.database.DBDiscussion;
+import notwist.database.DBDiscussionImpl;
+import notwist.database.Discussion;
 import notwist.database.User;
 
 /**
@@ -20,10 +29,6 @@ import notwist.database.User;
 public class Homepage_gui extends javax.swing.JFrame {
 
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	/**
      * Creates new form Homepage_gui
      */
     public Homepage_gui() {
@@ -177,61 +182,45 @@ public class Homepage_gui extends javax.swing.JFrame {
 
         body_panel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(3, 3, 3, 3, new java.awt.Color(0, 0, 0)), "What's new", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
         body_panel.setName(""); // NOI18N
-
         jTable1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"Barbabietole rosse, buone o no?", "Verdure", "14", "8"}, //Esempio stringa
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title", "Categoria", "Answers", "Views" //header tabelle
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Short.class, java.lang.Short.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+//#########
+        jTable1.setModel(this.loadDiscussion());
         jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        jTable1.setAutoscrolls(false);
-        jTable1.setEnabled(false);
+        jTable1.setAutoscrolls(true);
+        jTable1.setEnabled(true);
+        jTable1.setCellSelectionEnabled(false);
         jTable1.setGridColor(new java.awt.Color(0, 0, 0));
         jTable1.setShowGrid(true);
+        jTable1.setRequestFocusEnabled(true);
+        jTable1.setFocusable(true);
+//############
+        
+        jTable1.addFocusListener(new FocusListener() {
+
+			@Override
+			public void focusGained(FocusEvent e) {
+				      JOptionPane.showMessageDialog(null,jTable1.getValueAt(jTable1.getSelectedRow(), 0));
+				      jTable1.setFocusable(false);
+				      jTable1.setFocusable(true);
+			}
+			@Override
+			public void focusLost(FocusEvent e) {}
+        	
+        });
+       
         main_table.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(0).setResizable(false);
             jTable1.getColumnModel().getColumn(1).setResizable(false);
             jTable1.getColumnModel().getColumn(2).setResizable(false);
             jTable1.getColumnModel().getColumn(3).setResizable(false);
-        }
+        
         jTable1.getColumnModel().getColumn(0).setPreferredWidth(520);
         jTable1.getColumnModel().getColumn(1).setPreferredWidth(108);
         jTable1.getColumnModel().getColumn(2).setPreferredWidth(60);
         jTable1.getColumnModel().getColumn(3).setPreferredWidth(60);
-
+        }
+        
         jTextField2.setText("Spazio per next - prev che non posso creare ora :C");
         jTextField2.setBorder(new javax.swing.border.MatteBorder(null));
 
@@ -322,6 +311,7 @@ public class Homepage_gui extends javax.swing.JFrame {
 
         jList1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
+//##########
         	DBCategory cat = new DBCategory();
         	List<Category> list = cat.getCategories().get();
         	public int getSize() { return list.size();}
@@ -379,15 +369,6 @@ public class Homepage_gui extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * 
-     * 
-     * 
-     * @param evt
-     */
-    
-    private User actualUser = null;
-    
     private void exitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitMouseClicked
         dispose();
     }//GEN-LAST:event_exitMouseClicked
@@ -410,22 +391,30 @@ public class Homepage_gui extends javax.swing.JFrame {
         xy = evt.getY();
     }
     
+    //GEN-LAST:event_search_buttonActionPerformed
+
+    private DBDiscussion discussion = new DBDiscussionImpl();
+    
+    private DefaultTableModel loadDiscussion() {
+    	DefaultTableModel tableDiscussion = new DefaultTableModel(new Object[] {"Titolo","Risposte","Like","Created By"},0);
+        for(Discussion s : discussion.getAllDiscussion().get() ) {
+        	tableDiscussion.addRow(new Object[] {s.getTitle(),0,0,s.getIdUser()});
+        }
+        return tableDiscussion;
+    
+    }
+    
     public void start(User user) {
-    	  /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+    	  java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Homepage_gui().setVisible(true);
             }
         });
-        this.actualUser = user;
     }
     
-    //GEN-LAST:event_search_buttonActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
+    
+    
+//   public static void main(String args[]) {
 //        /* Set the Nimbus look and feel */
 //        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
 //        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

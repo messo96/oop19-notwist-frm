@@ -3,22 +3,19 @@ package notwist.database;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
-public class DBDiscussion extends DBManagerImpl{
+public class DBDiscussionImpl extends DBManagerImpl implements DBDiscussion{
 
 	
 	private ResultSet rs = null;
     private String query;
-	/**
-	 * 
-	 * @param idUser
-	 * 			identifier of user that create the return discussion
-	 * @return
-	 * 			null if user hasn't create a discussion, the discussion otherwise
-	 */
-	public List<Discussion> getDiscussion(User user) {
+	
+    
+	public Optional<List<Discussion>> getDiscussion(final User user){
 		List<Discussion> discussion = new LinkedList<>();
 		
 		try {
@@ -32,18 +29,18 @@ public class DBDiscussion extends DBManagerImpl{
 	     }
 		}
 	     catch(SQLException e) {
-	    	 System.out.println("Error while download discussion"+e);
+	    	 System.out.println("Error while download discussion of " + user.toString() + "\n"+e);
 	     }
 		finally {
 			close();
 		}
-
-		return discussion;
-		
+		if(discussion.isEmpty())
+			return Optional.empty();
+		else
+			return Optional.of(discussion);
 	}
 	
-	public boolean createDiscussion(User user, Discussion discussion, Category topic) {
-				
+	public boolean createDiscussion(final User user, final Discussion discussion, final Category topic) {			
 		 try {
 			 
 			 	PreparedStatement prepared = super.getConn()
@@ -64,6 +61,31 @@ public class DBDiscussion extends DBManagerImpl{
 		finally {
 			close();
 		}
+	}
+
+	@Override
+	public Optional<List<Discussion>> getAllDiscussion() {
+		List<Discussion> discussion = new LinkedList<>();
+		
+		try {
+			query = "select * from DISCUSSION";
+			rs = open().executeQuery(query);
+		 
+	              
+	     while (rs.next()) {
+	    		discussion.add(new Discussion(rs.getInt("id_user"),rs.getString("title"), rs.getString("description")));
+	     }
+		}
+	     catch(SQLException e) {
+	    	 System.out.println("Error while download discussion"+e);
+	     }
+		finally {
+			close();
+		}
+		if(discussion.isEmpty())
+			return Optional.empty();
+		else
+			return Optional.of(discussion);
 	}
 
 	

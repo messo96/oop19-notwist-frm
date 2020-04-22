@@ -2,23 +2,18 @@ package notwist.database;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Optional;
 
 /**
  * Class for manage interaction with database from Users
  */
-public class DBUser extends DBManagerImpl {
+public class DBUserImpl extends DBManagerImpl implements DBUser {
 
 	private ResultSet rs = null;
     private String query;
     
-    /**
-	 * 
-	 * @param user
-	 * 			verify that user effectively is registered
-	 * @return
-	 * 			true if it is registered, false otherwise
-	 */
-	public boolean existUser(String email) {
+   //cambiare ed ottimizzare query con Relax
+	public boolean existUser(final String email) {
 		
 		try
 		{
@@ -41,20 +36,8 @@ public class DBUser extends DBManagerImpl {
 
 		return false;
 	}
-	/**
-	 * 
-	 * @param user
-	 * 				name of the account
-	 * @param password
-	 *				encrypted password
-	 * @param email
-	 * 				a valid email
-	 * @param isModerator
-	 * 				if the account has the privileges of moderator
-	 * @return
-	 * 			true if account has been saved successfully, false otherwise
-	 */
-	public boolean addUser(String user, String password, String email, boolean isModerator) {
+
+	public boolean register(final String user, final String password, final String email, final boolean isModerator) {
 	     if(existUser(user))
 	    	 return false;
 	     
@@ -86,8 +69,8 @@ public class DBUser extends DBManagerImpl {
 		}
 	}
 	
-	
-	public User login(String email, String password) {
+	//cambiare ed ottimizzare query con Relax
+	public Optional<User> login(final String email, final String password) {
 		
 		User user = null;
 		try
@@ -98,8 +81,7 @@ public class DBUser extends DBManagerImpl {
 				if(rs.getString("email").contentEquals(this.Crypt(email)) && rs.getString("password").contentEquals(this.Crypt(password))) {
 					user = new User(rs.getInt("id_user"), rs.getString("nome"),this.Decrypt(rs.getString("password"))
 							,this.Decrypt(rs.getString("email")),rs.getBoolean("isModeratore"));
-					System.out.println("Welcome " +user.getName() +" \t:)");
-					
+					System.out.println("Welcome " +user.getName() +" \t:)");	
 				}
 			}
 		}
@@ -111,8 +93,11 @@ public class DBUser extends DBManagerImpl {
 		finally {
 			close();
 		}
+		if(user != null)
+			return Optional.of(user);
+		else
+			return Optional.empty();
 		
-		return user;
 	}
 	
 	

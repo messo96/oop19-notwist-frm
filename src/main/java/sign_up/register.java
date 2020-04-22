@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 
 import notwist.database.DBUser;
+import notwist.database.DBUserImpl;
 
 /**
  *
@@ -176,7 +177,7 @@ public class register extends javax.swing.JFrame {
          * #default isModerator = false
          */
         jButton1.addActionListener(e ->{
-        	if(new DBUser().addUser(this.getUsername(), this.getPassword(), this.getEmail(), false)) {
+        	if(new DBUserImpl().register(this.getUsername(), this.getPassword(), this.getEmail(), false)) {
         		JOptionPane.showMessageDialog(null, "Account created succesfully! :) ");
         		super.dispose();
         	}

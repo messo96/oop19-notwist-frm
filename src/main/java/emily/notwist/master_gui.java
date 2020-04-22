@@ -8,9 +8,13 @@ package emily.notwist;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Optional;
+
+import javax.swing.JOptionPane;
 
 import homepage.Homepage_gui;
 import notwist.database.DBUser;
+import notwist.database.DBUserImpl;
 import notwist.database.User;
 import sign_up.register;
 
@@ -27,7 +31,7 @@ public class master_gui extends javax.swing.JFrame {
 	/**
      * Creates new form master_gui
      */
-	private DBUser user = new DBUser();
+	private DBUser user = new DBUserImpl();
 	
 	public master_gui() {
         initComponents();
@@ -114,13 +118,16 @@ public class master_gui extends javax.swing.JFrame {
         jButton1.setText("LOGIN");
         jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, 300, 60));
         this.jButton1.addActionListener(e ->{
-        	User user = this.getCredential();
-        	if(user != null) {
+        	Optional<User> user = this.getCredential();
+        	if(user.isPresent()) {
+        		JOptionPane.showMessageDialog(null, "Credenziali corrette, Benvenuto!");
         		System.out.println("Credenziali corrette");
-        		new Homepage_gui().start(user);// Aggiungere User in parametro??
+        		
+        		new Homepage_gui().start(user.get());
         		super.dispose();
         	}
         	else
+        		JOptionPane.showMessageDialog(null, "Credenziali errate, riprovare! :(");
         		System.out.println("Credenziali errate");
         	
         });
@@ -269,8 +276,8 @@ public class master_gui extends javax.swing.JFrame {
      * Control if user exist
      * if not exist, return null, otherwise return corrent User
      */
-    public User getCredential() {
-    	return user.login(getMail(), getPassword());
+    public Optional<User> getCredential() {
+    	return user.login(getMail(), getPassword());	
     }
     
     
