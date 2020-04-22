@@ -3,15 +3,15 @@ package notwist.database;
 public class User {
 
 	private Integer id;
-	private String name;
-	private String surname;
+	private String username;
+	private String password;
 	private String email;
 	private boolean isModerator;
 	
-	public User(Integer id,String name,String surname,String email,boolean isMod) {
+	public User(Integer id,String username,String password,String email,boolean isMod) {
 		this.id = id;
-		this.name = name;
-		this.surname = surname;
+		this.username = username;
+		this.password = password;
 		this.email = email;
 		this.isModerator = isMod;
 	}
@@ -19,12 +19,12 @@ public class User {
 	public Integer getId() {
 		return id;
 	}
-	public String getName() {
-		return name;
+	public String getUsername() {
+		return username;
 	}
 
-	public String getSurname() {
-		return surname;
+	public String getPassword() {
+		return password;
 	}
 
 	public String getEmail() {
