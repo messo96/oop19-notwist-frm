@@ -41,7 +41,7 @@ public class register extends javax.swing.JFrame {
     private void initComponents() {
 
     	jDialog1 = new javax.swing.JDialog();
-        jPanel4 = new javax.swing.JPanel();
+    	jPanel4 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
@@ -175,7 +175,9 @@ public class register extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton1.setText("REGISTER");
-        /*
+        
+        
+        /**
          * Send data to class DBImplementation
          * (Try to register new user)
          * #default isModerator = false
@@ -195,14 +197,14 @@ public class register extends javax.swing.JFrame {
 
         jLabel2.setText("Hai già un account? Loggati");
         jLabel2.setToolTipText("");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 440, 170, -1));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 440, -1, -1));
 
         jLabel5.setText(".");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 440, 30, -1));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 440, -1, -1));
 
         jLabel4.setForeground(new java.awt.Color(250, 0, 0));
         jLabel4.setText("qui");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 440, 20, -1));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 440, -1, -1));
         
         jLabel4.addMouseListener( new MouseListener(){
 
@@ -385,9 +387,6 @@ public class register extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
    
-        	
-
-            
             jDialog1.getContentPane();         
             jDialog1.setSize(400, 350);
         
