@@ -13,14 +13,14 @@ public class DBUserImpl extends DBManagerImpl implements DBUser {
     private String query;
     
    //cambiare ed ottimizzare query con Relax
-	public boolean existUser(final String email) {
+	public boolean existUser(final String email, final String username) {
 		
 		try
 		{
 			String query = "select * from USER ";
 			rs = open().executeQuery(query);
 			while(rs.next()) {
-				if(rs.getString("email").contentEquals(email)) {
+				if(rs.getString("email").contentEquals(email) || rs.getString("user").contentEquals(username)) {
 				System.out.println("User exist! (" + email + ")");
 					return true;
 				}
@@ -38,7 +38,7 @@ public class DBUserImpl extends DBManagerImpl implements DBUser {
 	}
 
 	public boolean register(final String user, final String password, final String email, final boolean isModerator) {
-	     if(existUser(user))
+	     if(existUser(email,user))
 	    	 return false;
 	     
 	     int index=0;
@@ -81,7 +81,7 @@ public class DBUserImpl extends DBManagerImpl implements DBUser {
 				if(rs.getString("email").contentEquals(this.Crypt(email)) && rs.getString("password").contentEquals(this.Crypt(password))) {
 					user = new User(rs.getInt("id_user"), rs.getString("nome"),this.Decrypt(rs.getString("password"))
 							,this.Decrypt(rs.getString("email")),rs.getBoolean("isModeratore"));
-					System.out.println("Welcome " +user.getName() +" \t:)");	
+					System.out.println("Welcome " +user.getUsername() +" \t:)");	
 				}
 			}
 		}
@@ -99,7 +99,30 @@ public class DBUserImpl extends DBManagerImpl implements DBUser {
 			return Optional.empty();
 		
 	}
-	
+
+	@Override
+	public Optional<User> getUserFromId(Integer id) {
+		User user = null;
+		
+		try {
+			query = "SELECT * FROM `USER` WHERE id_user="+id;
+			rs = open().executeQuery(query);
+			if(rs.next())
+				user = new User(rs.getInt("id_user"), rs.getString("nome"),this.Decrypt(rs.getString("password"))
+							,this.Decrypt(rs.getString("email")),rs.getBoolean("isModeratore"));
+			
+		}
+		catch(Exception e) {
+			System.out.println("Error while get User from Id\n"+e);
+		}
+		finally {
+			close();
+		}
+		if(user != null)
+			return Optional.of(user);
+		else
+			return Optional.empty();
+	}
 	
 	
 }

@@ -11,7 +11,7 @@ public interface DBUser {
 		 * @return
 		 * 			true if it is registered, false otherwise
 		 */
-	public boolean existUser(final String email);
+	public boolean existUser(final String email, final String username);
 	
 	/**
 	 * 
@@ -39,4 +39,14 @@ public interface DBUser {
 	 * 			Optional User correctly initialized if credential are corrected, Optional empty otherwise
 	 */
 	public Optional<User> login(final String email, final String password);
+	
+	/**
+	 * 
+	 * @param id
+	 * 			id of the user
+	 * @return
+	 * 			Optional of User if id exist, Optional of empty otherwise
+	 */
+	public Optional<User> getUserFromId(final Integer id);
+	
 }
