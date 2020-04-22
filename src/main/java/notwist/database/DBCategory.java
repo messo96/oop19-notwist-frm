@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import notwist.base.Category;
+import notwist.base.CategoryImpl;
+
 public class DBCategory {
 	private DBManagerImpl database = new DBManagerImpl();
 	private ResultSet rs = null;

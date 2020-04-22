@@ -4,6 +4,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Optional;
 
+import notwist.base.User;
+
 /**
  * Class for manage interaction with database from Users
  */

@@ -8,6 +8,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
+import notwist.base.Category;
+import notwist.base.Discussion;
+import notwist.base.User;
+
 public class DBDiscussionImpl extends DBManagerImpl implements DBDiscussion{
 
 	

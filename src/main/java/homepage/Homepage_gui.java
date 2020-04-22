@@ -15,13 +15,13 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import notwist.database.Category;
+import notwist.base.Category;
+import notwist.base.Discussion;
+import notwist.base.User;
 import notwist.database.DBCategory;
 import notwist.database.DBDiscussion;
 import notwist.database.DBDiscussionImpl;
 import notwist.database.DBUserImpl;
-import notwist.database.Discussion;
-import notwist.database.User;
 
 /**
  *

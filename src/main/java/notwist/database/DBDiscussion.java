@@ -3,6 +3,10 @@ package notwist.database;
 import java.util.List;
 import java.util.Optional;
 
+import notwist.base.Category;
+import notwist.base.Discussion;
+import notwist.base.User;
+
 public interface DBDiscussion {
 	
 	/**

@@ -1,4 +1,4 @@
-package notwist.database;
+package notwist.base;
 
 public class CategoryImpl implements Category {
 

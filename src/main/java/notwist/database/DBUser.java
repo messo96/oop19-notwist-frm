@@ -2,6 +2,8 @@ package notwist.database;
 
 import java.util.Optional;
 
+import notwist.base.User;
+
 public interface DBUser {
 
 	 /**

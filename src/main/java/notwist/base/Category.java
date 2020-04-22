@@ -1,4 +1,4 @@
-package notwist.database;
+package notwist.base;
 
 /**
  * Category (or topic) when there are all the categories that tag various discussion

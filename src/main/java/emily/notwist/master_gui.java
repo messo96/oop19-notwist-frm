@@ -13,9 +13,9 @@ import java.util.Optional;
 import javax.swing.JOptionPane;
 
 import homepage.Homepage_gui;
+import notwist.base.User;
 import notwist.database.DBUser;
 import notwist.database.DBUserImpl;
-import notwist.database.User;
 import sign_up.register;
 
 /**
@@ -141,7 +141,6 @@ public class master_gui extends javax.swing.JFrame {
 				new register().start();
 				dispose();
 
-				
 			}
 
 			@Override
