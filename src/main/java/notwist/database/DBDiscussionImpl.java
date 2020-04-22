@@ -51,7 +51,7 @@ public class DBDiscussionImpl extends DBManagerImpl implements DBDiscussion{
 		     	prepared.setInt(4,topic.getId());
 		     	
 		     	prepared.executeUpdate();
-		     	System.out.println("Discussion create successfully(" + discussion.getTitle() + " | " + user.getName());
+		     	System.out.println("Discussion create successfully(" + discussion.getTitle() + " | " + user.getUsername());
 		     	return true;
 		}
 		catch(Exception e) {
@@ -87,6 +87,8 @@ public class DBDiscussionImpl extends DBManagerImpl implements DBDiscussion{
 		else
 			return Optional.of(discussion);
 	}
+	
+	
 
 	
 }

@@ -122,9 +122,9 @@ public class master_gui extends javax.swing.JFrame {
         	if(user.isPresent()) {
         		JOptionPane.showMessageDialog(null, "Credenziali corrette, Benvenuto!");
         		System.out.println("Credenziali corrette");
-        		
-        		new Homepage_gui().start(user.get());
         		super.dispose();
+        		new Homepage_gui().start(user.get());
+        		
         	}
         	else
         		JOptionPane.showMessageDialog(null, "Credenziali errate, riprovare! :(");
@@ -139,6 +139,8 @@ public class master_gui extends javax.swing.JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				new register().start();
+				dispose();
+
 				
 			}
 

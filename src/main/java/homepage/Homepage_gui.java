@@ -19,6 +19,7 @@ import notwist.database.Category;
 import notwist.database.DBCategory;
 import notwist.database.DBDiscussion;
 import notwist.database.DBDiscussionImpl;
+import notwist.database.DBUserImpl;
 import notwist.database.Discussion;
 import notwist.database.User;
 
@@ -398,7 +399,8 @@ public class Homepage_gui extends javax.swing.JFrame {
     private DefaultTableModel loadDiscussion() {
     	DefaultTableModel tableDiscussion = new DefaultTableModel(new Object[] {"Titolo","Risposte","Like","Created By"},0);
         for(Discussion s : discussion.getAllDiscussion().get() ) {
-        	tableDiscussion.addRow(new Object[] {s.getTitle(),0,0,s.getIdUser()});
+        	tableDiscussion.addRow(new Object[] {s.getTitle(),0,0,
+        								new DBUserImpl().getUserFromId(s.getIdUser()).get().getUsername()});
         }
         return tableDiscussion;
     

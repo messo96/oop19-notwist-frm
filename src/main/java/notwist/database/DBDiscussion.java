@@ -28,6 +28,12 @@ public interface DBDiscussion {
 	 */
 	public boolean createDiscussion(final User user, final Discussion discussion, final Category topic);
 		
+	/**
+	 * 
+	 * @return
+	 * 		all the Discussion on database
+	 */
 	public Optional<List<Discussion>> getAllDiscussion();
+	
 
 }
