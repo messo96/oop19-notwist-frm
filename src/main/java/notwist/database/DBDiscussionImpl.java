@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import notwist.base.Category;
 import notwist.base.Discussion;
@@ -39,9 +40,6 @@ public class DBDiscussionImpl extends DBManagerImpl implements DBDiscussion{
 		finally {
 			close();
 		}
-		if(discussion.isEmpty())
-			return Optional.empty();
-		else
 			return Optional.of(discussion);
 	}
 	
@@ -90,12 +88,18 @@ public class DBDiscussionImpl extends DBManagerImpl implements DBDiscussion{
 		finally {
 			close();
 		}
-		if(discussion.isEmpty())
-			return Optional.empty();
-		else
-			return Optional.of(discussion);
+		
+		return Optional.of(discussion);
 	}
 
+	@Override
+	public Optional<List<Discussion>> getAllDiscussion(final String string) {
+		List<Discussion> list = new ArrayList<>();
+		list.addAll(this.getAllDiscussion().get().stream().filter(c -> c.getTitle().toLowerCase().contains(string.toLowerCase())).collect(Collectors.toList()));
+		//list.addAll(this.getAllDiscussion().get().stream().filter(c -> c.getDescription().contains(string)).collect(Collectors.toList()));
+		
+		return Optional.of(list);
+	}
 
 	
 }

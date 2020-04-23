@@ -38,5 +38,14 @@ public interface DBDiscussion {
 	 */
 	public Optional<List<Discussion>> getAllDiscussion();
 	
+	/**
+	 * 
+	 * @param string
+	 * 			string to search in discussions
+	 * @return
+	 * 			all the discussion filter by that search
+	 */		
+	public Optional<List<Discussion>> getAllDiscussion(final String string);
+	
 
 }

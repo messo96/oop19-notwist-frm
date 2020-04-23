@@ -13,6 +13,7 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
 import newtopic.newtopic_gui;
@@ -134,7 +135,22 @@ public class Homepage_gui extends javax.swing.JFrame {
         search_field.setText("Search..");
         search_field.setMargin(new java.awt.Insets(2, 2, 2, 3));
         search_field.setMinimumSize(new java.awt.Dimension(7, 23));
+        search_field.addFocusListener(new FocusListener(){
 
+			@Override
+			public void focusGained(FocusEvent e) {
+				if(search_field.getText().equals("Search.."))
+				search_field.setText("");
+				
+			}
+
+			@Override
+			public void focusLost(FocusEvent e) {
+				if(search_field.getText().equals(""))
+					search_field.setText("Search..");
+			}
+        	
+        });
         search_button.setText("Go");
         search_button.setMaximumSize(new java.awt.Dimension(45, 25));
         search_button.setMinimumSize(new java.awt.Dimension(45, 25));
@@ -193,16 +209,19 @@ public class Homepage_gui extends javax.swing.JFrame {
         //Table of discussion in center of the Homepage
       
         
+        
         jTable1.setModel(this.loadDiscussion());
         
+        
         jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        jTable1.setAutoscrolls(true);
+        jTable1.setAutoscrolls(false);
         jTable1.setEnabled(true);
         jTable1.setCellSelectionEnabled(false);
         jTable1.setGridColor(new java.awt.Color(0, 0, 0));
         jTable1.setShowGrid(true);
         jTable1.setRequestFocusEnabled(true);
         jTable1.setFocusable(true);
+        jTable1.setAutoCreateColumnsFromModel(false);
        
         main_table.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
@@ -396,16 +415,20 @@ public class Homepage_gui extends javax.swing.JFrame {
         
         });
         
-        
-        
     }// </editor-fold>//GEN-END:initComponents
 
     private void exitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitMouseClicked
-        dispose();
+       System.exit(1);
     }//GEN-LAST:event_exitMouseClicked
 
     private void search_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_buttonActionPerformed
-        // TODO add your handling code here:
+    	  //Button Search
+        search_button.addActionListener(e ->{
+        	if(search_field.getText().equals("") || search_field.getText().equals("Search.."))
+        		jTable1.setModel(this.loadDiscussion());
+        	else
+           		jTable1.setModel(this.loadDiscussion(search_field.getText()));
+        });
     }
     
     int xy;
@@ -436,10 +459,19 @@ public class Homepage_gui extends javax.swing.JFrame {
         	tableDiscussion.addRow(new Object[] {s.getTitle(),0,0,
         								new DBUserImpl().getUserFromId(s.getIdUser()).get().getUsername()});
         }
-        return tableDiscussion;
-    
+         tableDiscussion.fireTableDataChanged();
+         return tableDiscussion;
     }
    
+    private DefaultTableModel loadDiscussion(final String string) {
+    	DefaultTableModel tableDiscussion = new DefaultTableModel(new Object[] {"Titolo","Risposte","Like","Created By"},0);
+        for(Discussion s : discussion.getAllDiscussion(string).get() ) {
+        	tableDiscussion.addRow(new Object[] {s.getTitle(),0,0,
+        								new DBUserImpl().getUserFromId(s.getIdUser()).get().getUsername()});
+        }
+        tableDiscussion.fireTableDataChanged();
+        return tableDiscussion;
+    }
     	 
     
     
