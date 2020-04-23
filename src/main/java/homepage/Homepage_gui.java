@@ -9,6 +9,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -66,6 +67,7 @@ public class Homepage_gui extends javax.swing.JFrame {
         body_panel = new javax.swing.JPanel();
         main_table = new javax.swing.JScrollPane(); 
         jTable1 = new javax.swing.JTable(); //Tabella discussioni
+        
         jTextField2 = new javax.swing.JTextField(); //Non ha nome perchè indica lo spazio dove ci starà prev - next per la tabella (se lo mettiamo)
         hottest_panel = new javax.swing.JPanel();
         jTable2 = new javax.swing.JTable(); //Tabella per le discussioni con più likes
@@ -211,8 +213,7 @@ public class Homepage_gui extends javax.swing.JFrame {
         
         
         jTable1.setModel(this.loadDiscussion());
-        
-        
+       
         jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jTable1.setAutoscrolls(false);
         jTable1.setEnabled(true);
@@ -388,6 +389,31 @@ public class Homepage_gui extends javax.swing.JFrame {
         	        	public int getSize() { return list.size();}
         	            public String getElementAt(int i) { return list.get(i).getName();}
         	        });
+        
+        
+        //Filter results of discussions by choosen category on list on the right
+       jList1.addMouseListener(new MouseListener() {
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			  jTable1.setModel(loadDiscussion(new DBCategory().getCategoryByName(jList1.getSelectedValue())));
+			
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {}
+
+		@Override
+		public void mouseExited(MouseEvent e) {}
+    	   
+       });
+       
        
         //When click on a discussion, open new Window
         jTable1.addFocusListener(new FocusListener() {
@@ -406,10 +432,9 @@ public class Homepage_gui extends javax.swing.JFrame {
         
         //Button create new discussion
         new_discussion.addActionListener(e ->{
-      	  System.out.println(this.actualUser + "BT\n\n");
       	java.awt.EventQueue.invokeLater(new Runnable() {
     		public void run() {
-    			new newtopic_gui(actualUser);
+    			new newtopic_gui(actualUser,jTable1);
     		}
     	});
         
@@ -463,9 +488,9 @@ public class Homepage_gui extends javax.swing.JFrame {
          return tableDiscussion;
     }
    
-    private DefaultTableModel loadDiscussion(final String string) {
+    private DefaultTableModel loadDiscussion(final String title) {
     	DefaultTableModel tableDiscussion = new DefaultTableModel(new Object[] {"Titolo","Risposte","Like","Created By"},0);
-        for(Discussion s : discussion.getAllDiscussion(string).get() ) {
+        for(Discussion s : discussion.getAllDiscussion(title).get() ) {
         	tableDiscussion.addRow(new Object[] {s.getTitle(),0,0,
         								new DBUserImpl().getUserFromId(s.getIdUser()).get().getUsername()});
         }
@@ -473,7 +498,15 @@ public class Homepage_gui extends javax.swing.JFrame {
         return tableDiscussion;
     }
     	 
-    
+    private DefaultTableModel loadDiscussion(final Category category) {
+    	DefaultTableModel tableDiscussion = new DefaultTableModel(new Object[] {"Titolo","Risposte","Like","Created By"},0);
+        for(Discussion s : discussion.getAllDiscussion(category).get() ) {
+        	tableDiscussion.addRow(new Object[] {s.getTitle(),0,0,
+        								new DBUserImpl().getUserFromId(s.getIdUser()).get().getUsername()});
+        }
+        tableDiscussion.fireTableDataChanged();
+        return tableDiscussion;
+    }
     
     
 //   public static void main(String args[]) {

@@ -40,12 +40,21 @@ public interface DBDiscussion {
 	
 	/**
 	 * 
-	 * @param string
-	 * 			string to search in discussions
+	 * @param title
+	 * 			title to search in discussion
 	 * @return
 	 * 			all the discussion filter by that search
 	 */		
-	public Optional<List<Discussion>> getAllDiscussion(final String string);
+	public Optional<List<Discussion>> getAllDiscussion(final String title);
 	
+	/**
+	 * 
+	 * @param category
+	 * 			search discussion by category
+	 * @return
+	 * 			all the discussion filter by that search
+
+	 */		
+	public Optional<List<Discussion>> getAllDiscussion(final Category category);
 
 }

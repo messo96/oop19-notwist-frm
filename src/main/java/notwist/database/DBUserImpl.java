@@ -47,19 +47,13 @@ public class DBUserImpl extends DBManagerImpl implements DBUser {
 	     
 	     int index=0;
 	     try {
-			 query = "select * from USER";
-		     rs = open().executeQuery(query);
-		     
-		     while(rs.next())
-		    	 index = rs.getInt("id_user");
-		     
+			 open();
 		        PreparedStatement prepared = super.getConn()
-		        		.prepareStatement("insert into USER (id_user,nome, password, email,isModeratore) values (?,?,?,?,?)");
-		     	prepared.setInt(1, index+1);
-		        prepared.setString(2, user);
-		     	prepared.setString(3, this.Crypt(password));
-		     	prepared.setString(4,this.Crypt(email));
-		     	prepared.setBoolean(5, isModerator);
+		        		.prepareStatement("insert into USER (nome, password, email,isModeratore) values (?,?,?,?)");
+		        prepared.setString(1, user);
+		     	prepared.setString(2, this.Crypt(password));
+		     	prepared.setString(3,this.Crypt(email));
+		     	prepared.setBoolean(4, isModerator);
 		     	
 		     	prepared.executeUpdate();
 		     	return true;

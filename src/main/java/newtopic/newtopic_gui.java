@@ -12,6 +12,8 @@ import java.awt.event.KeyListener;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 import notwist.base.Category;
 import notwist.base.Discussion;
@@ -30,12 +32,12 @@ public class newtopic_gui extends javax.swing.JFrame {
      * Creates new form Homepage_gui
      */
 	 private User actualUser=null;
-	 
-    public newtopic_gui(User user) {
+	 private JTable table;
+    public newtopic_gui(User user, JTable table) {
         initComponents();
         this.actualUser = user;
         this.setVisible(true);
-        
+        this.table = table;
         
     }
 
@@ -336,9 +338,12 @@ public class newtopic_gui extends javax.swing.JFrame {
         	   Category cate = new DBCategory().getCategoryByName(category.getSelectedItem().toString());
         		String title = jTextField1.getText();
                 String desc = preview_textarea.getText();
-                Discussion disc = new DiscussionImpl(this.actualUser.getId(), title,desc);
+                Discussion disc = new DiscussionImpl(this.actualUser.getId(), title,desc, cate);
                 new DBDiscussionImpl().createDiscussion(disc, cate);
                 JOptionPane.showMessageDialog(null, title + "\nPublished");
+                DefaultTableModel model = (DefaultTableModel)table.getModel();
+                model.addRow(new Object[] {title,0,0,this.actualUser.getUsername()});
+                table.setModel(model);
                 dispose();
                 
         });
@@ -393,18 +398,18 @@ public class newtopic_gui extends javax.swing.JFrame {
    
     
 
-    
-    public void start(final User user) {
-    /* Create and display the form */
-    	java.awt.EventQueue.invokeLater(new Runnable() {
-    		public void run() {
-    			new newtopic_gui(user);
-    		}
-    	});
-        	
-    	System.out.print(actualUser + "AAAAA");
-    }
-    
+//    
+//    public void start(final User user) {
+//    /* Create and display the form */
+//    	java.awt.EventQueue.invokeLater(new Runnable() {
+//    		public void run() {
+//    			new newtopic_gui(user);
+//    		}
+//    	});
+//        	
+//    	System.out.print(actualUser + "AAAAA");
+//    }
+//    
     
     private DefaultComboBoxModel<String> loadModel() {
     	DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();

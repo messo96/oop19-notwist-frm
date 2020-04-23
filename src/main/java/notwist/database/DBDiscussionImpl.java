@@ -31,7 +31,8 @@ public class DBDiscussionImpl extends DBManagerImpl implements DBDiscussion{
 	              
 	     while (rs.next()) {
 	    	 if(rs.getInt("id_creator") == (user.getId()))
-	       	discussion.add(new DiscussionImpl(user.getId(),rs.getString("title"), rs.getString("description")));
+	       	discussion.add(new DiscussionImpl(rs.getInt("id_user"),rs.getString("title"), 
+					rs.getString("description"), new DBCategory().getCategoryById(rs.getInt("id_cat"))));
 	     }
 		}
 	     catch(SQLException e) {
@@ -79,7 +80,8 @@ public class DBDiscussionImpl extends DBManagerImpl implements DBDiscussion{
 		 
 	              
 	     while (rs.next()) {
-	    		discussion.add(new DiscussionImpl(rs.getInt("id_user"),rs.getString("title"), rs.getString("description")));
+	    		discussion.add(new DiscussionImpl(rs.getInt("id_user"),rs.getString("title"), 
+	    										rs.getString("description"), new DBCategory().getCategoryById(rs.getInt("id_macro"))));
 	     }
 		}
 	     catch(SQLException e) {
@@ -93,10 +95,18 @@ public class DBDiscussionImpl extends DBManagerImpl implements DBDiscussion{
 	}
 
 	@Override
-	public Optional<List<Discussion>> getAllDiscussion(final String string) {
+	public Optional<List<Discussion>> getAllDiscussion(final String title) {
 		List<Discussion> list = new ArrayList<>();
-		list.addAll(this.getAllDiscussion().get().stream().filter(c -> c.getTitle().toLowerCase().contains(string.toLowerCase())).collect(Collectors.toList()));
-		//list.addAll(this.getAllDiscussion().get().stream().filter(c -> c.getDescription().contains(string)).collect(Collectors.toList()));
+		list.addAll(this.getAllDiscussion().get().stream().filter(c -> c.getTitle()
+											.toLowerCase().contains(title.toLowerCase())).collect(Collectors.toList()));		
+		return Optional.of(list);
+	}
+
+	@Override
+	public Optional<List<Discussion>> getAllDiscussion(Category category) {
+		List<Discussion> list = new ArrayList<>();
+		list.addAll(this.getAllDiscussion().get().stream().
+								filter(c -> c.getCategory().getId() == category.getId()).collect(Collectors.toList()));
 		
 		return Optional.of(list);
 	}

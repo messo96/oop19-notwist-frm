@@ -84,4 +84,8 @@ public class DBCategory {
 	public Category getCategoryByName(final String name) {
 		return this.getNameOfAllTheCategories().get().stream().filter(c -> c.getName().equals(name)).findFirst().get();
 	}
+	
+	public Category getCategoryById(final Integer id) {
+		return this.getNameOfAllTheCategories().get().stream().filter(c -> c.getId() == id).findFirst().get();
+	}
 }
