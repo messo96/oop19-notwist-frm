@@ -15,6 +15,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import org.kefirsf.bb.BBProcessorFactory;
+import org.kefirsf.bb.ConfigurationFactory;
+import org.kefirsf.bb.TextProcessor;
+
 import notwist.base.Category;
 import notwist.base.Discussion;
 import notwist.base.DiscussionImpl;
@@ -348,11 +352,12 @@ public class newtopic_gui extends javax.swing.JFrame {
                 
         });
         
-        
+       
       // Sync with text PREVIEW and text TEXT
         preview_textarea1.setEnabled(false);
         preview_textarea.addKeyListener(new KeyListener() {
-
+        	TextProcessor processor;
+        	
 			@Override
 			public void keyTyped(KeyEvent e) {}
 
@@ -360,7 +365,11 @@ public class newtopic_gui extends javax.swing.JFrame {
 			public void keyPressed(KeyEvent e) {}
 
 			@Override
-			public void keyReleased(KeyEvent e) { preview_textarea1.setText(preview_textarea.getText()); }
+			public void keyReleased(KeyEvent e) { 
+				 processor = BBProcessorFactory.getInstance()
+						    .createFromResource(ConfigurationFactory.DEFAULT_PROPERTIES_XML_FILE);
+					preview_textarea1.setText(processor.process(preview_textarea.getText()));		
+			}
         	
         });
         

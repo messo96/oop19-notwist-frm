@@ -230,11 +230,14 @@ public class Homepage_gui extends javax.swing.JFrame {
             jTable1.getColumnModel().getColumn(1).setResizable(false);
             jTable1.getColumnModel().getColumn(2).setResizable(false);
             jTable1.getColumnModel().getColumn(3).setResizable(false);
-        
-        jTable1.getColumnModel().getColumn(0).setPreferredWidth(520);
-        jTable1.getColumnModel().getColumn(1).setPreferredWidth(108);
-        jTable1.getColumnModel().getColumn(2).setPreferredWidth(60);
-        jTable1.getColumnModel().getColumn(3).setPreferredWidth(60);
+            jTable1.getColumnModel().getColumn(4).setResizable(false);
+
+        jTable1.getColumnModel().getColumn(0).setPreferredWidth(400);
+        jTable1.getColumnModel().getColumn(1).setPreferredWidth(80);
+        jTable1.getColumnModel().getColumn(2).setPreferredWidth(80);
+        jTable1.getColumnModel().getColumn(3).setPreferredWidth(120);
+        jTable1.getColumnModel().getColumn(4).setPreferredWidth(30);
+
         }
         
         jTextField2.setText("Spazio per next - prev che non posso creare ora :C");
@@ -479,30 +482,30 @@ public class Homepage_gui extends javax.swing.JFrame {
 
   
     private DefaultTableModel loadDiscussion() {
-    	DefaultTableModel tableDiscussion = new DefaultTableModel(new Object[] {"Titolo","Risposte","Like","Created By"},0);
+    	DefaultTableModel tableDiscussion = new DefaultTableModel(new Object[] {"Titolo","Categoria","Like","Created By","Risposte"},0);
         for(Discussion s : discussion.getAllDiscussion().get() ) {
-        	tableDiscussion.addRow(new Object[] {s.getTitle(),0,0,
-        								new DBUserImpl().getUserFromId(s.getIdUser()).get().getUsername()});
+        	tableDiscussion.addRow(new Object[] {s.getTitle(),s.getCategory().getName(),0,
+					new DBUserImpl().getUserFromId(s.getIdUser()).get().getUsername(),0});
         }
-         tableDiscussion.fireTableDataChanged();
-         return tableDiscussion;
+        tableDiscussion.fireTableDataChanged();
+        return tableDiscussion;
     }
    
     private DefaultTableModel loadDiscussion(final String title) {
-    	DefaultTableModel tableDiscussion = new DefaultTableModel(new Object[] {"Titolo","Risposte","Like","Created By"},0);
+    	DefaultTableModel tableDiscussion = new DefaultTableModel(new Object[] {"Titolo","Categoria","Like","Created By","Risposte"},0);
         for(Discussion s : discussion.getAllDiscussion(title).get() ) {
-        	tableDiscussion.addRow(new Object[] {s.getTitle(),0,0,
-        								new DBUserImpl().getUserFromId(s.getIdUser()).get().getUsername()});
+        	tableDiscussion.addRow(new Object[] {s.getTitle(),s.getCategory().getName(),0,
+					new DBUserImpl().getUserFromId(s.getIdUser()).get().getUsername(),0});
         }
         tableDiscussion.fireTableDataChanged();
         return tableDiscussion;
     }
     	 
     private DefaultTableModel loadDiscussion(final Category category) {
-    	DefaultTableModel tableDiscussion = new DefaultTableModel(new Object[] {"Titolo","Risposte","Like","Created By"},0);
+    	DefaultTableModel tableDiscussion = new DefaultTableModel(new Object[] {"Titolo","Categoria","Like","Created By","Risposte"},0);
         for(Discussion s : discussion.getAllDiscussion(category).get() ) {
-        	tableDiscussion.addRow(new Object[] {s.getTitle(),0,0,
-        								new DBUserImpl().getUserFromId(s.getIdUser()).get().getUsername()});
+        	tableDiscussion.addRow(new Object[] {s.getTitle(),s.getCategory().getName(),0,
+        								new DBUserImpl().getUserFromId(s.getIdUser()).get().getUsername(),0});
         }
         tableDiscussion.fireTableDataChanged();
         return tableDiscussion;
