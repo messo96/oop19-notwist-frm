@@ -10,9 +10,12 @@ import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 import java.util.List;
 
+import javax.swing.JEditorPane;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
@@ -233,10 +236,10 @@ public class Homepage_gui extends javax.swing.JFrame {
             jTable1.getColumnModel().getColumn(4).setResizable(false);
 
         jTable1.getColumnModel().getColumn(0).setPreferredWidth(400);
-        jTable1.getColumnModel().getColumn(1).setPreferredWidth(80);
+        jTable1.getColumnModel().getColumn(1).setPreferredWidth(100);
         jTable1.getColumnModel().getColumn(2).setPreferredWidth(80);
         jTable1.getColumnModel().getColumn(3).setPreferredWidth(120);
-        jTable1.getColumnModel().getColumn(4).setPreferredWidth(30);
+        jTable1.getColumnModel().getColumn(4).setPreferredWidth(40);
 
         }
         
@@ -423,10 +426,12 @@ public class Homepage_gui extends javax.swing.JFrame {
 
 			@Override
 			public void focusGained(FocusEvent e) {
-				      JOptionPane.showMessageDialog(null,jTable1.getValueAt(jTable1.getSelectedRow(), 0));
-				      jTable1.setFocusable(false);
-				      jTable1.setFocusable(true);
-				 
+				Discussion disc = new DBDiscussionImpl().getDiscussionFromTitle(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString()).get();
+				JOptionPane.showMessageDialog(null,disc.getDescription());
+				jTable1.setFocusable(false);
+				jTable1.setFocusable(true);
+				
+				
 			}
 			@Override
 			public void focusLost(FocusEvent e) {}
@@ -444,6 +449,7 @@ public class Homepage_gui extends javax.swing.JFrame {
         });
         
     }// </editor-fold>//GEN-END:initComponents
+    
 
     private void exitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitMouseClicked
        System.exit(1);

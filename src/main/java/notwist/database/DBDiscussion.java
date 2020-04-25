@@ -56,5 +56,11 @@ public interface DBDiscussion {
 
 	 */		
 	public Optional<List<Discussion>> getAllDiscussion(final Category category);
+	
+	/**
+	 * 
+	 */
+	public Optional<Discussion> getDiscussionFromTitle(final String title);
+
 
 }

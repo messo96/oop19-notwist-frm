@@ -21,14 +21,14 @@ public class DBUserImpl extends DBManagerImpl implements DBUser {
 		
 		try
 		{
-			String query = "select * from USER ";
+			String query = "select * from USER where email='" + this.Crypt(email) + "' and username='" + username + "'";
 			rs = open().executeQuery(query);
-			while(rs.next()) {
-				if(rs.getString("email").contentEquals(email) || rs.getString("user").contentEquals(username)) {
+			if(rs.next() && rs.getString("email").contentEquals(email) || rs.getString("user").contentEquals(username)) {
 				System.out.println("User exist! (" + email + ")");
 					return true;
 				}
-			}
+				else
+					System.out.println("email is not registered yet!");
 		}
 		catch(Exception e)
 		{
@@ -73,16 +73,13 @@ public class DBUserImpl extends DBManagerImpl implements DBUser {
 		User user = null;
 		try
 		{
-			query = "select * from USER";
+			query = "select * from USER where email= '" + this.Crypt(email)+"'";
 			rs = open().executeQuery(query);
-			while(rs.next()) {
-				if(rs.getString("email").contentEquals(this.Crypt(email)) 
+			if(rs.next() && rs.getString("email").contentEquals(this.Crypt(email)) 
 														&& rs.getString("password").contentEquals(this.Crypt(password))) {
 					user = new User(rs.getInt("id_user"), rs.getString("nome"),this.Decrypt(rs.getString("password"))
 							,this.Decrypt(rs.getString("email")),rs.getBoolean("isModeratore"));
 					System.out.println("Welcome " +user.getUsername() +"  :)");
-					break;
-				}
 
 			}
 		}

@@ -111,5 +111,31 @@ public class DBDiscussionImpl extends DBManagerImpl implements DBDiscussion{
 		return Optional.of(list);
 	}
 
+	@Override
+	public Optional<Discussion> getDiscussionFromTitle(String title) {
+		Discussion discussion = null;
+		
+		try {
+			query = "select * from DISCUSSION";
+			rs = open().executeQuery(query);
+		 
+	              
+	   while(rs.next()) {
+		   if(rs.getString("title").contains(title))
+	    		discussion = new DiscussionImpl(rs.getInt("id_user"),rs.getString("title"), 
+	    										rs.getString("description"), new DBCategory().getCategoryById(rs.getInt("id_macro")));
+	     }
+		}
+	     catch(SQLException e) {
+	    	 System.out.println("Error while download discussion"+e);
+	     }
+		finally {
+			close();
+		}
+		
+		return Optional.of(discussion);
+	}
+
+	
 	
 }

@@ -5,12 +5,11 @@
  */
 package newtopic;
 
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JEditorPane;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -77,7 +76,7 @@ public class newtopic_gui extends javax.swing.JFrame {
         preview_textarea = new javax.swing.JTextArea();
         jSeparator2 = new javax.swing.JSeparator();
         jScrollPane2 = new javax.swing.JScrollPane();
-        preview_textarea1 = new javax.swing.JTextArea();
+        editorPane = new javax.swing.JEditorPane();
         notify_checkbox = new javax.swing.JCheckBox();
         post_button = new javax.swing.JButton();
         preview_button = new javax.swing.JButton();
@@ -233,11 +232,11 @@ public class newtopic_gui extends javax.swing.JFrame {
         jSeparator2.setBackground(new java.awt.Color(0, 0, 0));
         topic_panel.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 257, 760, 10));
 
-        preview_textarea1.setColumns(20);
-        preview_textarea1.setRows(5);
-        preview_textarea1.setEnabled(false);
+        editorPane.setContentType("text/html");
+///////        ep.setText("html code");
+        editorPane.setEnabled(false);
 
-        jScrollPane2.setViewportView(preview_textarea1);
+        jScrollPane2.setViewportView(editorPane);
 
         topic_panel.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 111, 760, 135));
 
@@ -352,11 +351,10 @@ public class newtopic_gui extends javax.swing.JFrame {
                 
         });
         
-       
+    	
       // Sync with text PREVIEW and text TEXT
-        preview_textarea1.setEnabled(false);
+        editorPane.setEnabled(true);
         preview_textarea.addKeyListener(new KeyListener() {
-        	TextProcessor processor;
         	
 			@Override
 			public void keyTyped(KeyEvent e) {}
@@ -366,9 +364,9 @@ public class newtopic_gui extends javax.swing.JFrame {
 
 			@Override
 			public void keyReleased(KeyEvent e) { 
-				 processor = BBProcessorFactory.getInstance()
-						    .createFromResource(ConfigurationFactory.DEFAULT_PROPERTIES_XML_FILE);
-					preview_textarea1.setText(processor.process(preview_textarea.getText()));		
+				TextProcessor processor = BBProcessorFactory.getInstance()
+					    .createFromResource(ConfigurationFactory.SAFE_HTML_CONFIGURATION_FILE);
+				editorPane.setText(processor.process(preview_textarea.getText()));		
 			}
         	
         });
@@ -488,7 +486,7 @@ public class newtopic_gui extends javax.swing.JFrame {
     private javax.swing.JButton post_button;
     private javax.swing.JButton preview_button;
     private javax.swing.JTextArea preview_textarea;
-    private javax.swing.JTextArea preview_textarea1;
+    private JEditorPane editorPane;
     private javax.swing.JLabel profile_icon;
     private javax.swing.JTextArea rules_area;
     private javax.swing.JPanel rules_panel;
