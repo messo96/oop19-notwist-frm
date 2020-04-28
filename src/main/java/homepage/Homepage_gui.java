@@ -5,23 +5,25 @@
  */
 package homepage;
 
-import java.awt.FlowLayout;
+import java.awt.BorderLayout;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import javax.swing.JEditorPane;
-import javax.swing.JOptionPane;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTable;
-import javax.swing.event.TableModelListener;
+import javax.swing.JWindow;
+import javax.swing.SwingWorker;
+import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 
 import newtopic.newtopic_gui;
+import notwist.Loader;
 import notwist.base.Category;
 import notwist.base.Discussion;
 import notwist.base.User;
@@ -34,15 +36,24 @@ import notwist.database.DBUserImpl;
  *
  * @author emily
  */
-public class Homepage_gui extends javax.swing.JFrame {
 
-    /**
+
+public class Homepage_gui extends javax.swing.JFrame {
+    
+	 /**
      * Creates new form Homepage_gui
      */
 
+
+    private DBDiscussion discussion = new DBDiscussionImpl();
+	private User actualUser = null;
+	private Loader loader;
+	
+	
 	  public Homepage_gui(User user) {
 	      initComponents();
 		  this.actualUser = user;
+		  this.loader = new Loader();
 		  this.setVisible(true);
 		  this.pack();
     }
@@ -337,6 +348,7 @@ public class Homepage_gui extends javax.swing.JFrame {
         jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         category_list.setViewportView(jList1);
 
+        
         javax.swing.GroupLayout categorie_panelLayout = new javax.swing.GroupLayout(categorie_panel);
         categorie_panel.setLayout(categorie_panelLayout);
         categorie_panelLayout.setHorizontalGroup(
@@ -403,12 +415,22 @@ public class Homepage_gui extends javax.swing.JFrame {
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			  jTable1.setModel(loadDiscussion(new DBCategory().getCategoryByName(jList1.getSelectedValue())));
-			
+			loader.start();
+			new SwingWorker<String,Object>(){
+
+				@Override
+				protected String doInBackground() throws Exception {
+					jTable1.setModel(loadDiscussion(new DBCategory().getCategoryByName(jList1.getSelectedValue())));
+					loader.end();
+					return "";
+				}
+				
+			}.execute();
 		}
 
 		@Override
-		public void mousePressed(MouseEvent e) {}
+		public void mousePressed(MouseEvent e) {
+		}
 
 		@Override
 		public void mouseReleased(MouseEvent e) {}
@@ -492,9 +514,6 @@ public class Homepage_gui extends javax.swing.JFrame {
     
     //GEN-LAST:event_search_buttonActionPerformed
 
-    
-    private DBDiscussion discussion = new DBDiscussionImpl();
-	private User actualUser = null;
     
 
   

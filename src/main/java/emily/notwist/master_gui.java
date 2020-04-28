@@ -5,8 +5,11 @@
  */
 package emily.notwist;
 
+import java.awt.AWTEvent;
 import java.awt.BorderLayout;
+import java.awt.Event;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Optional;
@@ -200,7 +203,14 @@ public class master_gui extends javax.swing.JFrame {
         //<Personalization> of GUI with Methods NOTWIST
         //############################################
         
+        
+        
         //Button Login
+        
+        
+       
+        
+        
         this.jButton1.addActionListener(e ->{
         	jButton1.setVisible(false);
         	loader.setVisible(true);
