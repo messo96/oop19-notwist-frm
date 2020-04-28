@@ -252,7 +252,7 @@ public class register extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(67, 71, 91));
 
-        jLabel7.setIcon(new javax.swing.ImageIcon("src/main/java/emily/notwist/font_test_1.png")); // NOI18N
+        jLabel7.setIcon(new javax.swing.ImageIcon("img/font_test_1.png")); // NOI18N
         jLabel7.setDoubleBuffered(true);
         jLabel7.setFocusable(false);
         jLabel7.setRequestFocusEnabled(false);

@@ -125,7 +125,7 @@ public class master_gui extends javax.swing.JFrame {
         jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, 300, 60));
         
         //loader image
-        JLabel loader = new JLabel(new javax.swing.ImageIcon("src/main/java/emily/notwist/loader_login.gif"));
+        JLabel loader = new JLabel(new javax.swing.ImageIcon("img/loader_login.gif"));
     	loader.setBounds(jButton1.getBounds());
     	jPanel2.add(loader,new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, 300, 60));
 
@@ -161,7 +161,7 @@ public class master_gui extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(67, 71, 91));
 
-        jLabel7.setIcon(new javax.swing.ImageIcon("src/main/java/emily/notwist/font_test_1.png")); // NOI18N
+        jLabel7.setIcon(new javax.swing.ImageIcon("img/font_test_1.png")); // NOI18N
         jLabel7.setDoubleBuffered(true);
         jLabel7.setFocusable(false);
         jLabel7.setRequestFocusEnabled(false);
