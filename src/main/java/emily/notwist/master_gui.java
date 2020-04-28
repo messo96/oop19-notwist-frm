@@ -5,12 +5,18 @@
  */
 package emily.notwist;
 
+import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Optional;
 
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JProgressBar;
+import javax.swing.SwingWorker;
 
 import homepage.Homepage_gui;
 import notwist.base.User;
@@ -118,6 +124,12 @@ public class master_gui extends javax.swing.JFrame {
         jButton1.setText("LOGIN");
         jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, 300, 60));
         
+        //loader image
+        JLabel loader = new JLabel(new javax.swing.ImageIcon("src/main/java/emily/notwist/loader_login.gif"));
+    	loader.setBounds(jButton1.getBounds());
+    	jPanel2.add(loader,new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, 300, 60));
+
+        
         jLabel2.setText("Non hai un account? Registrati");
         jLabel2.setToolTipText("Hai bisogno di un account per poter entrare");
         
@@ -190,20 +202,36 @@ public class master_gui extends javax.swing.JFrame {
         
         //Button Login
         this.jButton1.addActionListener(e ->{
-        	Optional<User> user = this.getCredential();
-        	if(user.isPresent()) {
-        		JOptionPane.showMessageDialog(null, "Credenziali corrette, Benvenuto!");
-        		System.out.println("Credenziali corrette");
-        		super.dispose();
-        		new Homepage_gui(user.get());
-        		System.out.println(user.get() + "A");
-        		
-        	}
-        	else {
-        		JOptionPane.showMessageDialog(null, "Credenziali errate, riprovare! :(");
-        		System.out.println("Credenziali errate");
-        	}
+        	jButton1.setVisible(false);
+        	loader.setVisible(true);
         	
+        	new SwingWorker<String,Object>(){
+
+	@Override
+	protected String doInBackground() throws Exception {
+		Optional<User> user = getCredential();
+    	if(user.isPresent()) {
+    		JOptionPane.showMessageDialog(null, "Credenziali corrette, Benvenuto!");
+    		dispose();
+    		new Homepage_gui(user.get());
+    		return  "Credenziali corrette";
+
+    		
+    	}
+    	else {
+    		JOptionPane.showMessageDialog(null, "Credenziali errate, riprovare! :(");
+    		loader.setVisible(false);
+        	jButton1.setVisible(true);
+    		return "Credenziali errate";
+    	}
+    	
+    	
+	}
+	
+	
+        	}.execute();
+            
+
         });
         
         //Button register

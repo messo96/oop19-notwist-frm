@@ -1,8 +1,10 @@
-package rombo.discuss;
+package notwist.base;
 
 /*This interface extend "BaseAccount" that represent the base information of every users.*/
 
 import java.util.Optional;
+
+import rombo.discuss.BaseAccount;
 
 public interface Comments extends BaseAccount {
 	

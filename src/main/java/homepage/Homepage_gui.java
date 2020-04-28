@@ -5,6 +5,7 @@
  */
 package homepage;
 
+import java.awt.FlowLayout;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
@@ -427,7 +428,17 @@ public class Homepage_gui extends javax.swing.JFrame {
 			@Override
 			public void focusGained(FocusEvent e) {
 				Discussion disc = new DBDiscussionImpl().getDiscussionFromTitle(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString()).get();
-				JOptionPane.showMessageDialog(null,disc.getDescription());
+//				JOptionPane.showMessageDialog(null,disc.getDescription());
+				JPanel panel = new JPanel();
+				JEditorPane editor = new JEditorPane();
+		        editor.setContentType("text/html");
+				editor.setText(disc.getDescription());
+				
+				panel.add(editor);
+				setContentPane(panel);
+				repaint();
+				pack();
+				
 				jTable1.setFocusable(false);
 				jTable1.setFocusable(true);
 				
@@ -493,7 +504,6 @@ public class Homepage_gui extends javax.swing.JFrame {
         	tableDiscussion.addRow(new Object[] {s.getTitle(),s.getCategory().getName(),0,
 					new DBUserImpl().getUserFromId(s.getIdUser()).get().getUsername(),0});
         }
-        tableDiscussion.fireTableDataChanged();
         return tableDiscussion;
     }
    
@@ -503,7 +513,6 @@ public class Homepage_gui extends javax.swing.JFrame {
         	tableDiscussion.addRow(new Object[] {s.getTitle(),s.getCategory().getName(),0,
 					new DBUserImpl().getUserFromId(s.getIdUser()).get().getUsername(),0});
         }
-        tableDiscussion.fireTableDataChanged();
         return tableDiscussion;
     }
     	 
@@ -513,7 +522,6 @@ public class Homepage_gui extends javax.swing.JFrame {
         	tableDiscussion.addRow(new Object[] {s.getTitle(),s.getCategory().getName(),0,
         								new DBUserImpl().getUserFromId(s.getIdUser()).get().getUsername(),0});
         }
-        tableDiscussion.fireTableDataChanged();
         return tableDiscussion;
     }
     
