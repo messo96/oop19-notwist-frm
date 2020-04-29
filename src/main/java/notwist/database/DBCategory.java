@@ -16,7 +16,7 @@ public class DBCategory {
     
 	public Optional<List<Category>> getCategories(){
 		List<Category> list = new ArrayList<>();
-		query = "Select * from TOPIC";
+		query = "Select * from Topic";
 	    
 		try {
 			rs = database.open().executeQuery(query);
@@ -36,7 +36,7 @@ public class DBCategory {
 
 	
 	public boolean existCategory(String name){
-		query = "Select * from TOPIC";
+		query = "Select * from Topic";
 	    boolean flag=false;
 		try {
 			rs = database.open().executeQuery(query);
@@ -64,7 +64,7 @@ public class DBCategory {
 	public Optional< List<Category> > getNameOfAllTheCategories() {
 		
 			List<Category> list = new ArrayList<>();
-			query = "Select * from TOPIC";
+			query = "Select * from Topic";
 			try {
 				rs = database.open().executeQuery(query);
 				while(rs.next()) {

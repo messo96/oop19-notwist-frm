@@ -25,7 +25,7 @@ public class DBDiscussionImpl extends DBManagerImpl implements DBDiscussion{
 		List<Discussion> discussion = new LinkedList<>();
 		
 		try {
-			query = "select * from DISCUSSION";
+			query = "select * from Discussion";
 			rs = open().executeQuery(query);
 		 
 	              
@@ -48,7 +48,7 @@ public class DBDiscussionImpl extends DBManagerImpl implements DBDiscussion{
 		 try {
 			 System.out.println(discussion);
 			 System.out.println(topic.getName());
-			 query = "insert into DISCUSSION (id_user,title,description,id_macro) values (?,?,?,?)";
+			 query = "insert into Discussion (id_user,title,description,id_macro) values (?,?,?,?)";
 			 	open();
 			 	PreparedStatement prepared = super.getConn().prepareStatement(query);
 		     	prepared.setInt(1,discussion.getIdUser());
@@ -75,7 +75,7 @@ public class DBDiscussionImpl extends DBManagerImpl implements DBDiscussion{
 		List<Discussion> discussion = new LinkedList<>();
 		
 		try {
-			query = "select * from DISCUSSION";
+			query = "select * from Discussion";
 			rs = open().executeQuery(query);
 		 
 	              
@@ -116,7 +116,7 @@ public class DBDiscussionImpl extends DBManagerImpl implements DBDiscussion{
 		Discussion discussion = null;
 		
 		try {
-			query = "select * from DISCUSSION";
+			query = "select * from Discussion";
 			rs = open().executeQuery(query);
 		 
 	              

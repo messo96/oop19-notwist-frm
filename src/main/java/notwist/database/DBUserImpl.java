@@ -21,7 +21,7 @@ public class DBUserImpl extends DBManagerImpl implements DBUser {
 		
 		try
 		{
-			String query = "select * from USER where email='" + this.Crypt(email) + "' and username='" + username + "'";
+			String query = "select * from User where email='" + this.Crypt(email) + "' and username='" + username + "'";
 			rs = open().executeQuery(query);
 			if(rs.next() && rs.getString("email").contentEquals(email) || rs.getString("user").contentEquals(username)) {
 				System.out.println("User exist! (" + email + ")");
@@ -49,7 +49,7 @@ public class DBUserImpl extends DBManagerImpl implements DBUser {
 	     try {
 			 open();
 		        PreparedStatement prepared = super.getConn()
-		        		.prepareStatement("insert into USER (nome, password, email,isModeratore) values (?,?,?,?)");
+		        		.prepareStatement("insert into User (nome, password, email,isModeratore) values (?,?,?,?)");
 		        prepared.setString(1, user);
 		     	prepared.setString(2, this.Crypt(password));
 		     	prepared.setString(3,this.Crypt(email));
@@ -73,7 +73,7 @@ public class DBUserImpl extends DBManagerImpl implements DBUser {
 		User user = null;
 		try
 		{
-			query = "select * from USER where email= '" + this.Crypt(email)+"'";
+			query = "select * from User where email= '" + this.Crypt(email)+"'";
 			rs = open().executeQuery(query);
 			if(rs.next() && rs.getString("email").contentEquals(this.Crypt(email)) 
 														&& rs.getString("password").contentEquals(this.Crypt(password))) {
@@ -103,7 +103,7 @@ public class DBUserImpl extends DBManagerImpl implements DBUser {
 		User user = null;
 		
 		try {
-			query = "SELECT * FROM `USER` WHERE id_user="+id;
+			query = "SELECT * FROM User WHERE id_user="+id;
 			rs = open().executeQuery(query);
 			if(rs.next())
 				user = new User(rs.getInt("id_user"), rs.getString("nome"),this.Decrypt(rs.getString("password"))

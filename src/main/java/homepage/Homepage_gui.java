@@ -12,6 +12,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
+import java.util.Random;
 
 import javax.swing.JEditorPane;
 import javax.swing.JFrame;
@@ -31,6 +32,7 @@ import notwist.database.DBCategory;
 import notwist.database.DBDiscussion;
 import notwist.database.DBDiscussionImpl;
 import notwist.database.DBUserImpl;
+import topic_gui.Topic_gui;
 
 /**
  *
@@ -400,6 +402,26 @@ public class Homepage_gui extends javax.swing.JFrame {
         //<Personalization> of GUI with Methods NOTWIST
         //############################################
         
+        
+        //Random Discussion 
+        
+        random_button.addActionListener(e ->{
+        	loader.start();
+        	new SwingWorker<String,Object>(){
+
+				@Override
+				protected String doInBackground() throws Exception {
+					Random rand = new Random();
+	        		Discussion disc = new DBDiscussionImpl().
+								getDiscussionFromTitle(jTable1.getValueAt(rand.nextInt(jTable1.getRowCount()), 0).toString()).get();
+	        		new Topic_gui(disc,actualUser).start();
+	        		loader.end();	
+	        	return "";
+				}
+        	}.execute();
+        		
+        });
+        
         //List of category on the right
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
         	
@@ -449,21 +471,19 @@ public class Homepage_gui extends javax.swing.JFrame {
 
 			@Override
 			public void focusGained(FocusEvent e) {
-				Discussion disc = new DBDiscussionImpl().getDiscussionFromTitle(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString()).get();
-//				JOptionPane.showMessageDialog(null,disc.getDescription());
-				JPanel panel = new JPanel();
-				JEditorPane editor = new JEditorPane();
-		        editor.setContentType("text/html");
-				editor.setText(disc.getDescription());
-				
-				panel.add(editor);
-				setContentPane(panel);
-				repaint();
-				pack();
-				
-				jTable1.setFocusable(false);
-				jTable1.setFocusable(true);
-				
+				loader.start();
+				new SwingWorker<String,Object>(){
+
+					@Override
+					protected String doInBackground() throws Exception {
+						Discussion disc = new DBDiscussionImpl().getDiscussionFromTitle(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString()).get();
+						new Topic_gui(disc,actualUser).start();
+						jTable1.setFocusable(false);
+						jTable1.setFocusable(true);
+						loader.end();
+						return "";
+					}
+				}.execute();
 				
 			}
 			@Override

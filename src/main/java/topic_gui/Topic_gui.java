@@ -5,6 +5,10 @@
  */
 package topic_gui;
 
+import javax.swing.JEditorPane;
+
+import notwist.base.Discussion;
+import notwist.base.User;
 
 /**
  *
@@ -15,8 +19,14 @@ public class Topic_gui extends javax.swing.JFrame {
     /**
      * Creates new form Homepage_gui
      */
-    public Topic_gui() {
+	private User user = null;
+	private Discussion discussion = null;
+	
+    public Topic_gui(final Discussion discussion, final User user) {
         initComponents();
+        this.user = user;
+        this.discussion = discussion;
+        
     }
 
     /**
@@ -35,7 +45,7 @@ public class Topic_gui extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JSeparator();
         discussion_part = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        discussion_area = new javax.swing.JTextArea();
+        discussion_area = new javax.swing.JEditorPane();
         title_label = new javax.swing.JLabel();
         n_likes = new javax.swing.JLabel();
         like = new javax.swing.JButton();
@@ -102,8 +112,7 @@ public class Topic_gui extends javax.swing.JFrame {
         jScrollPane1.setToolTipText("");
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
-        discussion_area.setColumns(20);
-        discussion_area.setRows(5);
+        discussion_area.setContentType("text/html");
         discussion_area.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jScrollPane1.setViewportView(discussion_area);
 
@@ -521,7 +530,27 @@ public class Topic_gui extends javax.swing.JFrame {
         );
 
         pack();
+        setVisible(true);
+       
+        
     }// </editor-fold>//GEN-END:initComponents
+    
+    
+    
+    
+    //####################
+    //#################### NOTWIST CUSTOM
+    //###################################
+    
+    //fill Discussion field
+    
+   public void start() {
+    discussion_area.setText(discussion.getDescription());
+    this.title_label.setText(discussion.getTitle());
+   }
+    
+    
+    
 
     private void exitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitMouseClicked
         dispose();
@@ -554,38 +583,38 @@ public class Topic_gui extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Topic_gui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Topic_gui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Topic_gui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Topic_gui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(Topic_gui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(Topic_gui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(Topic_gui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(Topic_gui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Topic_gui().setVisible(true);
-            }
-        });
-    }
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new Topic_gui(new User(1,"","","",false)).setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel bell_icon;
@@ -597,7 +626,7 @@ public class Topic_gui extends javax.swing.JFrame {
     private javax.swing.JButton comment_menu;
     private javax.swing.JButton comment_menu1;
     private javax.swing.JLabel date_user;
-    private javax.swing.JTextArea discussion_area;
+    private JEditorPane discussion_area;
     private javax.swing.JPanel discussion_panel;
     private javax.swing.JPanel discussion_part;
     private javax.swing.JButton dislike;
