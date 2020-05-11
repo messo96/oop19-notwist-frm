@@ -23,8 +23,8 @@ import javax.swing.SwingWorker;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 
+import main.Loader;
 import newtopic.newtopic_gui;
-import notwist.Loader;
 import notwist.base.Category;
 import notwist.base.Discussion;
 import notwist.base.User;

@@ -1,4 +1,4 @@
-package notwist;
+package main;
 
 import java.awt.BorderLayout;
 import java.awt.Shape;
@@ -10,7 +10,7 @@ import javax.swing.JWindow;
 public class Loader extends JWindow{
 		
 			
-		 /**
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;

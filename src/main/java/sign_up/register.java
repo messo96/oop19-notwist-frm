@@ -11,7 +11,7 @@ import java.awt.event.MouseListener;
 import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 
-import emily.notwist.master_gui;
+import login.master_gui;
 import notwist.database.DBUser;
 import notwist.database.DBUserImpl;
 
