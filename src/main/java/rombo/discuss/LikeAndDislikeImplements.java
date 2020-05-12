@@ -30,6 +30,12 @@ public class LikeAndDislikeImplements implements LikeAndDislike {
 				this.NumberDisLike--;
 				this.NumberLike++;
 			}
+			else {
+				if(User.get(ID) == LIKE) {
+					User.remove(ID);
+					this.NumberLike--;
+				}
+			}
 		}
 		/*If this is a new user*/
 		else {
@@ -55,6 +61,12 @@ public class LikeAndDislikeImplements implements LikeAndDislike {
 			if(User.get(ID) == LIKE) {
 				this.NumberLike--;
 				this.NumberDisLike++;
+			}
+			else {
+				if(User.get(ID) == DISLIKE) {
+					this.NumberDisLike--;
+					User.remove(ID);
+				}
 			}
 		}
 		/*If this is a new user*/

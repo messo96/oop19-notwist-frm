@@ -10,13 +10,13 @@ public class SpecificLikeAndDisLikeImplements extends LikeAndDislikeImplements i
 	
 	/*Base builder.*/
 	public SpecificLikeAndDisLikeImplements(String Topic) {
-		
+		super();
 		this.Topic = Topic;
 	}
 	
 	/*Advance builder.*/
 	public SpecificLikeAndDisLikeImplements(String Topic, CommentsImplements Comment) {
-		
+		super();
 		this.Topic = Topic;
 		this.Comment = Comment;
 	}

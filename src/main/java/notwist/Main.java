@@ -5,21 +5,28 @@
  */
 package notwist;
 
-import emily.notwist.master_gui;
+import rombo.crypt.CrypterImplementation;
 
-/**
- *
- * @author gio
- */
+//import emily.notwist.master_gui;
+
+
 public class Main {
 
-    /**
-     * @param args the command line arguments
-     */
+    
     public static void main(String[] args) {
-    	master_gui gui = new master_gui();
     	
-    	gui.start();
+    	CrypterImplementation temp = new CrypterImplementation();
+    	String s = "Prova di testo 1";
+    	String d = "prova";
+    	
+    	System.out.println("Testo orginale==>"+s);
+    	System.out.println("Testo criptato==>"+temp.Crypt(s));
+    	System.out.println("Testo decriptato==>"+temp.Decrypt(temp.Crypt(s)));
+    	System.out.println("Testo orginale==>"+d);
+    	System.out.println("Testo criptato==>"+temp.Crypt(d));
+    	System.out.println("Testo decriptato==>"+temp.Decrypt(temp.Crypt(d)));
+    
     }
     
 }
+

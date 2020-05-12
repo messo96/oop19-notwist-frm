@@ -25,9 +25,22 @@ public class StrikeImplements extends BaseAccountImplements implements Strike {
 		this.Strike++;
 	}
 	
+	/*Method for remove a strike.*/
+	public void RemoveStrike() {
+		this.Strike--;
+	}
+
+	/*Method for remove all strike.*/
+	public void RemoveAllStrike() {	
+		this.Strike=0;
+	}
+	
 	/*Method that return the number of the strikes.*/
 	public int GetNumberOfStrikes() {
 		return this.Strike;
 	}
+
+	
+	
 
 }
