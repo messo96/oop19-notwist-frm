@@ -2,6 +2,8 @@ package rombo.discuss;
 
 import java.util.Optional;
 
+import notwist.base.CommentsImplements;
+
 public class SpecificLikeAndDisLikeImplements extends LikeAndDislikeImplements implements SpecificLikeAndDisLike {
 
 	/*Fileds.*/

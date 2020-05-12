@@ -1,6 +1,8 @@
-package rombo.discuss;
+package notwist.base;
 
 import java.util.Optional;
+
+import rombo.discuss.BaseAccountImplements;
 
 public class CommentsImplements extends BaseAccountImplements implements Comments{
 

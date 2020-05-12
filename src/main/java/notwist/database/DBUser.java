@@ -1,48 +1,20 @@
 package notwist.database;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.util.Optional;
 
-/**
- * Class for manage interaction with database from Users
- */
-public class DBUser extends DBManagerImpl {
+import notwist.base.User;
 
-	private ResultSet rs = null;
-    private String query;
-    
-    /**
-	 * 
-	 * @param user
-	 * 			verify that user effectively is registered
-	 * @return
-	 * 			true if it is registered, false otherwise
-	 */
-	public boolean existUser(String email) {
-		
-		try
-		{
-			String query = "select * from USER ";
-			rs = open().executeQuery(query);
-			while(rs.next()) {
-				if(rs.getString("email").contentEquals(email)) {
-				System.out.println("User exist! (" + email + ")");
-					return true;
-				}
-			}
-		}
-		catch(Exception e)
-		{
-			System.out.println("User doesn't exist!"+e);
-		}
-		finally {
-			close();
-		}
+public interface DBUser {
 
-		return false;
-	}
+	 /**
+		 * 
+		 * @param user
+		 * 			verify that user effectively is registered
+		 * @return
+		 * 			true if it is registered, false otherwise
+		 */
+	public boolean existUser(final String email, final String username);
 	
-
 	/**
 	 * 
 	 * @param user
@@ -50,76 +22,33 @@ public class DBUser extends DBManagerImpl {
 	 * @param password
 	 *				encrypted password
 	 * @param email
-	 * 				a valid email
+	 * 				an encrypted email
 	 * @param isModerator
-	 * 				if the account has the privileges of moderator
+	 * 				True if the account has the privileges of moderator, false if it's a basic user
 	 * @return
 	 * 			true if account has been saved successfully, false otherwise
 	 */
-	public boolean addUser(String user, String password, String email, boolean isModerator) {
-	     if(existUser(user))
-	    	 return false;
-	     
-	     int index=0;
-	     try {
-			 query = "select * from USER";
-		     rs = open().executeQuery(query);
-		     
-		     while(rs.next())
-		    	 index = rs.getInt("id_user");
-		     
-		        PreparedStatement prepared = super.getConn()
-		        		.prepareStatement("insert into USER (id_user,nome, password, email,isModeratore) values (?,?,?,?,?)");
-		     	prepared.setInt(1, index+1);
-		        prepared.setString(2, user);
-		     	prepared.setString(3, password);
-		     	prepared.setString(4,email);
-		     	prepared.setBoolean(5, isModerator);
-		     	
-		     	prepared.executeUpdate();
-		     	return true;
-		}
-		catch(Exception e) {
-			System.out.println("\nError while adding new user " + e);
-			return false;
-		}
-		finally {
-			close();
-		}
-	}
+	public boolean register(final String user, final String password, final String email, final boolean isModerator);
 	
 	
-	public User login(String email, String password) {
-		
-		if(!this.existUser(email))
-			return null;
-		
-		User user = null;
-		open();
-		try
-		{
-			query = "select * from USER ";
-			rs = open().executeQuery(query);
-			while(rs.next()) {
-				if(rs.getString("email").contentEquals(email) && rs.getString("password").contentEquals(password)) {
-				System.out.println("Welcome " + email + " :)");
-					user = new User(rs.getInt("id_user"), rs.getString("nome"),rs.getString("password")
-							,rs.getString("email"),rs.getBoolean("isModeratore"));
-				}
-			}
-		}
-		catch(Exception e)
-		{
-			System.out.println("User doesn't exist!"+e);
-			
-		}
-		finally {
-			close();
-		}
-		
-		return user;
-	}
+	/**
+	 * 
+	 * @param email
+	 * 			
+	 * @param password
+	 * 		
+	 * @return
+	 * 			Optional User correctly initialized if credential are corrected, Optional empty otherwise
+	 */
+	public Optional<User> login(final String email, final String password);
 	
-	
+	/**
+	 * 
+	 * @param id
+	 * 			id of the user
+	 * @return
+	 * 			Optional of User if id exist, Optional of empty otherwise
+	 */
+	public Optional<User> getUserFromId(final Integer id);
 	
 }

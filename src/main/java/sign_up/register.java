@@ -5,6 +5,15 @@
  */
 package sign_up;
 
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+import javax.swing.JOptionPane;
+import javax.swing.WindowConstants;
+
+import login.master_gui;
+import notwist.database.DBUser;
+import notwist.database.DBUserImpl;
 
 /**
  *
@@ -13,6 +22,10 @@ package sign_up;
 public class register extends javax.swing.JFrame {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
      * Creates new form master_gui1
      */
     public register() {
@@ -27,8 +40,8 @@ public class register extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDialog1 = new javax.swing.JDialog();
-        jPanel4 = new javax.swing.JPanel();
+    	jDialog1 = new javax.swing.JDialog();
+    	jPanel4 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
@@ -162,18 +175,22 @@ public class register extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton1.setText("REGISTER");
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 360, 300, 60));
+      
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 360, 300, 60));
+        
 
         jLabel2.setText("Hai già un account? Loggati");
         jLabel2.setToolTipText("");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 440, 170, -1));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 440, -1, -1));
 
         jLabel5.setText(".");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 440, 30, -1));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 440, -1, -1));
 
         jLabel4.setForeground(new java.awt.Color(250, 0, 0));
         jLabel4.setText("qui");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 440, 20, -1));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 440, -1, -1));
+        
+       
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setText("Mail");
@@ -235,7 +252,7 @@ public class register extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(67, 71, 91));
 
-        jLabel7.setIcon(new javax.swing.ImageIcon("C:\\Users\\emily\\Desktop\\Progetto\\font_test_1.png")); // NOI18N
+        jLabel7.setIcon(new javax.swing.ImageIcon("img/font_test_1.png")); // NOI18N
         jLabel7.setDoubleBuffered(true);
         jLabel7.setFocusable(false);
         jLabel7.setRequestFocusEnabled(false);
@@ -268,6 +285,52 @@ public class register extends javax.swing.JFrame {
             }
         });
         pack();
+        
+
+        //<Personalization> of GUI with Methods NOTWIST
+        //############################################
+        
+        //Label link to login GUI
+        jLabel4.addMouseListener( new MouseListener(){
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				dispose();
+				new master_gui().start();
+				
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {}
+
+			@Override
+			public void mouseExited(MouseEvent e) {}  
+			
+        });
+        
+        //Button that create new User from DBUserImpl
+        //isModerator to default false
+        jButton1.addActionListener(e ->{
+        	if(!jCheckBox1.isSelected())
+        		JOptionPane.showMessageDialog(null, "You have to accept our rules before sign up :0");
+        	else if(new DBUserImpl().register(this.getUsername(), this.getPassword(), this.getEmail(), false)) {
+        		JOptionPane.showMessageDialog(null, "Account created succesfully! :) ");
+        		super.dispose();
+        	}
+        		
+        	else
+        		JOptionPane.showMessageDialog(null, "Error, something goes wrong!:(\nRetry ");
+        		
+        });
+        
+        
+        
     }// </editor-fold>//GEN-END:initComponents
 
 		
@@ -315,18 +378,14 @@ public class register extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-jDialog1.dispose();        // TODO add your handling code here:
+    	jDialog1.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         try {
    
-        	
-
-            
-            jDialog1.getContentPane();
-         
+            jDialog1.getContentPane();         
             jDialog1.setSize(400, 350);
         
             jDialog1.pack();
@@ -338,41 +397,65 @@ jDialog1.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(register.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(register.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(register.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(register.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
+    public String getUsername() {
+    	return username_field1.getText();
+    }
+    
+    public String getEmail() {
+    	return mail_field.getText();
+    }
+    
+   /*
+    * MODIFICARE ?? getPassword() RESTITUISCE UN CHAR[]
+    */
+    public String getPassword() {
+    	return pssw_field.getText();
+    }
+    
+    
+    public void start() {
+    	 /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new register().setVisible(true);
             }
         });
     }
+//    /**
+//     * @param args the command line arguments
+//     */
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(register.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(register.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(register.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(register.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new register().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Padre;
