@@ -40,19 +40,19 @@ public class register extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-    	jDialog1 = new javax.swing.JDialog();
-    	jPanel4 = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
+    	termsDialog = new javax.swing.JDialog();
+    	termsPanel = new javax.swing.JPanel();
+        termsTitle = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jButton2 = new javax.swing.JButton();
+        termsText = new javax.swing.JTextArea();
+        termsAccept = new javax.swing.JButton();
         Padre = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
-        mail_field = new javax.swing.JTextField();
+        rmail_field = new javax.swing.JTextField();
         jSeparator3 = new javax.swing.JSeparator();
-        pssw_field = new javax.swing.JPasswordField();
+        rpssw_field = new javax.swing.JPasswordField();
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -68,55 +68,55 @@ public class register extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
 
-        jLabel9.setText("Informativa Privacy");
+        termsTitle.setText("Informativa Privacy");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jTextArea1.setText("blablabla \nrobaprivacycontrattibananecaramello\nblablabla");
-        jTextArea1.setEditable(false);
-        jScrollPane1.setViewportView(jTextArea1);
-        jDialog1.setUndecorated(true);
+        termsText.setColumns(20);
+        termsText.setRows(5);
+        termsText.setText("blablabla \nrobaprivacycontrattibananecaramello\nblablabla");
+        termsText.setEditable(false);
+        jScrollPane1.setViewportView(termsText);
+        termsDialog.setUndecorated(true);
 
-        jButton2.setText("Ok, ho letto");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        termsAccept.setText("Ok, ho letto");
+        termsAccept.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                termsAcceptActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        javax.swing.GroupLayout termsPanelLayout = new javax.swing.GroupLayout(termsPanel);
+        termsPanel.setLayout(termsPanelLayout);
+        termsPanelLayout.setHorizontalGroup(
+            termsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(termsPanelLayout.createSequentialGroup()
                 .addGap(42, 42, 42)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(termsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9)
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(termsTitle)
+                    .addComponent(termsAccept, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap(49, Short.MAX_VALUE))
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        termsPanelLayout.setVerticalGroup(
+            termsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(termsPanelLayout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addComponent(jLabel9)
+                .addComponent(termsTitle)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addComponent(termsAccept)
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
-        jDialog1.getContentPane().setLayout(jDialog1Layout);
-        jDialog1Layout.setHorizontalGroup(
-            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        javax.swing.GroupLayout termsDialogLayout = new javax.swing.GroupLayout(termsDialog.getContentPane());
+        termsDialog.getContentPane().setLayout(termsDialogLayout);
+        termsDialogLayout.setHorizontalGroup(
+            termsDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(termsPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jDialog1Layout.setVerticalGroup(
-            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        termsDialogLayout.setVerticalGroup(
+            termsDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(termsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         
         
@@ -140,34 +140,34 @@ public class register extends javax.swing.JFrame {
         jSeparator2.setBackground(new java.awt.Color(255, 255, 245));
         jPanel2.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, 290, -1));
 
-        mail_field.setBackground(new java.awt.Color(250, 250, 250));
-        mail_field.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        mail_field.setActionCommand("<Not Set>");
-        mail_field.setBorder(null);
-        mail_field.addFocusListener(new java.awt.event.FocusAdapter() {
+        rmail_field.setBackground(new java.awt.Color(250, 250, 250));
+        rmail_field.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rmail_field.setActionCommand("<Not Set>");
+        rmail_field.setBorder(null);
+        rmail_field.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                mail_fieldFocusGained(evt);
+                rmail_fieldFocusGained(evt);
             }
         });
-        mail_field.addActionListener(new java.awt.event.ActionListener() {
+        rmail_field.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mail_fieldActionPerformed(evt);
+                rmail_fieldActionPerformed(evt);
             }
         });
-        jPanel2.add(mail_field, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 290, 270, 20));
+        jPanel2.add(rmail_field, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 290, 270, 20));
 
         jSeparator3.setBackground(new java.awt.Color(255, 255, 245));
         jPanel2.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 230, 290, -1));
 
-        pssw_field.setBackground(new java.awt.Color(250, 250, 250));
-        pssw_field.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        pssw_field.setBorder(null);
-        pssw_field.addFocusListener(new java.awt.event.FocusAdapter() {
+        rpssw_field.setBackground(new java.awt.Color(250, 250, 250));
+        rpssw_field.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rpssw_field.setBorder(null);
+        rpssw_field.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                pssw_fieldFocusGained(evt);
+                rpssw_fieldFocusGained(evt);
             }
         });
-        jPanel2.add(pssw_field, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, 270, 20));
+        jPanel2.add(rpssw_field, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, 270, 20));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Username");
@@ -336,9 +336,9 @@ public class register extends javax.swing.JFrame {
 		
 
 
-    private void mail_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mail_fieldActionPerformed
+    private void rmail_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rmail_fieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_mail_fieldActionPerformed
+    }//GEN-LAST:event_rmail_fieldActionPerformed
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
         System.exit(0);
@@ -358,15 +358,15 @@ public class register extends javax.swing.JFrame {
         xy = evt.getY();
     }//GEN END;
 
-    private void mail_fieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_mail_fieldFocusGained
+    private void rmail_fieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_rmail_fieldFocusGained
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setForeground(new java.awt.Color(0, 150, 0));
-    }//GEN-LAST:event_mail_fieldFocusGained
+    }//GEN-LAST:event_rmail_fieldFocusGained
 
-    private void pssw_fieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pssw_fieldFocusGained
+    private void rpssw_fieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_rpssw_fieldFocusGained
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setForeground(new java.awt.Color(0, 150, 0));
-    }//GEN-LAST:event_pssw_fieldFocusGained
+    }//GEN-LAST:event_rpssw_fieldFocusGained
 
     private void username_field1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_username_field1FocusGained
         // TODO add your handling code here:
@@ -376,21 +376,21 @@ public class register extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_username_field1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void termsAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_termsAcceptActionPerformed
 
-    	jDialog1.dispose();        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    	termsDialog.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_termsAcceptActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         try {
    
-            jDialog1.getContentPane();         
-            jDialog1.setSize(400, 350);
+            termsDialog.getContentPane();         
+            termsDialog.setSize(400, 350);
         
-            jDialog1.pack();
-            jDialog1.setLocationRelativeTo(Padre); 
-        jDialog1.setVisible(true);
+            termsDialog.pack();
+            termsDialog.setLocationRelativeTo(Padre); 
+        termsDialog.setVisible(true);
     } catch (Exception ex) {
         ex.printStackTrace();
     }
@@ -402,14 +402,14 @@ public class register extends javax.swing.JFrame {
     }
     
     public String getEmail() {
-    	return mail_field.getText();
+    	return rmail_field.getText();
     }
     
    /*
     * MODIFICARE ?? getPassword() RESTITUISCE UN CHAR[]
     */
     public String getPassword() {
-    	return pssw_field.getText();
+    	return rpssw_field.getText();
     }
     
     
@@ -460,10 +460,10 @@ public class register extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Padre;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton termsAccept;
     private javax.swing.JButton jButton3;
     private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JDialog jDialog1;
+    private javax.swing.JDialog termsDialog;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -472,18 +472,18 @@ public class register extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel termsTitle;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel termsPanel;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField mail_field;
-    private javax.swing.JPasswordField pssw_field;
+    private javax.swing.JTextArea termsText;
+    private javax.swing.JTextField rmail_field;
+    private javax.swing.JPasswordField rpssw_field;
     private javax.swing.JTextField username_field1;
     // End of variables declaration//GEN-END:variables
 }

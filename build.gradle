@@ -9,6 +9,9 @@ mainClassName = 'notwist.Main'
 repositories {
     jcenter()
     mavenCentral()
+    maven {
+        url  "https://dl.bintray.com/jformdesigner/flatlaf" 
+    }
 }
 
 dependencies {
@@ -20,3 +23,4 @@ dependencies {
    	
 	  
 }
+
