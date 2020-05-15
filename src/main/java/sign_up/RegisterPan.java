@@ -46,20 +46,20 @@ public class RegisterPan extends JPanel{
         termsText = new JTextArea();
         termsAccept = new JButton();
         register_panel = new JPanel();
-        rpssw_label = new JLabel();
+        pssw_label = new JLabel();
         login_link = new JLabel();
-        rmail_field = new JTextField();
+        mail_field = new JTextField();
         jSeparator3 = new JSeparator();
         jSeparator5 = new JSeparator();
-        rpssw_field = new JPasswordField();
+        pssw_field = new JPasswordField();
         user_label = new JLabel();
         signup_button = new JButton();
 
-        rdot = new JLabel();
+        dot = new JLabel();
         login_link = new JLabel();
-        rmail_label = new JLabel();
+        mail_label = new JLabel();
         jSeparator4 = new JSeparator();
-        username_field1 = new JTextField();
+        username_field = new JTextField();
         jCheckBox1 = new JCheckBox();
         terms_button = new JButton();
       
@@ -128,16 +128,16 @@ public class RegisterPan extends JPanel{
         user_label.setText("Username");
         register_panel.add(user_label, new AbsoluteConstraints(60, 80, -1, -1));
         
-        username_field1.setFont(new Font("Tahoma", 0, 14)); // NOI18N
-        username_field1.setActionCommand("<Not Set>");
-        username_field1.setBorder(null);
-        username_field1.addFocusListener(new FocusAdapter() {
+        username_field.setFont(new Font("Tahoma", 0, 14)); // NOI18N
+        username_field.setActionCommand("<Not Set>");
+        username_field.setBorder(null);
+        username_field.addFocusListener(new FocusAdapter() {
             public void focusGained(FocusEvent evt) {
-                username_field1FocusGained(evt);
+                username_fieldFocusGained(evt);
             }
         });
 
-        register_panel.add(username_field1, new AbsoluteConstraints(60, 110, 290, 20));
+        register_panel.add(username_field, new AbsoluteConstraints(60, 110, 290, 20));
         
         //Separator
         jSeparator5.setBackground(new Color(0,0,0));
@@ -148,18 +148,18 @@ public class RegisterPan extends JPanel{
         register_panel.add(jSeparator5, new AbsoluteConstraints(60, 140, 290, -1));
 
         //Password 
-        rpssw_label.setFont(new Font("Tahoma", 0, 14)); // NOI18N
-        rpssw_label.setText("Password");
-        register_panel.add(rpssw_label, new AbsoluteConstraints(60, 170, -1, -1));
+        pssw_label.setFont(new Font("Tahoma", 0, 14)); // NOI18N
+        pssw_label.setText("Password");
+        register_panel.add(pssw_label, new AbsoluteConstraints(60, 170, -1, -1));
 
-        rpssw_field.setFont(new Font("Tahoma", 0, 14)); // NOI18N
-        rpssw_field.setBorder(null);
-        rpssw_field.addFocusListener(new FocusAdapter() {
+        pssw_field.setFont(new Font("Tahoma", 0, 14)); // NOI18N
+        pssw_field.setBorder(null);
+        pssw_field.addFocusListener(new FocusAdapter() {
             public void focusGained(FocusEvent evt) {
-                rpssw_fieldFocusGained(evt);
+                pssw_fieldFocusGained(evt);
             }
         });
-        register_panel.add(rpssw_field, new AbsoluteConstraints(60, 200, 290, 20));
+        register_panel.add(pssw_field, new AbsoluteConstraints(60, 200, 290, 20));
         //Separator
         jSeparator3.setBackground(new Color(0,0,0));
         jSeparator3.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 0, 0, 0, new java.awt.Color(194, 192, 192)));
@@ -171,21 +171,21 @@ public class RegisterPan extends JPanel{
 
         //Mail
         
-        rmail_label.setFont(new Font("Tahoma", 0, 14)); // NOI18N
-        rmail_label.setText("Mail");
-        register_panel.add(rmail_label, new AbsoluteConstraints(60, 260, -1, -1));
+        mail_label.setFont(new Font("Tahoma", 0, 14)); // NOI18N
+        mail_label.setText("Mail");
+        register_panel.add(mail_label, new AbsoluteConstraints(60, 260, -1, -1));
         
-        rmail_field.setFont(new Font("Tahoma", 0, 14)); // NOI18N
-        rmail_field.setBorder(null);
+        mail_field.setFont(new Font("Tahoma", 0, 14)); // NOI18N
+        mail_field.setBorder(null);
         
-        rmail_field.addFocusListener(new FocusAdapter() {
+        mail_field.addFocusListener(new FocusAdapter() {
             public void focusGained(FocusEvent evt) {
-                rmail_fieldFocusGained(evt);
+                mail_fieldFocusGained(evt);
             }
         });
         
         
-        register_panel.add(rmail_field, new AbsoluteConstraints(60, 290, 290, 20));
+        register_panel.add(mail_field, new AbsoluteConstraints(60, 290, 290, 20));
 
 
         //Separator
@@ -230,8 +230,8 @@ public class RegisterPan extends JPanel{
         login_link.setText("qui");
         register_panel.add(login_link, new AbsoluteConstraints(210, 440, -1, -1));
         
-        rdot.setText(".");
-        register_panel.add(rdot, new AbsoluteConstraints(230, 440, -1, -1)); 
+        dot.setText(".");
+        register_panel.add(dot, new AbsoluteConstraints(230, 440, -1, -1)); 
 
         add(register_panel);
         
@@ -244,21 +244,21 @@ public class RegisterPan extends JPanel{
          });
         
         
-        rmail_field.addFocusListener(new FocusAdapter() {
+        mail_field.addFocusListener(new FocusAdapter() {
             public void focusGained(FocusEvent evt) {
-                rmail_fieldFocusGained(evt);
+                mail_fieldFocusGained(evt);
             }
         });
         
-        rpssw_field.addFocusListener(new FocusAdapter() {
+        pssw_field.addFocusListener(new FocusAdapter() {
             public void focusGained(FocusEvent evt) {
-                rpssw_fieldFocusGained(evt);
+                pssw_fieldFocusGained(evt);
             }
         });
         
-        username_field1.addFocusListener(new FocusAdapter(){
+        username_field.addFocusListener(new FocusAdapter(){
         	public void focusGained(FocusEvent evt) {
-        		username_field1FocusGained(evt);
+        		username_fieldFocusGained(evt);
         	}
         });
         
@@ -300,15 +300,15 @@ public class RegisterPan extends JPanel{
         
         
         public String getUsername() {
-        	return username_field1.getText();
+        	return username_field.getText();
         }
         
         public String getEmail() {
-        	return rmail_field.getText();
+        	return mail_field.getText();
         }
         
         public String getrPassword() {
-        	return rpssw_field.getText();
+        	return pssw_field.getText();
         }
        
         
@@ -317,20 +317,20 @@ public class RegisterPan extends JPanel{
       
         
         //Focus
-        private void rmail_fieldFocusGained(FocusEvent evt) {
-            rpssw_label.setForeground(new Color(0, 0, 0));
-            rmail_label.setForeground(new Color(135, 175, 218));
+        private void mail_fieldFocusGained(FocusEvent evt) {
+            pssw_label.setForeground(new Color(0, 0, 0));
+            mail_label.setForeground(new Color(135, 175, 218));
            user_label.setForeground(new Color(0,0,0));
         }
-        private void rpssw_fieldFocusGained(FocusEvent evt) {
-            rpssw_label.setForeground(new Color(135, 175, 218));
-            rmail_label.setForeground(new Color(0, 0, 0));
+        private void pssw_fieldFocusGained(FocusEvent evt) {
+            pssw_label.setForeground(new Color(135, 175, 218));
+            mail_label.setForeground(new Color(0, 0, 0));
            user_label.setForeground(new Color(0,0,0));
         }
         
-        private void username_field1FocusGained(FocusEvent evt) {
-            rpssw_label.setForeground(new Color(0, 0, 0));
-            rmail_label.setForeground(new Color(0, 0, 0));
+        private void username_fieldFocusGained(FocusEvent evt) {
+            pssw_label.setForeground(new Color(0, 0, 0));
+            mail_label.setForeground(new Color(0, 0, 0));
            user_label.setForeground(new Color(135, 175, 218));
         } 
         
@@ -346,18 +346,18 @@ public class RegisterPan extends JPanel{
 	
     private JCheckBox jCheckBox1;
     private JDialog termsDialog;
-    private JLabel rpssw_label;
+    private JLabel pssw_label;
     private JLabel user_label;
 
     private JButton signup_button;
 
     private JPanel register_panel;
-    private JTextField rmail_field;
-    private JPasswordField rpssw_field;
-    private JTextField username_field1;
+    private JTextField mail_field;
+    private JPasswordField pssw_field;
+    private JTextField username_field;
     private JLabel register_label;
-    private JLabel rdot;
-    private JLabel rmail_label;
+    private JLabel dot;
+    private JLabel mail_label;
     private JLabel termsTitle;
     private JPanel termsPanel;
     private JScrollPane jScrollPane1;
