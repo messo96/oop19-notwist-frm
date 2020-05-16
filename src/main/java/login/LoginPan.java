@@ -42,7 +42,7 @@ import homepage.Homepage_gui;
 import notwist.base.User;
 import notwist.database.DBUser;
 import notwist.database.DBUserImpl;
-public class LoginPan extends JPanel {
+public class LoginPan extends JPanel  {
 	private static final long serialVersionUID = 1L;
 	private DBUser user = new DBUserImpl();
 	public LoginPan() {
@@ -156,6 +156,8 @@ public class LoginPan extends JPanel {
         this.login_button.addActionListener(e ->{
         	login_button.setVisible(false);
         	loader.setVisible(true);
+        	Window win = ( (Window) SwingUtilities.getRoot(this));
+
         	if(this.login_button.getActionListeners().length == 0)
         		throw new IllegalStateException();
         	new SwingWorker<String,Object>(){
@@ -165,8 +167,8 @@ public class LoginPan extends JPanel {
         			Optional<User> user = getCredential();
         			if(user.isPresent()) {
         				JOptionPane.showMessageDialog(null, "Credenziali corrette, Benvenuto!");
-        				((Window) getParent()).dispose();
         				new Homepage_gui(user.get());
+        				win.dispose();
         				return  "Credenziali corrette";
         			}
         			else {
