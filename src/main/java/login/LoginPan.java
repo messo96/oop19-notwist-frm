@@ -11,6 +11,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowEvent;
 import java.util.Optional;
 
 import java.awt.event.ActionEvent;
@@ -19,6 +20,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -38,6 +40,7 @@ import javax.swing.UIManager;
 import org.netbeans.lib.awtextra.AbsoluteConstraints;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
 
+import gui.BuildGui;
 import homepage.Homepage_gui;
 import notwist.base.User;
 import notwist.database.DBUser;
@@ -165,7 +168,10 @@ public class LoginPan extends JPanel {
         			Optional<User> user = getCredential();
         			if(user.isPresent()) {
         				JOptionPane.showMessageDialog(null, "Credenziali corrette, Benvenuto!");
-        				((Window) getParent()).dispose();
+        				System.out.println ("qjnnqwnquq");
+        				
+        			
+        				
         				new Homepage_gui(user.get());
         				return  "Credenziali corrette";
         			}

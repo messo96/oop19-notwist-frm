@@ -1,7 +1,6 @@
 package gui;
 
 import java.awt.CardLayout;
-
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.MouseAdapter;
@@ -62,7 +61,7 @@ public class BuildGui extends JFrame {
         getContentPane().add(panelHolder, new AbsoluteConstraints(510, 40, 370, 480));
         
 
-
+     
         //Get logo panel and add it to the main frame
         logo = new LogoPan();
         logo.setVisible(true);
@@ -104,6 +103,12 @@ public class BuildGui extends JFrame {
         xy = evt.getY();
     }
     
+   
+    
+    
+    
+    
+    
    //<------------BUILD THE GUI----------------->
     public void start() {
 
@@ -113,6 +118,8 @@ public class BuildGui extends JFrame {
             }
         });
     }
+    
+  
 
     // Variables declaration - do not modify
     private JPanel panelHolder;   

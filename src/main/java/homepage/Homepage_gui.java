@@ -69,6 +69,8 @@ public class Homepage_gui extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+    	
+    	
         drag_panel = new javax.swing.JPanel();
         commands_panel = new javax.swing.JPanel();
         exit = new javax.swing.JLabel();

@@ -331,8 +331,6 @@ public class master_gui extends JFrame {
     }
     
     public void start() {
-    	if(this.login_button.getActionListeners().length == 0)
-    		throw new IllegalStateException();
     	
     	EventQueue.invokeLater(new Runnable() {
             public void run() {
