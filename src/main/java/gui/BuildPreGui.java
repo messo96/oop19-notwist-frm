@@ -18,11 +18,11 @@ import util.UpperPan;
 import sign_up.RegisterPan;
 import login.LoginPan;
 
-public class BuildGui extends JFrame {
+public class BuildPreGui extends JFrame {
  
 	private static final long serialVersionUID = 1L;
 
-    public BuildGui() {
+    public BuildPreGui() {
     	
         initComponents();
     }
@@ -114,7 +114,7 @@ public class BuildGui extends JFrame {
 
     	EventQueue.invokeLater(new Runnable() {
             public void run() {
-            	  new BuildGui().setVisible(true);
+            	  new BuildPreGui().setVisible(true);
             }
         });
     }

@@ -40,7 +40,7 @@ import javax.swing.UIManager;
 import org.netbeans.lib.awtextra.AbsoluteConstraints;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
 
-import gui.BuildGui;
+import gui.BuildPreGui;
 import homepage.Homepage_gui;
 import notwist.base.User;
 import notwist.database.DBUser;
