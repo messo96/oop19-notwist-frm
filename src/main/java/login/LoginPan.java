@@ -41,7 +41,7 @@ import org.netbeans.lib.awtextra.AbsoluteConstraints;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
 
 import gui.BuildPreGui;
-import homepage.Homepage_gui;
+import gui.BuildAfterGui;
 import notwist.base.User;
 import notwist.database.DBUser;
 import notwist.database.DBUserImpl;
@@ -170,7 +170,7 @@ public class LoginPan extends JPanel  {
         			Optional<User> user = getCredential();
         			if(user.isPresent()) {
         				JOptionPane.showMessageDialog(null, "Credenziali corrette, Benvenuto!");
-        				new Homepage_gui(user.get());
+        				new BuildAfterGui(user.get());
         				win.dispose();
         				return  "Credenziali corrette";
         			}
@@ -240,5 +240,4 @@ public class LoginPan extends JPanel  {
 
 	    private JTextField mail_field;
 	    private JPasswordField pssw_field; 
-	    private JButton checkP;
 }
