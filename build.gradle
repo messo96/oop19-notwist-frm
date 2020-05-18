@@ -18,6 +18,8 @@ dependencies {
     compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.6'
     compile group: 'org.netbeans.external', name: 'AbsoluteLayout', version: 'RELEASE701'
    	compile group: 'org.kefirsf', name: 'kefirbb', version:'1.5'
+ // https://mvnrepository.com/artifact/com.formdev/flatlaf
+	runtime group: 'com.formdev', name: 'flatlaf', version: '0.20'
  
    	
 	  
