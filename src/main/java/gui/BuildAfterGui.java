@@ -1,7 +1,6 @@
 package gui;
 
 import java.awt.CardLayout;
-
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.MouseAdapter;
@@ -14,23 +13,34 @@ import javax.swing.JPanel;
 import org.netbeans.lib.awtextra.AbsoluteConstraints;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
 
-import util.LogoPan;
+import main.Loader;
+import notwist.base.User;
+import notwist.database.DBDiscussion;
+import notwist.database.DBDiscussionImpl;
+import util.Header;
 import util.UpperPan;
-import sign_up.RegisterPan;
-import login.LoginPan;
 
-public class BuildGui extends JFrame {
+public class BuildAfterGui extends JFrame {
  
 	private static final long serialVersionUID = 1L;
 
-    public BuildGui() {
-    	
-        initComponents();
+    private DBDiscussion discussion = new DBDiscussionImpl();
+	private User actualUser = null;
+	private Loader loader;
+	
+	
+	  public BuildAfterGui(User user) {
+	      initComponents();
+		  this.actualUser = user;
+		  this.loader = new Loader();
+		  this.setVisible(true);
+		  this.pack();
     }
+
 
     private void initComponents() {
 
-        panelHolder = new JPanel(); //Holder for Login and Register
+       	bodyHolder = new JPanel(); //Holder for body
        
         //JFrame properties
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -42,33 +52,24 @@ public class BuildGui extends JFrame {
         //Get upper panel and add it to the main frame
         upper_panel = new UpperPan();
         upper_panel.setVisible(true);
+       
+        getContentPane().add(upper_panel, new AbsoluteConstraints(670, 0, -1, 40));
         
-        getContentPane().add(upper_panel, new AbsoluteConstraints(510, 0, 420, 40));
+        //Header
+        
+        header_panel = new Header();
+        header_panel.setVisible(true);
+        
+        getContentPane().add(header_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 1080, 90));
+
+        
+        
         
         //Card space
-        panelHolder.setLayout(new CardLayout());
-
-        //Add login to card
-        login_panel = new LoginPan();
-        login_panel.setVisible(true);
-        panelHolder.add(login_panel, "login");
-     
-        //Add register to card
-        register_panel = new RegisterPan();
-        register_panel.setVisible(true);
-        panelHolder.add(register_panel,"register_panel");
+        bodyHolder.setLayout(new CardLayout());
 
         //Adding the card!
-        getContentPane().add(panelHolder, new AbsoluteConstraints(510, 40, 370, 480));
-        
-
-
-        //Get logo panel and add it to the main frame
-        logo = new LogoPan();
-        logo.setVisible(true);
-        logo.setBackground(new Color(67, 71, 91));
-    	
-        getContentPane().add(logo, new AbsoluteConstraints(0, 0, -1, -1));
+        getContentPane().add(bodyHolder, new AbsoluteConstraints(820, 0, 260, 40));
         
         pack();
         
@@ -104,21 +105,11 @@ public class BuildGui extends JFrame {
         xy = evt.getY();
     }
     
-   //<------------BUILD THE GUI----------------->
-    public void start() {
-
-    	EventQueue.invokeLater(new Runnable() {
-            public void run() {
-            	  new BuildGui().setVisible(true);
-            }
-        });
-    }
+  
 
     // Variables declaration - do not modify
-    private JPanel panelHolder;   
-    private LoginPan login_panel;
-    private LogoPan logo;
+    private JPanel bodyHolder;   
     private UpperPan upper_panel;
-    private RegisterPan register_panel;
+    private Header header_panel;
     // End of variables declaration
 }

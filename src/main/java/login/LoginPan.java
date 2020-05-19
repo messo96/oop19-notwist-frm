@@ -11,6 +11,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowEvent;
 import java.util.Optional;
 
 import java.awt.event.ActionEvent;
@@ -19,6 +20,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -38,11 +40,12 @@ import javax.swing.UIManager;
 import org.netbeans.lib.awtextra.AbsoluteConstraints;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
 
-import homepage.Homepage_gui;
+import gui.BuildPreGui;
+import gui.BuildAfterGui;
 import notwist.base.User;
 import notwist.database.DBUser;
 import notwist.database.DBUserImpl;
-public class LoginPan extends JPanel {
+public class LoginPan extends JPanel  {
 	private static final long serialVersionUID = 1L;
 	private DBUser user = new DBUserImpl();
 	public LoginPan() {
@@ -156,6 +159,8 @@ public class LoginPan extends JPanel {
         this.login_button.addActionListener(e ->{
         	login_button.setVisible(false);
         	loader.setVisible(true);
+        	Window win = ( (Window) SwingUtilities.getRoot(this));
+
         	if(this.login_button.getActionListeners().length == 0)
         		throw new IllegalStateException();
         	new SwingWorker<String,Object>(){
@@ -165,8 +170,8 @@ public class LoginPan extends JPanel {
         			Optional<User> user = getCredential();
         			if(user.isPresent()) {
         				JOptionPane.showMessageDialog(null, "Credenziali corrette, Benvenuto!");
-        				((Window) getParent()).dispose();
-        				new Homepage_gui(user.get());
+        				new BuildAfterGui(user.get());
+        				win.dispose();
         				return  "Credenziali corrette";
         			}
         			else {
@@ -235,5 +240,4 @@ public class LoginPan extends JPanel {
 
 	    private JTextField mail_field;
 	    private JPasswordField pssw_field; 
-	    private JButton checkP;
 }

@@ -6,20 +6,16 @@
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="src" output="bin/test" path="src/test/java">
-		<attributes>
-			<attribute name="test" value="true"/>
-			<attribute name="gradle_scope" value="test"/>
-			<attribute name="gradle_used_by_scope" value="test"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-11/">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.buildship.core.gradleclasspathcontainer"/>
+<<<<<<< HEAD
 	<classpathentry kind="lib" path="C:/Users/emily/Downloads/jar_files (2)/flatlaf-0.34.jar"/>
+=======
+>>>>>>> 45ad3f71d9c944f842f952bc5e82d3232a1f5868
 	<classpathentry kind="lib" path="lib/unknown/binary/flatlaf-0.34.jar"/>
 	<classpathentry kind="output" path="bin/default"/>
 </classpath>
