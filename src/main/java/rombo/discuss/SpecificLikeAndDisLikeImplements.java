@@ -8,16 +8,10 @@ public class SpecificLikeAndDisLikeImplements extends LikeAndDislikeImplements i
 
 	/*Fileds.*/
 	private final String Topic;
-	private CommentsImplements Comment = null;
+	private Optional<CommentsImplements> Comment = null;
 	
-	/*Base builder.*/
-	public SpecificLikeAndDisLikeImplements(String Topic) {
-		super();
-		this.Topic = Topic;
-	}
-	
-	/*Advance builder.*/
-	public SpecificLikeAndDisLikeImplements(String Topic, CommentsImplements Comment) {
+	/*Builder*/
+	public SpecificLikeAndDisLikeImplements(String Topic, Optional<CommentsImplements> Comment) {
 		super();
 		this.Topic = Topic;
 		this.Comment = Comment;
@@ -26,17 +20,17 @@ public class SpecificLikeAndDisLikeImplements extends LikeAndDislikeImplements i
 
 	/*Getter methods.*/
 	
-	/*This method return the topic.*/
+	/*@Return the topic.*/
 	public String GetTopic() {
 		return this.Topic;
 	}
 
 
-	/*If possible this method return the comment.*/
+	/*@Return a Optional about the comment, if the comment is not present return a Oprional.Empty.*/
 	public Optional<CommentsImplements> GetComment() {
 		
 		if(this.Comment != null) {
-			return Optional.of(this.Comment);
+			return this.Comment;
 		}
 		else {
 			return Optional.empty();

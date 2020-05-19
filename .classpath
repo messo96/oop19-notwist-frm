@@ -20,5 +20,6 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.buildship.core.gradleclasspathcontainer"/>
 	<classpathentry kind="lib" path="C:/Users/emily/Downloads/jar_files (2)/flatlaf-0.34.jar"/>
+	<classpathentry kind="lib" path="lib/unknown/binary/flatlaf-0.34.jar"/>
 	<classpathentry kind="output" path="bin/default"/>
 </classpath>

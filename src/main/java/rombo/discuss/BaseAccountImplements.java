@@ -6,17 +6,10 @@ public class BaseAccountImplements implements BaseAccount {
 
 	/*Fields.*/
 	private final int ID;
-	private String UserName = null;
+	private Optional<String> UserName = null;
 	
-	/*Builders.*/
-	
-	/*Base builder.*/
-	public BaseAccountImplements(int ID) {
-		this.ID = ID;
-	}
-	
-	/*Advance builder.*/
-	public BaseAccountImplements(int ID , String UserName) {
+	/*Builder.*/
+	public BaseAccountImplements(int ID ,Optional<String> username) {
 		this.ID = ID;
 		this.UserName = UserName;
 	}
@@ -24,15 +17,16 @@ public class BaseAccountImplements implements BaseAccount {
 	
 	/*Get methods.*/
 	
-	/*ID.*/
+	/*@Return the ID of the user.*/
 	public int GetID() {
 		return this.ID;
 	}
 
-	/*UserName.*/
+	/*@Retunr a Optional abought the username of the user, if the user is not anonymous return 
+	 the username, else return an Optional.Empty*/
 	public Optional<String> GetUserName() {
 		if(this.UserName != null) {
-			return Optional.of(this.UserName);
+			return this.UserName;
 		}
 		else {
 			return Optional.empty();

@@ -20,7 +20,7 @@ public class LikeAndDislikeImplements implements LikeAndDislike {
 	}
 	
 	
-	/*method for add like, if the same user pouted  dislike the count of dislike id decrement.*/
+	/*@Input the ID of the user the pouted like.*/
 	public void ADDLike(BaseAccountImplements ID) {
 		
 		/*Control if this is a new user.*/
@@ -46,13 +46,13 @@ public class LikeAndDislikeImplements implements LikeAndDislike {
 
 	}
 
-	/*Method that return the current number of like*/
+	/*@Return the current number of like*/
 	public int GetLikeNumber() {
 		return this.NumberLike;
 	}
 
 	
-	/*method for add dislike, if the same user pouted  like the count of like id decrement.*/
+	/*@Input the ID of the user the pouted dislike.*/
 	public void ADDDislike(BaseAccountImplements ID) {
 		
 		/*Control if this is a new user.*/
@@ -77,7 +77,7 @@ public class LikeAndDislikeImplements implements LikeAndDislike {
 
 	}
 
-	/*Method that return the current number of like*/
+	/*@Return the current number of like*/
 	public int GetDislikeNumber() {
 		return this.NumberDisLike;
 	}

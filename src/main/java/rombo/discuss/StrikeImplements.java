@@ -1,20 +1,14 @@
 package rombo.discuss;
 
+import java.util.Optional;
+
 public class StrikeImplements extends BaseAccountImplements implements Strike {
 	
 	/*Fields.*/
 	private int Strike;
 	
 	/*Builders.*/
-	
-	/*Base builder.*/
-	public StrikeImplements(int ID) {
-		super(ID);
-		this.Strike = 0;
-	}
-	
-	/*Advace Builder.*/
-	public StrikeImplements(int ID , String UserName) {
+	public StrikeImplements(int ID , Optional<String> UserName) {
 		super(ID,UserName);
 		this.Strike = 0;
 	}
