@@ -5,20 +5,13 @@
  */
 package notwist;
 
-
-import rombo.chat.BaseChatImplement;
-
-
+import login.master_gui;
 
 public class Main {
 
     
     public static void main(String[] args) {
-    	
-    	BaseChatImplement prova = new BaseChatImplement(1234, 4312);
-    	
-    	System.out.println("prova stampa 1: " + prova.GetID());
-    
+    	new master_gui().start();
     }
     
 }

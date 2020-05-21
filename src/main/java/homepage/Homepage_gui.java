@@ -6,6 +6,7 @@
 package homepage;
 
 import java.awt.BorderLayout;
+import java.awt.Frame;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
@@ -57,6 +58,10 @@ public class Homepage_gui extends javax.swing.JFrame {
 		  this.actualUser = user;
 		  this.loader = new Loader();
 		  this.setVisible(true);
+		  //Minimize
+//	        this.setState(Frame.ICONIFIED);
+//	        this.setExtendedState(JFrame.ICONIFIED);
+	        
 		  this.pack();
     }
 
@@ -253,9 +258,9 @@ public class Homepage_gui extends javax.swing.JFrame {
 
         jTable1.getColumnModel().getColumn(0).setPreferredWidth(400);
         jTable1.getColumnModel().getColumn(1).setPreferredWidth(100);
-        jTable1.getColumnModel().getColumn(2).setPreferredWidth(80);
-        jTable1.getColumnModel().getColumn(3).setPreferredWidth(120);
-        jTable1.getColumnModel().getColumn(4).setPreferredWidth(40);
+        jTable1.getColumnModel().getColumn(2).setPreferredWidth(60);
+        jTable1.getColumnModel().getColumn(3).setPreferredWidth(100);
+        jTable1.getColumnModel().getColumn(4).setPreferredWidth(80);
 
         }
         
@@ -398,6 +403,8 @@ public class Homepage_gui extends javax.swing.JFrame {
             	drag_panelMousePressed(evt);
             }
         });
+        
+       
         
         pack();
         

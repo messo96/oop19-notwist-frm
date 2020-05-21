@@ -1,7 +1,9 @@
 package main;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Shape;
+import java.awt.image.IndexColorModel;
 
 import javax.swing.JLabel;
 import javax.swing.JWindow;
@@ -19,11 +21,10 @@ public class Loader extends JWindow{
 				this.setLayout(new BorderLayout());
 		        JLabel loader = new JLabel(new javax.swing.ImageIcon("img/loading_text.gif"));
 				this.add(loader,BorderLayout.CENTER);
-				this.setLocationRelativeTo(this);
+				this.setLocationRelativeTo(null);
 				this.setAlwaysOnTop(true);
-//				this.setOpacity(0.8f);
-				loader.setOpaque(false);
-				loader.setVisible(true);
+				loader.setOpaque(true);
+				this.setBackground(new Color(0,0,0,0));
 				this.pack();
 			}
 		 
