@@ -17,6 +17,8 @@ import main.Loader;
 import notwist.base.User;
 import notwist.database.DBDiscussion;
 import notwist.database.DBDiscussionImpl;
+import table.Nofilter;
+import util.CategoryPan;
 import util.Header;
 import util.UpperPan;
 
@@ -62,15 +64,19 @@ public class BuildAfterGui extends JFrame {
         
         getContentPane().add(header_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 1080, 90));
 
+        //Qua chiamo il pannello no filter con la tabella principale non filtrata, basta togliere il commento /* sotto
+     /*   Nofilter drag_panel = new Nofilter(this.actualUser);
+        drag_panel.setVisible(true);
         
         
-        
-        //Card space
-        bodyHolder.setLayout(new CardLayout());
-
-        //Adding the card!
-        getContentPane().add(bodyHolder, new AbsoluteConstraints(820, 0, 260, 40));
-        
+       
+        getContentPane().add(drag_panel, new AbsoluteConstraints(820, 0, 260, 40));
+        //qua era dove addavo la card, ma per i test è rimasta commentata
+     /*   CategoryPan category_panel = new CategoryPan();
+        category_panel.setVisible(true);
+        bodyHolder.add(category_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 290, 240, 200));
+       
+        */
         pack();
         
         //<--------------METHODS---------------------------------------->
