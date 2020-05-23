@@ -345,7 +345,7 @@ public class newtopic_gui extends javax.swing.JFrame {
         	   Category cate = new DBCategory().getCategoryByName(category.getSelectedItem().toString());
         		String title = jTextField1.getText();
                 String desc = preview_textarea.getText();
-                Discussion disc = new DiscussionImpl(this.actualUser.getId(), title,desc, cate, d);
+                Discussion disc = new DiscussionImpl(0,this.actualUser.getId(), title,desc, cate, d);
                 new DBDiscussionImpl().createDiscussion(disc, cate);
                 JOptionPane.showMessageDialog(null, title + "\nPublished");
                 DefaultTableModel model = (DefaultTableModel)table.getModel();

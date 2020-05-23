@@ -104,7 +104,7 @@ public class DBUserImpl extends DBManagerImpl implements DBUser {
 		User user = null;
 		
 		try {
-			query = "SELECT * FROM USER WHERE idUser="+id;
+			query = "SELECT * FROM UTENTE WHERE idUser="+id;
 			rs = open().executeQuery(query);
 			if(rs.next())
 				user = new User(rs.getInt("idUser"), rs.getString("nome"),this.Decrypt(rs.getString("password"))
