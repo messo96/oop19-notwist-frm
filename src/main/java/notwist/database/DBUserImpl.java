@@ -42,9 +42,11 @@ public class DBUserImpl extends DBManagerImpl implements DBUser {
 	}
 
 	public boolean register(final String user, final String password, final String email, final boolean isModerator) {
-	     if(existUser(email,user))
+	     if(existUser(email,user)) {
+	    	 JOptionPane.showMessageDialog(null, "Is still registered with this email \nUser: " + user);
 	    	 return false;
-	     
+	     }
+	    	 
 	     try {
 			 open();
 		        PreparedStatement prepared = super.getConn()
