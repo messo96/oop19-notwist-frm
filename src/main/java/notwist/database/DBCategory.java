@@ -8,20 +8,19 @@ import java.util.Optional;
 import notwist.base.Category;
 import notwist.base.CategoryImpl;
 
-public class DBCategory {
-	private DBManagerImpl database = new DBManagerImpl();
+public class DBCategory extends DBManagerImpl{
 	private ResultSet rs = null;
     private String query;
     
     
 	public Optional<List<Category>> getCategories(){
 		List<Category> list = new ArrayList<>();
-		query = "Select * from Topic";
+		query = "Select * from TOPIC";
 	    
 		try {
-			rs = database.open().executeQuery(query);
+			rs = open().executeQuery(query);
 			while(rs.next()) {
-				list.add(new CategoryImpl(rs.getInt("id_macro"),rs.getString("titolo")));
+				list.add(new CategoryImpl(rs.getInt("idMacro"),rs.getString("title")));
 			}
 					
 		}
@@ -29,19 +28,19 @@ public class DBCategory {
 			System.out.println("Error while loading categories");
 		}
 		finally {
-			database.close();
+			close();
 		}
 		return Optional.of(list);
 	}
 
 	
 	public boolean existCategory(String name){
-		query = "Select * from Topic";
+		query = "Select * from TOPIC";
 	    boolean flag=false;
 		try {
-			rs = database.open().executeQuery(query);
+			rs = open().executeQuery(query);
 			while(rs.next()) {
-				if(rs.getString("titolo").contentEquals(name)) {
+				if(rs.getString("title").contentEquals(name)) {
 					flag = true;
 					break;	
 				}
@@ -52,7 +51,7 @@ public class DBCategory {
 			System.out.println("Error looking for category " + name);
 		}
 		finally {
-			database.close();
+			close();
 		}
 		return flag;
 	}
@@ -64,11 +63,11 @@ public class DBCategory {
 	public Optional< List<Category> > getNameOfAllTheCategories() {
 		
 			List<Category> list = new ArrayList<>();
-			query = "Select * from Topic";
+			query = "Select * from TOPIC";
 			try {
-				rs = database.open().executeQuery(query);
+				rs = open().executeQuery(query);
 				while(rs.next()) {
-					list.add(new CategoryImpl(rs.getInt("id_macro"),rs.getString("titolo")));
+					list.add(new CategoryImpl(rs.getInt("idMacro"),rs.getString("title")));
 				}
 				return Optional.of(list);
 			}
@@ -76,7 +75,7 @@ public class DBCategory {
 				System.out.println("Error String[] categories");
 			}
 			finally {
-				database.close();
+				close();
 			}
 			return Optional.of(list);
 		}

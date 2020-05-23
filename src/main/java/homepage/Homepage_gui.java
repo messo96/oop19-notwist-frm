@@ -90,7 +90,11 @@ public class Homepage_gui extends javax.swing.JFrame {
         search_button = new javax.swing.JButton();
         body_panel = new javax.swing.JPanel();
         main_table = new javax.swing.JScrollPane(); 
-        jTable1 = new javax.swing.JTable(); //Tabella discussioni
+        jTable1 = new javax.swing.JTable() {
+        	public boolean editCellAt(int row, int column, java.util.EventObject e) {
+        		return false;
+        	}
+        }; //Tabella discussioni
         
         jTextField2 = new javax.swing.JTextField(); //Non ha nome perchè indica lo spazio dove ci starà prev - next per la tabella (se lo mettiamo)
         hottest_panel = new javax.swing.JPanel();

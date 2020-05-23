@@ -7,6 +7,8 @@ package newtopic;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JEditorPane;
@@ -30,6 +32,7 @@ import notwist.database.DBDiscussionImpl;
  * @author emily
  */
 public class newtopic_gui extends javax.swing.JFrame {
+
 
     /**
      * Creates new form Homepage_gui
@@ -338,10 +341,11 @@ public class newtopic_gui extends javax.swing.JFrame {
         category.setModel(this.loadModel());
     
         post_button.addActionListener(e ->{
+        	   Date d = new Date();
         	   Category cate = new DBCategory().getCategoryByName(category.getSelectedItem().toString());
         		String title = jTextField1.getText();
                 String desc = preview_textarea.getText();
-                Discussion disc = new DiscussionImpl(this.actualUser.getId(), title,desc, cate);
+                Discussion disc = new DiscussionImpl(this.actualUser.getId(), title,desc, cate, d);
                 new DBDiscussionImpl().createDiscussion(disc, cate);
                 JOptionPane.showMessageDialog(null, title + "\nPublished");
                 DefaultTableModel model = (DefaultTableModel)table.getModel();

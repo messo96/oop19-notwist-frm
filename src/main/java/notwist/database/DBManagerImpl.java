@@ -7,7 +7,7 @@ import java.sql.Statement;
 
 import rombo.crypt.CrypterImplementation;
 
- class DBManagerImpl extends CrypterImplementation{
+abstract class DBManagerImpl extends CrypterImplementation{
 
 	private Connection conn;
     private Statement stmt;

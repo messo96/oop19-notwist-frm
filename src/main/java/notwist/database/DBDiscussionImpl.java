@@ -3,7 +3,9 @@ package notwist.database;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -16,7 +18,8 @@ import notwist.base.User;
 
 public class DBDiscussionImpl extends DBManagerImpl implements DBDiscussion{
 
-	
+	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	private Date d;
 	private ResultSet rs = null;
     private String query;
 	
@@ -25,14 +28,14 @@ public class DBDiscussionImpl extends DBManagerImpl implements DBDiscussion{
 		List<Discussion> discussion = new LinkedList<>();
 		
 		try {
-			query = "select * from Discussion";
+			query = "select * from DISCUSSION";
 			rs = open().executeQuery(query);
 		 
 	              
 	     while (rs.next()) {
-	    	 if(rs.getInt("id_creator") == (user.getId()))
-	       	discussion.add(new DiscussionImpl(rs.getInt("id_user"),rs.getString("title"), 
-					rs.getString("description"), new DBCategory().getCategoryById(rs.getInt("id_cat"))));
+	    	 if(rs.getInt("idUser") == (user.getId()))
+	       	discussion.add(new DiscussionImpl(rs.getInt("idUser"),rs.getString("title"), 
+					rs.getString("description"), new DBCategory().getCategoryById(rs.getInt("idMacro")), rs.getDate("data")));
 	     }
 		}
 	     catch(SQLException e) {
@@ -48,13 +51,16 @@ public class DBDiscussionImpl extends DBManagerImpl implements DBDiscussion{
 		 try {
 			 System.out.println(discussion);
 			 System.out.println(topic.getName());
-			 query = "insert into Discussion (id_user,title,description,id_macro) values (?,?,?,?)";
+			 d = new Date();
+			 query = "insert into Discussion (idUser, title, description, idMacro,data) values (?,?,?,?,?)";
 			 	open();
 			 	PreparedStatement prepared = super.getConn().prepareStatement(query);
 		     	prepared.setInt(1,discussion.getIdUser());
 		        prepared.setString(2, discussion.getTitle());
 		     	prepared.setString(3, discussion.getDescription());
 		     	prepared.setInt(4,topic.getId());
+		     	prepared.setDate(5, java.sql.Date.valueOf(sdf.format(d)));
+
 		     	
 		     	prepared.executeUpdate();
 		     	System.out.println("Discussion create successfully(" + discussion.getTitle() + " | " + 
@@ -75,13 +81,13 @@ public class DBDiscussionImpl extends DBManagerImpl implements DBDiscussion{
 		List<Discussion> discussion = new LinkedList<>();
 		
 		try {
-			query = "select * from Discussion";
+			query = "select * from DISCUSSION";
 			rs = open().executeQuery(query);
 		 
 	              
 	     while (rs.next()) {
-	    		discussion.add(new DiscussionImpl(rs.getInt("id_user"),rs.getString("title"), 
-	    										rs.getString("description"), new DBCategory().getCategoryById(rs.getInt("id_macro"))));
+	    		discussion.add(new DiscussionImpl(rs.getInt("idUser"),rs.getString("title"), 
+	    										rs.getString("description"), new DBCategory().getCategoryById(rs.getInt("idMacro")), rs.getDate("data")));
 	     }
 		}
 	     catch(SQLException e) {
@@ -116,14 +122,14 @@ public class DBDiscussionImpl extends DBManagerImpl implements DBDiscussion{
 		Discussion discussion = null;
 		
 		try {
-			query = "select * from Discussion";
+			query = "select * from DISCUSSION";
 			rs = open().executeQuery(query);
 		 
 	              
 	   while(rs.next()) {
 		   if(rs.getString("title").contains(title))
-	    		discussion = new DiscussionImpl(rs.getInt("id_user"),rs.getString("title"), 
-	    										rs.getString("description"), new DBCategory().getCategoryById(rs.getInt("id_macro")));
+	    		discussion = new DiscussionImpl(rs.getInt("idUser"),rs.getString("title"), 
+	    										rs.getString("description"), new DBCategory().getCategoryById(rs.getInt("idMacro")), rs.getDate("data"));
 	     }
 		}
 	     catch(SQLException e) {
