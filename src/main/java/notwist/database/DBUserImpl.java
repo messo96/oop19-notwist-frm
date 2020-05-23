@@ -45,7 +45,6 @@ public class DBUserImpl extends DBManagerImpl implements DBUser {
 	     if(existUser(email,user))
 	    	 return false;
 	     
-	     int index=0;
 	     try {
 			 open();
 		        PreparedStatement prepared = super.getConn()
