@@ -35,7 +35,7 @@ public class DBDiscussionImpl extends DBManagerImpl implements DBDiscussion{
 	     while (rs.next()) {
 	    	 if(rs.getInt("idUser") == (user.getId()))
 	       	discussion.add(new DiscussionImpl(rs.getInt("idDiscussion"), rs.getInt("idUser"),rs.getString("title"), 
-					rs.getString("description"), new DBCategory().getCategoryById(rs.getInt("idMacro")), rs.getDate("data")));
+					rs.getString("description"), new DBCategoryImpl().getCategoryById(rs.getInt("idMacro")), rs.getDate("data")));
 	     }
 		}
 	     catch(SQLException e) {
@@ -87,7 +87,7 @@ public class DBDiscussionImpl extends DBManagerImpl implements DBDiscussion{
 	              
 	     while (rs.next()) {
 	    		discussion.add(new DiscussionImpl(rs.getInt("idDiscussion"),rs.getInt("idUser"),rs.getString("title"), 
-	    										rs.getString("description"), new DBCategory().getCategoryById(rs.getInt("idMacro")), rs.getDate("data")));
+	    										rs.getString("description"), new DBCategoryImpl().getCategoryById(rs.getInt("idMacro")), rs.getDate("data")));
 	     }
 		}
 	     catch(SQLException e) {
@@ -129,7 +129,7 @@ public class DBDiscussionImpl extends DBManagerImpl implements DBDiscussion{
 	   while(rs.next()) {
 		   if(rs.getString("title").contains(title))
 	    		discussion = new DiscussionImpl(rs.getInt("idDiscussion"),rs.getInt("idUser"),rs.getString("title"), 
-	    										rs.getString("description"), new DBCategory().getCategoryById(rs.getInt("idMacro")), rs.getDate("data"));
+	    										rs.getString("description"), new DBCategoryImpl().getCategoryById(rs.getInt("idMacro")), rs.getDate("data"));
 	     }
 		}
 	     catch(SQLException e) {

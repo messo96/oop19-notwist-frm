@@ -185,8 +185,8 @@ public class Header extends JPanel{
 	
     
     private void new_discussionMouseClicked(MouseEvent evt) {
-        CardLayout card = getRootPane()..getLayout();
-        card.show(getParent(), "newtopic_panel");
+//        CardLayout card = getRootPane().getLayout();
+//        card.show(getParent(), "newtopic_panel");
     }
     
 	

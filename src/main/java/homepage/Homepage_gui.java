@@ -25,11 +25,12 @@ import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 
 import main.Loader;
-import newtopic.newtopic_gui;
+//import newtopic.newtopic_gui;
 import notwist.base.Category;
 import notwist.base.Discussion;
 import notwist.base.User;
 import notwist.database.DBCategory;
+import notwist.database.DBCategoryImpl;
 import notwist.database.DBDiscussion;
 import notwist.database.DBDiscussionImpl;
 import notwist.database.DBUserImpl;
@@ -438,7 +439,7 @@ public class Homepage_gui extends javax.swing.JFrame {
         //List of category on the right
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
         	
-        	        	DBCategory cat = new DBCategory();
+        	        	DBCategory cat = new DBCategoryImpl();
         	        	List<Category> list = cat.getCategories().get();
         	        	public int getSize() { return list.size();}
         	            public String getElementAt(int i) { return list.get(i).getName();}
@@ -455,7 +456,7 @@ public class Homepage_gui extends javax.swing.JFrame {
 
 				@Override
 				protected String doInBackground() throws Exception {
-					jTable1.setModel(loadDiscussion(new DBCategory().getCategoryByName(jList1.getSelectedValue())));
+					jTable1.setModel(loadDiscussion(new DBCategoryImpl().getCategoryByName(jList1.getSelectedValue())));
 					loader.end();
 					return "";
 				}
@@ -508,7 +509,7 @@ public class Homepage_gui extends javax.swing.JFrame {
         new_discussion.addActionListener(e ->{
       	java.awt.EventQueue.invokeLater(new Runnable() {
     		public void run() {
-    			new newtopic_gui(actualUser,jTable1);
+//    			new newtopic_gui(actualUser,jTable1);
     		}
     	});
         

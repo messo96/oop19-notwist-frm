@@ -12,13 +12,20 @@ import javax.swing.border.MatteBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
+import notwist.base.Discussion;
+import notwist.base.Share;
+import notwist.database.DBDiscussionImpl;
+import notwist.database.DBUserImpl;
+
 
 public class Nofilter extends JPanel{
 
 	private static final long serialVersionUID = 1L;
+	private DefaultTableModel modelDiscussion;
+	private Share share;
 	
-	public Nofilter() {
-		
+	public Nofilter(final Share share) {
+		this.share = share;
 		drawComp();
 	}
 	
@@ -33,36 +40,12 @@ public class Nofilter extends JPanel{
         table_panel.setName(""); // NOI18N
 
         jTable1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"prova", "qwe", "6", "4"},
-                {"prova", "qwe", "6", "4"},
-                {"prova", "qwe", "6", "4"},
-                {"prova", "qwe", "6", "4"},
-                {"prova", "qwe", "6", "4"},
-                {"prova", "qwe", "6", "4"},
-                {"prova", "qwe", "6", "4"},
-                {"prova", "qwe", "6", "4"},
-            },
-            new String [] {
-                "Title", "Categoria", "Answers", "Views"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Short.class, java.lang.Short.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        modelDiscussion = new DefaultTableModel(new Object[] {"Titolo","Categoria","Like","Created By","Risposte"},0);
+        jTable1.setModel(modelDiscussion);
+        loadDiscussion();
+        
+        //Uso Share
+        share = new Share(jTable1, modelDiscussion);
         jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jTable1.setAutoscrolls(false);
         jTable1.setEnabled(false);
@@ -116,6 +99,14 @@ public class Nofilter extends JPanel{
     private javax.swing.JScrollPane main_table;
 
     // End of variables declaration
-	}
+    
+    private void loadDiscussion() {
+        for(Discussion s : new DBDiscussionImpl().getAllDiscussion().get() ) {
+        	modelDiscussion.addRow(new Object[] {s.getTitle(),s.getCategory().getName(),0,
+					new DBUserImpl().getUserFromId(s.getIdUser()).get().getUsername(),0});
+        }
+    }
+    
+}
 	
 
