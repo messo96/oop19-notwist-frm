@@ -547,12 +547,18 @@ public class Topic_gui extends javax.swing.JFrame {
    public void start() {
     discussion_area.setText(discussion.getDescription());
     this.title_label.setText(discussion.getTitle());
+    upladComments();
    }
     
     
     
 
-    private void exitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitMouseClicked
+    private void upladComments() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void exitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitMouseClicked
         dispose();
     }//GEN-LAST:event_exitMouseClicked
 

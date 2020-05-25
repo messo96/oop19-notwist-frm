@@ -130,7 +130,7 @@ public class LoginPan extends JPanel  {
         signup_link.setText("qui");      
         dot.setText(".");
         login_panel.add(signup_label, new AbsoluteConstraints(60, 350, -1, -1));
-        login_panel.add(signup_link, new AbsoluteConstraints(230, 350, -1, -1));
+        login_panel.add(signup_link, new AbsoluteConstraints(280, 350, -1, -1));
         login_panel.add(dot, new AbsoluteConstraints(250, 350, -1, -1));
 
         signup_link.addMouseListener(new MouseAdapter() {

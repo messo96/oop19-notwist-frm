@@ -21,9 +21,9 @@ public class DBUserImpl extends DBManagerImpl implements DBUser {
 		
 		try
 		{
-			String query = "select * from User where email='" + this.Crypt(email) + "' and username='" + username + "'";
+			String query = "select * from UTENTE where email='" + this.Crypt(email) + "' and nome='" + username + "'";
 			rs = open().executeQuery(query);
-			if(rs.next() && rs.getString("email").contentEquals(email) || rs.getString("user").contentEquals(username)) {
+			if(rs.next() && rs.getString("email").contentEquals(email) || rs.getString("nome").contentEquals(username)) {
 				System.out.println("User exist! (" + email + ")");
 					return true;
 				}
@@ -42,14 +42,15 @@ public class DBUserImpl extends DBManagerImpl implements DBUser {
 	}
 
 	public boolean register(final String user, final String password, final String email, final boolean isModerator) {
-	     if(existUser(email,user))
+	     if(existUser(email,user)) {
+	    	 JOptionPane.showMessageDialog(null, "Is still registered with this email \nUser: " + user);
 	    	 return false;
-	     
-	     int index=0;
+	     }
+	    	 
 	     try {
 			 open();
 		        PreparedStatement prepared = super.getConn()
-		        		.prepareStatement("insert into User (nome, password, email,isModeratore) values (?,?,?,?)");
+		        		.prepareStatement("insert into UTENTE (nome, password, email,isModeratore) values (?,?,?,?)");
 		        prepared.setString(1, user);
 		     	prepared.setString(2, this.Crypt(password));
 		     	prepared.setString(3,this.Crypt(email));
@@ -73,11 +74,11 @@ public class DBUserImpl extends DBManagerImpl implements DBUser {
 		User user = null;
 		try
 		{
-			query = "select * from User where email= '" + this.Crypt(email)+"'";
+			query = "select * from UTENTE where email= '" + this.Crypt(email)+"'";
 			rs = open().executeQuery(query);
 			if(rs.next() && rs.getString("email").contentEquals(this.Crypt(email)) 
 														&& rs.getString("password").contentEquals(this.Crypt(password))) {
-					user = new User(rs.getInt("id_user"), rs.getString("nome"),this.Decrypt(rs.getString("password"))
+					user = new User(rs.getInt("idUser"), rs.getString("nome"),this.Decrypt(rs.getString("password"))
 							,this.Decrypt(rs.getString("email")),rs.getBoolean("isModeratore"));
 					System.out.println("Welcome " +user.getUsername() +"  :)");
 
@@ -103,10 +104,10 @@ public class DBUserImpl extends DBManagerImpl implements DBUser {
 		User user = null;
 		
 		try {
-			query = "SELECT * FROM User WHERE id_user="+id;
+			query = "SELECT * FROM UTENTE WHERE idUser="+id;
 			rs = open().executeQuery(query);
 			if(rs.next())
-				user = new User(rs.getInt("id_user"), rs.getString("nome"),this.Decrypt(rs.getString("password"))
+				user = new User(rs.getInt("idUser"), rs.getString("nome"),this.Decrypt(rs.getString("password"))
 							,this.Decrypt(rs.getString("email")),rs.getBoolean("isModeratore"));
 			
 		}
