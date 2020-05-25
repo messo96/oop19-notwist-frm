@@ -13,37 +13,33 @@ import javax.swing.JPanel;
 import org.netbeans.lib.awtextra.AbsoluteConstraints;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
 
+import login.LoginPan;
 import main.Loader;
+import newtopic.NewTopicPan;
 import notwist.base.User;
 import notwist.database.DBDiscussion;
 import notwist.database.DBDiscussionImpl;
+import sign_up.RegisterPan;
 import table.Nofilter;
 import util.CategoryPan;
 import util.Header;
+import util.HolderPan;
 import util.UpperPan;
 
 public class BuildAfterGui extends JFrame {
  
 	private static final long serialVersionUID = 1L;
 
-    private DBDiscussion discussion = new DBDiscussionImpl();
-	private User actualUser = null;
-	private Loader loader;
-	
-	
-	  public BuildAfterGui(User user) {
+	  public BuildAfterGui() {
 	      initComponents();
-		  this.actualUser = user;
-		  this.loader = new Loader();
-		  this.setVisible(true);
-		  this.pack();
+
     }
 
 
     private void initComponents() {
 
        	bodyHolder = new JPanel(); //Holder for body
-       
+        
         //JFrame properties
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationByPlatform(true);
@@ -57,12 +53,26 @@ public class BuildAfterGui extends JFrame {
        
         getContentPane().add(upper_panel, new AbsoluteConstraints(670, 0, -1, 40));
         
-        //Header
-        
+        //Header12312312qqweqweqweeqwe
+     
         header_panel = new Header();
         header_panel.setVisible(true);
         
-        getContentPane().add(header_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 1080, 90));
+        getContentPane().add(header_panel, new AbsoluteConstraints(0, 20, 1080, 90));
+        
+        
+        bodyHolder.setLayout(new CardLayout());
+        //Add HolderPan with the homepage tables  to card
+        holder_panel = new HolderPan();
+        holder_panel.setVisible(true);
+        bodyHolder.add(holder_panel, "homepage_panel");
+    
+        newtopic_panel = new NewTopicPan();
+        newtopic_panel.setVisible(true);
+        bodyHolder.add(newtopic_panel,"newtopic_panel");
+
+        //Adding the card!
+        getContentPane().add(bodyHolder, new AbsoluteConstraints(0, 90, 1080, 490));
 
         //Qua chiamo il pannello no filter con la tabella principale non filtrata, basta togliere il commento /* sotto
      /*   Nofilter drag_panel = new Nofilter(this.actualUser);
@@ -71,7 +81,7 @@ public class BuildAfterGui extends JFrame {
         
        
         getContentPane().add(drag_panel, new AbsoluteConstraints(820, 0, 260, 40));
-        //qua era dove addavo la card, ma per i test è rimasta commentata
+        //qua era dove addavo la card, ma per i test è rimasta commentata.
      /*   CategoryPan category_panel = new CategoryPan();
         category_panel.setVisible(true);
         bodyHolder.add(category_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 290, 240, 200));
@@ -110,12 +120,24 @@ public class BuildAfterGui extends JFrame {
         xx = evt.getX();
         xy = evt.getY();
     }
+    public void start() {
+
+    	EventQueue.invokeLater(new Runnable() {
+            public void run() {
+            	  new BuildAfterGui().setVisible(true);
+            }
+        });
+    }
     
   
 
     // Variables declaration - do not modify
-    private JPanel bodyHolder;   
+    private JPanel bodyHolder;
+    private HolderPan holder_panel;
     private UpperPan upper_panel;
     private Header header_panel;
+    private NewTopicPan newtopic_panel;
+    
+    
     // End of variables declaration
 }

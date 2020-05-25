@@ -1,6 +1,8 @@
 package util;
 
+import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Insets;
@@ -32,7 +34,7 @@ import org.netbeans.lib.awtextra.AbsoluteLayout;
 
 
 import main.Loader;
-import newtopic.newtopic_gui;
+import newtopic.NewTopicPan;
 import notwist.base.Category;
 import notwist.base.Discussion;
 import notwist.base.User;
@@ -98,6 +100,12 @@ public class Header extends JPanel{
         new_discussion.setFont(new Font("Tahoma", 0, 14)); // NOI18N
         new_discussion.setText("Crea una nuova discussione");
 
+        new_discussion.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+            	new_discussionMouseClicked(evt);
+            }
+        });
+        
         search_field.setFont(new Font("Tahoma", 0, 14)); // NOI18N
         search_field.setText("Search..");
         search_field.setMargin(new Insets(2, 2, 2, 3));
@@ -171,7 +179,20 @@ public class Header extends JPanel{
 
         add(header_panel);
 
-	}/*
+	}
+	
+	
+	
+    
+    private void new_discussionMouseClicked(MouseEvent evt) {
+        CardLayout card = getRootPane()..getLayout();
+        card.show(getParent(), "newtopic_panel");
+    }
+    
+	
+	
+	
+	/*
     private void search_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_buttonActionPerformed
   	  //Button Search
       search_button.addActionListener(e ->{

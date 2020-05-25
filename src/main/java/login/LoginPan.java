@@ -170,7 +170,8 @@ public class LoginPan extends JPanel  {
         			Optional<User> user = getCredential();
         			if(user.isPresent()) {
         				JOptionPane.showMessageDialog(null, "Credenziali corrette, Benvenuto!");
-        				new BuildAfterGui(user.get());
+        				//new BuildAfterGui(user.get());
+        				new BuildAfterGui();
         				win.dispose();
         				return  "Credenziali corrette";
         			}

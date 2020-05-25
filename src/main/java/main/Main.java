@@ -3,6 +3,7 @@ package main;
 import com.formdev.flatlaf.FlatLightLaf;
 import gui.BuildPreGui;
 import javax.swing.UIManager;
+import gui.BuildAfterGui;
 
 /**
  * Starting the GUI.
@@ -19,7 +20,7 @@ public class Main {
     } catch (Exception ex) {
       System.err.println("Failed to initialize LaF");
       }
-BuildPreGui gui = new BuildPreGui();
+BuildAfterGui gui = new BuildAfterGui();
 gui.start();
     }
     
