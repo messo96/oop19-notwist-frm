@@ -1,13 +1,10 @@
 package util;
 
-import java.awt.CardLayout;
-import java.awt.Color;
-import java.awt.Container;
+
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
@@ -18,49 +15,32 @@ import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-import javax.swing.table.DefaultTableModel;
-
-import org.netbeans.lib.awtextra.AbsoluteConstraints;
-import org.netbeans.lib.awtextra.AbsoluteLayout;
 
 
 import main.Loader;
-import newtopic.NewTopicPan;
-import notwist.base.Category;
-import notwist.base.Discussion;
-import notwist.base.User;
-import notwist.database.DBCategory;
+
 import notwist.database.DBDiscussion;
 import notwist.database.DBDiscussionImpl;
-import notwist.database.DBUserImpl;
-import topic_gui.Topic_gui;
+
 
 public class Header extends JPanel{
 
 	private static final long serialVersionUID = 1L;
-//    private DBDiscussion discussion = new DBDiscussionImpl();
+    private DBDiscussion dbdiscussion = new DBDiscussionImpl();
 //	private User actualUser = null;
 	private Loader loader;
 	
-	public Header() {
+	public Header(TableDiscussion tableDiscussion) {
 		
-		drawComp();
+		drawComp(tableDiscussion);
 	}
 	
-	private void drawComp() {
+	private void drawComp(TableDiscussion tableDiscussion) {
 		
-	      drag_panel = new JPanel();
-	        commands_panel = new JPanel();
-	        exit = new JLabel();
 	        header_panel = new JPanel();
 	        jSeparator1 = new JSeparator();
 	        homepage_button = new JLabel();
@@ -70,19 +50,7 @@ public class Header extends JPanel{
 	        new_discussion = new JButton(); 
 	        search_field = new JTextField(); //Spazio filtro
 	        search_button = new JButton();
-	        body_panel = new JPanel();
-	        main_table = new JScrollPane(); 
-	        jTable1 = new JTable(); //Tabella discussioni
-	        
-	        jTextField2 = new JTextField(); //Non ha nome perchè indica lo spazio dove ci starà prev - next per la tabella (se lo mettiamo)
-	        hottest_panel = new JPanel();
-	        jTable2 = new JTable(); //Tabella per le discussioni con più likes
-	        categorie_panel = new JPanel();
-	        category_list = new JScrollPane();
-	        jList1 = new JList<>(); //Lista categorie
-	        random_button = new JButton();
-
-	        
+	       
         homepage_button.setFont(new Font("Bauhaus 93", 0, 18)); // NOI18N
         homepage_button.setText("NOTWIST");
 
@@ -129,10 +97,11 @@ public class Header extends JPanel{
         search_button.setText("Go");
 
         search_button.setPreferredSize(new Dimension(45, 25));
-        search_button.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-              //  search_buttonActionPerformed(evt);
-            }
+        search_button.addActionListener(e -> {
+            	if(search_field.getText().equals("") || search_field.getText().equals("Search.."))
+            		tableDiscussion.refreshTableDiscussion();
+            	else
+            		tableDiscussion.refreshTableDiscussion(search_field.getText());
         });
 
         GroupLayout header_panelLayout = new GroupLayout(header_panel);
@@ -202,57 +171,15 @@ public class Header extends JPanel{
          		jTable1.setModel(this.loadDiscussion(search_field.getText()));
       });
   }
-
-    
-    private DefaultTableModel loadDiscussion() {
-    	DefaultTableModel tableDiscussion = new DefaultTableModel(new Object[] {"Titolo","Categoria","Like","Created By","Risposte"},0);
-        for(Discussion s : discussion.getAllDiscussion().get() ) {
-        	tableDiscussion.addRow(new Object[] {s.getTitle(),s.getCategory().getName(),0,
-					new DBUserImpl().getUserFromId(s.getIdUser()).get().getUsername(),0});
-        }
-        return tableDiscussion;
-    }
-   
-    private DefaultTableModel loadDiscussion(final String title) {
-    	DefaultTableModel tableDiscussion = new DefaultTableModel(new Object[] {"Titolo","Categoria","Like","Created By","Risposte"},0);
-        for(Discussion s : discussion.getAllDiscussion(title).get() ) {
-        	tableDiscussion.addRow(new Object[] {s.getTitle(),s.getCategory().getName(),0,
-					new DBUserImpl().getUserFromId(s.getIdUser()).get().getUsername(),0});
-        }
-        return tableDiscussion;
-    }
-    	 
-    private DefaultTableModel loadDiscussion(final Category category) {
-    	DefaultTableModel tableDiscussion = new DefaultTableModel(new Object[] {"Titolo","Categoria","Like","Created By","Risposte"},0);
-        for(Discussion s : discussion.getAllDiscussion(category).get() ) {
-        	tableDiscussion.addRow(new Object[] {s.getTitle(),s.getCategory().getName(),0,
-        								new DBUserImpl().getUserFromId(s.getIdUser()).get().getUsername(),0});
-        }
-        return tableDiscussion;
-    }
-    */
-	
+  */
 
     private javax.swing.JLabel bell_icon;
-    private javax.swing.JPanel body_panel;
-    private javax.swing.JPanel categorie_panel;
     private javax.swing.JComboBox<String> category_filter;
-    private javax.swing.JScrollPane category_list;
-    private javax.swing.JPanel commands_panel;
-    private javax.swing.JPanel drag_panel;
-    private javax.swing.JLabel exit;
     private javax.swing.JPanel header_panel;
     private javax.swing.JLabel homepage_button;
-    private javax.swing.JPanel hottest_panel;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JScrollPane main_table;
     private javax.swing.JButton new_discussion;
     private javax.swing.JLabel profile_icon;
-    private javax.swing.JButton random_button;
     private javax.swing.JButton search_button;
     private javax.swing.JTextField search_field;
 }

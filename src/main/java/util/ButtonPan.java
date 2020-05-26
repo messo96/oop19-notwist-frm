@@ -1,23 +1,29 @@
 package util;
 
+import java.util.Random;
+
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.SwingWorker;
+
+import main.Loader;
+import notwist.database.DBDiscussionImpl;
 
 public class ButtonPan extends JPanel{
 
 	private static final long serialVersionUID = 1L;
+	private Loader loader;
 	
-	public ButtonPan() {
-		
-		drawComp();
+	public ButtonPan(TableDiscussion tableDiscussion) {
+		this.loader = new Loader();
+		drawComp(tableDiscussion);
 	}
 	
-	private void drawComp() {
-		random_button = new JButton();
+	private void drawComp(TableDiscussion tableDiscussion) {
+		random_button = new JButton("Scegli una discussione randomica!");
 		button_panel = new JPanel();
-	       random_button.setLabel("Scegli una discussione randomica!");
-
 	        GroupLayout button_panelLayout = new GroupLayout(button_panel);
 	        button_panel.setLayout(button_panelLayout);
 	        button_panelLayout.setHorizontalGroup(
@@ -31,6 +37,28 @@ public class ButtonPan extends JPanel{
 	                .addGap(0, 6, Short.MAX_VALUE))
 	        );
 	        add(button_panel);
+	        
+	        random_button.addActionListener(e ->{
+	        		loader.start();
+	              	new SwingWorker<String,Object>(){
+
+	      				@Override
+	      				protected String doInBackground() throws Exception {
+	      					Random rand = new Random();
+	      					JTable table = tableDiscussion.getTableDiscussion();
+	      	        		new DBDiscussionImpl().
+	      								getDiscussionFromTitle(table.
+	      													getValueAt(rand.nextInt(table.getRowCount()), 0).toString()).get();
+//	      	        		new Topic_gui(disc,actualUser).start();
+	      	        		loader.end();	
+	      	        	return "";
+	      				}
+	              	}.execute();
+	              		
+	              });
+	        
+	        
+	        
 	}
 	private JButton random_button;
 	private JPanel button_panel;

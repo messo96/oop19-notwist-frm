@@ -4,8 +4,8 @@ package util;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.List;
 
 import javax.swing.AbstractListModel;
@@ -17,29 +17,25 @@ import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingWorker;
 import javax.swing.border.TitledBorder;
-import javax.swing.table.DefaultTableModel;
 
 import main.Loader;
 import notwist.base.Category;
-import notwist.base.Discussion;
-import notwist.base.Share;
+import notwist.database.DBCategory;
 import notwist.database.DBCategoryImpl;
-import notwist.database.DBDiscussionImpl;
-import notwist.database.DBUserImpl;
+
 
 
 public class CategoryPan extends JPanel{
 
 	private static final long serialVersionUID = 1L;
 	private Loader loader = new Loader();
-	private Share share;
+	private DBCategory dbcategory = new DBCategoryImpl();
 	
-	public CategoryPan(final Share share) {
-		this.share = share;
-		drawComp();
+	public CategoryPan(TableDiscussion tableDiscussion) {
+		drawComp(tableDiscussion);
 	}
 	
-	private void drawComp() {
+	private void drawComp(TableDiscussion tableDiscussion) {
 		
 		category_panel = new JPanel();
         category_list = new JScrollPane();
@@ -77,49 +73,24 @@ public class CategoryPan extends JPanel{
 	            public String getElementAt(int i) { return list.get(i).getName(); }
 	        });
 	        
+	        
 	        //Filter results of discussions by choosen category on list on the right
-	        jList.addMouseListener(new MouseListener() {
+	        jList.addMouseListener(new MouseAdapter() {
 
-	        	@Override
 	        	public void mouseClicked(MouseEvent e) {
 	        		loader.start();
 	        		new SwingWorker<String,Object>(){
 
 	        			@Override
 	        			protected String doInBackground() throws Exception {
-	        			 	DefaultTableModel model = share.getModelDiscussion();
-	        				model = loadDiscussion(new DBCategoryImpl().getCategoryByName(jList.getSelectedValue()), model);
+	        			 	Category cat = dbcategory.getCategoryByName(jList.getSelectedValue());
+	        			 	tableDiscussion.refreshTableDiscussion(cat);
 	        				loader.end();
 	        				return "";
 	        			}
 	 				
 	        		}.execute();
 	        	}
-
-				@Override
-				public void mousePressed(MouseEvent e) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override
-				public void mouseReleased(MouseEvent e) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override
-				public void mouseEntered(MouseEvent e) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override
-				public void mouseExited(MouseEvent e) {
-					// TODO Auto-generated method stub
-					
-				}
-
 	        });
 	        
 
@@ -135,13 +106,4 @@ public class CategoryPan extends JPanel{
     private JList<String> jList;
 
     
-    private DefaultTableModel loadDiscussion(final Category title, DefaultTableModel model) {
-    	model.getDataVector().removeAllElements();
-    	revalidate();
-        for(Discussion s : new DBDiscussionImpl().getAllDiscussion(title).get() ) {
-        	model.addRow(new Object[] {s.getTitle(),s.getCategory().getName(),0,
-					new DBUserImpl().getUserFromId(s.getIdUser()).get().getUsername(),0});
-        }
-        return model;
-    }
 }

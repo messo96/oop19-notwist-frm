@@ -1,7 +1,6 @@
 package gui;
 
 import java.awt.CardLayout;
-import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -13,30 +12,28 @@ import javax.swing.JPanel;
 import org.netbeans.lib.awtextra.AbsoluteConstraints;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
 
-import login.LoginPan;
-import main.Loader;
+
 import newtopic.NewTopicPan;
-import notwist.base.User;
-import notwist.database.DBDiscussion;
-import notwist.database.DBDiscussionImpl;
-import sign_up.RegisterPan;
-import table.Nofilter;
-import util.CategoryPan;
+
 import util.Header;
 import util.HolderPan;
+import util.TableDiscussion;
 import util.UpperPan;
 
 public class BuildAfterGui extends JFrame {
  
 	private static final long serialVersionUID = 1L;
-
+	private TableDiscussion tableDiscussion;
+	
 	  public BuildAfterGui() {
-	      initComponents();
+		  this.tableDiscussion = new TableDiscussion();
+	      initComponents(tableDiscussion);
+	      
 
     }
 
 
-    private void initComponents() {
+    private void initComponents(TableDiscussion tableDiscussion) {
 
        	bodyHolder = new JPanel(); //Holder for body
         
@@ -55,7 +52,7 @@ public class BuildAfterGui extends JFrame {
         
         //Header12312312qqweqweqweeqwe
      
-        header_panel = new Header();
+        header_panel = new Header(tableDiscussion);
         header_panel.setVisible(true);
         
         getContentPane().add(header_panel, new AbsoluteConstraints(0, 20, 1080, 90));
@@ -63,7 +60,7 @@ public class BuildAfterGui extends JFrame {
         
         bodyHolder.setLayout(new CardLayout());
         //Add HolderPan with the homepage tables  to card
-        holder_panel = new HolderPan();
+        holder_panel = new HolderPan(tableDiscussion);
         holder_panel.setVisible(true);
         bodyHolder.add(holder_panel, "homepage_panel");
     
