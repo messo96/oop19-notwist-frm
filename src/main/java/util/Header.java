@@ -1,10 +1,12 @@
 package util;
 
 
+import java.awt.CardLayout;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Insets;
-
+import java.awt.LayoutManager;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
@@ -14,6 +16,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
@@ -33,9 +36,12 @@ public class Header extends JPanel{
     private DBDiscussion dbdiscussion = new DBDiscussionImpl();
 //	private User actualUser = null;
 	private Loader loader;
+	private CardLayout card;
+	private JPanel parent;
 	
-	public Header(TableDiscussion tableDiscussion) {
-		
+	public Header(TableDiscussion tableDiscussion, JPanel parent) {
+		this.parent = parent;
+		this.card = (CardLayout) parent.getLayout();
 		drawComp(tableDiscussion);
 	}
 	
@@ -154,8 +160,7 @@ public class Header extends JPanel{
 	
     
     private void new_discussionMouseClicked(MouseEvent evt) {
-//        CardLayout card = getRootPane().getLayout();
-//        card.show(getParent(), "newtopic_panel");
+        card.show(parent, "newtopic_panel");
     }
     
 	

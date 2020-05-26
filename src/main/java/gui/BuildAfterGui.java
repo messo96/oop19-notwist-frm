@@ -50,20 +50,12 @@ public class BuildAfterGui extends JFrame {
        
         getContentPane().add(upper_panel, new AbsoluteConstraints(670, 0, -1, 40));
         
-        //Header12312312qqweqweqweeqwe
-     
-        header_panel = new Header(tableDiscussion);
-        header_panel.setVisible(true);
-        
-        getContentPane().add(header_panel, new AbsoluteConstraints(0, 20, 1080, 90));
-        
-        
+       
         bodyHolder.setLayout(new CardLayout());
         //Add HolderPan with the homepage tables  to card
         holder_panel = new HolderPan(tableDiscussion);
         holder_panel.setVisible(true);
         bodyHolder.add(holder_panel, "homepage_panel");
-    
         newtopic_panel = new NewTopicPan();
         newtopic_panel.setVisible(true);
         bodyHolder.add(newtopic_panel,"newtopic_panel");
@@ -71,6 +63,18 @@ public class BuildAfterGui extends JFrame {
         //Adding the card!
         getContentPane().add(bodyHolder, new AbsoluteConstraints(0, 90, 1080, 490));
 
+        
+        //Header12312312qqweqweqweeqwe
+        
+        header_panel = new Header(tableDiscussion, bodyHolder);
+        header_panel.setVisible(true);
+        
+        getContentPane().add(header_panel, new AbsoluteConstraints(0, 20, 1080, 90));
+        
+        
+        
+        
+        
         //Qua chiamo il pannello no filter con la tabella principale non filtrata, basta togliere il commento /* sotto
      /*   Nofilter drag_panel = new Nofilter(this.actualUser);
         drag_panel.setVisible(true);

@@ -1,5 +1,6 @@
 package util;
 
+import java.awt.Container;
 import java.util.Random;
 
 import javax.swing.GroupLayout;
@@ -10,6 +11,7 @@ import javax.swing.SwingWorker;
 
 import main.Loader;
 import notwist.database.DBDiscussionImpl;
+import topic_gui.Topic_gui;
 
 public class ButtonPan extends JPanel{
 
@@ -49,8 +51,8 @@ public class ButtonPan extends JPanel{
 	      	        		new DBDiscussionImpl().
 	      								getDiscussionFromTitle(table.
 	      													getValueAt(rand.nextInt(table.getRowCount()), 0).toString()).get();
-//	      	        		new Topic_gui(disc,actualUser).start();
-	      	        		loader.end();	
+	      	        		//A TODO
+	      	        	loader.end();	
 	      	        	return "";
 	      				}
 	              	}.execute();
