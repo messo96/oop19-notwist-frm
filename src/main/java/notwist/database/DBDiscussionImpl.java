@@ -22,6 +22,11 @@ public class DBDiscussionImpl extends DBManagerImpl implements DBDiscussion{
 	private Date d;
 	private ResultSet rs = null;
     private String query;
+    private Optional< List<Discussion> > discussionList;
+    
+    public DBDiscussionImpl() {
+    	this.discussionList = getAllDiscussion();
+    }
 	
     
 	public Optional<List<Discussion>> getDiscussion(final User user){
@@ -102,19 +107,17 @@ public class DBDiscussionImpl extends DBManagerImpl implements DBDiscussion{
 
 	@Override
 	public Optional<List<Discussion>> getAllDiscussion(final String title) {
-		List<Discussion> list = new ArrayList<>();
-		list.addAll(this.getAllDiscussion().get().stream().filter(c -> c.getTitle()
-											.toLowerCase().contains(title.toLowerCase())).collect(Collectors.toList()));		
-		return Optional.of(list);
+		List<Discussion> list = discussionList.get().stream().filter(c -> c.getTitle()
+				.toLowerCase().contains(title.toLowerCase())).collect(Collectors.toList());
+		return Optional.of(list);						
 	}
 
 	@Override
 	public Optional<List<Discussion>> getAllDiscussion(Category category) {
-		List<Discussion> list = new ArrayList<>();
-		list.addAll(this.getAllDiscussion().get().stream().
-								filter(c -> c.getCategory().getId() == category.getId()).collect(Collectors.toList()));
+		List<Discussion> list = discussionList.get().stream().
+				filter(c -> c.getCategory().getId() == category.getId()).collect(Collectors.toList());
+		return Optional.of(list);	
 		
-		return Optional.of(list);
 	}
 
 	@Override
