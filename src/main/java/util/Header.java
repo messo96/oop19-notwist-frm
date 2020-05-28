@@ -56,6 +56,12 @@ public class Header extends JPanel {
 
 		homepage_button.setFont(new Font("Bauhaus 93", 0, 18)); // NOI18N
 		homepage_button.setText("NOTWIST");
+		
+        homepage_button.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                homepage_buttonMouseClicked(evt);
+            }
+        });
 
 		category_filter.setFont(new Font("Tahoma", 0, 14)); // NOI18N
 		category_filter.setModel(new DefaultComboBoxModel<>(
@@ -150,6 +156,9 @@ public class Header extends JPanel {
 
 	private void new_discussionMouseClicked(MouseEvent evt) {
 		card.show(parent, "newtopic_panel");
+	}
+	private void homepage_buttonMouseClicked(MouseEvent evt) {
+		card.show(parent, "homepage_panel");
 	}
 
 	/*
