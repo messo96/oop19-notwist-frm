@@ -11,6 +11,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
@@ -41,6 +43,7 @@ import notwist.base.Discussion;
 import notwist.base.DiscussionImpl;
 import notwist.base.User;
 import notwist.database.DBCategory;
+import notwist.database.DBCategoryImpl;
 import notwist.database.DBDiscussionImpl;
 import util.RulesPan;
 import util.TipsPan;
@@ -83,10 +86,10 @@ public class NewTopicPan extends JPanel {
 		jTextField1 = new JTextField();
 		textPreview_label = new JLabel();
 		jScrollPane1 = new JScrollPane();
-		preview_textarea = new JTextArea();
+		description_textArea = new JTextArea();
 		jSeparator2 = new JSeparator();
 		jScrollPane2 = new JScrollPane();
-		editorPane = new JEditorPane();
+		preview_editorPane = new JEditorPane();
 		notify_checkbox = new JCheckBox();
 		post_button = new JButton();
 		preview_button = new JButton();
@@ -99,12 +102,14 @@ public class NewTopicPan extends JPanel {
 		topic_panel.setLayout(new AbsoluteLayout());
 
 		category.setFont(new Font("Tahoma", 0, 14)); // NOI18N
+		this.addItemsCategories();
 		topic_panel.add(category, new AbsoluteConstraints(91, 11, -1, -1));
 
 		category_label.setFont(new Font("Tahoma", 0, 14)); // NOI18N
 		category_label.setText("Categoria:");
 		topic_panel.add(category_label, new AbsoluteConstraints(10, 14, -1, -1));
 
+		
 		title_label.setFont(new Font("Tahoma", 0, 14)); // NOI18N
 		title_label.setText("Titolo:");
 		topic_panel.add(title_label, new AbsoluteConstraints(10, 55, -1, -1));
@@ -116,20 +121,33 @@ public class NewTopicPan extends JPanel {
 		textPreview_label.setText("Preview testo");
 		topic_panel.add(textPreview_label, new AbsoluteConstraints(10, 86, -1, -1));
 
-		preview_textarea.setColumns(20);
-		preview_textarea.setRows(5);
-		jScrollPane1.setViewportView(preview_textarea);
+		description_textArea.setColumns(20);
+		description_textArea.setRows(5);
+		jScrollPane1.setViewportView(description_textArea);
+		description_textArea.addKeyListener(new KeyListener() {
 
+			@Override
+			public void keyTyped(KeyEvent e) {}
+
+			@Override
+			public void keyPressed(KeyEvent e) {}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				preview_editorPane.setText(	description_textArea.getText());
+			}
+			
+		});
 		topic_panel.add(jScrollPane1, new AbsoluteConstraints(10, 299, 760, 140));
 
 		jSeparator2.setBackground(new Color(0, 0, 0));
 		topic_panel.add(jSeparator2, new AbsoluteConstraints(10, 257, 760, 10));
 
-		editorPane.setContentType("text/html");
+		preview_editorPane.setContentType("text/html");
 ///////        ep.setText("html code");
-		editorPane.setEnabled(false);
+		preview_editorPane.setEnabled(false);
 
-		jScrollPane2.setViewportView(editorPane);
+		jScrollPane2.setViewportView(preview_editorPane);
 
 		topic_panel.add(jScrollPane2, new AbsoluteConstraints(10, 111, 760, 135));
 
@@ -140,6 +158,12 @@ public class NewTopicPan extends JPanel {
 		topic_panel.add(preview_button, new AbsoluteConstraints(600, 450, -1, -1));
 		
 		post_button.setText("Posta");
+		post_button.addActionListener(e ->{
+			//if(controllo se i campi(almeno il titolo) non sono vuoti
+			new DBDiscussionImpl().createDiscussion(1,jTextField1.getText(), 
+															preview_editorPane.getText(), String.valueOf(category.getSelectedItem()));
+			//aggiorna la table in Homepage
+		});
 		topic_panel.add(post_button, new AbsoluteConstraints(690, 450, -1, -1));
 
 		textPreview_label1.setFont(new Font("Tahoma", 0, 14)); // NOI18N
@@ -157,6 +181,7 @@ public class NewTopicPan extends JPanel {
 		newtopic_panel.add(markups_panel, new AbsoluteConstraints(800, 260, 260, 210));
 
 		add(newtopic_panel);
+	
 
 		// <Personalization> of GUI with Methods NOTWIST
 		// ############################################
@@ -226,8 +251,8 @@ public class NewTopicPan extends JPanel {
 	private JCheckBox notify_checkbox;
 	private JButton post_button;
 	private JButton preview_button;
-	private JTextArea preview_textarea;
-	private JEditorPane editorPane;
+	private JTextArea description_textArea;
+	private JEditorPane preview_editorPane;
 
 	private RulesPan rules_panel;
 	private JLabel textPreview_label;
@@ -235,4 +260,11 @@ public class NewTopicPan extends JPanel {
 	private JLabel title_label;
 	private JPanel topic_panel;
 	// End of variables declaration
+	
+	
+	private void addItemsCategories() {
+		Iterator<Category> ite = new DBCategoryImpl().getCategories().get().iterator();
+		while(ite.hasNext())
+			category.addItem(ite.next().getName());
+	}
 }
