@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.swing.JOptionPane;
+
 import rombo.crypt.CrypterImplementation;
 
 abstract class DBManagerImpl extends CrypterImplementation {
@@ -31,6 +33,8 @@ abstract class DBManagerImpl extends CrypterImplementation {
 			return stmt;
 		} catch (SQLException e) {
 			System.out.println("Error while connect with database" + e);
+			JOptionPane.showMessageDialog(null, "Errore di connessione al database, controlla la connessione! ");
+			
 		}
 		return null;
 	}

@@ -48,23 +48,22 @@ public class DBDiscussionImpl extends DBManagerImpl implements DBDiscussion {
 		return Optional.of(discussion);
 	}
 
-	public boolean createDiscussion(final Discussion discussion, final Category topic) {
+	public boolean createDiscussion(final Integer idUser, final String title, final String description,final String topic) {
 		try {
-			System.out.println(discussion);
-			System.out.println(topic.getName());
+			
 			d = new Date();
-			query = "insert into Discussion (idUser, title, description, idMacro,data) values (?,?,?,?,?)";
+			query = "insert into DISCUSSION (idUser, title, description, idMacro,data) values (?,?,?,?,?)";
 			open();
 			PreparedStatement prepared = super.getConn().prepareStatement(query);
-			prepared.setInt(1, discussion.getIdUser());
-			prepared.setString(2, discussion.getTitle());
-			prepared.setString(3, discussion.getDescription());
-			prepared.setInt(4, topic.getId());
+			prepared.setInt(1, idUser);
+			prepared.setString(2, title);
+			prepared.setString(3, description);
+			prepared.setInt(4, new DBCategoryImpl().getCategoryByName(topic).getId());
 			prepared.setDate(5, java.sql.Date.valueOf(sdf.format(d)));
 
 			prepared.executeUpdate();
-			System.out.println("Discussion create successfully(" + discussion.getTitle() + " | "
-					+ new DBUserImpl().getUserFromId(discussion.getIdUser()));
+			System.out.println("Discussion create successfully( " + title + " | "
+					+ new DBUserImpl().getUserFromId(idUser).get() + " )");
 			return true;
 		} catch (Exception e) {
 			System.out.println("\nError while adding new discussion " + e);
