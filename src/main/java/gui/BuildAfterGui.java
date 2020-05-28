@@ -61,7 +61,7 @@ public class BuildAfterGui extends JFrame {
         bodyHolder.add(newtopic_panel,"newtopic_panel");
 
         //Adding the card!
-        getContentPane().add(bodyHolder, new AbsoluteConstraints(0, 90, 1080, 490));
+        getContentPane().add(bodyHolder, new AbsoluteConstraints(0, 110, 1080, 490));
 
         
         //Header12312312qqweqweqweeqwe
