@@ -11,48 +11,45 @@ import notwist.database.DBUserImpl;
 
 public class TableDiscussion {
 
+	private JTable tableDiscussion;
+	private DefaultTableModel modelDiscussion;
+	private DBDiscussion dbdiscussion = new DBDiscussionImpl();
 
-  	private JTable tableDiscussion;
-  	private DefaultTableModel modelDiscussion;
-  	private DBDiscussion dbdiscussion = new DBDiscussionImpl();
-  	
-  	public TableDiscussion() {
-  		tableDiscussion = new JTable();
-  		tableDiscussion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-  		modelDiscussion = new DefaultTableModel(new Object[] {"Titolo","Categoria","Like","Created By","Risposte"},0);
-  		tableDiscussion.setModel(modelDiscussion);        
-     
-  		tableDiscussion.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-  		tableDiscussion.setAutoscrolls(false);
-  		tableDiscussion.setEnabled(false);
-  		tableDiscussion.setGridColor(new java.awt.Color(0, 0, 0));
-  		tableDiscussion.setShowGrid(true);
-  		 if (tableDiscussion.getColumnModel().getColumnCount() > 0) {
-  			tableDiscussion.getColumnModel().getColumn(0).setResizable(false);
-  			tableDiscussion.getColumnModel().getColumn(1).setResizable(false);
-  			tableDiscussion.getColumnModel().getColumn(2).setResizable(false);
-  			tableDiscussion.getColumnModel().getColumn(3).setResizable(false);
-         }
-  		tableDiscussion.getColumnModel().getColumn(0).setPreferredWidth(520);
-  		tableDiscussion.getColumnModel().getColumn(1).setPreferredWidth(108);
-  		tableDiscussion.getColumnModel().getColumn(2).setPreferredWidth(60);
-  		tableDiscussion.getColumnModel().getColumn(3).setPreferredWidth(60);
+	public TableDiscussion() {
+		tableDiscussion = new JTable();
+		tableDiscussion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+		modelDiscussion = new DefaultTableModel(
+				new Object[] { "Titolo", "Categoria", "Like", "Created By", "Risposte" }, 0);
+		tableDiscussion.setModel(modelDiscussion);
 
-  	}
-	  
-  	
-  	public JTable getTableDiscussion() {
-  		return tableDiscussion;
-  	}
+		tableDiscussion.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+		tableDiscussion.setAutoscrolls(false);
+		tableDiscussion.setEnabled(false);
+		tableDiscussion.setGridColor(new java.awt.Color(0, 0, 0));
+		tableDiscussion.setShowGrid(true);
+		if (tableDiscussion.getColumnModel().getColumnCount() > 0) {
+			tableDiscussion.getColumnModel().getColumn(0).setResizable(false);
+			tableDiscussion.getColumnModel().getColumn(1).setResizable(false);
+			tableDiscussion.getColumnModel().getColumn(2).setResizable(false);
+			tableDiscussion.getColumnModel().getColumn(3).setResizable(false);
+		}
+		tableDiscussion.getColumnModel().getColumn(0).setPreferredWidth(520);
+		tableDiscussion.getColumnModel().getColumn(1).setPreferredWidth(108);
+		tableDiscussion.getColumnModel().getColumn(2).setPreferredWidth(60);
+		tableDiscussion.getColumnModel().getColumn(3).setPreferredWidth(60);
 
-  public DefaultTableModel getModelDiscussion() {
-  		return modelDiscussion;
-  	}
+	}
 
-  	
-	
+	public JTable getTableDiscussion() {
+		return tableDiscussion;
+	}
+
+	public DefaultTableModel getModelDiscussion() {
+		return modelDiscussion;
+	}
+
 	/*--------------UTIL METHODS?? ----------*/
-	
+
 	public void refreshTableDiscussion() {
 		this.getModelDiscussion().getDataVector().removeAllElements();
 		loadDiscussion(this.getModelDiscussion());
@@ -62,39 +59,37 @@ public class TableDiscussion {
 
 	public void refreshTableDiscussion(Category category) {
 		this.getModelDiscussion().getDataVector().removeAllElements();
-		loadDiscussion(this.getModelDiscussion(),category);
+		loadDiscussion(this.getModelDiscussion(), category);
 		tableDiscussion.setModel(this.getModelDiscussion());
 		tableDiscussion.revalidate();
 	}
 
-	
 	public void refreshTableDiscussion(String filter) {
 		this.getModelDiscussion().getDataVector().removeAllElements();
-		loadDiscussion(this.getModelDiscussion(),filter);
+		loadDiscussion(this.getModelDiscussion(), filter);
 		tableDiscussion.setModel(this.getModelDiscussion());
 		tableDiscussion.revalidate();
 	}
-	
-	 private void loadDiscussion(DefaultTableModel model) {
-		 	for(Discussion s : dbdiscussion.getAllDiscussion().get() ) {
-	        	model.addRow(new Object[] {s.getTitle(),s.getCategory().getName(),0,
-						new DBUserImpl().getUserFromId(s.getIdUser()).get().getUsername(),0});
-		 	}
-	 }
-	 
-	 private void loadDiscussion(DefaultTableModel model, final Category category) {
-		 	for(Discussion s : dbdiscussion.getAllDiscussion(category).get() ) {
-	        	model.addRow(new Object[] {s.getTitle(),s.getCategory().getName(),0,
-						new DBUserImpl().getUserFromId(s.getIdUser()).get().getUsername(),0});
-		 	}
-	 }
-	 
-	 private void loadDiscussion(DefaultTableModel model, final String filter) {
-		 	for(Discussion s : dbdiscussion.getAllDiscussion(filter).get() ) {
-	        	model.addRow(new Object[] {s.getTitle(),s.getCategory().getName(),0,
-						new DBUserImpl().getUserFromId(s.getIdUser()).get().getUsername(),0});
-		 	}
-	 }
-	   
+
+	private void loadDiscussion(DefaultTableModel model) {
+		for (Discussion s : dbdiscussion.getAllDiscussion().get()) {
+			model.addRow(new Object[] { s.getTitle(), s.getCategory().getName(), 0,
+					new DBUserImpl().getUserFromId(s.getIdUser()).get().getUsername(), 0 });
+		}
+	}
+
+	private void loadDiscussion(DefaultTableModel model, final Category category) {
+		for (Discussion s : dbdiscussion.getAllDiscussion(category).get()) {
+			model.addRow(new Object[] { s.getTitle(), s.getCategory().getName(), 0,
+					new DBUserImpl().getUserFromId(s.getIdUser()).get().getUsername(), 0 });
+		}
+	}
+
+	private void loadDiscussion(DefaultTableModel model, final String filter) {
+		for (Discussion s : dbdiscussion.getAllDiscussion(filter).get()) {
+			model.addRow(new Object[] { s.getTitle(), s.getCategory().getName(), 0,
+					new DBUserImpl().getUserFromId(s.getIdUser()).get().getUsername(), 0 });
+		}
+	}
 
 }

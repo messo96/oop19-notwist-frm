@@ -2,6 +2,9 @@ package util;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
@@ -18,9 +21,9 @@ import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
 public class TipsPan extends JPanel {
-	
+
 	public TipsPan() {
-		
+
 		drawPan();
 	}
 
@@ -29,17 +32,15 @@ public class TipsPan extends JPanel {
 		jScrollPane4 = new JScrollPane();
 		tips_panel = new JTextArea();
 
-		
 		markups_panel.setBorder(
 				BorderFactory.createTitledBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, new Color(0, 0, 0)),
 						"Tips", TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION, new Font("Tahoma", 0, 14))); // NOI18N
 
 		jScrollPane4.setEnabled(false);
 
+		importTips();
 		tips_panel.setColumns(20);
 		tips_panel.setRows(5);
-		tips_panel.setText(
-				"Altro test blablabla\nasdasdasdasd\nasdasd\nasdasdassdasdassdasd\nasdasdasdasd\nasdadasdassdasd\nadadasdasdasdasd\nasdasdasdasd\nasdadsasdasd.");
 		tips_panel.setWrapStyleWord(true);
 		tips_panel.setLineWrap(true);
 		tips_panel.setEnabled(false);
@@ -55,12 +56,23 @@ public class TipsPan extends JPanel {
 				.addGroup(markups_panelLayout.createSequentialGroup().addContainerGap()
 						.addComponent(jScrollPane4, GroupLayout.PREFERRED_SIZE, 163, GroupLayout.PREFERRED_SIZE)
 						.addContainerGap()));
-		
+
 		add(markups_panel);
-		
+
 	}
-	
+
 	private JScrollPane jScrollPane4;
 	private JPanel markups_panel;
 	private JTextArea tips_panel;
+
+	private void importTips() {
+		BufferedReader buf;
+		try {
+			buf = new BufferedReader(new FileReader("src/main/java/newtopic/Tips.txt"));
+			tips_panel.read(buf, null);
+		} catch (IOException e) {
+			System.out.println("File Tips.txt not found! ");
+			e.printStackTrace();
+		}
+	}
 }
