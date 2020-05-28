@@ -13,7 +13,7 @@ import org.netbeans.lib.awtextra.AbsoluteConstraints;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
 
 import newtopic.NewTopicPan;
-
+import profile.Profile;
 import util.Header;
 import util.HolderPan;
 import util.TableDiscussion;
@@ -56,6 +56,10 @@ public class BuildAfterGui extends JFrame {
 		newtopic_panel = new NewTopicPan();
 		newtopic_panel.setVisible(true);
 		bodyHolder.add(newtopic_panel, "newtopic_panel");
+		profile_panel = new Profile();
+		profile_panel.setVisible(true);
+		bodyHolder.add(profile_panel, "profile_panel");
+
 
 		// Adding the card!
 		getContentPane().add(bodyHolder, new AbsoluteConstraints(0, 110, 1080, 490));
@@ -131,6 +135,7 @@ public class BuildAfterGui extends JFrame {
 	private UpperPan upper_panel;
 	private Header header_panel;
 	private NewTopicPan newtopic_panel;
+	private Profile profile_panel;
 
 	// End of variables declaration
 }

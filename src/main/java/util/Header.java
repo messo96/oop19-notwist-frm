@@ -150,6 +150,12 @@ public class Header extends JPanel {
 								.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED).addComponent(jSeparator1,
 										GroupLayout.PREFERRED_SIZE, 10, GroupLayout.PREFERRED_SIZE)));
 
+		  profile_icon.addMouseListener(new MouseAdapter() {
+	            public void mouseClicked(MouseEvent evt) {
+	                profile_iconMouseClicked(evt);
+	            }
+	        });
+		  
 		add(header_panel);
 
 	}
@@ -160,7 +166,9 @@ public class Header extends JPanel {
 	private void homepage_buttonMouseClicked(MouseEvent evt) {
 		card.show(parent, "homepage_panel");
 	}
-
+	private void profile_iconMouseClicked(MouseEvent evt) {
+		card.show(parent, "profile_panel");
+	}
 	/*
 	 * private void search_buttonActionPerformed(java.awt.event.ActionEvent evt)
 	 * {//GEN-FIRST:event_search_buttonActionPerformed //Button Search
