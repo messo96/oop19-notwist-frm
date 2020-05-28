@@ -12,29 +12,26 @@ import notwist.base.Discussion;
 import notwist.base.DiscussionImpl;
 import notwist.base.User;
 
-public class DBCommentsImpl extends DBManagerImpl{
+public class DBCommentsImpl extends DBManagerImpl {
 
 	private ResultSet rs = null;
-    private String query;
-	
-	public Optional<List<Comments>> getCommentfromDiscussion(final Integer idDiscussion){
+	private String query;
+
+	public Optional<List<Comments>> getCommentfromDiscussion(final Integer idDiscussion) {
 		List<Comments> list = new LinkedList<>();
-		
+
 		try {
-			query = "select * from DISCUSSION where idDiscussion= "+ idDiscussion;
+			query = "select * from DISCUSSION where idDiscussion= " + idDiscussion;
 			rs = open().executeQuery(query);
-		 
-	              
-	     while (rs.next()) {
+
+			while (rs.next()) {
 //	    	list.add(new CommentsImplements())
-	     }
-		}
-	     catch(SQLException e) {
+			}
+		} catch (SQLException e) {
 //	    	 System.out.println("Error while download discussion of " + user.toString() + "\n"+e);
-	     }
-		finally {
+		} finally {
 			close();
 		}
-			return Optional.of(list);
+		return Optional.of(list);
 	}
 }

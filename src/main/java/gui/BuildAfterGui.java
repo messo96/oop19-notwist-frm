@@ -12,7 +12,6 @@ import javax.swing.JPanel;
 import org.netbeans.lib.awtextra.AbsoluteConstraints;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
 
-
 import newtopic.NewTopicPan;
 
 import util.Header;
@@ -21,124 +20,115 @@ import util.TableDiscussion;
 import util.UpperPan;
 
 public class BuildAfterGui extends JFrame {
- 
+
 	private static final long serialVersionUID = 1L;
 	private TableDiscussion tableDiscussion;
-	
-	  public BuildAfterGui() {
-		  this.tableDiscussion = new TableDiscussion();
-	      initComponents(tableDiscussion);
-	      
+	public BuildAfterGui() {
+		this.tableDiscussion = new TableDiscussion();
+		initComponents(tableDiscussion);
 
-    }
+	}
 
+	private void initComponents(TableDiscussion tableDiscussion) {
 
-    private void initComponents(TableDiscussion tableDiscussion) {
+		bodyHolder = new JPanel(); // Holder for body
 
-       	bodyHolder = new JPanel(); //Holder for body
-        
-        //JFrame properties
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setLocationByPlatform(true);
-        setUndecorated(true);
-        setResizable(false);
-        getContentPane().setLayout(new AbsoluteLayout());
+		// JFrame properties
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setLocationByPlatform(true);
+		setUndecorated(true);
+		setResizable(false);
+		getContentPane().setLayout(new AbsoluteLayout());
 
-        //Get upper panel and add it to the main frame
-        upper_panel = new UpperPan();
-        upper_panel.setVisible(true);
-       
-        getContentPane().add(upper_panel, new AbsoluteConstraints(670, 0, -1, 40));
-        
-       
-        bodyHolder.setLayout(new CardLayout());
-        //Add HolderPan with the homepage tables  to card
-        holder_panel = new HolderPan(tableDiscussion);
-        holder_panel.setVisible(true);
-        bodyHolder.add(holder_panel, "homepage_panel");
-        newtopic_panel = new NewTopicPan();
-        newtopic_panel.setVisible(true);
-        bodyHolder.add(newtopic_panel,"newtopic_panel");
+		// Get upper panel and add it to the main frame
+		upper_panel = new UpperPan();
+		upper_panel.setVisible(true);
 
-        //Adding the card!
-        getContentPane().add(bodyHolder, new AbsoluteConstraints(0, 110, 1080, 490));
+		getContentPane().add(upper_panel, new AbsoluteConstraints(670, 0, -1, 40));
 
-        
-        //Header12312312qqweqweqweeqwe
-        
-        header_panel = new Header(tableDiscussion, bodyHolder);
-        header_panel.setVisible(true);
-        
-        getContentPane().add(header_panel, new AbsoluteConstraints(0, 20, 1080, 90));
-        
-        
-        
-        
-        
-        //Qua chiamo il pannello no filter con la tabella principale non filtrata, basta togliere il commento /* sotto
-     /*   Nofilter drag_panel = new Nofilter(this.actualUser);
-        drag_panel.setVisible(true);
-        
-        
-       
-        getContentPane().add(drag_panel, new AbsoluteConstraints(820, 0, 260, 40));
-        //qua era dove addavo la card, ma per i test è rimasta commentata.
-     /*   CategoryPan category_panel = new CategoryPan();
-        category_panel.setVisible(true);
-        bodyHolder.add(category_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 290, 240, 200));
-       
-        */
-        pack();
-        
-        //<--------------METHODS---------------------------------------->
-        
-        //Call Drag the frame
+		bodyHolder.setLayout(new CardLayout());
+		// Add HolderPan with the homepage tables to card
+		holder_panel = new HolderPan(tableDiscussion);
+		holder_panel.setVisible(true);
+		bodyHolder.add(holder_panel, "homepage_panel");
+		newtopic_panel = new NewTopicPan();
+		newtopic_panel.setVisible(true);
+		bodyHolder.add(newtopic_panel, "newtopic_panel");
+
+		// Adding the card!
+		getContentPane().add(bodyHolder, new AbsoluteConstraints(0, 90, 1080, 490));
+
+		// Header12312312qqweqweqweeqwe
+
+		header_panel = new Header(tableDiscussion, bodyHolder);
+		header_panel.setVisible(true);
+
+		getContentPane().add(header_panel, new AbsoluteConstraints(0, 20, 1080, 90));
+
+		// Qua chiamo il pannello no filter con la tabella principale non filtrata,
+		// basta togliere il commento /* sotto
+		/*
+		 * Nofilter drag_panel = new Nofilter(this.actualUser);
+		 * drag_panel.setVisible(true);
+		 * 
+		 * 
+		 * 
+		 * getContentPane().add(drag_panel, new AbsoluteConstraints(820, 0, 260, 40));
+		 * //qua era dove addavo la card, ma per i test è rimasta commentata. /*
+		 * CategoryPan category_panel = new CategoryPan();
+		 * category_panel.setVisible(true); bodyHolder.add(category_panel, new
+		 * org.netbeans.lib.awtextra.AbsoluteConstraints(820, 290, 240, 200));
+		 * 
+		 */
+		pack();
+
+		// <--------------METHODS---------------------------------------->
+
+		// Call Drag the frame
 		getContentPane().addMouseMotionListener(new MouseMotionAdapter() {
-            public void mouseDragged(MouseEvent evt) {
-                FrameMouseDragged(evt);
-            }
-        });
+			public void mouseDragged(MouseEvent evt) {
+				FrameMouseDragged(evt);
+			}
+		});
 		getContentPane().addMouseListener(new MouseAdapter() {
-            public void mousePressed(MouseEvent evt) {
-                FrameMousePressed(evt);
-            }
-        });
-    }
-		
-    	//<------------------------END---------------------------->
-    
-    //Drag the frame 
-    private  int xy;
-    private  int xx;
-    
-    private void FrameMouseDragged(MouseEvent evt) {
-        int x = evt.getXOnScreen();
-        int y = evt.getYOnScreen();
-        this.setLocation(x - xx, y - xy);
-    }
-    
-    private void FrameMousePressed(MouseEvent evt) {  
-        xx = evt.getX();
-        xy = evt.getY();
-    }
-    public void start() {
+			public void mousePressed(MouseEvent evt) {
+				FrameMousePressed(evt);
+			}
+		});
+	}
 
-    	EventQueue.invokeLater(new Runnable() {
-            public void run() {
-            	  new BuildAfterGui().setVisible(true);
-            }
-        });
-    }
-    
-  
+	// <------------------------END---------------------------->
 
-    // Variables declaration - do not modify
-    private JPanel bodyHolder;
-    private HolderPan holder_panel;
-    private UpperPan upper_panel;
-    private Header header_panel;
-    private NewTopicPan newtopic_panel;
-    
-    
-    // End of variables declaration
+	// Drag the frame
+	private int xy;
+	private int xx;
+
+	private void FrameMouseDragged(MouseEvent evt) {
+		int x = evt.getXOnScreen();
+		int y = evt.getYOnScreen();
+		this.setLocation(x - xx, y - xy);
+	}
+
+	private void FrameMousePressed(MouseEvent evt) {
+		xx = evt.getX();
+		xy = evt.getY();
+	}
+
+	public void start() {
+
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				new BuildAfterGui().setVisible(true);
+			}
+		});
+	}
+
+	// Variables declaration - do not modify
+	private JPanel bodyHolder;
+	private HolderPan holder_panel;
+	private UpperPan upper_panel;
+	private Header header_panel;
+	private NewTopicPan newtopic_panel;
+
+	// End of variables declaration
 }
