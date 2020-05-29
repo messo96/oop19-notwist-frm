@@ -50,18 +50,18 @@ public class Activities extends JPanel{
               .addGroup( activities_panelLayout.createSequentialGroup()
                   .addContainerGap()
                   .addComponent(jScrollPane2,  GroupLayout.PREFERRED_SIZE, 627,  GroupLayout.PREFERRED_SIZE)
-                  .addContainerGap(251, Short.MAX_VALUE))
+                  .addContainerGap(10, Short.MAX_VALUE))
           );
           activities_panelLayout.setVerticalGroup(
         		  activities_panelLayout.createParallelGroup( GroupLayout.Alignment.LEADING)
               .addGroup( activities_panelLayout.createSequentialGroup()
                   .addContainerGap()
                   .addComponent(jScrollPane2,  GroupLayout.PREFERRED_SIZE, 46,  GroupLayout.PREFERRED_SIZE)
-                  .addContainerGap(131, Short.MAX_VALUE))
+                  .addContainerGap(20, Short.MAX_VALUE))
           );
 
           jScrollPane1.setViewportView(activities_panel);
-          add(jScrollPane1);
+          add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 1));
     }
     private  JScrollPane jScrollPane1;
     private  JScrollPane jScrollPane2;

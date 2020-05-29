@@ -1,5 +1,7 @@
 package profile;
 
+import java.awt.Color;
+
 import javax.swing.JPanel;
 
 import message.MessagePan;
@@ -22,7 +24,8 @@ public class Profile extends JPanel{
         profile_panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());   
         
         activities_panel = new Activities();
-        profile_panel.add(activities_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 550, -1));
+        profile_panel.add(activities_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, -1));
+        
 
         myinfos_panel = new Infos();
         profile_panel.add(myinfos_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 0, -1, -1));
