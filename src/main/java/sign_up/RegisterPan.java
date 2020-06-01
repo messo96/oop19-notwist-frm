@@ -4,6 +4,8 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
@@ -26,11 +28,14 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 
 import org.netbeans.lib.awtextra.AbsoluteConstraints;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
+
+import com.formdev.flatlaf.FlatLightLaf;
 
 import notwist.database.DBUserImpl;
 
@@ -74,6 +79,7 @@ public class RegisterPan extends JPanel{
         
         //Dialog
         termsTitle.setText("Informativa Privacy:");
+        termsTitle.setFont(new Font("Tahoma", 0, 18));
         importTerms();
         termsText.setEditable(false);
         termsText.setOpaque(false);
@@ -139,7 +145,7 @@ public class RegisterPan extends JPanel{
             }
         });
 
-        register_panel.add(username_field, new AbsoluteConstraints(53, 110, 290, 20));
+        register_panel.add(username_field, new AbsoluteConstraints(53, 110, 290, 25));
         
         //Separator
         jSeparator5.setBackground(new Color(0,0,0));
@@ -161,7 +167,7 @@ public class RegisterPan extends JPanel{
                 mail_fieldFocusGained(evt);
             }
         });   
-        register_panel.add(mail_field, new AbsoluteConstraints(53, 200, 290, 20));
+        register_panel.add(mail_field, new AbsoluteConstraints(53, 200, 290, 25));
         
         //Separator
         jSeparator3.setBackground(new Color(0,0,0));
@@ -182,7 +188,7 @@ public class RegisterPan extends JPanel{
                 pssw_fieldFocusGained(evt);
             }
         });
-        register_panel.add(pssw_field, new AbsoluteConstraints(53, 290, 290, 20));
+        register_panel.add(pssw_field, new AbsoluteConstraints(53, 290, 290, 25));
 
 
 
@@ -283,13 +289,18 @@ public class RegisterPan extends JPanel{
         }
         private void terms_buttonActionPerformed(ActionEvent evt) {
             try {
-       
+            	UIManager.getLookAndFeel();
+            	 SwingUtilities.updateComponentTreeUI(termsDialog);    	
                 termsDialog.getContentPane();         
                 termsDialog.setSize(650, 450);  
                 termsDialog.pack();
                 termsDialog.setLocationRelativeTo(getParent()); 
                 termsDialog.setVisible(true);
+                Image icon = Toolkit.getDefaultToolkit().getImage("img/icon.jpg");    
+                termsDialog.setIconImage(icon);  
+                
             } catch (Exception ex) {
+                System.err.println("Failed to initialize LaF");
             	ex.printStackTrace();
             }
         }

@@ -77,6 +77,23 @@ public class LoginPan extends JPanel  {
 		  //<------------Draw login panel------------------->
         login_panel.setLayout(new AbsoluteLayout());
         
+        //Mail section
+        mail_label.setFont(new Font("Tahoma", 0, 14)); // NOI18N
+        mail_label.setText("Mail");
+        mail_label.setToolTipText("Utilizza una mail valida!");
+        login_panel.add(mail_label, new AbsoluteConstraints(60, 80, -1, -1));        
+  
+        mail_field.setFont(new Font("Tahoma", 0, 14)); // NOI18N
+        login_panel.add(mail_field, new AbsoluteConstraints(60, 110, 290, 25));
+        
+      
+        //Separator
+        jSeparator1.setBackground(new Color(0,0,0));
+        jSeparator1.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, new Color(194, 192, 192)));
+        jSeparator1.setMinimumSize(new Dimension(30, 20));
+        jSeparator1.setPreferredSize(new Dimension(30, 20));
+        login_panel.add(jSeparator1, new AbsoluteConstraints(60, 140, 290, -1));
+  
         //Password section
         pssw_label.setFont(new Font("Tahoma", 0, 14)); // NOI18N
         pssw_label.setText("Password");
@@ -86,24 +103,8 @@ public class LoginPan extends JPanel  {
     //    pssw_field.setBackground(new Color(242, 242, 242));
               
         pssw_field.setFont(new Font("Tahoma", 0, 14)); // NOI18N
-        login_panel.add(pssw_field, new AbsoluteConstraints(60, 200, 290, 20));
-
-        //Separator
-        jSeparator1.setBackground(new Color(0,0,0));
-        jSeparator1.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, new Color(194, 192, 192)));
-        jSeparator1.setMinimumSize(new Dimension(30, 20));
-        jSeparator1.setPreferredSize(new Dimension(30, 20));
-        login_panel.add(jSeparator1, new AbsoluteConstraints(60, 140, 290, -1));
-
-        //Mail section
-        mail_label.setFont(new Font("Tahoma", 0, 14)); // NOI18N
-        mail_label.setText("Mail");
-        mail_label.setToolTipText("Utilizza una mail valida!");
-        login_panel.add(mail_label, new AbsoluteConstraints(60, 80, -1, -1));        
-  
-        mail_field.setFont(new Font("Tahoma", 0, 14)); // NOI18N
-        login_panel.add(mail_field, new AbsoluteConstraints(60, 110, 290, 20));
-  
+        login_panel.add(pssw_field, new AbsoluteConstraints(60, 200, 290, 25));
+        
         //Separator
         jSeparator2.setBackground(new Color(0,0,0));
         jSeparator2.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, new Color(194, 192, 192)));
