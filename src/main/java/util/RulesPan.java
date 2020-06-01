@@ -74,7 +74,7 @@ public class RulesPan extends JPanel {
 	private void importRules(){
 			BufferedReader buf;
 			try {
-				buf = new BufferedReader(new FileReader("src/main/java/newtopic/Rules.txt"));
+				buf = new BufferedReader(new FileReader("docs/Rules.txt"));
 				rules_area.read(buf, null);
 			} catch (IOException e) {
 				System.out.println("File Rules.txt not found! ");

@@ -1,0 +1,18 @@
+Il forum supporta i tag di html:
+<b> Grassetto </b>
+<strong> Importante </strong>  
+<i> Corsivo </i>  
+<em> Enfatizzato </em> 
+<mark> Evidenziato </mark>  
+<small> Smaller text </small>  
+<del> Barrato </del>  
+<ins> Sottolineato </ins>  
+<sub> Pedice </sub> 
+<sup> Apice </sup> 
+<q> Quote </q>
+
+E' possibile usare anche i tag per le liste:
+<ul> o <ol> per le liste non numerate o numerate
+<li> per l'oggetto della lista
+
+Usali per rendere più piacevole la lettura, ma non esagerare!

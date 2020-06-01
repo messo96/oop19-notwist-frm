@@ -68,7 +68,7 @@ public class TipsPan extends JPanel {
 	private void importTips() {
 		BufferedReader buf;
 		try {
-			buf = new BufferedReader(new FileReader("src/main/java/newtopic/Tips.txt"));
+			buf = new BufferedReader(new FileReader("docs/Tips.txt"));
 			tips_panel.read(buf, null);
 		} catch (IOException e) {
 			System.out.println("File Tips.txt not found! ");

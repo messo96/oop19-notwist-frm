@@ -1,17 +1,12 @@
-"<h2>Regole per una nuova discussione:</h2"
-
-><h3>Le cose giuste al posto giusto.</h3>Fai lo sforzo di scrivere le cose giuste nel posto giusto,
+<h2>Regole per una nuova discussione:</h2>
+<h3>Le cose giuste al posto giusto.</h3>Fai lo sforzo di scrivere le cose giuste nel posto giusto,
  così possiamo dedicare più tempo a discutere e meno tempo a sistemare le cose.
   In particolare:<ul>
   <li>Non iniziare un topic in una categoria sbagliata;</li>
-  	<p></p>
   <li>Non pubblicare la stessa cosa in più topic;</li>
-    <p></p>
   <li>Non firmare i tuoi post, ogni post ha le info sul tuo profilo;</li>
   </ul><h3>L'educazione è importante.</h3>
   <ul><li>Sii educato. Non pubblicare niente che una persona considererebbe offensivo, oltraggioso o che possa istigare all’odio;</li>
-    <p></p>
   <li>Evita gli eccessi: non pubblicare contenuti osceni o sessualmente espliciti;</li>
-    <p></p>
   <li>Cerca di rispettare tutti. Non infastidire o ferire nessuno, non divulgare informazioni relative ad altri, 
   non assumere l’identità di altri;</li></ul>
