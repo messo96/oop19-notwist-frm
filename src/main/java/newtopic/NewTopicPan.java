@@ -74,7 +74,6 @@ public class NewTopicPan extends JPanel {
 
 	}
 
-	@SuppressWarnings("unchecked")
 	private void initComponents() {
 
 		newtopic_panel = new JPanel();
@@ -115,7 +114,7 @@ public class NewTopicPan extends JPanel {
 		topic_panel.add(title_label, new AbsoluteConstraints(10, 55, -1, -1));
 
 		jTextField1.setFont(new Font("Tahoma", 0, 14)); // NOI18N
-		topic_panel.add(jTextField1, new AbsoluteConstraints(91, 52, 679, -1));
+		topic_panel.add(jTextField1, new AbsoluteConstraints(91, 52, 600, -1));
 
 		textPreview_label.setFont(new Font("Tahoma", 0, 14)); // NOI18N
 		textPreview_label.setText("Preview testo");
@@ -138,10 +137,10 @@ public class NewTopicPan extends JPanel {
 			}
 			
 		});
-		topic_panel.add(jScrollPane1, new AbsoluteConstraints(10, 299, 760, 140));
+		topic_panel.add(jScrollPane1, new AbsoluteConstraints(10, 299, 675, 140));
 
 		jSeparator2.setBackground(new Color(0, 0, 0));
-		topic_panel.add(jSeparator2, new AbsoluteConstraints(10, 257, 760, 10));
+		topic_panel.add(jSeparator2, new AbsoluteConstraints(10, 257, 675, 10));
 
 		preview_editorPane.setContentType("text/html");
 ///////        ep.setText("html code");
@@ -149,13 +148,13 @@ public class NewTopicPan extends JPanel {
 
 		jScrollPane2.setViewportView(preview_editorPane);
 
-		topic_panel.add(jScrollPane2, new AbsoluteConstraints(10, 111, 760, 135));
+		topic_panel.add(jScrollPane2, new AbsoluteConstraints(10, 111, 675, 135));
 
 		notify_checkbox.setText("Notificami se rispondono");
 		topic_panel.add(notify_checkbox, new AbsoluteConstraints(10, 450, -1, -1));
 
 		preview_button.setText("Preview");
-		topic_panel.add(preview_button, new AbsoluteConstraints(600, 450, -1, -1));
+		topic_panel.add(preview_button, new AbsoluteConstraints(500, 450, -1, -1));
 		
 		post_button.setText("Posta");
 		post_button.addActionListener(e ->{
@@ -164,21 +163,21 @@ public class NewTopicPan extends JPanel {
 															preview_editorPane.getText(), String.valueOf(category.getSelectedItem()));
 			//aggiorna la table in Homepage
 		});
-		topic_panel.add(post_button, new AbsoluteConstraints(690, 450, -1, -1));
+		topic_panel.add(post_button, new AbsoluteConstraints(610, 450, -1, -1));
 
 		textPreview_label1.setFont(new Font("Tahoma", 0, 14)); // NOI18N
 		textPreview_label1.setText("Testo");
 		topic_panel.add(textPreview_label1, new AbsoluteConstraints(10, 271, -1, -1));
 
-		newtopic_panel.add(topic_panel, new AbsoluteConstraints(0, 0, 780, 490));
+		newtopic_panel.add(topic_panel, new AbsoluteConstraints(0, 0, 700, 490));
 	
 		//Importing Rules Pan
 		rules_panel = new RulesPan();
-		newtopic_panel.add(rules_panel, new AbsoluteConstraints(800, 0, 260, 250));
+		newtopic_panel.add(rules_panel, new AbsoluteConstraints(720, 0, -1, 250));
 
 		//Importing MarkupsPan
 		markups_panel = new TipsPan();
-		newtopic_panel.add(markups_panel, new AbsoluteConstraints(800, 260, 260, 210));
+		newtopic_panel.add(markups_panel, new AbsoluteConstraints(720, 260, -1, 210));
 
 		add(newtopic_panel);
 	

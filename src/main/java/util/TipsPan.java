@@ -50,7 +50,7 @@ public class TipsPan extends JPanel {
 		markups_panel.setLayout(markups_panelLayout);
 		markups_panelLayout.setHorizontalGroup(markups_panelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(markups_panelLayout.createSequentialGroup().addContainerGap()
-						.addComponent(jScrollPane4, GroupLayout.PREFERRED_SIZE, 228, GroupLayout.PREFERRED_SIZE)
+						.addComponent(jScrollPane4, GroupLayout.PREFERRED_SIZE, 318, GroupLayout.PREFERRED_SIZE)
 						.addContainerGap()));
 		markups_panelLayout.setVerticalGroup(markups_panelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(markups_panelLayout.createSequentialGroup().addContainerGap()

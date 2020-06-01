@@ -57,7 +57,7 @@ public class RulesPan extends JPanel {
 		rules_panel.setLayout(rules_panelLayout);
 		rules_panelLayout.setHorizontalGroup(rules_panelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(rules_panelLayout.createSequentialGroup().addContainerGap()
-						.addComponent(jScrollPane3, GroupLayout.PREFERRED_SIZE, 228, GroupLayout.PREFERRED_SIZE)
+						.addComponent(jScrollPane3, GroupLayout.PREFERRED_SIZE, 318, GroupLayout.PREFERRED_SIZE)
 						.addContainerGap()));
 		rules_panelLayout.setVerticalGroup(rules_panelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(GroupLayout.Alignment.TRAILING,
