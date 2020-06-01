@@ -60,7 +60,7 @@ public class TipsPan extends JPanel {
 		add(markups_panel);
 
 	}
-
+	
 	private JScrollPane jScrollPane4;
 	private JPanel markups_panel;
 	private JTextArea tips_panel;

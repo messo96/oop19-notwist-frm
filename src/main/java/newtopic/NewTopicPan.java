@@ -133,7 +133,7 @@ public class NewTopicPan extends JPanel {
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				preview_editorPane.setText(	description_textArea.getText());
+	 		preview_editorPane.setText(	description_textArea.getText());
 			}
 			
 		});
