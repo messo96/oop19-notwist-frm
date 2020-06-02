@@ -2,6 +2,8 @@ package user;
 
 import javax.swing.JPanel;
 
+import notwist.base.User;
+
 public class Infos extends JPanel{
 	
 
@@ -9,12 +11,12 @@ public class Infos extends JPanel{
 	/*
 	 * Creating the user infos panel
 	 */
-	public Infos() {
+	public Infos(final User user) {
 		
-		drawComps();
+		drawComps(user);
 	}
 	
-	private void drawComps() {
+	private void drawComps(User user) {
         myinfos_panel = new javax.swing.JPanel();
         name = new javax.swing.JLabel();
         mail = new javax.swing.JLabel();
@@ -22,11 +24,11 @@ public class Infos extends JPanel{
         myinfos_panel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 0, 0)), "My Infos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
 
         name.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        name.setText("Mail");
+        name.setText(user.getUsername());
         name.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
 
         mail.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        mail.setText("Nome");
+        mail.setText(user.getEmail());
         mail.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout myinfos_panelLayout = new javax.swing.GroupLayout(myinfos_panel);

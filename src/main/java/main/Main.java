@@ -19,16 +19,14 @@ public class Main {
     } catch (Exception ex) {
       System.err.println("Failed to initialize LaF");
       }
-<<<<<<< HEAD
-BuildAfterGui gui = new BuildAfterGui();
+//BuildAfterGui gui = new BuildAfterGui();
 //BuildPreGui gui = new BuildPreGui();
 
-=======
+
 //BuildAfterGui gui = new BuildAfterGui();
-  BuildPreGui gui = new BuildPreGui();
+//  BuildPreGui gui = new BuildPreGui();
   
->>>>>>> 23acca46d54fa2cec42bb6e777cf4a886529da6b
-gui.start();
+//gui.start();
     }
     
 }

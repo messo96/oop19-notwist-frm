@@ -17,18 +17,18 @@ public class DBCommentsImpl extends DBManagerImpl {
 	private ResultSet rs = null;
 	private String query;
 
-	public Optional<List<Comments>> getCommentfromDiscussion(final Integer idDiscussion) {
+	public Optional<List<Comments>> getAllComments(final Integer idDiscussion) {
 		List<Comments> list = new LinkedList<>();
 
 		try {
-			query = "select * from DISCUSSION where idDiscussion= " + idDiscussion;
+			query = "select * from COMMENT where idDiscussion= " + idDiscussion;
 			rs = open().executeQuery(query);
 
 			while (rs.next()) {
 //	    	list.add(new CommentsImplements())
 			}
 		} catch (SQLException e) {
-//	    	 System.out.println("Error while download discussion of " + user.toString() + "\n"+e);
+	    	 System.out.println("Error while download comments\n"+e);
 		} finally {
 			close();
 		}
