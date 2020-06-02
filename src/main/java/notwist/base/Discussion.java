@@ -8,6 +8,8 @@ public interface Discussion {
 	
 	public int getIdUser();
 	
+	public int getIdDiscussion();
+	
 	public Category getCategory();
 	
 	@Override

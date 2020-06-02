@@ -52,6 +52,6 @@ public interface DBDiscussion {
 	/**
 	 * 
 	 */
-	public Optional<Discussion> getDiscussionFromTitle(final String title);
+	public Optional<Discussion> getDiscussionFromId(final Integer idDiscussion);
 
 }
