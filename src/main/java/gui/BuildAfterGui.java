@@ -119,8 +119,7 @@ public class BuildAfterGui extends JFrame {
 		xx = evt.getX();
 		xy = evt.getY();
 	}
-
-/*	public void start() {
+	public void start() {
 
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -128,7 +127,7 @@ public class BuildAfterGui extends JFrame {
 			}
 		});
 	}
-*/
+
 	// Variables declaration - do not modify
 	private JPanel bodyHolder;
 	private HolderPan holder_panel;
