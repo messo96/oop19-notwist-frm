@@ -5,10 +5,13 @@
  */
 package topic_gui;
 
+import java.text.SimpleDateFormat;
+
 import javax.swing.JEditorPane;
 
 import notwist.base.Discussion;
 import notwist.base.User;
+import notwist.database.DBCommentsImpl;
 
 /**
  *
@@ -19,14 +22,14 @@ public class Topic_gui extends javax.swing.JFrame {
     /**
      * Creates new form Homepage_gui
      */
-	private User user = null;
+	private User user;
 	private Discussion discussion = null;
+	private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 	
     public Topic_gui(final Discussion discussion, final User user) {
-        initComponents();
         this.user = user;
         this.discussion = discussion;
-        
+        initComponents();
     }
 
     /**
@@ -113,11 +116,13 @@ public class Topic_gui extends javax.swing.JFrame {
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
         discussion_area.setContentType("text/html");
+        discussion_area.setText(discussion.getDescription());
+        discussion_area.setEditable(false);
         discussion_area.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jScrollPane1.setViewportView(discussion_area);
 
         title_label.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        title_label.setText("Titolo");
+        title_label.setText(discussion.getTitle());
         title_label.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         n_likes.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -135,7 +140,7 @@ public class Topic_gui extends javax.swing.JFrame {
         menu.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         date_user.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        date_user.setText("Date + Username");
+        date_user.setText("Published by: " + user.getUsername() + " on: " + sdf.format(discussion.getData()));
         date_user.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout discussion_partLayout = new javax.swing.GroupLayout(discussion_part);
@@ -189,12 +194,10 @@ public class Topic_gui extends javax.swing.JFrame {
         newcomment_area.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jScrollPane2.setViewportView(newcomment_area);
 
-        post_it.setText("Posta");
+        post_it.setText("Commenta");
         post_it.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        post_it.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                post_itActionPerformed(evt);
-            }
+        post_it.addActionListener(e -> {
+          new DBCommentsImpl().write(discussion.getIdDiscussion(), user.getId(), newcomment_area.getText());
         });
 
         javax.swing.GroupLayout new_commentLayout = new javax.swing.GroupLayout(new_comment);

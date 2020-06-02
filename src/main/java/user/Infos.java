@@ -24,11 +24,11 @@ public class Infos extends JPanel{
         myinfos_panel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 0, 0)), "My Infos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
 
         name.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        name.setText(user.getUsername());
+        name.setText("Name:" + user.getUsername());
         name.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
 
         mail.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        mail.setText(user.getEmail());
+        mail.setText("Email: " + user.getEmail());
         mail.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout myinfos_panelLayout = new javax.swing.GroupLayout(myinfos_panel);
