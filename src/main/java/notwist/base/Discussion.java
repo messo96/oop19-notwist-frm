@@ -1,5 +1,7 @@
 package notwist.base;
 
+import java.util.Date;
+
 public interface Discussion {
 
 	public String getTitle();
@@ -9,6 +11,8 @@ public interface Discussion {
 	public int getIdUser();
 	
 	public int getIdDiscussion();
+	
+	public Date getData();
 	
 	public Category getCategory();
 	

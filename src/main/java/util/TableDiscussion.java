@@ -1,13 +1,18 @@
 package util;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import notwist.base.Category;
 import notwist.base.Discussion;
+import notwist.base.User;
 import notwist.database.DBDiscussion;
 import notwist.database.DBDiscussionImpl;
 import notwist.database.DBUserImpl;
+import topic_gui.Topic_gui;
 
 public class TableDiscussion {
 
@@ -15,8 +20,14 @@ public class TableDiscussion {
 	private DefaultTableModel modelDiscussion;
 	private DBDiscussion dbdiscussion = new DBDiscussionImpl();
 
-	public TableDiscussion() {
-		tableDiscussion = new JTable();
+	public TableDiscussion(final User user) {
+		tableDiscussion = new JTable() {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
+		
 		tableDiscussion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 		modelDiscussion = new DefaultTableModel(
 				new Object[] { "Titolo", "Categoria", "Like", "Created By", "Risposte", "ID" }, 0);
@@ -24,7 +35,7 @@ public class TableDiscussion {
 
 		tableDiscussion.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
 		tableDiscussion.setAutoscrolls(false);
-		tableDiscussion.setEnabled(false);
+		tableDiscussion.setEnabled(true);
 		tableDiscussion.setGridColor(new java.awt.Color(0, 0, 0));
 		tableDiscussion.setShowGrid(true);
 		if (tableDiscussion.getColumnModel().getColumnCount() > 0) {
@@ -33,21 +44,33 @@ public class TableDiscussion {
 			tableDiscussion.getColumnModel().getColumn(2).setResizable(false);
 			tableDiscussion.getColumnModel().getColumn(3).setResizable(false);
 			tableDiscussion.getColumnModel().getColumn(4).setResizable(false);
+			tableDiscussion.getColumnModel().getColumn(5).setResizable(false);
+
 
 		}
 		tableDiscussion.getColumnModel().getColumn(0).setPreferredWidth(320);
 		tableDiscussion.getColumnModel().getColumn(1).setPreferredWidth(108);
 		tableDiscussion.getColumnModel().getColumn(2).setPreferredWidth(60);
 		tableDiscussion.getColumnModel().getColumn(3).setPreferredWidth(60);
-		tableDiscussion.getColumnModel().getColumn(4).setPreferredWidth(60);
+		tableDiscussion.getColumnModel().getColumn(4).setPreferredWidth(90);
+		tableDiscussion.getColumnModel().getColumn(5).setPreferredWidth(0);
+
+	
+		tableDiscussion.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent mouseEvent) {
+				if(mouseEvent.getClickCount() == 2) {
+					
+					Discussion d = dbdiscussion.getDiscussionFromId(
+							Integer.parseInt(tableDiscussion.getModel().getValueAt(tableDiscussion.getSelectedRow(), 5).toString())).get();
+			new Topic_gui(d, user);
+				}
+			}
+		});
 
 	}
 		
-//		modelDiscussion.addTableModelListener(t ->{
-//			Discussion d = dbdiscussion.getDiscussionFromId(
-//							Integer.parseInt(tableDiscussion.getModel().getValueAt(tableDiscussion.getSelectedRow(), 4).toString())).get();
-//			new Topic_gui(d)
-//	}
+		
+
 
 	public JTable getTableDiscussion() {
 		return tableDiscussion;

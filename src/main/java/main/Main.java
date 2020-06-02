@@ -20,8 +20,8 @@ public class Main {
       System.err.println("Failed to initialize LaF");
       }
 
-BuildAfterGui gui = new BuildAfterGui();
-  //BuildPreGui gui = new BuildPreGui();
+//BuildAfterGui gui = new BuildAfterGui();
+BuildPreGui gui = new BuildPreGui();
 
 gui.start();
     }
