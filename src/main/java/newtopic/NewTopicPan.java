@@ -63,10 +63,12 @@ public class NewTopicPan extends JPanel {
 	 * Creates new form Homepage_gui
 	 */
 
-	// private User actualUser=null;
+	 private User user;
+	 
 	// private JTable table;
 	// public newtopic_gui(User user, JTable table)
-	public NewTopicPan() {
+	public NewTopicPan(final User user) {
+		this.user = user;
 		initComponents();
 		// this.actualUser = user;
 		// this.setVisible(true);
@@ -153,15 +155,15 @@ public class NewTopicPan extends JPanel {
 		notify_checkbox.setText("Notificami se rispondono");
 		topic_panel.add(notify_checkbox, new AbsoluteConstraints(10, 450, -1, -1));
 
-		preview_button.setText("Preview");
-		topic_panel.add(preview_button, new AbsoluteConstraints(500, 450, -1, -1));
+//		preview_button.setText("Preview");
+//		topic_panel.add(preview_button, new AbsoluteConstraints(500, 450, -1, -1));
 		
 		post_button.setText("Posta");
 		post_button.addActionListener(e ->{
-			//if(controllo se i campi(almeno il titolo) non sono vuoti
-			new DBDiscussionImpl().createDiscussion(1,jTextField1.getText(), 
+			if(jTextField1.getText().isEmpty() && jTextField1.getText().isBlank())
+					new DBDiscussionImpl().createDiscussion(user.getId(),jTextField1.getText(), 
 															preview_editorPane.getText(), String.valueOf(category.getSelectedItem()));
-			//aggiorna la table in Homepage
+			//refresh table and close window
 		});
 		topic_panel.add(post_button, new AbsoluteConstraints(610, 450, -1, -1));
 

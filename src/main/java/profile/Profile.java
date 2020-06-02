@@ -5,6 +5,7 @@ import java.awt.Color;
 import javax.swing.JPanel;
 
 import message.MessagePan;
+import notwist.base.User;
 import notwist.database.DBUserImpl;
 import user.Activities;
 import user.Infos;
@@ -15,11 +16,11 @@ public class Profile extends JPanel{
 	/**
      * Creates new Profile Panel
      */
-    public Profile() {
-        initComponents();
+    public Profile(final User user) {
+        initComponents(user);
     }  
  
-    private void initComponents() {
+    private void initComponents(final User user) {
 
         profile_panel = new javax.swing.JPanel();
         profile_panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());   
@@ -28,7 +29,7 @@ public class Profile extends JPanel{
         profile_panel.add(activities_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, -1));
         
 
-        myinfos_panel = new Infos(new DBUserImpl().getUserFromId(1).get());
+        myinfos_panel = new Infos(user);
         profile_panel.add(myinfos_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 0, -1, -1));
 
         message_panel = new MessagePan();

@@ -13,6 +13,7 @@ import org.netbeans.lib.awtextra.AbsoluteConstraints;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
 
 import newtopic.NewTopicPan;
+import notwist.base.User;
 import profile.Profile;
 import util.Header;
 import util.HolderPan;
@@ -23,8 +24,11 @@ public class BuildAfterGui extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private TableDiscussion tableDiscussion;
-	public BuildAfterGui() {
-		this.tableDiscussion = new TableDiscussion();
+	private User user;
+	
+	public BuildAfterGui(final User user) {
+		this.user = user;
+		this.tableDiscussion = new TableDiscussion(user);
 		initComponents(tableDiscussion);
 
 	}
@@ -53,10 +57,10 @@ public class BuildAfterGui extends JFrame {
 		holder_panel = new HolderPan(tableDiscussion);
 		holder_panel.setVisible(true);
 		bodyHolder.add(holder_panel, "homepage_panel");
-		newtopic_panel = new NewTopicPan();
+		newtopic_panel = new NewTopicPan(user);
 		newtopic_panel.setVisible(true);
 		bodyHolder.add(newtopic_panel, "newtopic_panel");
-		profile_panel = new Profile();
+		profile_panel = new Profile(user);
 		profile_panel.setVisible(true);
 		bodyHolder.add(profile_panel, "profile_panel");
 
@@ -120,15 +124,15 @@ public class BuildAfterGui extends JFrame {
 		xy = evt.getY();
 	}
 
-/*	public void start() {
+	public void start() {
 
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				new BuildAfterGui().setVisible(true);
+				setVisible(true);
 			}
 		});
 	}
-*/
+
 	// Variables declaration - do not modify
 	private JPanel bodyHolder;
 	private HolderPan holder_panel;
