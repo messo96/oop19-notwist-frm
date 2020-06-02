@@ -427,7 +427,7 @@ public class Homepage_gui extends javax.swing.JFrame {
 				protected String doInBackground() throws Exception {
 					Random rand = new Random();
 	        		Discussion disc = new DBDiscussionImpl().
-								getDiscussionFromTitle(jTable1.getValueAt(rand.nextInt(jTable1.getRowCount()), 0).toString()).get();
+								getDiscussionFromId(Integer.parseInt(jTable1.getValueAt(rand.nextInt(jTable1.getRowCount()), 0).toString())).get();
 	        		new Topic_gui(disc,actualUser).start();
 	        		loader.end();	
 	        	return "";
@@ -490,7 +490,7 @@ public class Homepage_gui extends javax.swing.JFrame {
 
 					@Override
 					protected String doInBackground() throws Exception {
-						Discussion disc = new DBDiscussionImpl().getDiscussionFromTitle(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString()).get();
+						Discussion disc = new DBDiscussionImpl().getDiscussionFromId(Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 4).toString())).get();
 						new Topic_gui(disc,actualUser).start();
 						jTable1.setFocusable(false);
 						jTable1.setFocusable(true);

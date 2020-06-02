@@ -49,8 +49,8 @@ public class ButtonPan extends JPanel{
 	      					Random rand = new Random();
 	      					JTable table = tableDiscussion.getTableDiscussion();
 	      	        		new DBDiscussionImpl().
-	      								getDiscussionFromTitle(table.
-	      													getValueAt(rand.nextInt(table.getRowCount()), 0).toString()).get();
+	      								getDiscussionFromId(Integer.parseInt(table.
+	      													getValueAt(rand.nextInt(table.getRowCount()), 4).toString())).get();
 	      	        		//A TODO
 	      	        	loader.end();	
 	      	        	return "";

@@ -111,15 +111,14 @@ public class DBDiscussionImpl extends DBManagerImpl implements DBDiscussion {
 	}
 
 	@Override
-	public Optional<Discussion> getDiscussionFromTitle(String title) {
+	public Optional<Discussion> getDiscussionFromId(final Integer idDiscussion) {
 		Discussion discussion = null;
 
 		try {
-			query = "select * from DISCUSSION";
+			query = "select * from DISCUSSION where idDiscussion = " + idDiscussion;
 			rs = open().executeQuery(query);
 
-			while (rs.next()) {
-				if (rs.getString("title").contains(title))
+			if (rs.next()) {
 					discussion = new DiscussionImpl(rs.getInt("idDiscussion"), rs.getInt("idUser"),
 							rs.getString("title"), rs.getString("description"),
 							new DBCategoryImpl().getCategoryById(rs.getInt("idMacro")), rs.getDate("data"));
