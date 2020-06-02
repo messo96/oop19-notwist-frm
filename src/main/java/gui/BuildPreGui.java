@@ -3,10 +3,15 @@ package gui;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.awt.image.BufferedImage;
+import java.net.URL;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -37,7 +42,10 @@ public class BuildPreGui extends JFrame {
         setUndecorated(true);
         setResizable(false);
         getContentPane().setLayout(new AbsoluteLayout());
+   
 
+        Image icon = Toolkit.getDefaultToolkit().getImage("img/icon.jpg");    
+        setIconImage(icon);   
         //Get upper panel and add it to the main frame
         upper_panel = new UpperPan();
         upper_panel.setVisible(true);
@@ -115,6 +123,7 @@ public class BuildPreGui extends JFrame {
     	EventQueue.invokeLater(new Runnable() {
             public void run() {
             	  new BuildPreGui().setVisible(true);
+            	  
             }
         });
     }

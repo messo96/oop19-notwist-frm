@@ -1,0 +1,28 @@
+<span style= background-color:6495ED>In questa informativa ti forniamo tutte le informazioni riguardo al modo in cui acquisiamo e trattiamo i tuoi dati personali quando utilizzi la nostra applicazione.</span>
+<p>I dati forniti a Notwist saranno trattati in conformità a quanto previsto dalla <strong> vigente normativa sulla privacy </strong> che trova il suo fondamento nel Regolamento UE 2016/679 <i>(GDPR)</i>.</p>
+
+<p>La presente Informativa ha lo scopo di informare l'utente circa le modalità di trattamento dei dati personali che lo riguardano in modo il più possibile semplice e dettagliato. </p>
+
+<h2>Dati oggetto di trattamento</h2>
+<font style= background-color:FFFACD>Ti spieghiamo quali sono i dati che possono essere oggetto di trattamento navigando le pagine di questo sito web.</font>
+
+<h3>Dati conferiti in modo volontario</h3>
+<p>Al fine dell'accesso a determinati servizi o prestazioni potrebbe essere richiesta, da parte dell'utente, la compilazione di moduli (come, ad esempio, moduli di contatto o moduli di registrazione) che prevedono la comunicazione di dati personali (ad esempio l'indirizzo di posta elettronica). L'acquisizione dei dati, ove richiesta, è il presupposto indispensabile per accedere ai servizi offerti dalla nostra applicazione. Sono intesi come "dati conferiti in modo volontario" anche quelli che vengono inviati via posta elettronica (e-mail) per contattare un qualsiasi addetto del nostro sito.
+
+<h2>Finalità del trattamento</h2>
+<span style= background-color:FFFACD>Ti spieghiamo perchè acquisiamo e trattiamo i tuoi dati in relazione a specifiche finalità.</span>
+
+<h3>Commenti ai contenuti</h3>
+<p>Su talune viste dell'applicazione è offerta la possibilità, agli utenti, di scrivere commenti ai contenuti pubblicati.</p>
+
+<h3>Moduli di contatto / Registrazione</h3>
+<p>I dati personali forniti volontariamente all'interno degli appositi moduli vengono trattati:</p>
+<ul>
+<li>per poter fornire i servizi richiesti (come, ad esempio, l'iscrizione al Forum;</li>
+<li>per poter erogare i servizi base del Forum, ad esempio la ricerca delle discussioni o la partecipazione ad esse;</li>
+<li>per poter elaborare specifiche richieste degli utenti in modo automatico e/o manuale, ad esempio per rispondere alla messaggistica interna;</li>
+</ul>
+<h2>Base giuridica del trattamento</h2>
+<span style= background-color:FFFACD>Ti spieghiamo il fondamento giuridico su cui si basano i vari trattamenti di dati effettuati dal sito e ti spieghiamo quali sono i requisiti di validità del tuo eventuale consenso al trattamento dei tuoi dati personali.</span>
+
+<p>In tutte le circostanze, il trattamento si basa sul consenso dell'interessato che è libero di prestarlo o meno. Il consenso dell'interessato è indispensabile per le finalità di base del Forum come, ad esempio, l'accesso alla piattaforma, la possibilità di creare una discussione e commentare la propria/altrui discussione.</p>
