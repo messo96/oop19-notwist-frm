@@ -14,6 +14,7 @@ import org.netbeans.lib.awtextra.AbsoluteLayout;
 
 import newtopic.NewTopicPan;
 import profile.Profile;
+import topic.Topic;
 import util.Header;
 import util.HolderPan;
 import util.TableDiscussion;
@@ -59,6 +60,9 @@ public class BuildAfterGui extends JFrame {
 		profile_panel = new Profile();
 		profile_panel.setVisible(true);
 		bodyHolder.add(profile_panel, "profile_panel");
+		topic_panel = new Topic();
+		topic_panel.setVisible(true);
+		bodyHolder.add(topic_panel, "topic_panel");
 
 
 		// Adding the card!
@@ -135,6 +139,7 @@ public class BuildAfterGui extends JFrame {
 	private Header header_panel;
 	private NewTopicPan newtopic_panel;
 	private Profile profile_panel;
+	private Topic topic_panel;
 
 	// End of variables declaration
 }

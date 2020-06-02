@@ -11,7 +11,7 @@ import javax.swing.SwingWorker;
 
 import main.Loader;
 import notwist.database.DBDiscussionImpl;
-import topic_gui.Topic_gui;
+import topic.Topic;
 
 public class ButtonPan extends JPanel{
 

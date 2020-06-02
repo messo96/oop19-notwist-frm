@@ -47,7 +47,7 @@ public class Header extends JPanel {
 		header_panel = new JPanel();
 		jSeparator1 = new JSeparator();
 		homepage_button = new JLabel();
-		category_filter = new JComboBox<>(); // Combobox per le categorie
+		category_filter = new JButton(); // Combobox per le categorie
 		profile_icon = new JLabel(); // TBA
 		bell_icon = new JLabel(); // TBA
 		new_discussion = new JButton();
@@ -64,9 +64,14 @@ public class Header extends JPanel {
         });
 
 		category_filter.setFont(new Font("Tahoma", 0, 14)); // NOI18N
-		category_filter.setModel(new DefaultComboBoxModel<>(
-				new String[] { "Generale", "Animali", "Film", "Musica", "Cose", "Altre cose", "Cose non cose" }));
+		category_filter.setText("Temporanea tabella");
 
+		category_filter.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent evt) {
+				category_filterMouseClicked(evt);
+			}
+		});
+		
 		profile_icon.setFont(new Font("Tahoma", 0, 14)); // NOI18N
 		profile_icon.setText("P");
 		profile_icon.setToolTipText("Futura icona profilo");
@@ -169,6 +174,10 @@ public class Header extends JPanel {
 	private void profile_iconMouseClicked(MouseEvent evt) {
 		card.show(parent, "profile_panel");
 	}
+
+	private void category_filterMouseClicked(MouseEvent evt) {
+		card.show(parent, "topic_panel");
+	}
 	/*
 	 * private void search_buttonActionPerformed(java.awt.event.ActionEvent evt)
 	 * {//GEN-FIRST:event_search_buttonActionPerformed //Button Search
@@ -179,7 +188,7 @@ public class Header extends JPanel {
 	 */
 
 	private javax.swing.JLabel bell_icon;
-	private javax.swing.JComboBox<String> category_filter;
+	private javax.swing.JButton category_filter;
 	private javax.swing.JPanel header_panel;
 	private javax.swing.JLabel homepage_button;
 	private javax.swing.JSeparator jSeparator1;
