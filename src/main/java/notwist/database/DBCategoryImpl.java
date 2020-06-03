@@ -55,29 +55,19 @@ public class DBCategoryImpl extends DBManagerImpl implements DBCategory {
 	 * 
 	 * @return
 	 */
-	public Optional<List<Category>> getNameOfAllTheCategories() {
-
-		List<Category> list = new ArrayList<>();
-		query = "Select * from TOPIC";
-		try {
-			rs = open().executeQuery(query);
-			while (rs.next()) {
-				list.add(new CategoryImpl(rs.getInt("idMacro"), rs.getString("title")));
-			}
-			return Optional.of(list);
-		} catch (Exception e) {
-			System.out.println("Error String[] categories");
-		} finally {
-			close();
-		}
-		return Optional.of(list);
-	}
+	
 
 	public Category getCategoryByName(final String name) {
-		return this.getNameOfAllTheCategories().get().stream().filter(c -> c.getName().equals(name)).findFirst().get();
+		return this.getCategories().get().stream().filter(c -> c.getName().equals(name)).findFirst().get();
 	}
 
 	public Category getCategoryById(final Integer id) {
-		return this.getNameOfAllTheCategories().get().stream().filter(c -> c.getId() == id).findFirst().get();
+		return this.getCategories().get().stream().filter(c -> c.getId() == id).findFirst().get();
+	}
+
+	@Override
+	public boolean addCategory(String newCat) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

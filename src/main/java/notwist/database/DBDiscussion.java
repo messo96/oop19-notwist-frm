@@ -51,6 +51,8 @@ public interface DBDiscussion {
 
 	/**
 	 * 
+	 * @param idDiscussion	of the discussion to search
+	 * @return	Optional of Discussion, empty otherwise
 	 */
 	public Optional<Discussion> getDiscussionFromId(final Integer idDiscussion);
 

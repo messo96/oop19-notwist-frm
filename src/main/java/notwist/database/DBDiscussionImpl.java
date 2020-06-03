@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.swing.JOptionPane;
+
 import notwist.base.Category;
 import notwist.base.Discussion;
 import notwist.base.DiscussionImpl;
@@ -64,6 +66,7 @@ public class DBDiscussionImpl extends DBManagerImpl implements DBDiscussion {
 			prepared.executeUpdate();
 			System.out.println("Discussion create successfully( " + title + " | "
 					+ new DBUserImpl().getUserFromId(idUser).get() + " )");
+			JOptionPane.showMessageDialog(null, "Discussion create successfully");
 			return true;
 		} catch (Exception e) {
 			System.out.println("\nError while adding new discussion " + e);

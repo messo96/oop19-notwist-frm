@@ -12,12 +12,8 @@ import java.util.Optional;
 import javax.swing.JOptionPane;
 
 import notwist.base.Comments;
-import notwist.base.CommentsImplements;
-import notwist.base.Discussion;
-import notwist.base.DiscussionImpl;
-import notwist.base.User;
 
-public class DBCommentsImpl extends DBManagerImpl {
+public class DBCommentsImpl extends DBManagerImpl implements DBComments{
 
 	private ResultSet rs = null;
 	private String query;
@@ -31,19 +27,19 @@ public class DBCommentsImpl extends DBManagerImpl {
 			rs = open().executeQuery(query);
 
 			while (rs.next()) {
-//	    	list.add(new CommentsImplements())
+				// list.add(new CommentsImplements())
 			}
 		} catch (SQLException e) {
-	    	 System.out.println("Error while download comments\n"+e);
+			System.out.println("Error while download comments\n" + e);
 		} finally {
 			close();
 		}
 		return Optional.of(list);
 	}
-	
+
 	public void write(final Integer idDiscussion, final Integer idUser, final String comment) {
 		try {
-			
+
 			query = "insert into COMMENT (idUser, idDiscussion, commento, data) values (?,?,?,?)";
 			open();
 			PreparedStatement prepared = super.getConn().prepareStatement(query);
@@ -53,7 +49,7 @@ public class DBCommentsImpl extends DBManagerImpl {
 			prepared.setDate(4, java.sql.Date.valueOf(sdf.format(new Date())));
 
 			prepared.executeUpdate();
-			JOptionPane.showMessageDialog(null, "Comment uploaded successfully( ");
+			JOptionPane.showMessageDialog(null, "Comment uploaded successfully\nWell done!");
 		} catch (Exception e) {
 			System.out.println("\nError while adding new comment in discussion " + e);
 		} finally {
