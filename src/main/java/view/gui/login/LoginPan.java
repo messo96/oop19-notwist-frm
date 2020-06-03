@@ -47,8 +47,8 @@ import model.base.User;
 import model.database.DBUser;
 import model.database.DBUserImpl;
 import view.gui.BuildAfterGui;
-import view.gui.BuildPreGui;
-public class LoginPan extends JPanel  {
+
+public class LoginPan extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private DBUser user = new DBUserImpl();
 	public LoginPan() {

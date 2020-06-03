@@ -11,7 +11,7 @@ import org.netbeans.lib.awtextra.AbsoluteLayout;
 
 import controller.table.CategoryPan;
 import controller.table.HottestPan;
-import controller.table.Nofilter;
+import controller.table.Homepage;
 import controller.table.RandomPan;
 import controller.table.TableDiscussion;
 
@@ -29,7 +29,7 @@ public class HolderPan extends JPanel {
     	holder_panel.setLayout(new AbsoluteLayout());
     	
         //Get Table Pan and add it
-        table_panel = new Nofilter(tableDiscussion);
+        table_panel = new Homepage(tableDiscussion);
         table_panel.setVisible(true);
         holder_panel.add(table_panel, new AbsoluteConstraints(0, 21, -1, -1));
       
@@ -57,7 +57,7 @@ public class HolderPan extends JPanel {
     }
     // Variables declaration - do not modify
 
-    private Nofilter table_panel;
+    private Homepage table_panel;
     private HottestPan hottest_panel;
     private CategoryPan category_panel;
     private JPanel holder_panel;

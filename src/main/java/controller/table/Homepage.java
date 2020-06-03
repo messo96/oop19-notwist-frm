@@ -4,11 +4,11 @@ package controller.table;
 import javax.swing.JPanel;
 
 
-public class Nofilter extends JPanel{
+public class Homepage extends JPanel{
 
 	private static final long serialVersionUID = 1L;
 	
-	public Nofilter(TableDiscussion tableDiscussion) {
+	public Homepage(TableDiscussion tableDiscussion) {
 		drawComp(tableDiscussion);
 	}
 	

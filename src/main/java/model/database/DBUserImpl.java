@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.util.Optional;
 
 import javax.swing.JOptionPane;
-
 import model.base.User;
 
 /**

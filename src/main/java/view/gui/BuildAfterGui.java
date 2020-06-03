@@ -12,12 +12,12 @@ import javax.swing.JPanel;
 import org.netbeans.lib.awtextra.AbsoluteConstraints;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
 
+import controller.newtopic.NewTopicPan;
 import controller.table.Header;
 import controller.table.TableDiscussion;
 import model.base.User;
 import topic.Topic;
 import util.UpperPan;
-import view.newtopic.NewTopicPan;
 import view.profile.Profile;
 
 public class BuildAfterGui extends JFrame {

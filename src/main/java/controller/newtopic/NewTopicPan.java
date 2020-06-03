@@ -3,20 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view.newtopic;
+package controller.newtopic;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Iterator;
-import java.util.List;
 
-import javax.swing.BorderFactory;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -26,23 +20,16 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
-import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.border.TitledBorder;
-import javax.swing.table.DefaultTableModel;
 
-import org.kefirsf.bb.BBProcessorFactory;
-import org.kefirsf.bb.ConfigurationFactory;
-import org.kefirsf.bb.TextProcessor;
 import org.netbeans.lib.awtextra.AbsoluteConstraints;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
 
 import model.base.Category;
-import model.base.Discussion;
-import model.base.DiscussionImpl;
+
 import model.base.User;
-import model.database.DBCategory;
+
 import model.database.DBCategoryImpl;
 import model.database.DBDiscussionImpl;
 import util.RulesPan;
@@ -160,7 +147,7 @@ public class NewTopicPan extends JPanel {
 
 		post_button.setText("Posta");
 		post_button.addActionListener(e -> {
-			if (jTextField1.getText().isEmpty() && jTextField1.getText().isEmpty())
+			if (jTextField1.getText().isEmpty() && description_textArea.getText().isEmpty())
 				JOptionPane.showMessageDialog(null, "You have to write something both in title and description");
 			else
 				new DBDiscussionImpl().createDiscussion(user.getId(), jTextField1.getText(),

@@ -1,12 +1,10 @@
 package view.profile;
 
-import java.awt.Color;
 
 import javax.swing.JPanel;
 
 import message.MessagePan;
 import model.base.User;
-import model.database.DBUserImpl;
 import user.Activities;
 import user.Infos;
 
