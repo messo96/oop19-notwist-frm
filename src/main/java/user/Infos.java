@@ -2,7 +2,7 @@ package user;
 
 import javax.swing.JPanel;
 
-import notwist.base.User;
+import model.base.User;
 
 public class Infos extends JPanel{
 	

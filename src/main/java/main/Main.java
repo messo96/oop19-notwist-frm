@@ -1,7 +1,8 @@
 package main;
 
 import com.formdev.flatlaf.FlatLightLaf;
-import gui.*;
+import view.gui.BuildPreGui;
+
 import javax.swing.UIManager;
 
 /**

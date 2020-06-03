@@ -9,9 +9,9 @@ import java.text.SimpleDateFormat;
 
 import javax.swing.JEditorPane;
 
-import notwist.base.Discussion;
-import notwist.base.User;
-import notwist.database.DBCommentsImpl;
+import model.base.Discussion;
+import model.base.User;
+import model.database.DBCommentsImpl;
 
 /**
  *

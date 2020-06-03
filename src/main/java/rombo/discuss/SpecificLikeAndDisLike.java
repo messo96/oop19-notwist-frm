@@ -2,7 +2,7 @@ package rombo.discuss;
 
 import java.util.Optional;
 
-import notwist.base.CommentsImplements;
+import model.base.CommentsImplements;
 
 public interface SpecificLikeAndDisLike extends LikeAndDislike {
 	

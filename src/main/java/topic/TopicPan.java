@@ -3,10 +3,8 @@ package topic;
 import javax.swing.JEditorPane;
 import javax.swing.JPanel;
 
-import notwist.base.Discussion;
-import notwist.base.User;
-import notwist.base.Discussion;
-import notwist.base.User;
+import model.base.Discussion;
+import model.base.User;
 
 public class TopicPan extends JPanel{
 	private static final long serialVersionUID = 1L;

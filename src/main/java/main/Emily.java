@@ -1,6 +1,8 @@
 package main;
 
-import notwist.base.*;
+import model.base.Discussion;
+import model.base.User;
+
 
 public class Emily {
 

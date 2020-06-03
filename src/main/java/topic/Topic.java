@@ -8,8 +8,8 @@ package topic;
 import javax.swing.JEditorPane;
 import javax.swing.JPanel;
 
-import notwist.base.Discussion;
-import notwist.base.User;
+import model.base.Discussion;
+import model.base.User;
 
 /**
  *
