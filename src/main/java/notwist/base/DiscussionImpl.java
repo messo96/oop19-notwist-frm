@@ -3,7 +3,8 @@ package notwist.base;
 import java.util.Date;
 
 public class DiscussionImpl implements Discussion{
-	private int idUser;
+	private Integer id;
+	private Integer idUser;
 	private String title;
 	private String description;
 	private Category category;
@@ -11,13 +12,15 @@ public class DiscussionImpl implements Discussion{
 	//maybe add List of comments ? Ask rombo for comments class
 	
 
-	public DiscussionImpl(Integer id,String title, String description, Category category, Date data) {
-		this.idUser = id;
+	public DiscussionImpl(Integer id, Integer idUser,String title, String description, Category category, Date data) {
+		this.id = id;
+		this.idUser = idUser;
 		this.title = title;
 		this.description = description;
 		this.category = category;
 		this.data = data;
 	}
+	
 	
 	public String getTitle() {
 		return title;
@@ -28,6 +31,10 @@ public class DiscussionImpl implements Discussion{
 	
 	public int getIdUser() {
 		return idUser;
+	}
+	
+	public int getIdDiscussion() {
+		return id;
 	}
 	
 	public Category getCategory() {
