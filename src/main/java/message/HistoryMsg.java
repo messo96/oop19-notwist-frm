@@ -24,7 +24,20 @@ public class HistoryMsg extends JPanel{
         history_panel = new JPanel(); //incoming msgs
 
         history_panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, new Color(0, 0, 0)), "My Messages", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, new Font("Tahoma", 0, 14))); // NOI18N
+        int i =1;
+        if (i==1) {
+            GroupLayout messages_panelLayout = new GroupLayout(history_panel);
+            history_panel.setLayout(messages_panelLayout);
+            messages_panelLayout.setHorizontalGroup(
+                messages_panelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addGap(0, 350, Short.MAX_VALUE)
+            );
+            messages_panelLayout.setVerticalGroup(
+                messages_panelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addGap(0, 195, Short.MAX_VALUE)
+            );
 
+        }else {
         GroupLayout messages_panelLayout = new GroupLayout(history_panel);
         history_panel.setLayout(messages_panelLayout);
         messages_panelLayout.setHorizontalGroup(
@@ -35,7 +48,7 @@ public class HistoryMsg extends JPanel{
             messages_panelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGap(0, 195, Short.MAX_VALUE)
         );
-
+        }
         add(history_panel);
     }
     
