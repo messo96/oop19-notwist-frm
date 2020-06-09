@@ -1,11 +1,13 @@
 package view.gui;
 
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -66,15 +68,15 @@ public class BuildAfterGui extends JFrame {
 		topic_panel = new Topic();
 		topic_panel.setVisible(true);
 		bodyHolder.add(topic_panel, "topic_panel");
-
+		bodyHolder.setBorder(BorderFactory.createMatteBorder(3, 0, 0, 0, Color.BLACK));
 
 		// Adding the card!
-		getContentPane().add(bodyHolder, new AbsoluteConstraints(0, 110, 1080, 490));
+		getContentPane().add(bodyHolder, new AbsoluteConstraints(0, 120, 1080, 490));
 
 		header_panel = new Header(tableDiscussion, bodyHolder);
 		header_panel.setVisible(true);
 
-		getContentPane().add(header_panel, new AbsoluteConstraints(0, 20, 1080, 90));
+		getContentPane().add(header_panel, new AbsoluteConstraints(0, 20, 1080, -1));
 
 
 

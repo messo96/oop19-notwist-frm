@@ -1,26 +1,25 @@
 package controller.table;
 
 import java.awt.CardLayout;
-import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Insets;
-import java.awt.LayoutManager;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.DefaultComboBoxModel;
+
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
+
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
+import javax.swing.SwingConstants;
 
 import main.Loader;
 import model.database.DBDiscussion;
@@ -44,7 +43,6 @@ public class Header extends JPanel {
 	private void drawComp(TableDiscussion tableDiscussion) {
 
 		header_panel = new JPanel();
-		jSeparator1 = new JSeparator();
 		homepage_button = new JLabel();
 		category_filter = new JButton(); // Combobox per le categorie
 		profile_icon = new JLabel(); // TBA
@@ -55,6 +53,9 @@ public class Header extends JPanel {
 
 		homepage_button.setFont(new Font("Bauhaus 93", 0, 18)); // NOI18N
 		homepage_button.setText("NOTWIST");
+	//	homepage_button.setIcon(new ImageIcon("img/logo.png"));
+	//	homepage_button.setHorizontalAlignment(SwingConstants.CENTER);
+	//	homepage_button.setHorizontalTextPosition(SwingConstants.CENTER);
 		
         homepage_button.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
@@ -70,7 +71,7 @@ public class Header extends JPanel {
 				category_filterMouseClicked(evt);
 			}
 		});
-		
+
 		profile_icon.setFont(new Font("Tahoma", 0, 14)); // NOI18N
 		profile_icon.setText("P");
 		profile_icon.setToolTipText("Futura icona profilo");
@@ -117,49 +118,49 @@ public class Header extends JPanel {
 			else
 				tableDiscussion.refreshTableDiscussion(search_field.getText());
 		});
-
-		GroupLayout header_panelLayout = new GroupLayout(header_panel);
-		header_panel.setLayout(header_panelLayout);
-		header_panelLayout.setHorizontalGroup(header_panelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-				.addGroup(header_panelLayout.createSequentialGroup().addGap(0, 0, Short.MAX_VALUE)
-						.addComponent(jSeparator1, GroupLayout.PREFERRED_SIZE, 1080, GroupLayout.PREFERRED_SIZE))
-				.addGroup(header_panelLayout.createSequentialGroup().addContainerGap().addComponent(homepage_button)
-						.addGap(30, 30, 30)
-						.addComponent(category_filter, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-								GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE,
-								Short.MAX_VALUE)
-						.addComponent(search_field, GroupLayout.PREFERRED_SIZE, 218, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-						.addComponent(search_button, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-								GroupLayout.PREFERRED_SIZE)
-						.addGap(39, 39, 39).addComponent(new_discussion).addGap(27, 27, 27)
-						.addComponent(bell_icon, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
-						.addGap(18, 18, 18)
-						.addComponent(profile_icon, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap()));
-		header_panelLayout.setVerticalGroup(header_panelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-				.addGroup(GroupLayout.Alignment.TRAILING,
-						header_panelLayout.createSequentialGroup().addGap(45, 45, 45)
-								.addGroup(header_panelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-										.addComponent(homepage_button)
-										.addComponent(category_filter, GroupLayout.PREFERRED_SIZE,
-												GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addComponent(profile_icon).addComponent(bell_icon)
-										.addComponent(search_field, GroupLayout.PREFERRED_SIZE,
-												GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addComponent(search_button, GroupLayout.PREFERRED_SIZE, 29,
-												GroupLayout.PREFERRED_SIZE)
-										.addComponent(new_discussion, GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE))
-								.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED).addComponent(jSeparator1,
-										GroupLayout.PREFERRED_SIZE, 10, GroupLayout.PREFERRED_SIZE)));
+ 
+        javax.swing.GroupLayout header_panelLayout = new javax.swing.GroupLayout(header_panel);
+        header_panel.setLayout(header_panelLayout);
+        header_panelLayout.setHorizontalGroup(
+            header_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(header_panelLayout.createSequentialGroup()
+            		 .addGap(20, 20, 20)
+                .addComponent(homepage_button)
+                .addGap(40, 40, 40)
+                .addComponent(category_filter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 180, Short.MAX_VALUE)
+                .addComponent(search_field, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(search_button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addComponent(new_discussion)
+                .addGap(27, 27, 27)
+                .addComponent(bell_icon, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(profile_icon, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        header_panelLayout.setVerticalGroup(
+            header_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(header_panelLayout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addGroup(header_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(new_discussion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(header_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(category_filter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(profile_icon)
+                        .addComponent(bell_icon)
+                        .addComponent(search_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(search_button, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(homepage_button)))
+                .addGap(16, 16, 16))
+        );
 
 		  profile_icon.addMouseListener(new MouseAdapter() {
 	            public void mouseClicked(MouseEvent evt) {
 	                profile_iconMouseClicked(evt);
 	            }
 	        });
-		  
 		add(header_panel);
 
 	}
@@ -186,13 +187,12 @@ public class Header extends JPanel {
 	 * jTable1.setModel(this.loadDiscussion(search_field.getText())); }); }
 	 */
 
-	private javax.swing.JLabel bell_icon;
-	private javax.swing.JButton category_filter;
-	private javax.swing.JPanel header_panel;
-	private javax.swing.JLabel homepage_button;
-	private javax.swing.JSeparator jSeparator1;
-	private javax.swing.JButton new_discussion;
-	private javax.swing.JLabel profile_icon;
-	private javax.swing.JButton search_button;
-	private javax.swing.JTextField search_field;
+	private JLabel bell_icon;
+	private JButton category_filter;
+	private JPanel header_panel;
+	private JLabel homepage_button;
+	private JButton new_discussion;
+	private JLabel profile_icon;
+	private JButton search_button;
+	private JTextField search_field;
 }
