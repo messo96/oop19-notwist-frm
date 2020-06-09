@@ -12,6 +12,7 @@ import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -22,11 +23,22 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
+import model.base.User;
+import model.database.DBStrike;
+import model.database.DBStrikeImpl;
+import model.database.DBUser;
+import model.database.DBUserImpl;
+
 public class StrikePan extends JPanel{
 	/*
 	 * Create panel for the strike tab
 	 */
 	private static final long serialVersionUID = 1L;
+	private DBUser dbuser = new DBUserImpl();
+	private DBStrike dbstrike = new DBStrikeImpl();
+	private User user;
+	private final Integer MAX_STRIKE = 3; 
+	
 	public StrikePan() {
 		draw();
 	}
@@ -57,13 +69,25 @@ public class StrikePan extends JPanel{
 
         submitstrike.setFont(new  Font("Tahoma", 0, 14)); // NOI18N
         submitstrike.setText("Submit");
+        submitstrike.addActionListener(e ->{
+        	dbstrike.setStrike(user.getId(), Integer.parseInt(nstrike.getText()));
+        	refreshTable();
+        });
 
         plus.setText("+");
         plus.setBorder( BorderFactory.createLineBorder(new  Color(0, 0, 0)));
-
+        plus.addActionListener(e ->{
+        	Integer strike = Integer.parseInt(nstrike.getText());
+        	if(strike < MAX_STRIKE)
+        		nstrike.setText(String.valueOf(strike + 1));
+        });
         minus.setText("-");
         minus.setBorder( BorderFactory.createLineBorder(new  Color(0, 0, 0)));
-
+        minus.addActionListener(e ->{
+        	Integer strike = Integer.parseInt(nstrike.getText());
+        	if(strike > 0)
+        		nstrike.setText(String.valueOf(strike - 1));
+        });
          GroupLayout strikedialogLayout = new  GroupLayout(strikedialog.getContentPane());
         strikedialog.getContentPane().setLayout(strikedialogLayout);
         strikedialogLayout.setHorizontalGroup(
@@ -98,39 +122,25 @@ public class StrikePan extends JPanel{
         
         strikes_panel.setBorder( BorderFactory.createTitledBorder( BorderFactory.createMatteBorder(2, 2, 2, 2, new  Color(0, 0, 0)), "Strikes", TitledBorder.DEFAULT_JUSTIFICATION,  TitledBorder.DEFAULT_POSITION, new Font("Tahoma", 0, 14))); // NOI18N
 
-        strikes_table.setModel(new  DefaultTableModel(
-            new Object [][] {
-                {"nome", "n"}
-   
-            },
-            new String [] {
-                "User", "Strike"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Integer.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        model_strikes = new DefaultTableModel(new Object[] {"ID", "Username", "Strikes"},0);
+        strikes_table.setModel(model_strikes);
+        
         jScrollPane4.setViewportView(strikes_table);
         if (strikes_table.getColumnModel().getColumnCount() > 0) {
             strikes_table.getColumnModel().getColumn(0).setResizable(false);
             strikes_table.getColumnModel().getColumn(1).setResizable(false);
+            strikes_table.getColumnModel().getColumn(2).setResizable(false);
+
         }
-        strikes_table.setEnabled(false);
+        strikes_table.setEnabled(true);
+        strikes_table.setFocusable(true);
         strikes_table.setOpaque(false);
-        strikes_table.getColumnModel().getColumn(0).setPreferredWidth(95);
-        strikes_table.getColumnModel().getColumn(1).setPreferredWidth(5);
+        strikes_table.getColumnModel().getColumn(0).setPreferredWidth(5);
+        strikes_table.getColumnModel().getColumn(1).setPreferredWidth(90);
+        strikes_table.getColumnModel().getColumn(2).setPreferredWidth(5);
+
+        
+        refreshTable();
         DefaultTableCellRenderer center = new DefaultTableCellRenderer();
         center.setHorizontalAlignment(JLabel.CENTER);
         strikes_table.getColumnModel().getColumn(1).setCellRenderer(center);
@@ -164,17 +174,32 @@ public class StrikePan extends JPanel{
         add(strikes_panel);
 	}
 	
+	private void refreshTable() {
+		model_strikes.getDataVector().removeAllElements();
+		for(User u : dbuser.getAllUsers())
+			model_strikes.addRow(new Object[] {u.getId(), u.getUsername(), dbstrike.getStrikes(u.getId())});
+		strikes_table.setModel(model_strikes);
+		strikes_table.revalidate();
+	}
+	
 	  private void new_strikeMouseClicked(MouseEvent evt) {
-		  
-          try {
-        	  strikedialog.getContentPane();         
-        	  strikedialog.setSize(400, 350);
-        	  strikedialog.pack();
-        	  strikedialog.setLocationRelativeTo(getParent()); 
-        	  strikedialog.setVisible(true);
-          } catch (Exception ex) {
-        	  ex.printStackTrace();
-          }
+		  if(strikes_table.getSelectionModel().isSelectionEmpty())
+				  JOptionPane.showMessageDialog(null, "You have to select a row in the table before");
+		  else {
+			  user = dbuser.getUserFromId(Integer.parseInt(strikes_table.getModel().getValueAt(strikes_table.getSelectedRow(), 0).toString())).get();
+			  usernamestrikable.setText(user.getUsername());
+			  nstrike.setText(dbstrike.getStrikes(user.getId()).toString());
+			  try {
+	        	  strikedialog.getContentPane();         
+	        	  strikedialog.setSize(400, 350);
+	        	  strikedialog.pack();
+	        	  strikedialog.setLocationRelativeTo(getParent()); 
+	        	  strikedialog.setVisible(true);
+	          } catch (Exception ex) {
+	        	  ex.printStackTrace();
+	          }
+		  }
+          
 	  }
 	  
 	    private  JScrollPane jScrollPane4;
@@ -187,4 +212,5 @@ public class StrikePan extends JPanel{
 	    private  JTable strikes_table;
 	    private  JButton submitstrike;
 	    private  JTextField usernamestrikable;
+	    private DefaultTableModel model_strikes;
 }

@@ -25,8 +25,7 @@ public class Profile extends JPanel{
     private void initComponents(final User user) {
 
     	//If user is a mod
-    	int i=1;
-       if (i==1) {
+    	if(user.isModerator()) {
     	   
     	   	profile_panel = new JPanel();
             profile_panel.setLayout(new AbsoluteLayout());   
@@ -38,7 +37,7 @@ public class Profile extends JPanel{
             myinfos_panel = new Infos(user);
             profile_panel.add(myinfos_panel, new  AbsoluteConstraints(730, 0, -1, -1));
 
-            message_panel = new MessagePan();
+            message_panel = new MessagePan(user);
             profile_panel.add(message_panel, new  AbsoluteConstraints(10, 150, -1, -1)); 	   
     	   
             strike_panel = new StrikePan();
@@ -60,7 +59,7 @@ public class Profile extends JPanel{
         myinfos_panel = new Infos(user);
         profile_panel.add(myinfos_panel, new  AbsoluteConstraints(730, 0, -1, -1));
 
-        message_panel = new MessagePan();
+        message_panel = new MessagePan(user);
         profile_panel.add(message_panel, new  AbsoluteConstraints(10, 230, -1, -1));
         
         add(profile_panel);

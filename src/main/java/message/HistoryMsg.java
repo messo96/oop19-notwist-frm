@@ -8,6 +8,8 @@ import javax.swing.GroupLayout;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
+import model.base.User;
+
 public class HistoryMsg extends JPanel{
 
 	private static final long serialVersionUID = 1L;
@@ -15,17 +17,16 @@ public class HistoryMsg extends JPanel{
 	/**
      * Creates a space to manage the incoming/sent msgs.
      */
-    public HistoryMsg() {
-        initComponents();
+    public HistoryMsg(final User user) {
+        initComponents(user);
     }
 
-    private void initComponents() {
+    private void initComponents(final User user) {
     	
         history_panel = new JPanel(); //incoming msgs
 
         history_panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, new Color(0, 0, 0)), "My Messages", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, new Font("Tahoma", 0, 14))); // NOI18N
-        int i =1;
-        if (i==1) {
+        if(user.isModerator()) {
             GroupLayout messages_panelLayout = new GroupLayout(history_panel);
             history_panel.setLayout(messages_panelLayout);
             messages_panelLayout.setHorizontalGroup(

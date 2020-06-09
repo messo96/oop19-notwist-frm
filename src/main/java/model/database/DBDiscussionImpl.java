@@ -66,7 +66,6 @@ public class DBDiscussionImpl extends DBManagerImpl implements DBDiscussion {
 			prepared.executeUpdate();
 			System.out.println("Discussion create successfully( " + title + " | "
 					+ new DBUserImpl().getUserFromId(idUser).get() + " )");
-			JOptionPane.showMessageDialog(null, "Discussion create successfully");
 			return true;
 		} catch (Exception e) {
 			System.out.println("\nError while adding new discussion " + e);

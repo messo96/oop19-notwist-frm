@@ -2,6 +2,8 @@ package model.database;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
 
 import javax.swing.JOptionPane;
@@ -108,6 +110,26 @@ public class DBUserImpl extends DBManagerImpl implements DBUser {
 			return Optional.of(user);
 		else
 			return Optional.empty();
+	}
+
+	@Override
+	public List<User> getAllUsers() {
+		List<User> list = new LinkedList<>();
+		
+		try {
+			String query = "select * from UTENTE ";
+			rs = open().executeQuery(query);
+			while (rs.next())
+				list.add(new User(rs.getInt("idUser"), rs.getString("nome"), this.Decrypt(rs.getString("password")),
+						this.Decrypt(rs.getString("email")), rs.getBoolean("isModeratore")));
+			return list;
+		} catch (Exception e) {
+			System.out.println("User doesn't exist!" + e);
+			return list;
+		} finally {
+			close();
+		}
+
 	}
 
 }

@@ -1,5 +1,6 @@
 package model.database;
 
+import java.util.List;
 import java.util.Optional;
 
 import model.base.User;
@@ -42,4 +43,6 @@ public interface DBUser {
 	 */
 	public Optional<User> getUserFromId(final Integer id);
 
+	
+	public List<User> getAllUsers();
 }

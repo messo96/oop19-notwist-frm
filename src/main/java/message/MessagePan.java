@@ -2,6 +2,8 @@ package message;
 
 import javax.swing.JPanel;
 
+import model.base.User;
+
 
 public class MessagePan extends JPanel{
 
@@ -9,19 +11,18 @@ public class MessagePan extends JPanel{
 	/**
      * Creates new MessagePan to hold messages and chat
      */
-    public MessagePan() {
-        initComponents();
+    public MessagePan(final User user) {
+        initComponents(user);
     }
 
-    private void initComponents() {
+    private void initComponents(final User user) {
     	
     	message_panel = new JPanel();
     	
-    	historymsg_panel = new HistoryMsg();
+    	historymsg_panel = new HistoryMsg(user);
     	newmsg_panel = new NewMsg();
        
-    	int i= 1;
-    	if (i==1) {
+    	if(user.isModerator()) {
         message_panel.add(historymsg_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, -1, 220));
 
         message_panel.add(newmsg_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 340, 310, 220));              

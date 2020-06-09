@@ -1,9 +1,13 @@
 package model.database;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+
+import javax.swing.JOptionPane;
 
 import model.base.Category;
 import model.base.CategoryImpl;
@@ -67,7 +71,18 @@ public class DBCategoryImpl extends DBManagerImpl implements DBCategory {
 
 	@Override
 	public boolean addCategory(String newCat) {
-		// TODO Auto-generated method stub
-		return false;
+		try {
+			query = "insert into TOPIC (title) values (?)";
+			open();
+			PreparedStatement prepared = super.getConn().prepareStatement(query);
+			prepared.setString(1, newCat);
+			prepared.executeUpdate();
+			return true;
+		} catch (Exception e) {
+			System.out.println("\nError while adding new discussion " + e);
+			return false;
+		} finally {
+			close();
+		}
 	}
 }
