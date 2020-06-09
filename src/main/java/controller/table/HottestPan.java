@@ -11,6 +11,9 @@ import javax.swing.JTable;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
+import model.base.Discussion;
+import model.database.DBDiscussionImpl;
+
 
 
 public class HottestPan extends JPanel{
@@ -30,40 +33,15 @@ public class HottestPan extends JPanel{
         hottest_panel.setFont(new Font("Tahoma", 0, 14)); // NOI18N
         //Draw Table
         topdiscussiontable.setFont(new Font("Tahoma", 0, 14)); // NOI18N
-        topdiscussiontable.setModel(new DefaultTableModel(
-            new Object [][] {
-                {"test1"},
-                {"test2"},
-                {"test3"},
-                {"test4"},
-                {"test5"}
-            },
-            new String [] {
-                "Title "
-            }
-        ) {
-            Class[] types = new Class [] {
-                String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        model_hot = new DefaultTableModel(new Object[] {"Title"},0);
+        topdiscussiontable.setModel(model_hot);
         
         topdiscussiontable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         topdiscussiontable.setAutoscrolls(false);
         topdiscussiontable.setEnabled(false);
         topdiscussiontable.setRowHeight(25);
         topdiscussiontable.getTableHeader().setReorderingAllowed(false);
-
+        fillTable();
         GroupLayout hottest_panelLayout = new GroupLayout(hottest_panel);
         hottest_panel.setLayout(hottest_panelLayout);
         hottest_panelLayout.setHorizontalGroup(
@@ -82,7 +60,15 @@ public class HottestPan extends JPanel{
         );
         add(hottest_panel);
 	}
-        private javax.swing.JPanel hottest_panel;
+        private void fillTable() {
+		for(Discussion d : new DBDiscussionImpl().getTopDiscussion())
+			model_hot.addRow(new Object[] {d.getTitle()});
+		
+		topdiscussiontable.setModel(model_hot);
+		topdiscussiontable.revalidate();
+	}
+		private javax.swing.JPanel hottest_panel;
         private javax.swing.JTable topdiscussiontable;
+        private DefaultTableModel model_hot;
     
 }
