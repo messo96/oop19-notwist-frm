@@ -27,7 +27,7 @@ public class TableDiscussion {
 				return false;
 			}
 		};
-		
+
 		tableDiscussion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 		modelDiscussion = new DefaultTableModel(
 				new Object[] { "Titolo", "Categoria", "Like", "Created By", "Risposte", "ID" }, 0);
@@ -46,7 +46,6 @@ public class TableDiscussion {
 			tableDiscussion.getColumnModel().getColumn(4).setResizable(false);
 			tableDiscussion.getColumnModel().getColumn(5).setResizable(false);
 
-
 		}
 		tableDiscussion.getColumnModel().getColumn(0).setPreferredWidth(320);
 		tableDiscussion.getColumnModel().getColumn(1).setPreferredWidth(108);
@@ -55,22 +54,19 @@ public class TableDiscussion {
 		tableDiscussion.getColumnModel().getColumn(4).setPreferredWidth(90);
 		tableDiscussion.getColumnModel().getColumn(5).setPreferredWidth(0);
 
-	
 		tableDiscussion.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent mouseEvent) {
-				if(mouseEvent.getClickCount() == 2) {
-					
-					Discussion d = dbdiscussion.getDiscussionFromId(
-							Integer.parseInt(tableDiscussion.getModel().getValueAt(tableDiscussion.getSelectedRow(), 5).toString())).get();
-			new Topic_gui(d, user);
+				if (mouseEvent.getClickCount() == 2) {
+
+					Discussion d = dbdiscussion.getDiscussionFromId(Integer.parseInt(
+							tableDiscussion.getModel().getValueAt(tableDiscussion.getSelectedRow(), 5).toString()))
+							.get();
+					new Topic_gui(d, user);
 				}
 			}
 		});
 
 	}
-		
-		
-
 
 	public JTable getTableDiscussion() {
 		return tableDiscussion;
