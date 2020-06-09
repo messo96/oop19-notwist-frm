@@ -56,4 +56,6 @@ public interface DBDiscussion {
 	 */
 	public Optional<Discussion> getDiscussionFromId(final Integer idDiscussion);
 
+	
+	public List<Discussion> getTopDiscussion();
 }

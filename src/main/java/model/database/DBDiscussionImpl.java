@@ -24,6 +24,7 @@ public class DBDiscussionImpl extends DBManagerImpl implements DBDiscussion {
 	private ResultSet rs = null;
 	private String query;
 	private Optional<List<Discussion>> discussionList;
+	private final Integer MAX_TOP = 5;
 
 	public DBDiscussionImpl() {
 		this.discussionList = getAllDiscussion();
@@ -50,9 +51,10 @@ public class DBDiscussionImpl extends DBManagerImpl implements DBDiscussion {
 		return Optional.of(discussion);
 	}
 
-	public boolean createDiscussion(final Integer idUser, final String title, final String description,final String topic) {
+	public boolean createDiscussion(final Integer idUser, final String title, final String description,
+			final String topic) {
 		try {
-			
+
 			d = new Date();
 			query = "insert into DISCUSSION (idUser, title, description, idMacro,data) values (?,?,?,?,?)";
 			open();
@@ -121,9 +123,9 @@ public class DBDiscussionImpl extends DBManagerImpl implements DBDiscussion {
 			rs = open().executeQuery(query);
 
 			if (rs.next()) {
-					discussion = new DiscussionImpl(rs.getInt("idDiscussion"), rs.getInt("idUser"),
-							rs.getString("title"), rs.getString("description"),
-							new DBCategoryImpl().getCategoryById(rs.getInt("idMacro")), rs.getDate("data"));
+				discussion = new DiscussionImpl(rs.getInt("idDiscussion"), rs.getInt("idUser"), rs.getString("title"),
+						rs.getString("description"), new DBCategoryImpl().getCategoryById(rs.getInt("idMacro")),
+						rs.getDate("data"));
 			}
 		} catch (SQLException e) {
 			System.out.println("Error while download discussion" + e);
@@ -132,6 +134,16 @@ public class DBDiscussionImpl extends DBManagerImpl implements DBDiscussion {
 		}
 
 		return Optional.of(discussion);
+	}
+
+	@Override
+	public List<Discussion> getTopDiscussion() {
+
+		DBComments dbcomment = new DBCommentsImpl();
+		return this.getAllDiscussion().get().stream()
+				.sorted((d1, d2) -> Integer.compare(dbcomment.getAllComments(d1.getIdDiscussion()).get().size(),
+						dbcomment.getAllComments(d2.getIdDiscussion()).get().size()))
+				.limit(MAX_TOP).collect(Collectors.toList());
 	}
 
 }
