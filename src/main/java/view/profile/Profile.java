@@ -1,6 +1,8 @@
 package view.profile;
 
 
+import java.awt.Color;
+
 import javax.swing.JPanel;
 
 import org.netbeans.lib.awtextra.AbsoluteConstraints;
@@ -33,12 +35,11 @@ public class Profile extends JPanel{
             activities_panel = new Activities();
             profile_panel.add(activities_panel, new AbsoluteConstraints(10, 0, -1, -1));
             
-
             myinfos_panel = new Infos(user);
             profile_panel.add(myinfos_panel, new  AbsoluteConstraints(730, 0, -1, -1));
 
             message_panel = new MessagePan(user);
-            profile_panel.add(message_panel, new  AbsoluteConstraints(10, 150, -1, -1)); 	   
+            profile_panel.add(message_panel, new  AbsoluteConstraints(10, 200, -1, -1)); 	   
     	   
             strike_panel = new StrikePan();
             profile_panel.add(strike_panel, new  AbsoluteConstraints(730, 150, 310, 310));
@@ -53,14 +54,14 @@ public class Profile extends JPanel{
         profile_panel.setLayout(new  AbsoluteLayout());   
         
         activities_panel = new Activities();
-        profile_panel.add(activities_panel, new  AbsoluteConstraints(10, 0, -1, -1));
+        profile_panel.add(activities_panel, new  AbsoluteConstraints(10, 0,  -1, -1));
         
 
         myinfos_panel = new Infos(user);
         profile_panel.add(myinfos_panel, new  AbsoluteConstraints(730, 0, -1, -1));
 
         message_panel = new MessagePan(user);
-        profile_panel.add(message_panel, new  AbsoluteConstraints(10, 230, -1, -1));
+        profile_panel.add(message_panel, new  AbsoluteConstraints(0, 230, -1, -1));
         
         add(profile_panel);
        }

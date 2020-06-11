@@ -23,16 +23,16 @@ public class MessagePan extends JPanel{
     	newmsg_panel = new NewMsg();
        
     	if(user.isModerator()) {
-        message_panel.add(historymsg_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, -1, 220));
+        message_panel.add(historymsg_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 340, 670, 220));
 
         message_panel.add(newmsg_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 340, 310, 220));              
         
         add(message_panel);      
     	}else {
     		
-            message_panel.add(historymsg_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 670, 220));
+            message_panel.add(historymsg_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 340, 670, 220));
 
-            message_panel.add(newmsg_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 340, 310, 220));              
+            message_panel.add(newmsg_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 340, 310, 220));              
             
             add(message_panel);    
     	}
