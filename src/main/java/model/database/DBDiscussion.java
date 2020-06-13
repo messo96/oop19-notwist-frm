@@ -56,6 +56,16 @@ public interface DBDiscussion {
 	 */
 	public Optional<Discussion> getDiscussionFromId(final Integer idDiscussion);
 
-	
+	/**
+	 * 
+	 * @return limited list of Discussion ascendent by number of comments
+	 */
 	public List<Discussion> getTopDiscussion();
+	
+	/**
+	 * 
+	 * @param idDiscussion identifier of discussion to delete 
+	 * @return True if succesfully deleted, false otherwise
+	 */
+	public boolean deleteDiscussion(final Integer idDiscussion);
 }

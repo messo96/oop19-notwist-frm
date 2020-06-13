@@ -22,6 +22,7 @@ public class DBDiscussionImpl extends DBManagerImpl implements DBDiscussion {
 	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	private Date d;
 	private ResultSet rs = null;
+	private PreparedStatement prepared;
 	private String query;
 	private Optional<List<Discussion>> discussionList;
 	private final Integer MAX_TOP = 5;
@@ -58,7 +59,7 @@ public class DBDiscussionImpl extends DBManagerImpl implements DBDiscussion {
 			d = new Date();
 			query = "insert into DISCUSSION (idUser, title, description, idMacro,data) values (?,?,?,?,?)";
 			open();
-			PreparedStatement prepared = super.getConn().prepareStatement(query);
+			prepared = super.getConn().prepareStatement(query);
 			prepared.setInt(1, idUser);
 			prepared.setString(2, title);
 			prepared.setString(3, description);
@@ -144,6 +145,30 @@ public class DBDiscussionImpl extends DBManagerImpl implements DBDiscussion {
 				.sorted((d1, d2) -> Integer.compare(dbcomment.getAllComments(d1.getIdDiscussion()).get().size(),
 						dbcomment.getAllComments(d2.getIdDiscussion()).get().size()))
 				.limit(MAX_TOP).collect(Collectors.toList());
+	}
+	
+	@Override
+	public boolean deleteDiscussion(final Integer idDiscussion) {
+
+		try {
+			open();
+			query = "delete from DISCUSSION where idDiscussion = ?";
+			prepared = super.getConn().prepareStatement(query);
+			prepared.setInt(1, idDiscussion);
+			prepared.executeUpdate();
+			
+//			query = "delete from COMMENT where idDiscussion = ?";
+//			prepared = super.getConn().prepareStatement(query);
+//			prepared.setInt(1, idDiscussion);
+//			prepared.executeUpdate();
+			return true;
+			
+		} catch (SQLException e) {
+			System.out.println("Error while download discussion" + e);
+			return false;
+		} finally {
+			close();
+		}
 	}
 
 }

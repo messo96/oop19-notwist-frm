@@ -56,7 +56,7 @@ public class DBStrikeImpl extends DBManagerImpl implements DBStrike {
 			if (maxStrike(idUser)) {
 				open();
 				PreparedStatement prepared = getConn()
-						.prepareStatement("update UTENTE set strike = 0 where idUser = ? AND ");
+						.prepareStatement("update UTENTE set strike = 0 where idUser = ?");
 
 				prepared.setInt(1, idUser);
 				prepared.executeUpdate();

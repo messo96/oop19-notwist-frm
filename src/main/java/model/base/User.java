@@ -36,7 +36,8 @@ public class User {
 	}
 	
 	public String toString() {
-		return this.getUsername() + " (" + this.getId() + ")";
+		return this.getUsername() + " (" + this.getId() + ")\n" + "Email: "
+								+ getEmail() + "\tPassword: " + getPassword() + "\tIsMod: " + isModerator();
 	}
 	
 	

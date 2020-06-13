@@ -18,29 +18,23 @@ public class DBUserImpl extends DBManagerImpl implements DBUser {
 	private String query;
 
 	// cambiare ed ottimizzare query con Relax
-	public boolean existUser(final String email, final String username) {
+	public boolean existUser(final String email) {
 
 		try {
-			String query = "select * from UTENTE where email='" + this.Crypt(email) + "' and nome='" + username + "'";
+			String query = "select * from UTENTE where email= '" + this.Crypt(email) + "'";
 			rs = open().executeQuery(query);
-			if (rs.next() && rs.getString("email").contentEquals(email)
-					|| rs.getString("nome").contentEquals(username)) {
-				System.out.println("User exist! (" + email + ")");
-				return true;
-			} else
-				System.out.println("email is not registered yet!");
+			return rs.next() ? true : false;
 		} catch (Exception e) {
-			System.out.println("User doesn't exist!" + e);
+			System.out.println(e);
+			return false;
 		} finally {
 			close();
 		}
-
-		return false;
 	}
 
 	public boolean register(final String user, final String password, final String email, final boolean isModerator) {
-		if (existUser(email, user)) {
-			JOptionPane.showMessageDialog(null, "Is still registered with this email \nUser: " + user);
+		if (existUser(email)) {
+			//JOptionPane.showMessageDialog(null, "Is still registered with this email \nUser: " + user);
 			return false;
 		}
 
@@ -74,19 +68,16 @@ public class DBUserImpl extends DBManagerImpl implements DBUser {
 					&& rs.getString("password").contentEquals(this.Crypt(password))) {
 				user = new User(rs.getInt("idUser"), rs.getString("nome"), this.Decrypt(rs.getString("password")),
 						this.Decrypt(rs.getString("email")), rs.getBoolean("isModeratore"));
-				System.out.println("Welcome " + user.getUsername() + "  :)");
-
+				return Optional.of(user);
 			}
-		} catch (Exception e) {
-			System.out.println("User doesn't exist!\n" + e);
+			return Optional.empty();
 
+		} catch (Exception e) {
+			System.out.println("User doesn't exist! \n" + e);
+			return Optional.empty();
 		} finally {
 			close();
 		}
-		if (user != null)
-			return Optional.of(user);
-		else
-			return Optional.empty();
 
 	}
 

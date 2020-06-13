@@ -9,10 +9,10 @@ public interface DBUser {
 
 	/**
 	 * 
-	 * @param user verify that user effectively is registered
+	 * @param email verify that user effectively is registered
 	 * @return true if it is registered, false otherwise
 	 */
-	public boolean existUser(final String email, final String username);
+	public boolean existUser(final String email);
 
 	/**
 	 * 
