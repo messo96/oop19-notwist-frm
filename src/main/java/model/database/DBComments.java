@@ -10,6 +10,7 @@ public interface DBComments {
 
 	public Optional<List<Comments>> getAllComments(final Integer idDiscussion);
 	public boolean write(final Integer idDiscussion, final Integer idUser, final String comment);
+	public boolean delete(final Integer idComment);
 
 }
 

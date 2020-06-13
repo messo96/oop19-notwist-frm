@@ -12,10 +12,12 @@ import java.util.Optional;
 import javax.swing.JOptionPane;
 
 import model.base.Comments;
+import model.base.CommentsImplements;
 
 public class DBCommentsImpl extends DBManagerImpl implements DBComments{
 
-	private ResultSet rs = null;
+	private ResultSet rs;
+	PreparedStatement prepared;
 	private String query;
 	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -27,8 +29,9 @@ public class DBCommentsImpl extends DBManagerImpl implements DBComments{
 			rs = open().executeQuery(query);
 
 			while (rs.next()) {
-				// list.add(new CommentsImplements())
+//				 list.add(new CommentsImplements(rs.getInt("idUser"), ))
 			}
+			
 		} catch (SQLException e) {
 			System.out.println("Error while download comments\n" + e);
 		} finally {
@@ -42,7 +45,7 @@ public class DBCommentsImpl extends DBManagerImpl implements DBComments{
 
 			query = "insert into COMMENT (idUser, idDiscussion, commento, data) values (?,?,?,?)";
 			open();
-			PreparedStatement prepared = super.getConn().prepareStatement(query);
+			prepared = super.getConn().prepareStatement(query);
 			prepared.setInt(1, idUser);
 			prepared.setInt(2, idDiscussion);
 			prepared.setString(3, comment);
@@ -52,6 +55,24 @@ public class DBCommentsImpl extends DBManagerImpl implements DBComments{
 			return true;
 		} catch (Exception e) {
 			System.out.println("\nError while adding new comment in discussion " + e);
+			return false;
+		} finally {
+			close();
+		}
+	}
+	
+	public boolean delete(final Integer idComment) {
+		try {
+			open();
+			
+				query = "delete from COMMENT where idComment= ?";
+				prepared = super.getConn().prepareStatement(query);
+				prepared.setInt(1, idComment);
+				prepared.executeUpdate();
+				return true;
+		
+		} catch (SQLException e) {
+			System.out.println("Error while delete comment" + e);
 			return false;
 		} finally {
 			close();
