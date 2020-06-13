@@ -146,7 +146,7 @@ public class DBDiscussionImpl extends DBManagerImpl implements DBDiscussion {
 						dbcomment.getAllComments(d2.getIdDiscussion()).get().size()))
 				.limit(MAX_TOP).collect(Collectors.toList());
 	}
-	
+
 	@Override
 	public boolean deleteDiscussion(final Integer idDiscussion) {
 
@@ -157,14 +157,17 @@ public class DBDiscussionImpl extends DBManagerImpl implements DBDiscussion {
 			prepared.setInt(1, idDiscussion);
 			prepared.executeUpdate();
 			
-//			query = "delete from COMMENT where idDiscussion = ?";
-//			prepared = super.getConn().prepareStatement(query);
-//			prepared.setInt(1, idDiscussion);
-//			prepared.executeUpdate();
-			return true;
+			if(new DBCommentsImpl().getAllComments(idDiscussion).isPresent()) {
+				query = "delete from COMMENT where idDiscussion = ?";
+				prepared = super.getConn().prepareStatement(query);
+				prepared.setInt(1, idDiscussion);
+				prepared.executeUpdate();
+			}
 			
+			return true;
+
 		} catch (SQLException e) {
-			System.out.println("Error while download discussion" + e);
+			System.out.println("Error while delete discussion and attached comments" + e);
 			return false;
 		} finally {
 			close();

@@ -3,26 +3,20 @@ package test.model.database;
 import static org.junit.Assert.*;
 
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
 import org.junit.Test;
 
-import model.base.Discussion;
-import model.base.DiscussionImpl;
-import model.base.User;
+import model.base.*;
 import model.database.*;
 
 public class DBTest {
 
 	private DBUser dbuser = new DBUserImpl();
 	private DBDiscussion dbdiscussion = new DBDiscussionImpl();
-	private DBComments dbcomments = new DBCommentsImpl();
-	private DBCategory dbcategory = new DBCategoryImpl();
 	private DBStrike dbstrike = new DBStrikeImpl();
 	private User testUser = new User(0, "test","test", "test@test.com", false);
-	private Discussion testDiscussion = new DiscussionImpl(0, testUser.getId(), "Test title", "This is a test", dbcategory.getCategoryByName("SPORT"), new Date());
 
 	
 	@Test
@@ -51,9 +45,7 @@ public class DBTest {
 			assertTrue(dbdiscussion.deleteDiscussion(d.getIdDiscussion()));
 		}
 		assertEquals(dbdiscussion.getDiscussion(testUser).get().size(), 0);
-
 	}
-	
 	
 	@Test
 	public void testDBStrike() {
@@ -65,5 +57,18 @@ public class DBTest {
 		assertTrue(dbstrike.getStrikes(testUser.getId()).equals(0));
 
 	}
+	
+	@Test
+	public void testDB() {
 
+		assertTrue(dbstrike.getStrikes(testUser.getId()).equals(0));
+		dbstrike.setStrike(testUser.getId(), 3);
+		assertTrue(dbstrike.getStrikes(testUser.getId()).equals(3));
+		dbstrike.resetStrike(testUser.getId());
+		assertTrue(dbstrike.getStrikes(testUser.getId()).equals(0));
+
+	}
+	
+
+	
 }

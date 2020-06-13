@@ -37,7 +37,7 @@ public class DBCommentsImpl extends DBManagerImpl implements DBComments{
 		return Optional.of(list);
 	}
 
-	public void write(final Integer idDiscussion, final Integer idUser, final String comment) {
+	public boolean write(final Integer idDiscussion, final Integer idUser, final String comment) {
 		try {
 
 			query = "insert into COMMENT (idUser, idDiscussion, commento, data) values (?,?,?,?)";
@@ -49,9 +49,10 @@ public class DBCommentsImpl extends DBManagerImpl implements DBComments{
 			prepared.setDate(4, java.sql.Date.valueOf(sdf.format(new Date())));
 
 			prepared.executeUpdate();
-			JOptionPane.showMessageDialog(null, "Comment uploaded successfully\nWell done!");
+			return true;
 		} catch (Exception e) {
 			System.out.println("\nError while adding new comment in discussion " + e);
+			return false;
 		} finally {
 			close();
 		}
