@@ -20,13 +20,15 @@ public interface DBDiscussion {
 
 	/**
 	 * Create a new discussion and load on database
+	 * 
 	 * @param idUser
 	 * @param title
 	 * @param description
 	 * @param topic
 	 * @return
 	 */
-	public boolean createDiscussion(final Integer idUser, final String title, final String description,final String topic);
+	public boolean createDiscussion(final Integer idUser, final String title, final String description,
+			final String topic);
 
 	/**
 	 * 
@@ -51,8 +53,8 @@ public interface DBDiscussion {
 
 	/**
 	 * 
-	 * @param idDiscussion	of the discussion to search
-	 * @return	Optional of Discussion, empty otherwise
+	 * @param idDiscussion of the discussion to search
+	 * @return Optional list of Discussion, empty if there aren't discussion created by idUser
 	 */
 	public Optional<Discussion> getDiscussionFromId(final Integer idDiscussion);
 
@@ -61,10 +63,10 @@ public interface DBDiscussion {
 	 * @return limited list of Discussion ascendent by number of comments
 	 */
 	public List<Discussion> getTopDiscussion();
-	
+
 	/**
 	 * 
-	 * @param idDiscussion identifier of discussion to delete 
+	 * @param idDiscussion identifier of discussion to delete
 	 * @return True if succesfully deleted, false otherwise
 	 */
 	public boolean deleteDiscussion(final Integer idDiscussion);

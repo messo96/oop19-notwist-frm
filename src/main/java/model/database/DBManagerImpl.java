@@ -7,9 +7,7 @@ import java.sql.Statement;
 
 import javax.swing.JOptionPane;
 
-import model.crypt.CrypterImplementation;
-
-abstract class DBManagerImpl extends CrypterImplementation {
+abstract class DBManagerImpl {
 
 	private Connection conn;
 	private Statement stmt;

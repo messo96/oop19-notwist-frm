@@ -10,8 +10,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import javax.swing.JOptionPane;
-
 import model.base.Category;
 import model.base.Discussion;
 import model.base.DiscussionImpl;
@@ -24,14 +22,9 @@ public class DBDiscussionImpl extends DBManagerImpl implements DBDiscussion {
 	private ResultSet rs = null;
 	private PreparedStatement prepared;
 	private String query;
-	private Optional<List<Discussion>> discussionList;
 	private final Integer MAX_TOP = 5;
 
-	public DBDiscussionImpl() {
-		this.discussionList = getAllDiscussion();
-	}
-
-	public Optional<List<Discussion>> getDiscussion(final User user) {
+	private Optional<List<Discussion>> getDataBase() {
 		List<Discussion> discussion = new LinkedList<>();
 
 		try {
@@ -39,20 +32,20 @@ public class DBDiscussionImpl extends DBManagerImpl implements DBDiscussion {
 			rs = open().executeQuery(query);
 
 			while (rs.next()) {
-				if (rs.getInt("idUser") == (user.getId()))
-					discussion.add(new DiscussionImpl(rs.getInt("idDiscussion"), rs.getInt("idUser"),
-							rs.getString("title"), rs.getString("description"),
-							new DBCategoryImpl().getCategoryById(rs.getInt("idMacro")), rs.getDate("data")));
+				discussion.add(new DiscussionImpl(rs.getInt("idDiscussion"), rs.getInt("idUser"), rs.getString("title"),
+						rs.getString("description"), new DBCategoryImpl().getCategoryById(rs.getInt("idMacro")),
+						rs.getDate("data")));
 			}
+			return Optional.of(discussion);
 		} catch (SQLException e) {
-			System.out.println("Error while download discussion of " + user.toString() + "\n" + e);
+			System.out.println("Error while download discussion" + e);
+			return Optional.empty();
 		} finally {
 			close();
 		}
-		return Optional.of(discussion);
 	}
 
-	public boolean createDiscussion(final Integer idUser, final String title, final String description,
+	private boolean setDataBase(final Integer idUser, final String title, final String description,
 			final String topic) {
 		try {
 
@@ -78,70 +71,43 @@ public class DBDiscussionImpl extends DBManagerImpl implements DBDiscussion {
 		}
 	}
 
+	public Optional<List<Discussion>> getDiscussion(final User user) {
+		return Optional.of(this.getDataBase().get().stream().filter(d -> d.getIdUser() == user.getId())
+				.collect(Collectors.toList()));
+	}
+
+	public boolean createDiscussion(final Integer idUser, final String title, final String description,
+			final String topic) {
+		return this.setDataBase(idUser, title, description, topic);
+	}
+
 	@Override
 	public Optional<List<Discussion>> getAllDiscussion() {
-		List<Discussion> discussion = new LinkedList<>();
-
-		try {
-			query = "select * from DISCUSSION";
-			rs = open().executeQuery(query);
-
-			while (rs.next()) {
-				discussion.add(new DiscussionImpl(rs.getInt("idDiscussion"), rs.getInt("idUser"), rs.getString("title"),
-						rs.getString("description"), new DBCategoryImpl().getCategoryById(rs.getInt("idMacro")),
-						rs.getDate("data")));
-			}
-		} catch (SQLException e) {
-			System.out.println("Error while download discussion" + e);
-		} finally {
-			close();
-		}
-
-		return Optional.of(discussion);
+		return this.getDataBase();
 	}
 
 	@Override
 	public Optional<List<Discussion>> getAllDiscussion(final String title) {
-		List<Discussion> list = discussionList.get().stream()
-				.filter(c -> c.getTitle().toLowerCase().contains(title.toLowerCase())).collect(Collectors.toList());
-		return Optional.of(list);
+		return Optional.of(this.getDataBase().get().stream().filter(d -> d.getTitle().contains(title))
+				.collect(Collectors.toList()));
 	}
 
 	@Override
 	public Optional<List<Discussion>> getAllDiscussion(Category category) {
-		List<Discussion> list = discussionList.get().stream().filter(c -> c.getCategory().getId() == category.getId())
-				.collect(Collectors.toList());
-		return Optional.of(list);
-
+		return Optional.of(this.getDataBase().get().stream().filter(d -> d.getCategory().getId() == category.getId())
+				.collect(Collectors.toList()));
 	}
 
 	@Override
 	public Optional<Discussion> getDiscussionFromId(final Integer idDiscussion) {
-		Discussion discussion = null;
-
-		try {
-			query = "select * from DISCUSSION where idDiscussion = " + idDiscussion;
-			rs = open().executeQuery(query);
-
-			if (rs.next()) {
-				discussion = new DiscussionImpl(rs.getInt("idDiscussion"), rs.getInt("idUser"), rs.getString("title"),
-						rs.getString("description"), new DBCategoryImpl().getCategoryById(rs.getInt("idMacro")),
-						rs.getDate("data"));
-			}
-		} catch (SQLException e) {
-			System.out.println("Error while download discussion" + e);
-		} finally {
-			close();
-		}
-
-		return Optional.of(discussion);
+		return Optional.of(this.getDataBase().get().stream().filter(d -> d.getIdDiscussion() == idDiscussion).findFirst().get());
 	}
 
 	@Override
 	public List<Discussion> getTopDiscussion() {
 
 		DBComments dbcomment = new DBCommentsImpl();
-		return this.getAllDiscussion().get().stream()
+		return this.getDataBase().get().stream()
 				.sorted((d1, d2) -> Integer.compare(dbcomment.getAllComments(d1.getIdDiscussion()).get().size(),
 						dbcomment.getAllComments(d2.getIdDiscussion()).get().size()))
 				.limit(MAX_TOP).collect(Collectors.toList());
@@ -156,14 +122,14 @@ public class DBDiscussionImpl extends DBManagerImpl implements DBDiscussion {
 			prepared = super.getConn().prepareStatement(query);
 			prepared.setInt(1, idDiscussion);
 			prepared.executeUpdate();
-			
-			if(new DBCommentsImpl().getAllComments(idDiscussion).isPresent()) {
+
+			if (new DBCommentsImpl().getAllComments(idDiscussion).isPresent()) {
 				query = "delete from COMMENT where idDiscussion = ?";
 				prepared = super.getConn().prepareStatement(query);
 				prepared.setInt(1, idDiscussion);
 				prepared.executeUpdate();
 			}
-			
+
 			return true;
 
 		} catch (SQLException e) {

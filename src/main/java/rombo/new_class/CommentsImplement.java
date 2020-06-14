@@ -1,5 +1,6 @@
 package rombo.new_class;
 
+import java.util.Date;
 import java.util.Optional;
 
 public class CommentsImplement implements Comments {
@@ -9,15 +10,16 @@ public class CommentsImplement implements Comments {
 	private final String Comment;
 	private final Optional<Integer> IDComment;
 	private final Optional<Integer> IDDiscussion;
-	
+	private final Date data;
 	
 	/*Builder*/
-	public CommentsImplement(int IDUser, String Comment, Optional<Integer> IDComment,Optional<Integer> IDDiscussion) {
+	public CommentsImplement(int IDUser, String Comment, Optional<Integer> IDComment,Optional<Integer> IDDiscussion, Date data) {
 		
 		this.IDUser = IDUser;
 		this.Comment = Comment;
 		this.IDComment = IDComment;
 		this.IDDiscussion = IDDiscussion;
+		this.data = data;
 	}
 	
 
@@ -54,5 +56,32 @@ public class CommentsImplement implements Comments {
 			return Optional.empty();
 		}
 	}
+
+
+	public int getIDUser() {
+		return IDUser;
+	}
+
+
+	public String getComment() {
+		return Comment;
+	}
+
+
+	public Optional<Integer> getIDComment() {
+		return IDComment;
+	}
+
+
+	public Optional<Integer> getIDDiscussion() {
+		return IDDiscussion;
+	}
+
+
+	public Date getData() {
+		return data;
+	}
+	
+	
 
 }

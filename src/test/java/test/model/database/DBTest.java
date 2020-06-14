@@ -7,6 +7,8 @@ import java.util.Optional;
 
 import org.junit.Test;
 
+import rombo.new_class.*;
+import rombo.new_class.Comments;
 import model.base.*;
 import model.database.*;
 
@@ -33,7 +35,6 @@ public class DBTest {
 		
 	}
 	
-	//DA FINIRE PERCHE' MANCA IMPLEMENTAZIONE DEL dbcomments.getAllDiscussion();
 	@Test
 	public void testDBDiscussionAndComments() {
 		assertEquals(dbdiscussion.getDiscussion(testUser).get().size(), 0);
@@ -44,16 +45,17 @@ public class DBTest {
 		List<Discussion> discussionList = dbdiscussion.getDiscussion(testUser).get();
 		
 		Discussion disc = discussionList.get(0);
-//		assertEquals(dbcomments.getAllComments(disc.getIdDiscussion()).get().size(), 0);
-//		assertTrue(dbcomments.write(disc.getIdDiscussion(), testUser.getId(), "I'm a comment!"));
-//		assertEquals(dbcomments.getAllComments(disc.getIdDiscussion()).get().size(), 1);
-//		assertTrue(dbcomments.write(disc.getIdDiscussion(), testUser.getId(), "I'm another comment!"));
-//		assertEquals(dbcomments.getAllComments(disc.getIdDiscussion()).get().size(), 2);
-//		List<Comments> commentList = dbcomments.getAllComments(disc.getIdDiscussion()).get();
-//		for(Comments c : commentList)
-//			assertTrue(dbcomments.delete(c.GetID()));
-//		assertEquals(dbcomments.getAllComments(disc.getIdDiscussion()).get().size(), 0);
-//		
+		assertEquals(dbcomments.getAllComments(disc.getIdDiscussion()).get().size(), 0);
+		assertTrue(dbcomments.write(disc.getIdDiscussion(), testUser.getId(), "I'm a comment!"));
+		assertEquals(dbcomments.getAllComments(disc.getIdDiscussion()).get().size(), 1);
+		assertTrue(dbcomments.write(disc.getIdDiscussion(), testUser.getId(), "I'm another comment!"));
+		assertEquals(dbcomments.getAllComments(disc.getIdDiscussion()).get().size(), 2);
+		
+		List<Comments> commentList = dbcomments.getAllComments(disc.getIdDiscussion()).get();
+		for(Comments c : commentList)
+			assertTrue(dbcomments.delete(c.GetIDComment().get()));
+		assertEquals(dbcomments.getAllComments(disc.getIdDiscussion()).get().size(), 0);
+
 		for(Discussion d : discussionList) 
 			assertTrue(dbdiscussion.deleteDiscussion(d.getIdDiscussion()));
 		assertEquals(dbdiscussion.getDiscussion(testUser).get().size(), 0);

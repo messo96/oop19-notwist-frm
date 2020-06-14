@@ -9,10 +9,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
-import javax.swing.JOptionPane;
+import rombo.new_class.*;
 
-import model.base.Comments;
-import model.base.CommentsImplements;
+
 
 public class DBCommentsImpl extends DBManagerImpl implements DBComments{
 
@@ -29,15 +28,16 @@ public class DBCommentsImpl extends DBManagerImpl implements DBComments{
 			rs = open().executeQuery(query);
 
 			while (rs.next()) {
-//				 list.add(new CommentsImplements(rs.getInt("idUser"), ))
+				 list.add(new CommentsImplement(rs.getInt("idUser"), rs.getString("commento"),
+						 							Optional.of(rs.getInt("idComment")), Optional.of(rs.getInt("idDiscussion")), rs.getDate("data")));
 			}
-			
+			return Optional.of(list);
 		} catch (SQLException e) {
 			System.out.println("Error while download comments\n" + e);
+			return Optional.empty();
 		} finally {
 			close();
 		}
-		return Optional.of(list);
 	}
 
 	public boolean write(final Integer idDiscussion, final Integer idUser, final String comment) {

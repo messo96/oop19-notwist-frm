@@ -4,7 +4,8 @@ package model.database;
 import java.util.List;
 import java.util.Optional;
 
-import model.base.Comments;
+import rombo.new_class.Comments;
+
 
 public interface DBComments {
 

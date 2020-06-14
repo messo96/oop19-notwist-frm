@@ -1,5 +1,6 @@
 package rombo.new_class;
 
+import java.util.Date;
 import java.util.Optional;
 
 /*A simple interface that permit to create comments*/
@@ -16,6 +17,6 @@ public interface Comments {
 	
 	public Optional<Integer> GetIDDiscussion();
 	
-	
+	public Date getData();
 
 }

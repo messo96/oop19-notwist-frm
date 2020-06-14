@@ -1,12 +1,15 @@
 package model.database;
 
-import java.util.List;
 
 public interface DBLikeDislike{
-
-//	public List<Like> getLikes(final Integer idDiscussion);
-//	
-//	public List<Like> getDislike(final Integer idDiscussion);
+	
+	public boolean addLike(final Integer idDiscussion, final Integer idUser);
+	
+	public boolean addDislike(final Integer idDiscussion, final Integer idUser);
+	
+	public Integer getLike(final Integer idDiscussion);
+	
+	public Integer getDislike(final Integer idDiscussion);
 	
 	public boolean isStillLiked(final Integer idDiscussion, final Integer idUser);
 	

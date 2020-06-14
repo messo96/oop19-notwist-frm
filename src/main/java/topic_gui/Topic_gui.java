@@ -12,6 +12,8 @@ import javax.swing.JEditorPane;
 import model.base.Discussion;
 import model.base.User;
 import model.database.DBCommentsImpl;
+import model.database.DBLikeDislike;
+import model.database.DBLikeDislikeImpl;
 
 /**
  *
@@ -25,6 +27,7 @@ public class Topic_gui extends javax.swing.JFrame {
 	private User user;
 	private Discussion discussion = null;
 	private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+	private DBLikeDislike dblike = new DBLikeDislikeImpl();
 	
     public Topic_gui(final Discussion discussion, final User user) {
         this.user = user;
@@ -129,10 +132,10 @@ public class Topic_gui extends javax.swing.JFrame {
         n_likes.setText("like");
         n_likes.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        like.setText("Y");
+        like.setText(String.valueOf(dblike.getLike(this.discussion.getIdDiscussion())));
         like.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        dislike.setText("N");
+		dislike.setText(String.valueOf(dblike.getDislike(this.discussion.getIdDiscussion())));
         dislike.setToolTipText("");
         dislike.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 

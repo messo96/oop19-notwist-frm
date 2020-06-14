@@ -3,11 +3,8 @@ package model.database;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-
-import javax.swing.JOptionPane;
 
 import model.base.Category;
 import model.base.CategoryImpl;
@@ -16,7 +13,7 @@ public class DBCategoryImpl extends DBManagerImpl implements DBCategory {
 	private ResultSet rs = null;
 	private String query;
 
-	public Optional<List<Category>> getCategories() {
+	private Optional<List<Category>> getDataBase() {
 		List<Category> list = new ArrayList<>();
 		query = "Select * from TOPIC";
 
@@ -33,25 +30,29 @@ public class DBCategoryImpl extends DBManagerImpl implements DBCategory {
 		}
 		return Optional.of(list);
 	}
-
-	public boolean existCategory(String name) {
-		query = "Select * from TOPIC";
-		boolean flag = false;
+	
+	private boolean setDataBase(final String newCategory) {
 		try {
-			rs = open().executeQuery(query);
-			while (rs.next()) {
-				if (rs.getString("title").contentEquals(name)) {
-					flag = true;
-					break;
-				}
-
-			}
+			query = "insert into TOPIC (title) values (?)";
+			open();
+			PreparedStatement prepared = super.getConn().prepareStatement(query);
+			prepared.setString(1, newCategory);
+			prepared.executeUpdate();
+			return true;
 		} catch (Exception e) {
-			System.out.println("Error looking for category " + name);
+			System.out.println("\nError while adding new discussion " + e);
+			return false;
 		} finally {
 			close();
 		}
-		return flag;
+	}
+	
+	public Optional<List<Category>> getCategories() {
+		return this.getDataBase();
+	}
+
+	public boolean existCategory(String name) {
+		return this.getDataBase().get().stream().filter(c -> c.getName().contains(name)).count() != 0;
 	}
 
 	/**
@@ -71,18 +72,6 @@ public class DBCategoryImpl extends DBManagerImpl implements DBCategory {
 
 	@Override
 	public boolean addCategory(String newCat) {
-		try {
-			query = "insert into TOPIC (title) values (?)";
-			open();
-			PreparedStatement prepared = super.getConn().prepareStatement(query);
-			prepared.setString(1, newCat);
-			prepared.executeUpdate();
-			return true;
-		} catch (Exception e) {
-			System.out.println("\nError while adding new discussion " + e);
-			return false;
-		} finally {
-			close();
-		}
+		return this.setDataBase(newCat);
 	}
 }
