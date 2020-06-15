@@ -2,8 +2,10 @@ package test.model.database;
 
 import static org.junit.Assert.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.junit.Test;
 
@@ -15,15 +17,14 @@ import model.database.*;
 public class DBTest {
 
 	private DBUser dbuser = new DBUserImpl();
-	private DBDiscussion dbdiscussion = new DBDiscussionImpl();
-	private DBComments dbcomments = new DBCommentsImpl();
+	private Dao<DiscussionImpl> dbdiscussion = new DBDiscussionImpl();
+	private Dao<CommentsImplement> dbcomments = new DBCommentsImpl();
 	private DBStrike dbstrike = new DBStrikeImpl();
-	private User testUser = new User(0, "test","test", "test@test.com", false);
+	private User testUser = new User(0, "test", "test", "test@test.com", false);
 
-	
 	@Test
 	public void testDBUser() {
-		
+
 		assertTrue(dbuser.existUser("test@test.com"));
 		assertFalse(dbuser.register("test", "test", "test@test.com", false));
 		assertEquals(dbuser.login("test@test.com", "t"), Optional.empty());
@@ -32,35 +33,48 @@ public class DBTest {
 		assertEquals(testUser.getUsername(), compareUser.getUsername());
 		assertEquals(testUser.getEmail(), compareUser.getEmail());
 		assertEquals(testUser.getPassword(), compareUser.getPassword());
-		
+
 	}
-	
+
 	@Test
 	public void testDBDiscussionAndComments() {
-		assertEquals(dbdiscussion.getDiscussion(testUser).get().size(), 0);
-		dbdiscussion.createDiscussion(testUser.getId(), "TITLE TEST", "This is a description", "SPORT");
-		dbdiscussion.createDiscussion(testUser.getId(), "TITLE SECOND TEST", "This is a description", "SPORT");
-
-		assertEquals(dbdiscussion.getDiscussion(testUser).get().size(),2);
-		List<Discussion> discussionList = dbdiscussion.getDiscussion(testUser).get();
+		Category cat = new DBCategoryImpl().getAll().stream().filter(c -> c.getName().equals("SPORT")).collect(Collectors.toList()).get(0);
+		Date date = new Date();
+		assertEquals(dbdiscussion.getAll().stream().filter(d -> d.getIdUser() == testUser.getId())
+				.collect(Collectors.toList()).size(), 0);
+		dbdiscussion.create(new DiscussionImpl(0, testUser.getId(), "TITLE TEST", "This is a description", cat, date));
+		dbdiscussion.create(new DiscussionImpl(0, testUser.getId(), "TITLE SECOND TEST", "This is another description", cat, date));
+		List<Discussion> discussionList = dbdiscussion.getAll().stream().filter(d -> d.getIdUser() == testUser.getId())
+				.collect(Collectors.toList());
+		assertEquals(discussionList.size(), 2);
 		
 		Discussion disc = discussionList.get(0);
-		assertEquals(dbcomments.getAllComments(disc.getIdDiscussion()).get().size(), 0);
-		assertTrue(dbcomments.write(disc.getIdDiscussion(), testUser.getId(), "I'm a comment!"));
-		assertEquals(dbcomments.getAllComments(disc.getIdDiscussion()).get().size(), 1);
-		assertTrue(dbcomments.write(disc.getIdDiscussion(), testUser.getId(), "I'm another comment!"));
-		assertEquals(dbcomments.getAllComments(disc.getIdDiscussion()).get().size(), 2);
-		
-		List<Comments> commentList = dbcomments.getAllComments(disc.getIdDiscussion()).get();
-		for(Comments c : commentList)
-			assertTrue(dbcomments.delete(c.GetIDComment().get()));
-		assertEquals(dbcomments.getAllComments(disc.getIdDiscussion()).get().size(), 0);
+		assertEquals(dbcomments.getAll().stream().filter(c -> c.GetIDDiscussion().get() == disc.getIdDiscussion())
+				.collect(Collectors.toList()).size(), 0);
+		assertTrue(dbcomments.create(new CommentsImplement(testUser.getId(), "I'm a comment!", Optional.empty(),
+				Optional.of(disc.getIdDiscussion()), new Date())));
+		assertEquals(dbcomments.getAll().stream().filter(c -> c.GetIDDiscussion().get() == disc.getIdDiscussion())
+				.collect(Collectors.toList()).size(), 1);
+		assertTrue(dbcomments.create(new CommentsImplement(testUser.getId(), "I'm another comment!", Optional.empty(),
+				Optional.of(disc.getIdDiscussion()), new Date())));
+		assertEquals(dbcomments.getAll().stream().filter(c -> c.GetIDDiscussion().get() == disc.getIdDiscussion())
+				.collect(Collectors.toList()).size(), 2);
 
-		for(Discussion d : discussionList) 
-			assertTrue(dbdiscussion.deleteDiscussion(d.getIdDiscussion()));
-		assertEquals(dbdiscussion.getDiscussion(testUser).get().size(), 0);
+		List<Comments> commentList = dbcomments.getAll().stream()
+				.filter(c -> c.GetIDDiscussion().get() == disc.getIdDiscussion()).collect(Collectors.toList());
+		for (Comments c : commentList)
+			assertTrue(dbcomments.delete(c.GetIDComment().get()));
+		assertEquals(dbcomments.getAll().stream().filter(c -> c.GetIDDiscussion().get() == disc.getIdDiscussion())
+				.collect(Collectors.toList()).size(), 0);
+
+		for (Discussion d : discussionList)
+			assertTrue(dbdiscussion.delete(d.getIdDiscussion()));
+		
+		assertEquals(dbdiscussion.getAll().stream().filter(d -> d.getIdUser() == testUser.getId())
+				.collect(Collectors.toList()).size(), 0);
+		
 	}
-	
+
 	@Test
 	public void testDBStrike() {
 
@@ -71,9 +85,5 @@ public class DBTest {
 		assertTrue(dbstrike.getStrikes(testUser.getId()).equals(0));
 
 	}
-	
 
-	
-
-	
 }

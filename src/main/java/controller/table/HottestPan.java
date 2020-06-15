@@ -3,6 +3,7 @@ package controller.table;
 import java.awt.Color;
 import java.awt.Font;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
@@ -12,13 +13,20 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
 import model.base.Discussion;
+import model.base.DiscussionImpl;
+import model.database.DBCommentsImpl;
 import model.database.DBDiscussionImpl;
+import model.database.Dao;
+import rombo.new_class.CommentsImplement;
 
 
 
 public class HottestPan extends JPanel{
 
 	private static final long serialVersionUID = 1L;
+	private Dao<CommentsImplement> dbcomment = new DBCommentsImpl();
+	
+	private final Integer MAX_TOP = 5;
 	
 	public HottestPan() {
 		
@@ -61,7 +69,12 @@ public class HottestPan extends JPanel{
         add(hottest_panel);
 	}
         private void fillTable() {
-		for(Discussion d : new DBDiscussionImpl().getTopDiscussion())
+        	List<DiscussionImpl> list = new DBDiscussionImpl().getAll().stream()
+			.sorted((d1, d2) -> Integer.compare(
+					(int)dbcomment.getAll().stream().filter(c -> c.GetIDDiscussion().get() == d1.getIdDiscussion()).count(),
+					(int)dbcomment.getAll().stream().filter(c -> c.GetIDDiscussion().get() == d2.getIdDiscussion()).count()))
+			.limit(MAX_TOP).collect(Collectors.toList());
+		for(Discussion d : list)
 			model_hot.addRow(new Object[] {d.getTitle()});
 		
 		topdiscussiontable.setModel(model_hot);

@@ -14,15 +14,15 @@ import model.base.Category;
 import model.base.Discussion;
 import model.base.DiscussionImpl;
 import model.base.User;
+import rombo.new_class.Comments;
 
-public class DBDiscussionImpl extends DBManagerImpl implements DBDiscussion {
+public class DBDiscussionImpl extends DBManagerImpl implements Dao<DiscussionImpl> {
 
 	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	private Date d;
 	private ResultSet rs = null;
 	private PreparedStatement prepared;
 	private String query;
-	private final Integer MAX_TOP = 5;
 
 	private Optional<List<Discussion>> getDataBase() {
 		List<Discussion> discussion = new LinkedList<>();
@@ -33,8 +33,15 @@ public class DBDiscussionImpl extends DBManagerImpl implements DBDiscussion {
 
 			while (rs.next()) {
 				discussion.add(new DiscussionImpl(rs.getInt("idDiscussion"), rs.getInt("idUser"), rs.getString("title"),
-						rs.getString("description"), new DBCategoryImpl().getCategoryById(rs.getInt("idMacro")),
-						rs.getDate("data")));
+						rs.getString("description"), new DBCategoryImpl().getAll().stream().filter(c -> {
+							try {
+								return c.getId() == rs.getInt("idMacro");
+							} catch (SQLException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							return false;
+						}).findFirst().get(), rs.getDate("data")));
 			}
 			return Optional.of(discussion);
 		} catch (SQLException e) {
@@ -45,23 +52,58 @@ public class DBDiscussionImpl extends DBManagerImpl implements DBDiscussion {
 		}
 	}
 
-	private boolean setDataBase(final Integer idUser, final String title, final String description,
-			final String topic) {
+	public Optional<List<Discussion>> getDiscussion(final User user) {
+		return Optional.of(this.getDataBase().get().stream().filter(d -> d.getIdUser() == user.getId())
+				.collect(Collectors.toList()));
+	}
+
+	@Override
+	public List<DiscussionImpl> getAll() {
+		List<DiscussionImpl> discussion = new LinkedList<>();
+
+		try {
+			query = "select * from DISCUSSION";
+			rs = open().executeQuery(query);
+
+			while (rs.next()) {
+				discussion.add(new DiscussionImpl(rs.getInt("idDiscussion"), rs.getInt("idUser"), rs.getString("title"),
+						rs.getString("description"), new DBCategoryImpl().getAll().stream().filter(c -> {
+							try {
+								return c.getId() == rs.getInt("idMacro");
+							} catch (SQLException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							return false;
+						}).findFirst().get(), rs.getDate("data")));
+			}
+			return discussion;
+		} catch (SQLException e) {
+			System.out.println("Error while download discussion" + e);
+			return discussion;
+		} finally {
+			close();
+		}
+	}
+
+	@Override
+	public boolean create(DiscussionImpl t) {
 		try {
 
 			d = new Date();
 			query = "insert into DISCUSSION (idUser, title, description, idMacro,data) values (?,?,?,?,?)";
 			open();
 			prepared = super.getConn().prepareStatement(query);
-			prepared.setInt(1, idUser);
-			prepared.setString(2, title);
-			prepared.setString(3, description);
-			prepared.setInt(4, new DBCategoryImpl().getCategoryByName(topic).getId());
+			prepared.setInt(1, t.getIdUser());
+			prepared.setString(2, t.getTitle());
+			prepared.setString(3, t.getDescription());
+			prepared.setInt(4, new DBCategoryImpl().getAll().stream()
+					.filter(c -> c.getId() == t.getCategory().getId()).findFirst().get().getId());
 			prepared.setDate(5, java.sql.Date.valueOf(sdf.format(d)));
 
 			prepared.executeUpdate();
-			System.out.println("Discussion create successfully( " + title + " | "
-					+ new DBUserImpl().getUserFromId(idUser).get() + " )");
+			System.out.println("Discussion create successfully( " + t.getTitle() + " | "
+					+ new DBUserImpl().getUserFromId(t.getIdUser()).get() + " )");
 			return true;
 		} catch (Exception e) {
 			System.out.println("\nError while adding new discussion " + e);
@@ -71,62 +113,26 @@ public class DBDiscussionImpl extends DBManagerImpl implements DBDiscussion {
 		}
 	}
 
-	public Optional<List<Discussion>> getDiscussion(final User user) {
-		return Optional.of(this.getDataBase().get().stream().filter(d -> d.getIdUser() == user.getId())
-				.collect(Collectors.toList()));
-	}
-
-	public boolean createDiscussion(final Integer idUser, final String title, final String description,
-			final String topic) {
-		return this.setDataBase(idUser, title, description, topic);
+	@Override
+	public boolean update(DiscussionImpl t) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	@Override
-	public Optional<List<Discussion>> getAllDiscussion() {
-		return this.getDataBase();
-	}
-
-	@Override
-	public Optional<List<Discussion>> getAllDiscussion(final String title) {
-		return Optional.of(this.getDataBase().get().stream().filter(d -> d.getTitle().contains(title))
-				.collect(Collectors.toList()));
-	}
-
-	@Override
-	public Optional<List<Discussion>> getAllDiscussion(Category category) {
-		return Optional.of(this.getDataBase().get().stream().filter(d -> d.getCategory().getId() == category.getId())
-				.collect(Collectors.toList()));
-	}
-
-	@Override
-	public Optional<Discussion> getDiscussionFromId(final Integer idDiscussion) {
-		return Optional.of(this.getDataBase().get().stream().filter(d -> d.getIdDiscussion() == idDiscussion).findFirst().get());
-	}
-
-	@Override
-	public List<Discussion> getTopDiscussion() {
-
-		DBComments dbcomment = new DBCommentsImpl();
-		return this.getDataBase().get().stream()
-				.sorted((d1, d2) -> Integer.compare(dbcomment.getAllComments(d1.getIdDiscussion()).get().size(),
-						dbcomment.getAllComments(d2.getIdDiscussion()).get().size()))
-				.limit(MAX_TOP).collect(Collectors.toList());
-	}
-
-	@Override
-	public boolean deleteDiscussion(final Integer idDiscussion) {
-
+	public boolean delete(Integer id) {
 		try {
 			open();
 			query = "delete from DISCUSSION where idDiscussion = ?";
 			prepared = super.getConn().prepareStatement(query);
-			prepared.setInt(1, idDiscussion);
+			prepared.setInt(1, id);
 			prepared.executeUpdate();
 
-			if (new DBCommentsImpl().getAllComments(idDiscussion).isPresent()) {
+			if (!new DBCommentsImpl().getAll().stream().filter(c -> c.GetIDDiscussion().get() == id)
+					.collect(Collectors.toList()).isEmpty()) {
 				query = "delete from COMMENT where idDiscussion = ?";
 				prepared = super.getConn().prepareStatement(query);
-				prepared.setInt(1, idDiscussion);
+				prepared.setInt(1, id);
 				prepared.executeUpdate();
 			}
 
@@ -139,5 +145,13 @@ public class DBDiscussionImpl extends DBManagerImpl implements DBDiscussion {
 			close();
 		}
 	}
+
+//	return this.getDataBase().get().stream()
+//			.sorted((d1, d2) -> Integer.compare(
+//					dbcomment.getAll().stream().filter(c -> c.GetIDDiscussion().get() == d1.getIdDiscussion())
+//							.collect(Collectors.toList()).size(),
+//					dbcomment.getAll().stream().filter(c -> c.GetIDDiscussion().get() == d2.getIdDiscussion())
+//							.collect(Collectors.toList()).size()))
+//			.limit(MAX_TOP).collect(Collectors.toList());
 
 }

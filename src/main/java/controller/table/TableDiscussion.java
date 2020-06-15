@@ -2,23 +2,26 @@ package controller.table;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.stream.Collectors;
 
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import model.base.Category;
 import model.base.Discussion;
+import model.base.DiscussionImpl;
 import model.base.User;
 import model.database.DBDiscussion;
 import model.database.DBDiscussionImpl;
 import model.database.DBUserImpl;
+import model.database.Dao;
 import topic_gui.Topic_gui;
 
 public class TableDiscussion {
 
 	private JTable tableDiscussion;
 	private DefaultTableModel modelDiscussion;
-	private DBDiscussion dbdiscussion = new DBDiscussionImpl();
+	private Dao<DiscussionImpl> dbdiscussion = new DBDiscussionImpl();
 
 	public TableDiscussion(final User user) {
 		tableDiscussion = new JTable() {
@@ -58,10 +61,11 @@ public class TableDiscussion {
 			public void mousePressed(MouseEvent mouseEvent) {
 				if (mouseEvent.getClickCount() == 2) {
 
-					Discussion d = dbdiscussion.getDiscussionFromId(Integer.parseInt(
-							tableDiscussion.getModel().getValueAt(tableDiscussion.getSelectedRow(), 5).toString()))
-							.get();
-					new Topic_gui(d, user);
+					Discussion disc = dbdiscussion
+							.getAll().stream().filter(d -> d.getIdDiscussion() == Integer.parseInt(tableDiscussion
+									.getModel().getValueAt(tableDiscussion.getSelectedRow(), 5).toString()))
+							.findFirst().get();
+					new Topic_gui(disc, user);
 				}
 			}
 		});
@@ -100,21 +104,23 @@ public class TableDiscussion {
 	}
 
 	private void loadDiscussion(DefaultTableModel model) {
-		for (Discussion s : dbdiscussion.getAllDiscussion().get()) {
+		for (Discussion s : dbdiscussion.getAll()) {
 			model.addRow(new Object[] { s.getTitle(), s.getCategory().getName(), 0,
 					new DBUserImpl().getUserFromId(s.getIdUser()).get().getUsername(), 0, s.getIdDiscussion() });
 		}
 	}
 
 	private void loadDiscussion(DefaultTableModel model, final Category category) {
-		for (Discussion s : dbdiscussion.getAllDiscussion(category).get()) {
+		for (Discussion s : dbdiscussion.getAll().stream().filter(d -> d.getCategory().getId() == category.getId())
+				.collect(Collectors.toList())) {
 			model.addRow(new Object[] { s.getTitle(), s.getCategory().getName(), 0,
 					new DBUserImpl().getUserFromId(s.getIdUser()).get().getUsername(), 0, s.getIdDiscussion() });
 		}
 	}
 
 	private void loadDiscussion(DefaultTableModel model, final String filter) {
-		for (Discussion s : dbdiscussion.getAllDiscussion(filter).get()) {
+		for (Discussion s : dbdiscussion.getAll().stream().filter(d -> d.getTitle().contains(filter))
+				.collect(Collectors.toList())) {
 			model.addRow(new Object[] { s.getTitle(), s.getCategory().getName(), 0,
 					new DBUserImpl().getUserFromId(s.getIdUser()).get().getUsername(), 0, s.getIdDiscussion() });
 		}

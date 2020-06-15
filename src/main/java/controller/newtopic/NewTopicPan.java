@@ -9,7 +9,9 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Date;
 import java.util.Iterator;
+import java.util.stream.Collectors;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -27,11 +29,13 @@ import org.netbeans.lib.awtextra.AbsoluteConstraints;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
 
 import model.base.Category;
-
+import model.base.CategoryImpl;
+import model.base.DiscussionImpl;
 import model.base.User;
 
 import model.database.DBCategoryImpl;
 import model.database.DBDiscussionImpl;
+import model.database.Dao;
 import util.RulesPan;
 import util.TipsPan;
 
@@ -51,6 +55,7 @@ public class NewTopicPan extends JPanel {
 	 */
 
 	private User user;
+	private Dao<CategoryImpl> dbcategory = new DBCategoryImpl();
 
 	// private JTable table;
 	// public newtopic_gui(User user, JTable table)
@@ -149,10 +154,13 @@ public class NewTopicPan extends JPanel {
 		post_button.addActionListener(e -> {
 			if (jTextField1.getText().isEmpty() && description_textArea.getText().isEmpty())
 				JOptionPane.showMessageDialog(null, "You have to write something both in title and description");
-			else
-				new DBDiscussionImpl().createDiscussion(user.getId(), jTextField1.getText(),
-						preview_editorPane.getText(), String.valueOf(category.getSelectedItem()));
+			else {
+				Category cat = dbcategory.getAll().stream().filter(c -> c.getName() == String.valueOf(category.getSelectedItem())).findFirst().get();
+				new DBDiscussionImpl().create(new DiscussionImpl(0, user.getId(), jTextField1.getText(),
+						preview_editorPane.getText(), cat, new Date()));
 			// refresh table and close window
+			}
+				
 		});
 		topic_panel.add(post_button, new AbsoluteConstraints(610, 450, -1, -1));
 
@@ -203,7 +211,7 @@ public class NewTopicPan extends JPanel {
 	// End of variables declaration
 
 	private void addItemsCategories() {
-		Iterator<Category> ite = new DBCategoryImpl().getCategories().get().iterator();
+		Iterator<CategoryImpl> ite = dbcategory.getAll().iterator();
 		while (ite.hasNext())
 			category.addItem(ite.next().getName());
 	}

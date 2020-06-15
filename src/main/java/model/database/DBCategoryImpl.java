@@ -9,12 +9,15 @@ import java.util.Optional;
 import model.base.Category;
 import model.base.CategoryImpl;
 
-public class DBCategoryImpl extends DBManagerImpl implements DBCategory {
+public class DBCategoryImpl extends DBManagerImpl implements Dao<CategoryImpl> {
 	private ResultSet rs = null;
 	private String query;
+	private PreparedStatement prepared;
 
-	private Optional<List<Category>> getDataBase() {
-		List<Category> list = new ArrayList<>();
+
+	@Override
+	public List<CategoryImpl> getAll() {
+		List<CategoryImpl> list = new ArrayList<>();
 		query = "Select * from TOPIC";
 
 		try {
@@ -22,21 +25,22 @@ public class DBCategoryImpl extends DBManagerImpl implements DBCategory {
 			while (rs.next()) {
 				list.add(new CategoryImpl(rs.getInt("idMacro"), rs.getString("title")));
 			}
-
+			return list;
 		} catch (Exception e) {
 			System.out.println("Error while loading categories");
+			return list;
 		} finally {
 			close();
 		}
-		return Optional.of(list);
 	}
-	
-	private boolean setDataBase(final String newCategory) {
+
+	@Override
+	public boolean create(CategoryImpl t) {
 		try {
 			query = "insert into TOPIC (title) values (?)";
 			open();
 			PreparedStatement prepared = super.getConn().prepareStatement(query);
-			prepared.setString(1, newCategory);
+			prepared.setString(1, t.getName());
 			prepared.executeUpdate();
 			return true;
 		} catch (Exception e) {
@@ -46,32 +50,39 @@ public class DBCategoryImpl extends DBManagerImpl implements DBCategory {
 			close();
 		}
 	}
-	
-	public Optional<List<Category>> getCategories() {
-		return this.getDataBase();
-	}
 
-	public boolean existCategory(String name) {
-		return this.getDataBase().get().stream().filter(c -> c.getName().contains(name)).count() != 0;
-	}
-
-	/**
-	 * NON mi piace ma è per far vedere nella lista della HomePage
-	 * 
-	 * @return
-	 */
-	
-
-	public Category getCategoryByName(final String name) {
-		return this.getCategories().get().stream().filter(c -> c.getName().equals(name)).findFirst().get();
-	}
-
-	public Category getCategoryById(final Integer id) {
-		return this.getCategories().get().stream().filter(c -> c.getId() == id).findFirst().get();
+	@Override
+	public boolean update(CategoryImpl t) {
+		try {
+			query = "update TOPIC set title = (?) where idMacro = ?";
+			open();
+			PreparedStatement prepared = super.getConn().prepareStatement(query);
+			prepared.setString(1, t.getName());
+			prepared.setInt(2, t.getId());
+			prepared.executeUpdate();
+			return true;
+		} catch (Exception e) {
+			System.out.println("\nError while adding new discussion " + e);
+			return false;
+		} finally {
+			close();
+		}
 	}
 
 	@Override
-	public boolean addCategory(String newCat) {
-		return this.setDataBase(newCat);
+	public boolean delete(Integer id) {
+		try {
+			query = "delete from TOPIC where idMacro = ?";
+			open();
+			prepared = super.getConn().prepareStatement(query);
+			prepared.setInt(1, id);
+			prepared.executeUpdate();
+			return true;
+		} catch (Exception e) {
+			System.out.println("\nError while adding new discussion " + e);
+			return false;
+		} finally {
+			close();
+		}
 	}
 }
