@@ -33,8 +33,8 @@ import model.base.CategoryImpl;
 import model.base.DiscussionImpl;
 import model.base.User;
 
-import model.database.DBCategoryImpl;
-import model.database.DBDiscussionImpl;
+import model.database.DBCategory;
+import model.database.DBDiscussion;
 import model.database.Dao;
 import util.RulesPan;
 import util.TipsPan;
@@ -55,7 +55,7 @@ public class NewTopicPan extends JPanel {
 	 */
 
 	private User user;
-	private Dao<CategoryImpl> dbcategory = new DBCategoryImpl();
+	private Dao<CategoryImpl> dbcategory = new DBCategory();
 
 	// private JTable table;
 	// public newtopic_gui(User user, JTable table)
@@ -156,7 +156,7 @@ public class NewTopicPan extends JPanel {
 				JOptionPane.showMessageDialog(null, "You have to write something both in title and description");
 			else {
 				Category cat = dbcategory.getAll().stream().filter(c -> c.getName() == String.valueOf(category.getSelectedItem())).findFirst().get();
-				new DBDiscussionImpl().create(new DiscussionImpl(0, user.getId(), jTextField1.getText(),
+				new DBDiscussion().create(new DiscussionImpl(0, user.getId(), jTextField1.getText(),
 						preview_editorPane.getText(), cat, new Date()));
 			// refresh table and close window
 			}

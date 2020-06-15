@@ -35,14 +35,15 @@ import javax.swing.UIManager;
 import org.netbeans.lib.awtextra.AbsoluteConstraints;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
 
-
+import model.base.User;
 import model.database.DBUser;
 import model.database.DBUserImpl;
+import model.database.Dao;
 
 public class RegisterPan extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
-	private DBUser dbuser = new DBUserImpl();
+	private Dao<User> dbuser = new DBUserImpl();
 
 	public RegisterPan() {
 		
@@ -271,7 +272,7 @@ public class RegisterPan extends JPanel {
         signup_button.addActionListener(e ->{
         	if(!jCheckBox1.isSelected())
         		JOptionPane.showMessageDialog(null, "You have to accept our rules before sign up :0");
-        	else if(dbuser.register(this.getUsername(), this.getrPassword(), this.getEmail(), false)) {
+        	else if(dbuser.create(new User(0, this.getUsername(), this.getrPassword(), this.getEmail(), false))) {
         		JOptionPane.showMessageDialog(null, "Account created succesfully! :) ");
         		
         	}

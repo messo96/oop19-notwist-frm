@@ -12,7 +12,7 @@ import javax.swing.SwingWorker;
 
 import main.Loader;
 import model.base.Discussion;
-import model.database.DBDiscussionImpl;
+import model.database.DBDiscussion;
 import topic.Topic;
 import topic_gui.Topic_gui;
 
@@ -51,7 +51,7 @@ public class RandomPan extends JPanel {
 					Integer rand = Integer
 							.parseInt(table.getValueAt(new Random().nextInt(table.getRowCount()), 4).toString());
 
-					Discussion disc = new DBDiscussionImpl().getAll().stream().filter(d -> d.getIdDiscussion() == rand)
+					Discussion disc = new DBDiscussion().getAll().stream().filter(d -> d.getIdDiscussion() == rand)
 							.collect(Collectors.toList()).get(0);
 //	      	        		new Topic_gui(disc, user);
 					loader.end();

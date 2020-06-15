@@ -9,7 +9,7 @@ import java.util.Optional;
 import model.base.Category;
 import model.base.CategoryImpl;
 
-public class DBCategoryImpl extends DBManagerImpl implements Dao<CategoryImpl> {
+public class DBCategory extends DBManagerImpl implements Dao<CategoryImpl> {
 	private ResultSet rs = null;
 	private String query;
 	private PreparedStatement prepared;

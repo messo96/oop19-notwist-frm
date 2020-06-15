@@ -9,9 +9,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
+
 import rombo.new_class.*;
 
-public class DBCommentsImpl extends DBManagerImpl implements Dao<CommentsImplement> {
+public class DBComments extends DBManagerImpl implements Dao<CommentsImplement> {
 
 	private ResultSet rs;
 	PreparedStatement prepared;

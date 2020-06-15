@@ -67,8 +67,8 @@ public class TopicPan extends JPanel {
 		menu.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
 		date_user.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-		date_user.setText(this.discussion.getData() + "by "
-				+ new DBUserImpl().getUserFromId(this.discussion.getIdUser()).get().getUsername());
+		date_user.setText(this.discussion.getData() + "by " + new DBUserImpl().getAll().stream()
+				.filter(u -> u.getId() == discussion.getIdUser()).findFirst().get().getUsername());
 		date_user.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
 		javax.swing.GroupLayout discussion_partLayout = new javax.swing.GroupLayout(discussion_part);

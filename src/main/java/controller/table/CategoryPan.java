@@ -19,14 +19,14 @@ import javax.swing.border.TitledBorder;
 import main.Loader;
 import model.base.Category;
 import model.base.CategoryImpl;
-import model.database.DBCategoryImpl;
+import model.database.DBCategory;
 import model.database.Dao;
 
 public class CategoryPan extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private Loader loader = new Loader();
-	private Dao<CategoryImpl> dbcategory = new DBCategoryImpl();
+	private Dao<CategoryImpl> dbcategory = new DBCategory();
 
 	public CategoryPan(TableDiscussion tableDiscussion) {
 		drawComp(tableDiscussion);
@@ -59,7 +59,7 @@ public class CategoryPan extends JPanel {
 		);
 
 		jList.setModel(new AbstractListModel<String>() {
-			List<CategoryImpl> list = new DBCategoryImpl().getAll();
+			List<CategoryImpl> list = new DBCategory().getAll();
 
 			public int getSize() {
 				return list.size();

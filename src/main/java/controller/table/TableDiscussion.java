@@ -12,7 +12,7 @@ import model.base.Discussion;
 import model.base.DiscussionImpl;
 import model.base.User;
 import model.database.DBDiscussion;
-import model.database.DBDiscussionImpl;
+import model.database.DBDiscussion;
 import model.database.DBUserImpl;
 import model.database.Dao;
 import topic_gui.Topic_gui;
@@ -21,7 +21,7 @@ public class TableDiscussion {
 
 	private JTable tableDiscussion;
 	private DefaultTableModel modelDiscussion;
-	private Dao<DiscussionImpl> dbdiscussion = new DBDiscussionImpl();
+	private Dao<DiscussionImpl> dbdiscussion = new DBDiscussion();
 
 	public TableDiscussion(final User user) {
 		tableDiscussion = new JTable() {
@@ -105,24 +105,30 @@ public class TableDiscussion {
 
 	private void loadDiscussion(DefaultTableModel model) {
 		for (Discussion s : dbdiscussion.getAll()) {
-			model.addRow(new Object[] { s.getTitle(), s.getCategory().getName(), 0,
-					new DBUserImpl().getUserFromId(s.getIdUser()).get().getUsername(), 0, s.getIdDiscussion() });
+			model.addRow(new Object[] {
+					s.getTitle(), s.getCategory().getName(), 0, new DBUserImpl().getAll().stream()
+							.filter(u -> u.getId() == s.getIdUser()).findFirst().get().getUsername(),
+					0, s.getIdDiscussion() });
 		}
 	}
 
 	private void loadDiscussion(DefaultTableModel model, final Category category) {
 		for (Discussion s : dbdiscussion.getAll().stream().filter(d -> d.getCategory().getId() == category.getId())
 				.collect(Collectors.toList())) {
-			model.addRow(new Object[] { s.getTitle(), s.getCategory().getName(), 0,
-					new DBUserImpl().getUserFromId(s.getIdUser()).get().getUsername(), 0, s.getIdDiscussion() });
+			model.addRow(new Object[] {
+					s.getTitle(), s.getCategory().getName(), 0, new DBUserImpl().getAll().stream()
+							.filter(u -> u.getId() == s.getIdUser()).findFirst().get().getUsername(),
+					0, s.getIdDiscussion() });
 		}
 	}
 
 	private void loadDiscussion(DefaultTableModel model, final String filter) {
 		for (Discussion s : dbdiscussion.getAll().stream().filter(d -> d.getTitle().contains(filter))
 				.collect(Collectors.toList())) {
-			model.addRow(new Object[] { s.getTitle(), s.getCategory().getName(), 0,
-					new DBUserImpl().getUserFromId(s.getIdUser()).get().getUsername(), 0, s.getIdDiscussion() });
+			model.addRow(new Object[] {
+					s.getTitle(), s.getCategory().getName(), 0, new DBUserImpl().getAll().stream()
+							.filter(u -> u.getId() == s.getIdUser()).findFirst().get().getUsername(),
+					0, s.getIdDiscussion() });
 		}
 	}
 

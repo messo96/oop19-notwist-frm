@@ -13,7 +13,7 @@ import javax.swing.JEditorPane;
 
 import model.base.Discussion;
 import model.base.User;
-import model.database.DBCommentsImpl;
+import model.database.DBComments;
 import model.database.DBLikeDislike;
 import model.database.DBLikeDislikeImpl;
 import rombo.new_class.CommentsImplement;
@@ -203,7 +203,7 @@ public class Topic_gui extends javax.swing.JFrame {
         post_it.setText("Commenta");
         post_it.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         post_it.addActionListener(e -> {
-          new DBCommentsImpl().create(new CommentsImplement(user.getId(), newcomment_area.getText(), Optional.empty(), Optional.of(discussion.getIdDiscussion()), new Date()));
+          new DBComments().create(new CommentsImplement(user.getId(), newcomment_area.getText(), Optional.empty(), Optional.of(discussion.getIdDiscussion()), new Date()));
         });
 
         javax.swing.GroupLayout new_commentLayout = new javax.swing.GroupLayout(new_comment);
