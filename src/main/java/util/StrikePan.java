@@ -26,7 +26,6 @@ import javax.swing.table.DefaultTableModel;
 import model.base.User;
 import model.database.DBStrike;
 import model.database.DBStrikeImpl;
-import model.database.DBUser;
 import model.database.DBUserImpl;
 import model.database.Dao;
 

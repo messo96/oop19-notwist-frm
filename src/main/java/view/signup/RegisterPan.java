@@ -36,7 +36,6 @@ import org.netbeans.lib.awtextra.AbsoluteConstraints;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
 
 import model.base.User;
-import model.database.DBUser;
 import model.database.DBUserImpl;
 import model.database.Dao;
 

@@ -22,39 +22,6 @@ public class DBDiscussion extends DBManagerImpl implements Dao<DiscussionImpl> {
 	private PreparedStatement prepared;
 	private String query;
 
-	private Optional<List<Discussion>> getDataBase() {
-		List<Discussion> discussion = new LinkedList<>();
-
-		try {
-			query = "select * from DISCUSSION";
-			rs = open().executeQuery(query);
-
-			while (rs.next()) {
-				discussion.add(new DiscussionImpl(rs.getInt("idDiscussion"), rs.getInt("idUser"), rs.getString("title"),
-						rs.getString("description"), new DBCategory().getAll().stream().filter(c -> {
-							try {
-								return c.getId() == rs.getInt("idMacro");
-							} catch (SQLException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-							return false;
-						}).findFirst().get(), rs.getDate("data")));
-			}
-			return Optional.of(discussion);
-		} catch (SQLException e) {
-			System.out.println("Error while download discussion" + e);
-			return Optional.empty();
-		} finally {
-			close();
-		}
-	}
-
-	public Optional<List<Discussion>> getDiscussion(final User user) {
-		return Optional.of(this.getDataBase().get().stream().filter(d -> d.getIdUser() == user.getId())
-				.collect(Collectors.toList()));
-	}
-
 	@Override
 	public List<DiscussionImpl> getAll() {
 		List<DiscussionImpl> discussion = new LinkedList<>();
@@ -126,8 +93,7 @@ public class DBDiscussion extends DBManagerImpl implements Dao<DiscussionImpl> {
 			prepared.setInt(1, id);
 			prepared.executeUpdate();
 
-			if (!new DBComments().getAll().stream().filter(c -> c.GetIDDiscussion().get() == id)
-					.collect(Collectors.toList()).isEmpty()) {
+			if (new DBComments().getAll().stream().filter(c -> c.GetIDDiscussion().get() == id).count() != 0) {
 				query = "delete from COMMENT where idDiscussion = ?";
 				prepared = super.getConn().prepareStatement(query);
 				prepared.setInt(1, id);

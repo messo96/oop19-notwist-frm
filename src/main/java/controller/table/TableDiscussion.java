@@ -8,19 +8,26 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import model.base.Category;
+import model.base.CommentsImplements;
 import model.base.Discussion;
 import model.base.DiscussionImpl;
 import model.base.User;
+import model.database.DBComments;
 import model.database.DBDiscussion;
+import model.database.DBLikeDislike;
+import model.database.DBLikeDislikeImpl;
 import model.database.DBDiscussion;
 import model.database.DBUserImpl;
 import model.database.Dao;
+import rombo.new_class.CommentsImplement;
 import topic_gui.Topic_gui;
 
 public class TableDiscussion {
 
 	private JTable tableDiscussion;
 	private DefaultTableModel modelDiscussion;
+	private DBLikeDislike dblike = new DBLikeDislikeImpl();
+	private Dao<CommentsImplement> dbcomment = new DBComments();
 	private Dao<DiscussionImpl> dbdiscussion = new DBDiscussion();
 
 	public TableDiscussion(final User user) {
@@ -106,19 +113,22 @@ public class TableDiscussion {
 	private void loadDiscussion(DefaultTableModel model) {
 		for (Discussion s : dbdiscussion.getAll()) {
 			model.addRow(new Object[] {
-					s.getTitle(), s.getCategory().getName(), 0, new DBUserImpl().getAll().stream()
-							.filter(u -> u.getId() == s.getIdUser()).findFirst().get().getUsername(),
-					0, s.getIdDiscussion() });
+					s.getTitle(), s.getCategory().getName(), dblike.getLike(s.getIdDiscussion()), new DBUserImpl()
+							.getAll().stream().filter(u -> u.getId() == s.getIdUser()).findFirst().get().getUsername(),
+					(int) dbcomment.getAll().stream().filter(c -> c.GetIDDiscussion().get() == s.getIdDiscussion())
+					.count(), s.getIdDiscussion() });
 		}
 	}
 
 	private void loadDiscussion(DefaultTableModel model, final Category category) {
 		for (Discussion s : dbdiscussion.getAll().stream().filter(d -> d.getCategory().getId() == category.getId())
 				.collect(Collectors.toList())) {
-			model.addRow(new Object[] {
-					s.getTitle(), s.getCategory().getName(), 0, new DBUserImpl().getAll().stream()
-							.filter(u -> u.getId() == s.getIdUser()).findFirst().get().getUsername(),
-					0, s.getIdDiscussion() });
+			model.addRow(new Object[] { s.getTitle(), s.getCategory().getName(), dblike.getLike(s.getIdDiscussion()),
+					new DBUserImpl().getAll().stream().filter(u -> u.getId() == s.getIdUser()).findFirst().get()
+							.getUsername(),
+					(int) dbcomment.getAll().stream().filter(c -> c.GetIDDiscussion().get() == s.getIdDiscussion())
+							.count(),
+					s.getIdDiscussion() });
 		}
 	}
 
@@ -126,9 +136,10 @@ public class TableDiscussion {
 		for (Discussion s : dbdiscussion.getAll().stream().filter(d -> d.getTitle().contains(filter))
 				.collect(Collectors.toList())) {
 			model.addRow(new Object[] {
-					s.getTitle(), s.getCategory().getName(), 0, new DBUserImpl().getAll().stream()
-							.filter(u -> u.getId() == s.getIdUser()).findFirst().get().getUsername(),
-					0, s.getIdDiscussion() });
+					s.getTitle(), s.getCategory().getName(), dblike.getLike(s.getIdDiscussion()), new DBUserImpl()
+							.getAll().stream().filter(u -> u.getId() == s.getIdUser()).findFirst().get().getUsername(),
+							(int) dbcomment.getAll().stream().filter(c -> c.GetIDDiscussion().get() == s.getIdDiscussion())
+							.count(), s.getIdDiscussion() });
 		}
 	}
 
