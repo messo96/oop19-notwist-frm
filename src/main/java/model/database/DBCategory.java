@@ -16,7 +16,7 @@ public class DBCategory extends DBManagerImpl implements Dao<CategoryImpl> {
 
 
 	@Override
-	public List<CategoryImpl> getAll() {
+	public List<CategoryImpl> read() {
 		List<CategoryImpl> list = new ArrayList<>();
 		query = "Select * from TOPIC";
 

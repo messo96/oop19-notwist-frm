@@ -3,89 +3,65 @@ package model.database;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
+import java.util.List;
+
+import model.base.Strike;
 
 
-public class DBStrikeImpl extends DBManagerImpl implements DBStrike {
+public class DBStrike extends DBManagerImpl implements Dao<Strike> {
 	private String query;
 	private ResultSet rs;
-	private final Integer MAX_STRIKE = 3;
 
 	@Override
-	public Integer getStrikes(Integer idUser) {
-
+	public List<Strike> read() {
+		List<Strike> list = new LinkedList<>();
+		
 		try {
-			query = "select strike from UTENTE where idUser= " + idUser;
+			query = "select idUser, strike from UTENTE";
 			rs = open().executeQuery(query);
 
-			if (rs.next()) {
-				return rs.getInt("strike");
+			while(rs.next()) {
+				list.add(new Strike(rs.getInt("idUser"), rs.getInt("strike")));
 			}
-
+			return list;
 		} catch (SQLException e) {
-			System.out.println("Error while download strike from idUser:" + idUser + "\n" + e);
+			System.out.println("Error while download strike\n" + e);
+			return list;
 		} finally {
 			close();
 		}
-		return -1;
 	}
 
 	@Override
-	public boolean setStrike(final Integer idUser, final Integer value) {
+	public boolean create(Strike t) {
+		// Automatic create a strike when create User (default strike = 0)
+		return false;
+	}
+
+	@Override
+	public boolean update(Strike t) {
 		try {
 			open();
 			PreparedStatement prepared = getConn()
 					.prepareStatement("update UTENTE set strike = ? where idUser = ?");
 
-			prepared.setInt(1, value);
-			prepared.setInt(2, idUser);
+			prepared.setInt(1, t.getStrike());
+			prepared.setInt(2, t.getIdUser());
 			prepared.executeUpdate();
 			return true;
 		} catch (SQLException e) {
-			System.out.println("Error while increment strike from idUser:" + idUser + "\n" + e);
+			System.out.println("Error while increment strike from idUser:" + t.getIdUser() + "\n" + e);
 			return false;
 		}
 		finally {
 			close();
 		}
-
 	}
 
 	@Override
-	public boolean resetStrike(Integer idUser) {
-		try {
-			if (maxStrike(idUser)) {
-				open();
-				PreparedStatement prepared = getConn()
-						.prepareStatement("update UTENTE set strike = 0 where idUser = ?");
-
-				prepared.setInt(1, idUser);
-				prepared.executeUpdate();
-				return true;
-			} else
-				return false;
-		} catch (SQLException e) {
-			System.out.println("Error while increment strike from idUser:" + idUser + "\n" + e);
-			return false;
-		} finally {
-			close();
-		}
-	}
-
-	private boolean maxStrike(final Integer idUser) {
-		try {
-			query = "select strike from UTENTE where idUser= " + idUser;
-			rs = open().executeQuery(query);
-
-			if (rs.next() && rs.getInt("strike") >= MAX_STRIKE)
-				return true;
-			else
-				return false;
-		} catch (SQLException e) {
-			System.out.println("Error while control if strike is max from idUser:" + idUser + "\n" + e);
-			return false;
-		} finally {
-			close();
-		}
+	public boolean delete(Integer id) {
+		return this.update(new Strike(id,0));
 	}
 
 }

@@ -6,7 +6,7 @@ import java.util.List;
 //Design pattern DatabaseAccessObject
 public interface Dao<T> {
 
-	List<T> getAll();
+	List<T> read();
 	
 	boolean create(final T t);
 	

@@ -10,20 +10,25 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import controller.database.DBCategoryImpl;
+import controller.database.DBCommentsImpl;
+import controller.database.DBUserImpl;
 import model.base.Discussion;
 import model.base.DiscussionImpl;
 import model.base.User;
 
 public class DBDiscussion extends DBManagerImpl implements Dao<DiscussionImpl> {
 
+	private DBCategoryImpl dbcategory = new DBCategoryImpl();
+	private DBCommentsImpl dbcomments = new DBCommentsImpl();
+	private DBUserImpl dbuser = new DBUserImpl();
 	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-	private Date d;
 	private ResultSet rs = null;
 	private PreparedStatement prepared;
 	private String query;
 
 	@Override
-	public List<DiscussionImpl> getAll() {
+	public List<DiscussionImpl> read() {
 		List<DiscussionImpl> discussion = new LinkedList<>();
 
 		try {
@@ -32,15 +37,7 @@ public class DBDiscussion extends DBManagerImpl implements Dao<DiscussionImpl> {
 
 			while (rs.next()) {
 				discussion.add(new DiscussionImpl(rs.getInt("idDiscussion"), rs.getInt("idUser"), rs.getString("title"),
-						rs.getString("description"), new DBCategory().getAll().stream().filter(c -> {
-							try {
-								return c.getId() == rs.getInt("idMacro");
-							} catch (SQLException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-							return false;
-						}).findFirst().get(), rs.getDate("data")));
+						rs.getString("description"), dbcategory.getCategory(rs.getInt("idMacro")).get(), rs.getDate("data")));
 			}
 			return discussion;
 		} catch (SQLException e) {
@@ -54,21 +51,18 @@ public class DBDiscussion extends DBManagerImpl implements Dao<DiscussionImpl> {
 	@Override
 	public boolean create(DiscussionImpl t) {
 		try {
-
-			d = new Date();
 			query = "insert into DISCUSSION (idUser, title, description, idMacro,data) values (?,?,?,?,?)";
 			open();
 			prepared = super.getConn().prepareStatement(query);
 			prepared.setInt(1, t.getIdUser());
 			prepared.setString(2, t.getTitle());
 			prepared.setString(3, t.getDescription());
-			prepared.setInt(4, new DBCategory().getAll().stream().filter(c -> c.getId() == t.getCategory().getId())
-					.findFirst().get().getId());
-			prepared.setDate(5, java.sql.Date.valueOf(sdf.format(d)));
+			prepared.setInt(4, t.getCategory().getId());
+			prepared.setDate(5, java.sql.Date.valueOf(sdf.format(t.getData())));
 
 			prepared.executeUpdate();
-			System.out.println("Discussion create successfully( " + t.getTitle() + " | " + new DBUserImpl().getAll()
-					.stream().filter(u -> u.getId() == t.getIdUser()).findFirst().get().getUsername() + " )");
+			System.out.println("Discussion create successfully( " + t.getTitle() + " | "
+					+ dbuser.getUser(t.getIdUser()).get().getUsername() + " )");
 			return true;
 		} catch (Exception e) {
 			System.out.println("\nError while adding new discussion " + e);
@@ -85,18 +79,18 @@ public class DBDiscussion extends DBManagerImpl implements Dao<DiscussionImpl> {
 	}
 
 	@Override
-	public boolean delete(Integer id) {
+	public boolean delete(Integer idDiscussion) {
 		try {
 			open();
 			query = "delete from DISCUSSION where idDiscussion = ?";
 			prepared = super.getConn().prepareStatement(query);
-			prepared.setInt(1, id);
+			prepared.setInt(1, idDiscussion);
 			prepared.executeUpdate();
 
-			if (new DBComments().getAll().stream().filter(c -> c.GetIDDiscussion().get() == id).count() != 0) {
+			if (dbcomments.getComments(idDiscussion).get().size() != 0) {
 				query = "delete from COMMENT where idDiscussion = ?";
 				prepared = super.getConn().prepareStatement(query);
-				prepared.setInt(1, id);
+				prepared.setInt(1, idDiscussion);
 				prepared.executeUpdate();
 			}
 

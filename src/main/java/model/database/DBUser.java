@@ -11,7 +11,7 @@ import model.crypt.CrypterImplementation;
 /**
  * Class for manage interaction with database from Users
  */
-public class DBUserImpl extends DBManagerImpl implements Dao<User> {
+public class DBUser extends DBManagerImpl implements Dao<User> {
 
 	private ResultSet rs = null;
 	private String query;
@@ -20,7 +20,7 @@ public class DBUserImpl extends DBManagerImpl implements Dao<User> {
 
 
 	@Override
-	public List<User> getAll() {
+	public List<User> read() {
 		List<User> list = new LinkedList<>();
 
 		try {

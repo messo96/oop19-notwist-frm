@@ -155,7 +155,7 @@ public class NewTopicPan extends JPanel {
 			if (jTextField1.getText().isEmpty() && description_textArea.getText().isEmpty())
 				JOptionPane.showMessageDialog(null, "You have to write something both in title and description");
 			else {
-				Category cat = dbcategory.getAll().stream().filter(c -> c.getName() == String.valueOf(category.getSelectedItem())).findFirst().get();
+				Category cat = dbcategory.read().stream().filter(c -> c.getName() == String.valueOf(category.getSelectedItem())).findFirst().get();
 				new DBDiscussion().create(new DiscussionImpl(0, user.getId(), jTextField1.getText(),
 						preview_editorPane.getText(), cat, new Date()));
 			// refresh table and close window
@@ -211,7 +211,7 @@ public class NewTopicPan extends JPanel {
 	// End of variables declaration
 
 	private void addItemsCategories() {
-		Iterator<CategoryImpl> ite = dbcategory.getAll().iterator();
+		Iterator<CategoryImpl> ite = dbcategory.read().iterator();
 		while (ite.hasNext())
 			category.addItem(ite.next().getName());
 	}

@@ -8,64 +8,45 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class DBLikeDislikeImpl extends DBManagerImpl implements DBLikeDislike {
-	private class LikeSet {
-		Boolean like;
-		Boolean dislike;
-		Integer idUser;
+import model.base.LikeSet;
 
-		LikeSet(final Boolean isLike, final Boolean isDislike, final Integer idUser) {
-			this.like = isLike;
-			this.dislike = isDislike;
-			this.idUser = idUser;
-		}
-
-		public Boolean getLike() {
-			return this.like;
-		}
-
-		public Boolean getDislike() {
-			return this.dislike;
-		}
-
-		public Integer getIdUser() {
-			return this.idUser;
-		}
-
-	}
+public class DBLikeDislike extends DBManagerImpl implements Dao<LikeSet> {
 
 	private String query;
 	private PreparedStatement prepared;
 	private ResultSet rs;
 
-	private Optional<List<LikeSet>> getDataBase(final Integer idDiscussion) {
+	@Override
+	public List<LikeSet> read() {
 		List<LikeSet> list = new LinkedList<>();
 		try {
-			query = "select * from LIKES where idDiscussion= " + idDiscussion;
+			query = "select * from LIKES";
 			rs = open().executeQuery(query);
 			while (rs.next()) {
-				list.add(new LikeSet(rs.getBoolean("isLike"), rs.getBoolean("isDislike"), rs.getInt("idUser")));
+				list.add(new LikeSet(rs.getBoolean("isLike"), rs.getBoolean("isDislike"), rs.getInt("idUser"),
+						rs.getInt("idDiscussion")));
 			}
-			return Optional.of(list);
+			return list;
 		} catch (SQLException e) {
 			System.out.println("Error while delete comment" + e);
-			return Optional.empty();
+			return list;
 		} finally {
 			close();
 		}
 	}
-	
-	private boolean setDataBase(final Integer idDiscussion, final Integer idUser, final boolean isLike, final boolean isDislike) {
+
+	@Override
+	public boolean create(LikeSet t) {
 		try {
 
 			query = "insert into LIKES (idUser, idDiscussion, isLike, isDislike) values (?,?,?,?)";
 			open();
 			prepared = super.getConn().prepareStatement(query);
-			prepared.setInt(1, idUser);
-			prepared.setInt(2, idDiscussion);
-			prepared.setBoolean(3, isLike);
-			prepared.setBoolean(4, isDislike);
-			
+			prepared.setInt(1, t.getIdUser());
+			prepared.setInt(2, t.getIdDiscussion());
+			prepared.setBoolean(3, t.getLike());
+			prepared.setBoolean(4, t.getDislike());
+
 			prepared.executeUpdate();
 			return true;
 		} catch (Exception e) {
@@ -77,38 +58,31 @@ public class DBLikeDislikeImpl extends DBManagerImpl implements DBLikeDislike {
 	}
 
 	@Override
-	public Integer getLike(Integer idDiscussion) {
-		return this.getDataBase(idDiscussion).get().stream().filter(s -> s.getLike()).collect(Collectors.toList())
-				.size();
+	public boolean update(LikeSet t) {
+		try {
+
+			query = "update LIKES set isLike= ?, isDislike ? where idUser= ? AND idDiscussion= ?";
+			open();
+			prepared = super.getConn().prepareStatement(query);
+			prepared.setBoolean(1, t.getLike());
+			prepared.setBoolean(2, t.getDislike());
+			prepared.setInt(3, t.getIdUser());
+			prepared.setInt(4, t.getIdDiscussion());
+
+			prepared.executeUpdate();
+			return true;
+		} catch (Exception e) {
+			System.out.println("\nError while adding new comment in discussion " + e);
+			return false;
+		} finally {
+			close();
+		}
 	}
 
 	@Override
-	public Integer getDislike(Integer idDiscussion) {
-		return this.getDataBase(idDiscussion).get().stream().filter(s -> s.getDislike()).collect(Collectors.toList())
-				.size();
+	public boolean delete(Integer id) {
+		// Cannot delete only with idDiscussion or idUser
+		return false;
 	}
-
-	@Override
-	public boolean isStillLiked(Integer idDiscussion, Integer idUser) {
-		return !this.getDataBase(idDiscussion).get().stream().filter(s -> s.getLike() && s.getIdUser() == idUser).collect(Collectors.toList()).isEmpty();
-	}
-
-	@Override
-	public boolean isStillDisliked(Integer idDiscussion, Integer idUser) {
-		return !this.getDataBase(idDiscussion).get().stream().filter(s -> s.getDislike() && s.getIdUser() == idUser).collect(Collectors.toList()).isEmpty();
-
-	}
-
-	@Override
-	public boolean addLike(Integer idDiscussion, Integer idUser) {
-		return this.setDataBase(idDiscussion, idUser, true, false);
-	}
-
-	@Override
-	public boolean addDislike(Integer idDiscussion, Integer idUser) {
-		return this.setDataBase(idDiscussion, idUser, false, true);
-	}
-
-	
 
 }

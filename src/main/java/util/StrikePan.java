@@ -23,10 +23,12 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
+import controller.database.DBStrikeImpl;
+import controller.database.DBUserImpl;
 import model.base.User;
 import model.database.DBStrike;
-import model.database.DBStrikeImpl;
-import model.database.DBUserImpl;
+import model.database.DBStrike;
+import model.database.DBUser;
 import model.database.Dao;
 
 public class StrikePan extends JPanel {
@@ -34,8 +36,8 @@ public class StrikePan extends JPanel {
 	 * Create panel for the strike tab
 	 */
 	private static final long serialVersionUID = 1L;
-	private Dao<User> dbuser = new DBUserImpl();
-	private DBStrike dbstrike = new DBStrikeImpl();
+	private DBUserImpl dbuser = new DBUserImpl();
+	private DBStrikeImpl dbstrike = new DBStrikeImpl();
 	private User user;
 	private final Integer MAX_STRIKE = 3;
 
@@ -168,8 +170,8 @@ public class StrikePan extends JPanel {
 
 	private void refreshTable() {
 		model_strikes.getDataVector().removeAllElements();
-		for (User u : dbuser.getAll())
-			model_strikes.addRow(new Object[] { u.getId(), u.getUsername(), dbstrike.getStrikes(u.getId()) });
+		for (User u : dbuser.read())
+			model_strikes.addRow(new Object[] { u.getId(), u.getUsername(), dbstrike.getStrike(u.getId()) });
 		strikes_table.setModel(model_strikes);
 		strikes_table.revalidate();
 	}
@@ -178,10 +180,10 @@ public class StrikePan extends JPanel {
 		if (strikes_table.getSelectionModel().isSelectionEmpty())
 			JOptionPane.showMessageDialog(null, "You have to select a row in the table before");
 		else {
-			user = dbuser.getAll().stream().filter(u -> u.getId() == Integer
-					.parseInt(strikes_table.getModel().getValueAt(strikes_table.getSelectedRow(), 0).toString())).findFirst().get();
+			user = dbuser.getUser(Integer
+					.parseInt(strikes_table.getModel().getValueAt(strikes_table.getSelectedRow(), 0).toString())).get();
 			usernamestrikable.setText(user.getUsername());
-			nstrike.setText(dbstrike.getStrikes(user.getId()).toString());
+			nstrike.setText(dbstrike.getStrike(user.getId()).toString());
 			try {
 				strikedialog.getContentPane();
 				strikedialog.setSize(400, 350);

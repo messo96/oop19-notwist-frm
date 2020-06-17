@@ -3,25 +3,20 @@ package view.gui.login;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Window;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.WindowEvent;
 import java.util.Optional;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JEditorPane;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -29,27 +24,23 @@ import javax.swing.JPasswordField;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 
-import javax.swing.JScrollPane;
 
-import javax.swing.JTextArea;
 
 import javax.swing.SwingUtilities;
 import javax.swing.BorderFactory;
-import javax.swing.GroupLayout;
 import javax.swing.SwingWorker;
-import javax.swing.UIManager;
 
 import org.netbeans.lib.awtextra.AbsoluteConstraints;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
 
+import controller.database.DBUserImpl;
 import model.base.User;
-import model.database.DBUserImpl;
-import model.database.Dao;
+
 import view.gui.BuildAfterGui;
 
 public class LoginPan extends JPanel {
 	private static final long serialVersionUID = 1L;
-	private Dao<User> user = new DBUserImpl();
+	private DBUserImpl dbuser = new DBUserImpl();
 
 	public LoginPan() {
 
@@ -200,8 +191,7 @@ public class LoginPan extends JPanel {
 	}
 
 	public Optional<User> getCredential() {
-		return user.getAll().stream()
-				.filter(u -> u.getEmail().equals(getMail()) && u.getPassword().equals(getPassword())).findFirst();
+		return dbuser.login(getMail(), getPassword());
 	}
 
 	private void signup_linkMouseClicked(MouseEvent evt) {

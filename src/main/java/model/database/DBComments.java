@@ -21,7 +21,7 @@ public class DBComments extends DBManagerImpl implements Dao<CommentsImplement> 
 
 
 	@Override
-	public List<CommentsImplement> getAll() {
+	public List<CommentsImplement> read() {
 		List<CommentsImplement> list = new LinkedList<>();
 
 		try {

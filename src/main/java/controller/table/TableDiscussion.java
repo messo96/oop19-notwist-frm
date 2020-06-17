@@ -2,33 +2,28 @@ package controller.table;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.stream.Collectors;
 
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import controller.database.DBCommentsImpl;
+import controller.database.DBDiscussionImpl;
+import controller.database.DBLikeDislikeImpl;
+import controller.database.DBUserImpl;
 import model.base.Category;
-import model.base.CommentsImplements;
 import model.base.Discussion;
-import model.base.DiscussionImpl;
 import model.base.User;
-import model.database.DBComments;
-import model.database.DBDiscussion;
-import model.database.DBLikeDislike;
-import model.database.DBLikeDislikeImpl;
-import model.database.DBDiscussion;
-import model.database.DBUserImpl;
-import model.database.Dao;
-import rombo.new_class.CommentsImplement;
+
 import topic_gui.Topic_gui;
 
 public class TableDiscussion {
 
 	private JTable tableDiscussion;
 	private DefaultTableModel modelDiscussion;
-	private DBLikeDislike dblike = new DBLikeDislikeImpl();
-	private Dao<CommentsImplement> dbcomment = new DBComments();
-	private Dao<DiscussionImpl> dbdiscussion = new DBDiscussion();
+	private DBLikeDislikeImpl dblike = new DBLikeDislikeImpl();
+	private DBCommentsImpl dbcomment = new DBCommentsImpl();
+	private DBUserImpl dbuser = new DBUserImpl();
+	private DBDiscussionImpl dbdiscussion = new DBDiscussionImpl();
 
 	public TableDiscussion(final User user) {
 		tableDiscussion = new JTable() {
@@ -68,10 +63,10 @@ public class TableDiscussion {
 			public void mousePressed(MouseEvent mouseEvent) {
 				if (mouseEvent.getClickCount() == 2) {
 
-					Discussion disc = dbdiscussion
-							.getAll().stream().filter(d -> d.getIdDiscussion() == Integer.parseInt(tableDiscussion
-									.getModel().getValueAt(tableDiscussion.getSelectedRow(), 5).toString()))
-							.findFirst().get();
+					Discussion disc = dbdiscussion.getDiscussion(Integer.parseInt(
+							tableDiscussion.getModel().getValueAt(tableDiscussion.getSelectedRow(), 5).toString()))
+							.get();
+
 					new Topic_gui(disc, user);
 				}
 			}
@@ -111,35 +106,26 @@ public class TableDiscussion {
 	}
 
 	private void loadDiscussion(DefaultTableModel model) {
-		for (Discussion s : dbdiscussion.getAll()) {
-			model.addRow(new Object[] {
-					s.getTitle(), s.getCategory().getName(), dblike.getLike(s.getIdDiscussion()), new DBUserImpl()
-							.getAll().stream().filter(u -> u.getId() == s.getIdUser()).findFirst().get().getUsername(),
-					(int) dbcomment.getAll().stream().filter(c -> c.GetIDDiscussion().get() == s.getIdDiscussion())
-					.count(), s.getIdDiscussion() });
+		for (Discussion s : dbdiscussion.read()) {
+			model.addRow(new Object[] { s.getTitle(), s.getCategory().getName(), dblike.getLikes(s.getIdDiscussion()),
+					dbuser.getUser(s.getIdUser()).get().getUsername(),
+					dbcomment.getComments(s.getIdDiscussion()).get().size(), s.getIdDiscussion() });
 		}
 	}
 
 	private void loadDiscussion(DefaultTableModel model, final Category category) {
-		for (Discussion s : dbdiscussion.getAll().stream().filter(d -> d.getCategory().getId() == category.getId())
-				.collect(Collectors.toList())) {
-			model.addRow(new Object[] { s.getTitle(), s.getCategory().getName(), dblike.getLike(s.getIdDiscussion()),
-					new DBUserImpl().getAll().stream().filter(u -> u.getId() == s.getIdUser()).findFirst().get()
-							.getUsername(),
-					(int) dbcomment.getAll().stream().filter(c -> c.GetIDDiscussion().get() == s.getIdDiscussion())
-							.count(),
-					s.getIdDiscussion() });
+		for (Discussion s : dbdiscussion.getDiscussion(category).get()) {
+			model.addRow(new Object[] { s.getTitle(), s.getCategory().getName(), dblike.getLikes(s.getIdDiscussion()),
+					dbuser.getUser(s.getIdUser()).get().getUsername(),
+					dbcomment.getComments(s.getIdDiscussion()).get().size(), s.getIdDiscussion() });
 		}
 	}
 
 	private void loadDiscussion(DefaultTableModel model, final String filter) {
-		for (Discussion s : dbdiscussion.getAll().stream().filter(d -> d.getTitle().contains(filter))
-				.collect(Collectors.toList())) {
-			model.addRow(new Object[] {
-					s.getTitle(), s.getCategory().getName(), dblike.getLike(s.getIdDiscussion()), new DBUserImpl()
-							.getAll().stream().filter(u -> u.getId() == s.getIdUser()).findFirst().get().getUsername(),
-							(int) dbcomment.getAll().stream().filter(c -> c.GetIDDiscussion().get() == s.getIdDiscussion())
-							.count(), s.getIdDiscussion() });
+		for (Discussion s : dbdiscussion.getDiscussion(filter).get()) {
+			model.addRow(new Object[] { s.getTitle(), s.getCategory().getName(), dblike.getLikes(s.getIdDiscussion()),
+					dbuser.getUser(s.getIdUser()).get().getUsername(),
+					dbcomment.getComments(s.getIdDiscussion()).get().size(), s.getIdDiscussion() });
 		}
 	}
 

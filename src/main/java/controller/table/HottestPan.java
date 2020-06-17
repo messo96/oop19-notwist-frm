@@ -12,6 +12,8 @@ import javax.swing.JTable;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
+import controller.database.DBCommentsImpl;
+import controller.database.DBDiscussionImpl;
 import model.base.Discussion;
 import model.base.DiscussionImpl;
 import model.database.DBComments;
@@ -24,10 +26,8 @@ import rombo.new_class.CommentsImplement;
 public class HottestPan extends JPanel{
 
 	private static final long serialVersionUID = 1L;
-	private Dao<CommentsImplement> dbcomment = new DBComments();
-	
-	private final Integer MAX_TOP = 5;
-	
+	private DBDiscussionImpl dbdiscussion = new DBDiscussionImpl();
+		
 	public HottestPan() {
 		
 		drawComp();
@@ -69,11 +69,7 @@ public class HottestPan extends JPanel{
         add(hottest_panel);
 	}
         private void fillTable() {
-        	List<DiscussionImpl> list = new DBDiscussion().getAll().stream()
-			.sorted((d1, d2) -> Integer.compare(
-					(int)dbcomment.getAll().stream().filter(c -> c.GetIDDiscussion().get() == d1.getIdDiscussion()).count(),
-					(int)dbcomment.getAll().stream().filter(c -> c.GetIDDiscussion().get() == d2.getIdDiscussion()).count()))
-			.limit(MAX_TOP).collect(Collectors.toList());
+        	List<DiscussionImpl> list = dbdiscussion.getTopDiscussion().get();
 		for(Discussion d : list)
 			model_hot.addRow(new Object[] {d.getTitle()});
 		
