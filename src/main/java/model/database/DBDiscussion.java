@@ -74,7 +74,7 @@ public class DBDiscussion extends DBManagerImpl implements Dao<DiscussionImpl> {
 
 	@Override
 	public boolean update(DiscussionImpl t) {
-		// TODO Auto-generated method stub
+		// Cannot edit a published discussion
 		return false;
 	}
 

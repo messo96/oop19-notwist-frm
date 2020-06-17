@@ -22,7 +22,7 @@ abstract class DBManagerImpl {
 
 	}
 
-	public Statement open() {
+	protected Statement open() {
 		try {
 			conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/7lncuOhnfh", "7lncuOhnfh",
 					"DLmbbVHESb");
@@ -37,7 +37,7 @@ abstract class DBManagerImpl {
 		return null;
 	}
 
-	public void close() {
+	protected void close() {
 		try {
 			conn.close();
 			System.out.println("Connection closed safely");
@@ -47,7 +47,7 @@ abstract class DBManagerImpl {
 		}
 	}
 
-	public Connection getConn() {
+	protected Connection getConn() {
 		return conn;
 	}
 
