@@ -1,73 +1,131 @@
 package model.database;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
-import model.base.Category;
+import controller.database.DBCategoryImpl;
+import controller.database.DBCommentsImpl;
+import controller.database.DBUserImpl;
 import model.base.Discussion;
+import model.base.DiscussionImpl;
 import model.base.User;
 
-public interface DBDiscussion {
+/**
+ * Class for Discussion table based on DAO
+ * 
+ * @author gio
+ *
+ */
+public class DBDiscussion extends DBManagerImpl implements Dao<DiscussionImpl> {
 
-	/**
-	 * Search discussion/s of the user
-	 * 
-	 * @param idUser identifier of user that create the return discussion
-	 * @return Optional empty if user hasn't create a discussion, Optional list of
-	 *         discussions otherwise
-	 */
-	public Optional<List<Discussion>> getDiscussion(final User user);
+	private DBCategoryImpl dbcategory = new DBCategoryImpl();
+	private DBCommentsImpl dbcomments = new DBCommentsImpl();
+	private DBUserImpl dbuser = new DBUserImpl();
+	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	private ResultSet rs = null;
+	private PreparedStatement prepared;
+	private String query;
 
-	/**
-	 * Create a new discussion and load on database
-	 * 
-	 * @param idUser
-	 * @param title
-	 * @param description
-	 * @param topic
-	 * @return
-	 */
-	public boolean createDiscussion(final Integer idUser, final String title, final String description,
-			final String topic);
+	@Override
+	public List<DiscussionImpl> read() {
+		List<DiscussionImpl> discussion = new LinkedList<>();
 
-	/**
-	 * 
-	 * @return all the Discussion on database
-	 */
-	public Optional<List<Discussion>> getAllDiscussion();
+		try {
+			query = "select * from DISCUSSION";
+			rs = open().executeQuery(query);
 
-	/**
-	 * 
-	 * @param title title to search in discussion
-	 * @return all the discussion filter by that search
-	 */
-	public Optional<List<Discussion>> getAllDiscussion(final String title);
+			while (rs.next()) {
+				discussion.add(new DiscussionImpl(rs.getInt("idDiscussion"), rs.getInt("idUser"), rs.getString("title"),
+						rs.getString("description"), dbcategory.getCategory(rs.getInt("idMacro")).get(),
+						rs.getDate("data")));
+			}
+			return discussion;
+		} catch (SQLException e) {
+			System.out.println("Error while download discussion" + e);
+			return discussion;
+		} finally {
+			close();
+		}
+	}
 
-	/**
-	 * 
-	 * @param category search discussion by category
-	 * @return all the discussion filter by that search
-	 * 
-	 */
-	public Optional<List<Discussion>> getAllDiscussion(final Category category);
+	@Override
+	public boolean create(DiscussionImpl t) {
+		try {
+			query = "insert into DISCUSSION (idUser, title, description, idMacro,data) values (?,?,?,?,?)";
+			open();
+			prepared = super.getConn().prepareStatement(query);
+			prepared.setInt(1, t.getIdUser());
+			prepared.setString(2, t.getTitle());
+			prepared.setString(3, t.getDescription());
+			prepared.setInt(4, t.getCategory().getId());
+			prepared.setDate(5, java.sql.Date.valueOf(sdf.format(t.getData())));
 
-	/**
-	 * 
-	 * @param idDiscussion of the discussion to search
-	 * @return Optional list of Discussion, empty if there aren't discussion created by idUser
-	 */
-	public Optional<Discussion> getDiscussionFromId(final Integer idDiscussion);
+			prepared.executeUpdate();
+			System.out.println("Discussion create successfully( " + t.getTitle() + " | "
+					+ dbuser.getUser(t.getIdUser()).get().getUsername() + " )");
+			return true;
+		} catch (Exception e) {
+			System.out.println("\nError while adding new discussion " + e);
+			return false;
+		} finally {
+			close();
+		}
+	}
 
-	/**
-	 * 
-	 * @return limited list of Discussion ascendent by number of comments
-	 */
-	public List<Discussion> getTopDiscussion();
+	@Override
+	public boolean update(DiscussionImpl t) {
+		try {
+			query = "update DISCUSSION set title = ?, description = ?, idMacro= ? where idDiscussion= ? ";
+			open();
+			prepared = super.getConn().prepareStatement(query);
+			prepared.setString(1, t.getTitle());
+			prepared.setString(2, t.getDescription());
+			prepared.setInt(3, t.getCategory().getId());
+			prepared.setInt(4, t.getIdDiscussion());
 
-	/**
-	 * 
-	 * @param idDiscussion identifier of discussion to delete
-	 * @return True if succesfully deleted, false otherwise
-	 */
-	public boolean deleteDiscussion(final Integer idDiscussion);
+			prepared.executeUpdate();
+			System.out.println("Discussion update successfully( " + t.getTitle() + " | "
+					+ dbuser.getUser(t.getIdUser()).get().getUsername() + " )");
+			return true;
+		} catch (Exception e) {
+			System.out.println("\nError while adding new discussion " + e);
+			return false;
+		} finally {
+			close();
+		}
+	}
+
+	@Override
+	public boolean delete(Integer idDiscussion) {
+		try {
+			open();
+			query = "delete from DISCUSSION where idDiscussion = ?";
+			prepared = super.getConn().prepareStatement(query);
+			prepared.setInt(1, idDiscussion);
+			prepared.executeUpdate();
+
+			if (dbcomments.getComments(idDiscussion).get().size() != 0) {
+				query = "delete from COMMENT where idDiscussion = ?";
+				prepared = super.getConn().prepareStatement(query);
+				prepared.setInt(1, idDiscussion);
+				prepared.executeUpdate();
+			}
+
+			return true;
+
+		} catch (SQLException e) {
+			System.out.println("Error while delete discussion and attached comments" + e);
+			return false;
+		} finally {
+			close();
+		}
+	}
+
 }

@@ -3,6 +3,7 @@ package controller.table;
 import java.awt.Color;
 import java.awt.Font;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
@@ -11,15 +12,22 @@ import javax.swing.JTable;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
+import controller.database.DBCommentsImpl;
+import controller.database.DBDiscussionImpl;
 import model.base.Discussion;
-import model.database.DBDiscussionImpl;
+import model.base.DiscussionImpl;
+import model.database.DBComments;
+import model.database.DBDiscussion;
+import model.database.Dao;
+import rombo.new_class.CommentsImplement;
 
 
 
 public class HottestPan extends JPanel{
 
 	private static final long serialVersionUID = 1L;
-	
+	private DBDiscussionImpl dbdiscussion = new DBDiscussionImpl();
+		
 	public HottestPan() {
 		
 		drawComp();
@@ -61,7 +69,8 @@ public class HottestPan extends JPanel{
         add(hottest_panel);
 	}
         private void fillTable() {
-		for(Discussion d : new DBDiscussionImpl().getTopDiscussion())
+        	List<DiscussionImpl> list = dbdiscussion.getTopDiscussion().get();
+		for(Discussion d : list)
 			model_hot.addRow(new Object[] {d.getTitle()});
 		
 		topdiscussiontable.setModel(model_hot);

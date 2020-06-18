@@ -1,32 +1,67 @@
 package model.database;
 
-public interface DBStrike {
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.LinkedList;
+import java.util.List;
 
-	/**
-	 * 
-	 * @param idUser id of the user to get Strikes
-	 * @return
-	 * 			number of strikes
-	 */
-	public Integer getStrikes(final Integer idUser);
-	
-	/**
-	 * 
-	 * @param idUser id of the user to change own strikes
-	 * @return
-	 * 			True if the change completely successfully, false otherwise
-	 */
-	public boolean setStrike(final Integer idUser, final Integer value);
-	
-	
-	/**
-	 * 
-	 * @param idUser 
-	 * @return
-	 * 			True if Strike is equal to 3 and can reset, false if not equal and then cannot reset Strike
-	 */
-	public boolean resetStrike(final Integer idUser);
+import model.base.Strike;
 
 
-	
+public class DBStrike extends DBManagerImpl implements Dao<Strike> {
+	private String query;
+	private ResultSet rs;
+
+	@Override
+	public List<Strike> read() {
+		List<Strike> list = new LinkedList<>();
+		
+		try {
+			query = "select idUser, strike from UTENTE";
+			rs = open().executeQuery(query);
+
+			while(rs.next()) {
+				list.add(new Strike(rs.getInt("idUser"), rs.getInt("strike")));
+			}
+			return list;
+		} catch (SQLException e) {
+			System.out.println("Error while download strike\n" + e);
+			return list;
+		} finally {
+			close();
+		}
+	}
+
+	@Override
+	public boolean create(Strike t) {
+		// Automatic create a strike when create User (default strike = 0)
+		return false;
+	}
+
+	@Override
+	public boolean update(Strike t) {
+		try {
+			open();
+			PreparedStatement prepared = getConn()
+					.prepareStatement("update UTENTE set strike = ? where idUser = ?");
+
+			prepared.setInt(1, t.getStrike());
+			prepared.setInt(2, t.getIdUser());
+			prepared.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			System.out.println("Error while increment strike from idUser:" + t.getIdUser() + "\n" + e);
+			return false;
+		}
+		finally {
+			close();
+		}
+	}
+
+	@Override
+	public boolean delete(Integer id) {
+		return this.update(new Strike(id,0));
+	}
+
 }

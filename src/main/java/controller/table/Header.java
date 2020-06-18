@@ -22,13 +22,15 @@ import javax.swing.LayoutStyle;
 import javax.swing.SwingConstants;
 
 import main.Loader;
+import model.base.DiscussionImpl;
 import model.database.DBDiscussion;
-import model.database.DBDiscussionImpl;
+import model.database.DBDiscussion;
+import model.database.Dao;
 
 public class Header extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private DBDiscussion dbdiscussion = new DBDiscussionImpl();
+//	private Dao<DiscussionImpl> dbdiscussion = new DBDiscussionImpl();
 //	private User actualUser = null;
 	private Loader loader;
 	private CardLayout card;

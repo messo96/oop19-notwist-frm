@@ -5,11 +5,14 @@
  */
 package controller.newtopic;
 
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Date;
 import java.util.Iterator;
+import java.util.stream.Collectors;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -26,12 +29,17 @@ import javax.swing.JTextField;
 import org.netbeans.lib.awtextra.AbsoluteConstraints;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
 
+import controller.database.DBCategoryImpl;
+import controller.database.DBDiscussionImpl;
+import controller.table.TableDiscussion;
 import model.base.Category;
-
+import model.base.CategoryImpl;
+import model.base.DiscussionImpl;
 import model.base.User;
 
-import model.database.DBCategoryImpl;
-import model.database.DBDiscussionImpl;
+import model.database.DBCategory;
+import model.database.DBDiscussion;
+import model.database.Dao;
 import util.RulesPan;
 import util.TipsPan;
 
@@ -51,19 +59,21 @@ public class NewTopicPan extends JPanel {
 	 */
 
 	private User user;
+	private DBCategoryImpl dbcategory = new DBCategoryImpl();
+	private DBDiscussionImpl dbdiscussion = new DBDiscussionImpl();
 
 	// private JTable table;
 	// public newtopic_gui(User user, JTable table)
-	public NewTopicPan(final User user) {
+	public NewTopicPan(final User user, TableDiscussion table) {
 		this.user = user;
-		initComponents();
+		initComponents(table);
 		// this.actualUser = user;
 		// this.setVisible(true);
 		// this.table = table;
 
 	}
 
-	private void initComponents() {
+	private void initComponents(TableDiscussion table) {
 
 		newtopic_panel = new JPanel();
 		category_filter = new JComboBox<>();
@@ -80,7 +90,6 @@ public class NewTopicPan extends JPanel {
 		preview_editorPane = new JEditorPane();
 		notify_checkbox = new JCheckBox();
 		post_button = new JButton();
-		preview_button = new JButton();
 		textPreview_label1 = new JLabel();
 		rules_panel = new RulesPan();
 		markups_panel = new TipsPan();
@@ -134,7 +143,6 @@ public class NewTopicPan extends JPanel {
 		preview_editorPane.setContentType("text/html");
 ///////        ep.setText("html code");
 		preview_editorPane.setEnabled(false);
-
 		jScrollPane2.setViewportView(preview_editorPane);
 
 		topic_panel.add(jScrollPane2, new AbsoluteConstraints(10, 111, 675, 135));
@@ -147,12 +155,18 @@ public class NewTopicPan extends JPanel {
 
 		post_button.setText("Posta");
 		post_button.addActionListener(e -> {
+			Category cat = dbcategory.getCategory(String.valueOf(category.getSelectedItem())).get();
 			if (jTextField1.getText().isEmpty() && description_textArea.getText().isEmpty())
 				JOptionPane.showMessageDialog(null, "You have to write something both in title and description");
-			else
-				new DBDiscussionImpl().createDiscussion(user.getId(), jTextField1.getText(),
-						preview_editorPane.getText(), String.valueOf(category.getSelectedItem()));
-			// refresh table and close window
+			else {
+				dbdiscussion
+				.createDiscussion(user.getId(), jTextField1.getText(), preview_editorPane.getText(), cat);
+				JOptionPane.showMessageDialog(null, "Discussion successfully created");
+				table.refreshTableDiscussion();
+				CardLayout card = (CardLayout) getParent().getLayout();
+				card.show(getParent(), "homepage_panel");
+			}
+
 		});
 		topic_panel.add(post_button, new AbsoluteConstraints(610, 450, -1, -1));
 
@@ -191,7 +205,6 @@ public class NewTopicPan extends JPanel {
 
 	private JCheckBox notify_checkbox;
 	private JButton post_button;
-	private JButton preview_button;
 	private JTextArea description_textArea;
 	private JEditorPane preview_editorPane;
 
@@ -203,7 +216,7 @@ public class NewTopicPan extends JPanel {
 	// End of variables declaration
 
 	private void addItemsCategories() {
-		Iterator<Category> ite = new DBCategoryImpl().getCategories().get().iterator();
+		Iterator<CategoryImpl> ite = dbcategory.read().iterator();
 		while (ite.hasNext())
 			category.addItem(ite.next().getName());
 	}

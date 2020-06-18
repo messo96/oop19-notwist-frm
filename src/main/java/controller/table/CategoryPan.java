@@ -1,7 +1,5 @@
 package controller.table;
 
-
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
@@ -18,92 +16,84 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingWorker;
 import javax.swing.border.TitledBorder;
 
+import controller.database.DBCategoryImpl;
 import main.Loader;
 import model.base.Category;
+import model.base.CategoryImpl;
 import model.database.DBCategory;
-import model.database.DBCategoryImpl;
 
-
-
-public class CategoryPan extends JPanel{
+public class CategoryPan extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private Loader loader = new Loader();
-	private DBCategory dbcategory = new DBCategoryImpl();
-	
+	private DBCategoryImpl dbcategory = new DBCategoryImpl();
+
 	public CategoryPan(TableDiscussion tableDiscussion) {
 		drawComp(tableDiscussion);
 	}
-	
+
 	private void drawComp(TableDiscussion tableDiscussion) {
-		
+
 		category_panel = new JPanel();
-        category_list = new JScrollPane();
-        jList = new javax.swing.JList<>();
-	    category_panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createMatteBorder(3, 3, 3, 3, new Color(0, 0, 0)), "category", TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION, new Font("Tahoma", 0, 14))); // NOI18N
-	    category_panel.setFont(new Font("Tahoma", 0, 14)); // NOI18N
-	    
-        jList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        category_list.setViewportView(jList);   
-        
-	        jList.setFont(new Font("Tahoma", 0, 14)); // NOI18N
+		category_list = new JScrollPane();
+		jList = new javax.swing.JList<>();
+		category_panel.setBorder(
+				BorderFactory.createTitledBorder(BorderFactory.createMatteBorder(3, 3, 3, 3, new Color(0, 0, 0)),
+						"category", TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION, new Font("Tahoma", 0, 14))); // NOI18N
+		category_panel.setFont(new Font("Tahoma", 0, 14)); // NOI18N
 
-	        GroupLayout category_panelLayout = new GroupLayout(category_panel);
-	        category_panel.setLayout(category_panelLayout);
-	        category_panelLayout.setHorizontalGroup(
-	            category_panelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-	            .addGroup(category_panelLayout.createSequentialGroup()
-	                .addContainerGap()
-	                .addComponent(category_list,210, 210,Short.MAX_VALUE)
-	                .addContainerGap())
-	        );
-	        category_panelLayout.setVerticalGroup(
-	            category_panelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-	            .addGroup(category_panelLayout.createSequentialGroup()
-	                .addContainerGap()
-	                .addComponent(category_list, GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
-	                .addContainerGap())
-	            
-	          
-	        );
-	    
-	        jList.setModel(new AbstractListModel<String>() {
-	        	List<Category> list = new DBCategoryImpl().getCategories().get();
-	        	public int getSize() { return list.size(); }
-	            public String getElementAt(int i) { return list.get(i).getName(); }
-	        });
-	        
-	        
-	        //Filter results of discussions by choosen category on list on the right
-	        jList.addMouseListener(new MouseAdapter() {
+		jList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		category_list.setViewportView(jList);
 
-	        	public void mouseClicked(MouseEvent e) {
-	        		loader.start();
-	        		new SwingWorker<String,Object>(){
+		jList.setFont(new Font("Tahoma", 0, 14)); // NOI18N
 
-	        			@Override
-	        			protected String doInBackground() throws Exception {
-	        			 	Category cat = dbcategory.getCategoryByName(jList.getSelectedValue());
-	        			 	tableDiscussion.refreshTableDiscussion(cat);
-	        				loader.end();
-	        				return "";
-	        			}
-	 				
-	        		}.execute();
-	        	}
-	        });
-	        
+		GroupLayout category_panelLayout = new GroupLayout(category_panel);
+		category_panel.setLayout(category_panelLayout);
+		category_panelLayout.setHorizontalGroup(category_panelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addGroup(category_panelLayout.createSequentialGroup().addContainerGap()
+						.addComponent(category_list, 210, 210, Short.MAX_VALUE).addContainerGap()));
+		category_panelLayout.setVerticalGroup(category_panelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addGroup(category_panelLayout.createSequentialGroup().addContainerGap()
+						.addComponent(category_list, GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE).addContainerGap())
 
+		);
 
-	        
-	        add(category_panel);
+		jList.setModel(new AbstractListModel<String>() {
+			List<CategoryImpl> list = new DBCategory().read();
+
+			public int getSize() {
+				return list.size();
+			}
+
+			public String getElementAt(int i) {
+				return list.get(i).getName();
+			}
+		});
+
+		// Filter results of discussions by choosen category on list on the right
+		jList.addMouseListener(new MouseAdapter() {
+
+			public void mouseClicked(MouseEvent e) {
+				loader.start();
+				new SwingWorker<String, Object>() {
+
+					@Override
+					protected String doInBackground() throws Exception {
+						Category cat = dbcategory.getCategory(jList.getSelectedValue()).get();
+						tableDiscussion.refreshTableDiscussion(cat);
+						loader.end();
+						return "";
+					}
+
+				}.execute();
+			}
+		});
+
+		add(category_panel);
 	}
-	
-	
-        
-    private JPanel category_panel;
-    private JScrollPane category_list;
-    private JList<String> jList;
 
-    
+	private JPanel category_panel;
+	private JScrollPane category_list;
+	private JList<String> jList;
+
 }

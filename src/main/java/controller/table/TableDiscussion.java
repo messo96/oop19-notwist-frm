@@ -6,19 +6,24 @@ import java.awt.event.MouseEvent;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import controller.database.DBCommentsImpl;
+import controller.database.DBDiscussionImpl;
+import controller.database.DBLikeDislikeImpl;
+import controller.database.DBUserImpl;
 import model.base.Category;
 import model.base.Discussion;
 import model.base.User;
-import model.database.DBDiscussion;
-import model.database.DBDiscussionImpl;
-import model.database.DBUserImpl;
+
 import topic_gui.Topic_gui;
 
 public class TableDiscussion {
 
 	private JTable tableDiscussion;
 	private DefaultTableModel modelDiscussion;
-	private DBDiscussion dbdiscussion = new DBDiscussionImpl();
+	private DBLikeDislikeImpl dblike = new DBLikeDislikeImpl();
+	private DBCommentsImpl dbcomment = new DBCommentsImpl();
+	private DBUserImpl dbuser = new DBUserImpl();
+	private DBDiscussionImpl dbdiscussion = new DBDiscussionImpl();
 
 	public TableDiscussion(final User user) {
 		tableDiscussion = new JTable() {
@@ -58,10 +63,11 @@ public class TableDiscussion {
 			public void mousePressed(MouseEvent mouseEvent) {
 				if (mouseEvent.getClickCount() == 2) {
 
-					Discussion d = dbdiscussion.getDiscussionFromId(Integer.parseInt(
+					Discussion disc = dbdiscussion.getDiscussion(Integer.parseInt(
 							tableDiscussion.getModel().getValueAt(tableDiscussion.getSelectedRow(), 5).toString()))
 							.get();
-					new Topic_gui(d, user);
+
+					new Topic_gui(disc, user);
 				}
 			}
 		});
@@ -100,23 +106,26 @@ public class TableDiscussion {
 	}
 
 	private void loadDiscussion(DefaultTableModel model) {
-		for (Discussion s : dbdiscussion.getAllDiscussion().get()) {
-			model.addRow(new Object[] { s.getTitle(), s.getCategory().getName(), 0,
-					new DBUserImpl().getUserFromId(s.getIdUser()).get().getUsername(), 0, s.getIdDiscussion() });
+		for (Discussion s : dbdiscussion.read()) {
+			model.addRow(new Object[] { s.getTitle(), s.getCategory().getName(), dblike.getLikes(s.getIdDiscussion()),
+					dbuser.getUser(s.getIdUser()).get().getUsername(),
+					dbcomment.getComments(s.getIdDiscussion()).get().size(), s.getIdDiscussion() });
 		}
 	}
 
 	private void loadDiscussion(DefaultTableModel model, final Category category) {
-		for (Discussion s : dbdiscussion.getAllDiscussion(category).get()) {
-			model.addRow(new Object[] { s.getTitle(), s.getCategory().getName(), 0,
-					new DBUserImpl().getUserFromId(s.getIdUser()).get().getUsername(), 0, s.getIdDiscussion() });
+		for (Discussion s : dbdiscussion.getDiscussion(category).get()) {
+			model.addRow(new Object[] { s.getTitle(), s.getCategory().getName(), dblike.getLikes(s.getIdDiscussion()),
+					dbuser.getUser(s.getIdUser()).get().getUsername(),
+					dbcomment.getComments(s.getIdDiscussion()).get().size(), s.getIdDiscussion() });
 		}
 	}
 
 	private void loadDiscussion(DefaultTableModel model, final String filter) {
-		for (Discussion s : dbdiscussion.getAllDiscussion(filter).get()) {
-			model.addRow(new Object[] { s.getTitle(), s.getCategory().getName(), 0,
-					new DBUserImpl().getUserFromId(s.getIdUser()).get().getUsername(), 0, s.getIdDiscussion() });
+		for (Discussion s : dbdiscussion.getDiscussion(filter).get()) {
+			model.addRow(new Object[] { s.getTitle(), s.getCategory().getName(), dblike.getLikes(s.getIdDiscussion()),
+					dbuser.getUser(s.getIdUser()).get().getUsername(),
+					dbcomment.getComments(s.getIdDiscussion()).get().size(), s.getIdDiscussion() });
 		}
 	}
 

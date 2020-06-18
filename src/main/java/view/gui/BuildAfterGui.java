@@ -59,7 +59,7 @@ public class BuildAfterGui extends JFrame {
 		holder_panel = new HolderPan(tableDiscussion);
 		holder_panel.setVisible(true);
 		bodyHolder.add(holder_panel, "homepage_panel");
-		newtopic_panel = new NewTopicPan(user);
+		newtopic_panel = new NewTopicPan(user, tableDiscussion);
 		newtopic_panel.setVisible(true);
 		bodyHolder.add(newtopic_panel, "newtopic_panel");
 		profile_panel = new Profile(user);

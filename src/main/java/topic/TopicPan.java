@@ -3,20 +3,19 @@ package topic;
 import javax.swing.JEditorPane;
 import javax.swing.JPanel;
 
+import controller.database.DBLikeDislikeImpl;
+import controller.database.DBUserImpl;
 import model.base.Discussion;
-import model.base.User;
 import model.database.DBLikeDislike;
-import model.database.DBLikeDislikeImpl;
-import model.database.DBUserImpl;
 
 public class TopicPan extends JPanel {
 	private static final long serialVersionUID = 1L;
 	/**
 	 * Creates new Profile Panel
 	 */
-	private User user = null;
+	private DBUserImpl dbuser = new DBUserImpl();
 	private Discussion discussion = null;
-	private DBLikeDislike dblike = new DBLikeDislikeImpl();
+	private DBLikeDislikeImpl dblike = new DBLikeDislikeImpl();
 
 	public TopicPan() {
 		initComponents();
@@ -56,10 +55,10 @@ public class TopicPan extends JPanel {
 		n_likes.setText("like");
 		n_likes.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-		like.setText(String.valueOf(dblike.getLike(this.discussion.getIdDiscussion())));
+		like.setText(String.valueOf(dblike.getLikes(this.discussion.getIdDiscussion())));
 		like.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-		dislike.setText(String.valueOf(dblike.getDislike(this.discussion.getIdDiscussion())));
+		dislike.setText(String.valueOf(dblike.getDislikes(this.discussion.getIdDiscussion())));
 		dislike.setToolTipText("");
 		dislike.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -67,8 +66,8 @@ public class TopicPan extends JPanel {
 		menu.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
 		date_user.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-		date_user.setText(this.discussion.getData() + "by "
-				+ new DBUserImpl().getUserFromId(this.discussion.getIdUser()).get().getUsername());
+		date_user.setText(
+				this.discussion.getData() + "by " + dbuser.getUser(discussion.getIdUser()).get().getUsername());
 		date_user.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
 		javax.swing.GroupLayout discussion_partLayout = new javax.swing.GroupLayout(discussion_part);
