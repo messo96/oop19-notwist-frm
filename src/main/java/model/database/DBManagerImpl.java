@@ -36,7 +36,6 @@ abstract class DBManagerImpl {
 			conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/7lncuOhnfh", "7lncuOhnfh",
 					"DLmbbVHESb");
 			stmt = conn.createStatement();
-			System.out.print("Database is connected !");
 			return stmt;
 		} catch (SQLException e) {
 			System.out.println("Error while connect with database" + e);
@@ -52,7 +51,6 @@ abstract class DBManagerImpl {
 	protected void close() {
 		try {
 			conn.close();
-			System.out.println("Connection closed safely");
 		} catch (SQLException e) {
 			System.out.println(e);
 		}
