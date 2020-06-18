@@ -4,11 +4,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-import model.base.Category;
 import model.base.CategoryImpl;
 
+/**
+ * Class for Category table based on DAO
+ * @author gio
+ *
+ */
 public class DBCategory extends DBManagerImpl implements Dao<CategoryImpl> {
 	private ResultSet rs = null;
 	private String query;

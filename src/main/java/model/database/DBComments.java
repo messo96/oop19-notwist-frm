@@ -12,6 +12,11 @@ import java.util.Optional;
 
 import rombo.new_class.*;
 
+/**
+ * Class for Comment table based on DAO
+ * @author gio
+ *
+ */
 public class DBComments extends DBManagerImpl implements Dao<CommentsImplement> {
 
 	private ResultSet rs;

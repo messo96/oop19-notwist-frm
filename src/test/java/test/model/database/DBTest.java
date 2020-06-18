@@ -44,7 +44,7 @@ public class DBTest {
 	@Test
 	public void testDBDiscussionAndComments() {
 		Optional<CategoryImpl> cat = dbcategory.getCategory("SPORT");
-		Date date = new Date();
+		//Date date = new Date();
 		assertNotEquals(cat, Optional.empty());
 		assertEquals(dbdiscussion.getDiscussions(testUser.getId()).get().size(), 0);
 		dbdiscussion.createDiscussion(testUser.getId(), "TITLE TEST", "This is a description", cat.get());

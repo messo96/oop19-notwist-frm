@@ -6,8 +6,6 @@
 package topic_gui;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Optional;
 
 import javax.swing.JEditorPane;
 import javax.swing.JOptionPane;
@@ -17,10 +15,7 @@ import controller.database.DBLikeDislikeImpl;
 import controller.database.DBUserImpl;
 import model.base.Discussion;
 import model.base.User;
-import model.database.DBComments;
-import model.database.DBLikeDislike;
-import model.database.DBLikeDislike;
-import rombo.new_class.CommentsImplement;
+
 
 /**
  *
@@ -36,7 +31,6 @@ public class Topic_gui extends javax.swing.JFrame {
 	private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 	private DBLikeDislikeImpl dblike = new DBLikeDislikeImpl();
 	private DBCommentsImpl dbcomments = new DBCommentsImpl();
-
 	public Topic_gui(final Discussion discussion, final User user) {
 		this.user = user;
 		this.discussion = discussion;
@@ -146,25 +140,28 @@ public class Topic_gui extends javax.swing.JFrame {
 		like.addActionListener(e ->{
 			if(!dblike.setLike(discussion.getIdDiscussion(), user.getId()))
 				JOptionPane.showMessageDialog(null, "You have still liked this");
-			else
+			else {
 				like.setText(String.valueOf(dblike.getLikes(this.discussion.getIdDiscussion())));
-
+				dislike.setText(String.valueOf(dblike.getDislikes(this.discussion.getIdDiscussion())));
+			}
 		});
 		dislike.setText(String.valueOf(dblike.getDislikes(this.discussion.getIdDiscussion())));
 		dislike.setToolTipText("");
 		dislike.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 		dislike.addActionListener(e ->{
-			if(dblike.setDislike(discussion.getIdDiscussion(), user.getId()))
+			if(!dblike.setDislike(discussion.getIdDiscussion(), user.getId()))
 				JOptionPane.showMessageDialog(null, "You have still disliked this");
-			else
+			else {
+				like.setText(String.valueOf(dblike.getLikes(this.discussion.getIdDiscussion())));
 				dislike.setText(String.valueOf(dblike.getDislikes(this.discussion.getIdDiscussion())));
+			}
 		});
 		
 		menu.setText(".");
 		menu.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
 		date_user.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-		date_user.setText("Published by: " + new DBUserImpl().getUser(discussion.getIdDiscussion()).get().getUsername()
+		date_user.setText("Published by: " + new DBUserImpl().getUser(discussion.getIdUser()).get().getUsername()
 				+ " on: " + sdf.format(discussion.getData()));
 		date_user.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 

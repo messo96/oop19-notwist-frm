@@ -17,6 +17,12 @@ import model.base.Discussion;
 import model.base.DiscussionImpl;
 import model.base.User;
 
+/**
+ * Class for Discussion table based on DAO
+ * 
+ * @author gio
+ *
+ */
 public class DBDiscussion extends DBManagerImpl implements Dao<DiscussionImpl> {
 
 	private DBCategoryImpl dbcategory = new DBCategoryImpl();
@@ -37,7 +43,8 @@ public class DBDiscussion extends DBManagerImpl implements Dao<DiscussionImpl> {
 
 			while (rs.next()) {
 				discussion.add(new DiscussionImpl(rs.getInt("idDiscussion"), rs.getInt("idUser"), rs.getString("title"),
-						rs.getString("description"), dbcategory.getCategory(rs.getInt("idMacro")).get(), rs.getDate("data")));
+						rs.getString("description"), dbcategory.getCategory(rs.getInt("idMacro")).get(),
+						rs.getDate("data")));
 			}
 			return discussion;
 		} catch (SQLException e) {
@@ -74,8 +81,25 @@ public class DBDiscussion extends DBManagerImpl implements Dao<DiscussionImpl> {
 
 	@Override
 	public boolean update(DiscussionImpl t) {
-		// Cannot edit a published discussion
-		return false;
+		try {
+			query = "update DISCUSSION set title = ?, description = ?, idMacro= ? where idDiscussion= ? ";
+			open();
+			prepared = super.getConn().prepareStatement(query);
+			prepared.setString(1, t.getTitle());
+			prepared.setString(2, t.getDescription());
+			prepared.setInt(3, t.getCategory().getId());
+			prepared.setInt(4, t.getIdDiscussion());
+
+			prepared.executeUpdate();
+			System.out.println("Discussion update successfully( " + t.getTitle() + " | "
+					+ dbuser.getUser(t.getIdUser()).get().getUsername() + " )");
+			return true;
+		} catch (Exception e) {
+			System.out.println("\nError while adding new discussion " + e);
+			return false;
+		} finally {
+			close();
+		}
 	}
 
 	@Override

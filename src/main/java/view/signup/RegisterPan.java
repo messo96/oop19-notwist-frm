@@ -244,7 +244,8 @@ public class RegisterPan extends JPanel {
 				JOptionPane.showMessageDialog(null, "You have to accept our rules before sign up :0");
 			else if (dbuser.register(this.getUsername(), this.getrPassword(), this.getEmail(), false)) {
 				JOptionPane.showMessageDialog(null, "Account created succesfully! :) ");
-
+				CardLayout card = (CardLayout) getParent().getLayout();
+				card.show(getParent(), "login");
 			}
 
 			else

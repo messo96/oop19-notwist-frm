@@ -5,11 +5,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 import model.base.LikeSet;
 
+/**
+ * Class for Likes table based on DAO
+ * 
+ * @author gio
+ *
+ */
 public class DBLikeDislike extends DBManagerImpl implements Dao<LikeSet> {
 
 	private String query;
@@ -23,12 +27,12 @@ public class DBLikeDislike extends DBManagerImpl implements Dao<LikeSet> {
 			query = "select * from LIKES";
 			rs = open().executeQuery(query);
 			while (rs.next()) {
-				list.add(new LikeSet(rs.getBoolean("isLike"), rs.getBoolean("isDislike"), rs.getInt("idUser"),
-						rs.getInt("idDiscussion")));
+				list.add(new LikeSet(rs.getInt("idLikes"), rs.getBoolean("isLike"), rs.getBoolean("isDislike"),
+						rs.getInt("idUser"), rs.getInt("idDiscussion")));
 			}
 			return list;
 		} catch (SQLException e) {
-			System.out.println("Error while delete comment" + e);
+			System.out.println("Error while read all likes of discussion" + e);
 			return list;
 		} finally {
 			close();
@@ -50,7 +54,7 @@ public class DBLikeDislike extends DBManagerImpl implements Dao<LikeSet> {
 			prepared.executeUpdate();
 			return true;
 		} catch (Exception e) {
-			System.out.println("\nError while adding new comment in discussion " + e);
+			System.out.println("\nError while adding new like/dislike in discussion " + e);
 			return false;
 		} finally {
 			close();
@@ -61,7 +65,7 @@ public class DBLikeDislike extends DBManagerImpl implements Dao<LikeSet> {
 	public boolean update(LikeSet t) {
 		try {
 
-			query = "update LIKES set isLike= ?, isDislike ? where idUser= ? AND idDiscussion= ?";
+			query = "update LIKES set isLike= ?, isDislike= ? where idUser= ? AND idDiscussion= ?";
 			open();
 			prepared = super.getConn().prepareStatement(query);
 			prepared.setBoolean(1, t.getLike());
@@ -81,8 +85,20 @@ public class DBLikeDislike extends DBManagerImpl implements Dao<LikeSet> {
 
 	@Override
 	public boolean delete(Integer id) {
-		// Cannot delete only with idDiscussion or idUser
-		return false;
+		try {
+			query = "delete from LIKES where idLikes = ?";
+			open();
+			prepared = super.getConn().prepareStatement(query);
+			prepared.setInt(1, id);
+
+			prepared.executeUpdate();
+			return true;
+		} catch (Exception e) {
+			System.out.println("\nError while delete like in discussion " + e);
+			return false;
+		} finally {
+			close();
+		}
 	}
 
 }

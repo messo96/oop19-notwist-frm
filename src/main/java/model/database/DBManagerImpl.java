@@ -7,6 +7,11 @@ import java.sql.Statement;
 
 import javax.swing.JOptionPane;
 
+/**
+ * Abstract class that establish a connection from remote database
+ * @author gio
+ *
+ */
 abstract class DBManagerImpl {
 
 	private Connection conn;
@@ -22,6 +27,10 @@ abstract class DBManagerImpl {
 
 	}
 
+	/**
+	 * open connection for the transfer data
+	 * @return Statement object if open worked, null otherwise
+	 */
 	protected Statement open() {
 		try {
 			conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/7lncuOhnfh", "7lncuOhnfh",
@@ -37,16 +46,22 @@ abstract class DBManagerImpl {
 		return null;
 	}
 
+	/**
+	 * close the connection
+	 */
 	protected void close() {
 		try {
 			conn.close();
 			System.out.println("Connection closed safely");
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e);
 		}
 	}
 
+	/**
+	 * 
+	 * @return instance of Connection object
+	 */
 	protected Connection getConn() {
 		return conn;
 	}

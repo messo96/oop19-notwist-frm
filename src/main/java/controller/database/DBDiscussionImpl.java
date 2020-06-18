@@ -13,10 +13,11 @@ public class DBDiscussionImpl extends DBDiscussion {
 	private DBCommentsImpl dbcomments = new DBCommentsImpl();
 	private final Integer MAX_TOP = 5;
 
-	
-	public boolean createDiscussion(final Integer idUser, final String title, final String description, final Category category) {
+	public boolean createDiscussion(final Integer idUser, final String title, final String description,
+			final Category category) {
 		return super.create(new DiscussionImpl(0, idUser, title, description, category, new Date()));
 	}
+
 	public Optional<DiscussionImpl> getDiscussion(final Integer idDiscussion) {
 		return super.read().stream().filter(d -> d.getIdDiscussion() == idDiscussion).findFirst();
 	}
