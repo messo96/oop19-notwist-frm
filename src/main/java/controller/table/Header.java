@@ -65,8 +65,8 @@ public class Header extends JPanel {
             }
         });
 
-		category_filter.setFont(new Font("Tahoma", 0, 14)); // NOI18N
-		category_filter.setText("Temporanea tabella");
+    category_filter.setFont(new Font("Tahoma", 0, 14)); // NOI18N
+	category_filter.setText("Temporaneo topic");
 
 		category_filter.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent evt) {
@@ -180,14 +180,7 @@ public class Header extends JPanel {
 	private void category_filterMouseClicked(MouseEvent evt) {
 		card.show(parent, "topic_panel");
 	}
-	/*
-	 * private void search_buttonActionPerformed(java.awt.event.ActionEvent evt)
-	 * {//GEN-FIRST:event_search_buttonActionPerformed //Button Search
-	 * search_button.addActionListener(e ->{ if(search_field.getText().equals("") ||
-	 * search_field.getText().equals("Search.."))
-	 * jTable1.setModel(this.loadDiscussion()); else
-	 * jTable1.setModel(this.loadDiscussion(search_field.getText())); }); }
-	 */
+
 
 	private JLabel bell_icon;
 	private JButton category_filter;

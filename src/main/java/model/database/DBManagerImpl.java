@@ -36,6 +36,8 @@ abstract class DBManagerImpl {
 			conn = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/7lncuOhnfh", "7lncuOhnfh",
 					"DLmbbVHESb");
 			stmt = conn.createStatement();
+			System.out.println("Connecting..\n");
+
 			return stmt;
 		} catch (SQLException e) {
 			System.out.println("Error while connect with database" + e);
