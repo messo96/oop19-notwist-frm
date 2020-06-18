@@ -18,7 +18,7 @@ import controller.newtopic.NewTopicPan;
 import controller.table.Header;
 import controller.table.TableDiscussion;
 import model.base.User;
-import topic.Topic;
+import topic.TopicPan;
 import util.UpperPan;
 import view.profile.Profile;
 
@@ -65,7 +65,7 @@ public class BuildAfterGui extends JFrame {
 		profile_panel = new Profile(user);
 		profile_panel.setVisible(true);
 		bodyHolder.add(profile_panel, "profile_panel");
-		topic_panel = new Topic();
+		topic_panel = new TopicPan();
 		topic_panel.setVisible(true);
 		bodyHolder.add(topic_panel, "topic_panel");
 		bodyHolder.setBorder(BorderFactory.createMatteBorder(3, 0, 0, 0, Color.BLACK));
@@ -78,23 +78,6 @@ public class BuildAfterGui extends JFrame {
 
 		getContentPane().add(header_panel, new AbsoluteConstraints(0, 20, 1080, -1));
 
-
-
-		// Qua chiamo il pannello no filter con la tabella principale non filtrata,
-		// basta togliere il commento /* sotto
-		/*
-		 * Nofilter drag_panel = new Nofilter(this.actualUser);
-		 * drag_panel.setVisible(true);
-		 * 
-		 * 
-		 * 
-		 * getContentPane().add(drag_panel, new AbsoluteConstraints(820, 0, 260, 40));
-		 * //qua era dove addavo la card, ma per i test è rimasta commentata. /*
-		 * CategoryPan category_panel = new CategoryPan();
-		 * category_panel.setVisible(true); bodyHolder.add(category_panel, new
-		 * org.netbeans.lib.awtextra.AbsoluteConstraints(820, 290, 240, 200));
-		 * 
-		 */
 		pack();
 
 		// <--------------METHODS---------------------------------------->
@@ -145,7 +128,7 @@ public class BuildAfterGui extends JFrame {
 	private Header header_panel;
 	private NewTopicPan newtopic_panel;
 	private Profile profile_panel;
-	private Topic topic_panel;
+	private TopicPan topic_panel;
 
 	// End of variables declaration
 }
