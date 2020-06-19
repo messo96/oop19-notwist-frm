@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
@@ -21,7 +22,9 @@ public class UpperPan extends JPanel {
 
 
 		private static final long serialVersionUID = 1L;
-		
+		private static final ImageIcon dark = new ImageIcon("img/light.png");
+		private static final ImageIcon light = new ImageIcon("img/dark.png");
+		private static final ImageIcon close = new ImageIcon("img/close.png");
 		public UpperPan() {
 			
 			drawComp();
@@ -31,19 +34,16 @@ public class UpperPan extends JPanel {
 	        upper_panel = new JPanel();
 	        close_label = new JLabel();
 	        switch_label= new JLabel();
+   
 	        //Draw upper menu panel
 	        upper_panel.setLayout(new AbsoluteLayout());
 
 			//Switch "button"
-	        switch_label.setFont(new Font("Tahoma", 0, 18)); // NOI18N
-	        switch_label.setForeground(new Color(250, 0, 0));
-	        switch_label.setText("S");	      
+	        switch_label.setIcon(light);	      
 	        upper_panel.add(switch_label, new AbsoluteConstraints(330, 10, -1, -1));
 	        
 	        //Close "button"
-	        close_label.setFont(new Font("Tahoma", 0, 18)); // NOI18N
-	        close_label.setForeground(new Color(250, 0, 0));
-	        close_label.setText("X");
+	        close_label.setIcon(close);
 	        upper_panel.add(close_label, new AbsoluteConstraints(380, 10, -1, -1));
 
 	        add(upper_panel);
@@ -72,10 +72,11 @@ public class UpperPan extends JPanel {
 	    //Switch
 	    private void switch_labelMouseClicked(MouseEvent evt) {
 	    	
-	    	if ("S" == switch_label.getText()) {
-	    	 switch_label.setText("C");
+	    	if (light == switch_label.getIcon()) {
+	    	 switch_label.setIcon(dark);
 	    	 
 	         try {
+	        	
 	             UIManager.setLookAndFeel(new FlatDarkLaf());
 	         } catch ( Exception ex ) {
 	      	    System.err.println( "Failed to initialize LaF" );
@@ -83,7 +84,7 @@ public class UpperPan extends JPanel {
 	         SwingUtilities.updateComponentTreeUI(getParent());
 	    	 
 	    	}else {
-	    		 switch_label.setText("S");
+	    		 switch_label.setIcon(light);
 	        	 
 	             try {
 	                 UIManager.setLookAndFeel(new FlatLightLaf());
