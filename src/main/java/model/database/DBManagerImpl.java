@@ -53,6 +53,7 @@ abstract class DBManagerImpl {
 	protected void close() {
 		try {
 			conn.close();
+			System.out.println("Connection closed safely\n");
 		} catch (SQLException e) {
 			System.out.println(e);
 		}

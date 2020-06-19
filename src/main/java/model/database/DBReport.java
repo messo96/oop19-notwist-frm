@@ -1,5 +1,92 @@
 package model.database;
 
-public interface DBReport {
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import model.base.Report;
+
+
+public class DBReport extends DBManagerImpl implements Dao<Report> {
+	private String query;
+	private PreparedStatement prepared;
+	private ResultSet rs;
+
+	@Override
+	public List<Report> read() {
+		List<Report> list = new ArrayList<>();
+		query = "Select * from REPORT";
+
+		try {
+			rs = open().executeQuery(query);
+			while (rs.next()) {
+//				list.add(new Report("idUser, idDiscussion, description, pending(bool)");
+			}
+			return list;
+		} catch (Exception e) {
+			System.out.println("Error while loading categories");
+			return list;
+		} finally {
+			close();
+		}
+	}
+
+	@Override
+	public boolean create(Report t) {
+		try {
+			query = "insert into REPORT (idUser, idDiscussion, description, pending) values (?,?,?,?)";
+			open();
+			PreparedStatement prepared = super.getConn().prepareStatement(query);
+//			prepared.setInt(1, t);
+//			prepared.setInt(2, t);
+//			prepared.setString(3, t);
+//			prepared.setBoolean(4, t);
+
+			prepared.executeUpdate();
+			return true;
+		} catch (Exception e) {
+			System.out.println("\nError while adding new discussion " + e);
+			return false;
+		} finally {
+			close();
+		}
+	}
+
+	@Override
+	public boolean update(Report t) {
+		try {
+			query = "update REPORT set pending = ? where idReport = ?";
+			open();
+			PreparedStatement prepared = super.getConn().prepareStatement(query);
+			prepared.setBoolean(1, true);
+//			prepared.setInt(2, t.getId());
+			prepared.executeUpdate();
+			return true;
+		} catch (Exception e) {
+			System.out.println("\nError while update report " + e);
+			return false;
+		} finally {
+			close();
+		}
+	}
+
+	@Override
+	public boolean delete(Integer id) {
+		try {
+			open();
+			query = "delete from REPORT where idReport= ?";
+			prepared = super.getConn().prepareStatement(query);
+			prepared.setInt(1, id);
+			prepared.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			System.out.println("Error while delete report" + e);
+			return false;
+		} finally {
+			close();
+		}
+	}
 
 }

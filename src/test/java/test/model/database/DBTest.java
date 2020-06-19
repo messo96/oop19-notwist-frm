@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.junit.Test;
 
@@ -18,7 +17,6 @@ import controller.database.DBUserImpl;
 import rombo.new_class.*;
 import rombo.new_class.Comments;
 import model.base.*;
-import model.database.*;
 
 public class DBTest {
 
