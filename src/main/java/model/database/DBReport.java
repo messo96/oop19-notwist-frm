@@ -36,7 +36,7 @@ public class DBReport extends DBManagerImpl implements Dao<Report> {
 	@Override
 	public boolean create(Report t) {
 		try {
-			query = "insert into REPORT (idUser, idDiscussion, description, pending) values (?,?,?,?)";
+			query = "insert into REPORT (idUser, idDiscussion, description) values (?,?,?,?)";
 			open();
 			PreparedStatement prepared = super.getConn().prepareStatement(query);
 //			prepared.setInt(1, t);
