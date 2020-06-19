@@ -25,7 +25,7 @@ abstract class DBManagerImpl {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			open();
 		} catch (ClassNotFoundException e) {
-			log.logWarning(e.getMessage());
+			e.getMessage();
 		}
 
 	}

@@ -106,7 +106,7 @@ public class TableDiscussion {
 	}
 
 	private void loadDiscussion(DefaultTableModel model) {
-		for (Discussion s : dbdiscussion.read()) {
+		for (Discussion s : dbdiscussion.getAll()) {
 			model.addRow(new Object[] { s.getTitle(), s.getCategory().getName(), dblike.getLikes(s.getIdDiscussion()),
 					dbuser.getUser(s.getIdUser()).get().getUsername(),
 					dbcomment.getComments(s.getIdDiscussion()).get().size(), s.getIdDiscussion() });

@@ -33,7 +33,7 @@ public class DBTest {
 	public void testDBUser() {
 
 		assertTrue(dbuser.existUser("test@test.com"));
-		assertFalse(dbuser.create(new User(0, "test", "test", "test@test.com", false)));
+		assertFalse(dbuser.register("test", "test", "test@test.com", false));
 		User compareUser = dbuser.login("test@test.com", "test").get();
 		assertEquals(testUser.getId(), compareUser.getId());
 		assertEquals(testUser.getUsername(), compareUser.getUsername());
@@ -53,7 +53,7 @@ public class DBTest {
 		assertEquals(discussionList.size(), 2);
 
 		for (Discussion d : discussionList)
-			assertTrue(dbdiscussion.delete(d.getIdDiscussion()));
+			assertTrue(dbdiscussion.remove(d.getIdDiscussion()));
 
 		assertEquals(dbdiscussion.getDiscussions(testUser.getId()).get().size(), 0);
 
@@ -75,7 +75,7 @@ public class DBTest {
 		dblike.setDislike(disc.getIdDiscussion(), testUser.getId());
 		assertTrue(dblike.getDislikes(disc.getIdDiscussion()) == 0);
 		
-		assertTrue(dbdiscussion.delete(disc.getIdDiscussion()));
+		assertTrue(dbdiscussion.remove(disc.getIdDiscussion()));
 
 	}
 
@@ -86,20 +86,19 @@ public class DBTest {
 
 		// comment side
 		assertEquals(dbcomments.getComments(disc.getIdDiscussion()).get().size(), 0);
-		assertTrue(dbcomments.create(new CommentsImplement(testUser.getId(), "I'm a comment!", Optional.empty(),
-				Optional.of(disc.getIdDiscussion()), new Date())));
+		assertTrue(dbcomments.createComment(disc.getIdDiscussion(), testUser.getId(), "I'm a comment!"));
 		assertEquals(dbcomments.getComments(disc.getIdDiscussion()).get().size(), 1);
 
-		assertTrue(dbcomments.create(new CommentsImplement(testUser.getId(), "I'm another comment!", Optional.empty(),
-				Optional.of(disc.getIdDiscussion()), new Date())));
+		assertTrue(dbcomments.createComment(disc.getIdDiscussion(), testUser.getId(), "I'm another comment!"));
+
 		assertEquals(dbcomments.getComments(disc.getIdDiscussion()).get().size(), 2);
 
 		List<CommentsImplement> commentList = dbcomments.getComments(disc.getIdDiscussion()).get();
 		for (Comments c : commentList)
-			assertTrue(dbcomments.delete(c.GetIDComment().get()));
+			assertTrue(dbcomments.removeComment(c.GetIDComment().get()));
 		assertEquals(dbcomments.getComments(disc.getIdDiscussion()).get().size(), 0);
 
-		assertTrue(dbdiscussion.delete(disc.getIdDiscussion()));
+		assertTrue(dbdiscussion.remove(disc.getIdDiscussion()));
 
 	}
 

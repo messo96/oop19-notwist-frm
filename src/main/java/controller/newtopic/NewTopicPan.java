@@ -216,7 +216,7 @@ public class NewTopicPan extends JPanel {
 	// End of variables declaration
 
 	private void addItemsCategories() {
-		Iterator<CategoryImpl> ite = dbcategory.read().iterator();
+		Iterator<CategoryImpl> ite = dbcategory.getAll().iterator();
 		while (ite.hasNext())
 			category.addItem(ite.next().getName());
 	}

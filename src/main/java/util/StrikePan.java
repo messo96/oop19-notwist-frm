@@ -170,7 +170,7 @@ public class StrikePan extends JPanel {
 
 	private void refreshTable() {
 		model_strikes.getDataVector().removeAllElements();
-		for (User u : dbuser.read())
+		for (User u : dbuser.getAll())
 			model_strikes.addRow(new Object[] { u.getId(), u.getUsername(), dbstrike.getStrike(u.getId()) });
 		strikes_table.setModel(model_strikes);
 		strikes_table.revalidate();
