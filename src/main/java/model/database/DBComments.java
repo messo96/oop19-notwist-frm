@@ -9,21 +9,21 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
-
+import main.Log;
 import rombo.new_class.*;
 
 /**
  * Class for Comment table based on DAO
+ * 
  * @author gio
  *
  */
 public class DBComments extends DBManagerImpl implements Dao<CommentsImplement> {
-
+	private Log log = Log.getInstance();
 	private ResultSet rs;
-	PreparedStatement prepared;
+	private PreparedStatement prepared;
 	private String query;
 	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
 
 	@Override
 	public List<CommentsImplement> read() {
@@ -40,7 +40,7 @@ public class DBComments extends DBManagerImpl implements Dao<CommentsImplement> 
 			}
 			return list;
 		} catch (SQLException e) {
-			System.out.println("Error while download comments\n" + e);
+			log.logWarning("Error while download comments\n" + e);
 			return list;
 		} finally {
 			close();
@@ -54,7 +54,7 @@ public class DBComments extends DBManagerImpl implements Dao<CommentsImplement> 
 			query = "insert into COMMENT (idUser, idDiscussion, commento, data) values (?,?,?,?)";
 			open();
 			prepared = super.getConn().prepareStatement(query);
-			prepared.setInt(1,  t.GetIDUser());
+			prepared.setInt(1, t.GetIDUser());
 			prepared.setInt(2, t.GetIDDiscussion().get());
 			prepared.setString(3, t.GetComment());
 			prepared.setDate(4, java.sql.Date.valueOf(sdf.format(new Date())));
@@ -62,7 +62,8 @@ public class DBComments extends DBManagerImpl implements Dao<CommentsImplement> 
 			prepared.executeUpdate();
 			return true;
 		} catch (Exception e) {
-			System.out.println("\nError while adding new comment in discussion " + e);
+			log.logWarning("Error while adding new comment in discussion (idDiscussion = " + t.getIDDiscussion().get()
+					+ "|idUser = " + t.getIDUser() + ")" + e);
 			return false;
 		} finally {
 			close();
@@ -82,7 +83,7 @@ public class DBComments extends DBManagerImpl implements Dao<CommentsImplement> 
 			return true;
 
 		} catch (SQLException e) {
-			System.out.println("Error while delete comment" + e);
+			log.logWarning("Error while update comment (idComment= " + t.getIDComment().get() + ")" + e);
 			return false;
 		} finally {
 			close();
@@ -93,15 +94,15 @@ public class DBComments extends DBManagerImpl implements Dao<CommentsImplement> 
 	public boolean delete(final Integer id) {
 		try {
 			open();
-			
-				query = "delete from COMMENT where idComment= ?";
-				prepared = super.getConn().prepareStatement(query);
-				prepared.setInt(1, id);
-				prepared.executeUpdate();
-				return true;
-		
+
+			query = "delete from COMMENT where idComment= ?";
+			prepared = super.getConn().prepareStatement(query);
+			prepared.setInt(1, id);
+			prepared.executeUpdate();
+			return true;
+
 		} catch (SQLException e) {
-			System.out.println("Error while delete comment" + e);
+			log.logWarning("Error while delete comment(idComment=" + id + ")" + e);
 			return false;
 		} finally {
 			close();

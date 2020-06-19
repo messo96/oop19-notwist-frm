@@ -7,6 +7,8 @@ import java.sql.Statement;
 
 import javax.swing.JOptionPane;
 
+import main.Log;
+
 /**
  * Abstract class that establish a connection from remote database
  * @author gio
@@ -16,13 +18,14 @@ abstract class DBManagerImpl {
 
 	private Connection conn;
 	private Statement stmt;
+	private  Log log = Log.getInstance();
 
 	public DBManagerImpl() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			open();
 		} catch (ClassNotFoundException e) {
-			e.getStackTrace();
+			log.logWarning(e.getMessage());
 		}
 
 	}
@@ -40,7 +43,7 @@ abstract class DBManagerImpl {
 
 			return stmt;
 		} catch (SQLException e) {
-			System.out.println("Error while connect with database" + e);
+			log.logWarning("Error while connect with database" + e);
 			JOptionPane.showMessageDialog(null, "Errore di connessione al database, controlla la connessione! ");
 			
 		}
@@ -55,7 +58,7 @@ abstract class DBManagerImpl {
 			conn.close();
 			System.out.println("Connection closed safely\n");
 		} catch (SQLException e) {
-			System.out.println(e);
+			log.logWarning("Error while close connection " + e);
 		}
 	}
 

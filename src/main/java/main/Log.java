@@ -7,6 +7,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
+/**
+ * Class that work same as a log
+ * used Singleton
+ * @author gio
+ *
+ */
 public class Log {
 	private static Log instance = null;
 	private File file = new File("src/main/java/main/notwist.log");
@@ -22,14 +28,26 @@ public class Log {
 		fh.setFormatter(form);
 	}
 
+	/**
+	 * write info message in log file
+	 * @param s details of info
+	 */
 	public void logInfo(String s) {
 		logger.log(Level.INFO, s);
 	}
 
+	/**
+	 * write warning message in log file
+	 * @param s details of warning
+	 */
 	public void logWarning(String s) {
 		logger.log(Level.WARNING, s);
 	}
 
+	/**
+	 * 
+	 * @return instance of this class
+	 */
 	public static Log getInstance() {
 		if (instance == null)
 			try {

@@ -17,7 +17,13 @@ public class DBUserImpl extends DBUser {
 	}
 
 	public boolean register(final String username, final String password, final String email, final boolean isMod) {
+		if(existUser(email))
+			return false;
 		return super.create(new User(0, username, password, email, isMod));
+	}
+	
+	public boolean existUser(final String email) {
+		return super.read().stream().filter(u -> u.getEmail().equals(email)).findFirst().isPresent();
 	}
 	
 	

@@ -4,18 +4,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 import controller.database.DBCategoryImpl;
 import controller.database.DBCommentsImpl;
 import controller.database.DBUserImpl;
-import model.base.Discussion;
+import main.Log;
 import model.base.DiscussionImpl;
-import model.base.User;
 
 /**
  * Class for Discussion table based on DAO
@@ -24,7 +20,7 @@ import model.base.User;
  *
  */
 public class DBDiscussion extends DBManagerImpl implements Dao<DiscussionImpl> {
-
+	private Log log = Log.getInstance();
 	private DBCategoryImpl dbcategory = new DBCategoryImpl();
 	private DBCommentsImpl dbcomments = new DBCommentsImpl();
 	private DBUserImpl dbuser = new DBUserImpl();
@@ -48,7 +44,7 @@ public class DBDiscussion extends DBManagerImpl implements Dao<DiscussionImpl> {
 			}
 			return discussion;
 		} catch (SQLException e) {
-			System.out.println("Error while download discussion" + e);
+			log.logWarning("Error while download discussion" + e);
 			return discussion;
 		} finally {
 			close();
@@ -72,7 +68,7 @@ public class DBDiscussion extends DBManagerImpl implements Dao<DiscussionImpl> {
 					+ dbuser.getUser(t.getIdUser()).get().getUsername() + " )");
 			return true;
 		} catch (Exception e) {
-			System.out.println("\nError while adding new discussion " + e);
+			log.logWarning("Error while adding new discussion " + e);
 			return false;
 		} finally {
 			close();
@@ -95,7 +91,7 @@ public class DBDiscussion extends DBManagerImpl implements Dao<DiscussionImpl> {
 					+ dbuser.getUser(t.getIdUser()).get().getUsername() + " )");
 			return true;
 		} catch (Exception e) {
-			System.out.println("\nError while adding new discussion " + e);
+			log.logWarning("\nError while update a discussion " + e);
 			return false;
 		} finally {
 			close();
@@ -121,7 +117,8 @@ public class DBDiscussion extends DBManagerImpl implements Dao<DiscussionImpl> {
 			return true;
 
 		} catch (SQLException e) {
-			System.out.println("Error while delete discussion and attached comments" + e);
+			log.logWarning(
+					"Error while delete discussion and attached comments (idDiscussion=" + idDiscussion + ")" + e);
 			return false;
 		} finally {
 			close();

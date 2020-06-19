@@ -5,18 +5,20 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import main.Log;
 import model.base.CategoryImpl;
 
 /**
  * Class for Category table based on DAO
+ * 
  * @author gio
  *
  */
 public class DBCategory extends DBManagerImpl implements Dao<CategoryImpl> {
+	private Log log = Log.getInstance();
 	private ResultSet rs = null;
 	private String query;
 	private PreparedStatement prepared;
-
 
 	@Override
 	public List<CategoryImpl> read() {
@@ -30,7 +32,7 @@ public class DBCategory extends DBManagerImpl implements Dao<CategoryImpl> {
 			}
 			return list;
 		} catch (Exception e) {
-			System.out.println("Error while loading categories");
+			log.logWarning("Error while download categories " + e);
 			return list;
 		} finally {
 			close();
@@ -47,7 +49,7 @@ public class DBCategory extends DBManagerImpl implements Dao<CategoryImpl> {
 			prepared.executeUpdate();
 			return true;
 		} catch (Exception e) {
-			System.out.println("\nError while adding new discussion " + e);
+			log.logWarning("Error while adding new discussion " + e);
 			return false;
 		} finally {
 			close();
@@ -65,7 +67,7 @@ public class DBCategory extends DBManagerImpl implements Dao<CategoryImpl> {
 			prepared.executeUpdate();
 			return true;
 		} catch (Exception e) {
-			System.out.println("\nError while adding new discussion " + e);
+			log.logWarning("\nError while update a discussion(idDiscussion=" + t.getId() + ")" + e);
 			return false;
 		} finally {
 			close();
@@ -82,7 +84,7 @@ public class DBCategory extends DBManagerImpl implements Dao<CategoryImpl> {
 			prepared.executeUpdate();
 			return true;
 		} catch (Exception e) {
-			System.out.println("\nError while adding new discussion " + e);
+			log.logWarning("\nError while delete a discussion ( idDiscussion= " + id + ")" + e);
 			return false;
 		} finally {
 			close();

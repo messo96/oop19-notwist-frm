@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
+import main.Log;
 import model.base.LikeSet;
 
 /**
@@ -15,7 +16,7 @@ import model.base.LikeSet;
  *
  */
 public class DBLikeDislike extends DBManagerImpl implements Dao<LikeSet> {
-
+	private Log log = Log.getInstance();
 	private String query;
 	private PreparedStatement prepared;
 	private ResultSet rs;
@@ -32,7 +33,7 @@ public class DBLikeDislike extends DBManagerImpl implements Dao<LikeSet> {
 			}
 			return list;
 		} catch (SQLException e) {
-			System.out.println("Error while read all likes of discussion" + e);
+			log.logWarning("Error while download all likes and dislikes of all discussions" + e);
 			return list;
 		} finally {
 			close();
@@ -42,7 +43,6 @@ public class DBLikeDislike extends DBManagerImpl implements Dao<LikeSet> {
 	@Override
 	public boolean create(LikeSet t) {
 		try {
-
 			query = "insert into LIKES (idUser, idDiscussion, isLike, isDislike) values (?,?,?,?)";
 			open();
 			prepared = super.getConn().prepareStatement(query);
@@ -54,7 +54,7 @@ public class DBLikeDislike extends DBManagerImpl implements Dao<LikeSet> {
 			prepared.executeUpdate();
 			return true;
 		} catch (Exception e) {
-			System.out.println("\nError while adding new like/dislike in discussion " + e);
+			log.logWarning("\nError while adding new like/dislike in discussion " + e);
 			return false;
 		} finally {
 			close();
@@ -64,7 +64,6 @@ public class DBLikeDislike extends DBManagerImpl implements Dao<LikeSet> {
 	@Override
 	public boolean update(LikeSet t) {
 		try {
-
 			query = "update LIKES set isLike= ?, isDislike= ? where idUser= ? AND idDiscussion= ?";
 			open();
 			prepared = super.getConn().prepareStatement(query);
@@ -76,7 +75,7 @@ public class DBLikeDislike extends DBManagerImpl implements Dao<LikeSet> {
 			prepared.executeUpdate();
 			return true;
 		} catch (Exception e) {
-			System.out.println("\nError while adding new comment in discussion " + e);
+			log.logWarning("\nError while update like or dislike in discussion (idLikes= " + t.getId() + ")" + e);
 			return false;
 		} finally {
 			close();
@@ -94,7 +93,7 @@ public class DBLikeDislike extends DBManagerImpl implements Dao<LikeSet> {
 			prepared.executeUpdate();
 			return true;
 		} catch (Exception e) {
-			System.out.println("\nError while delete like in discussion " + e);
+			log.logWarning("\nError while delete like in discussion (id=" + id + ")" + e);
 			return false;
 		} finally {
 			close();

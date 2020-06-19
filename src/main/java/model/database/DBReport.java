@@ -6,10 +6,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import main.Log;
 import model.base.Report;
 
-
 public class DBReport extends DBManagerImpl implements Dao<Report> {
+	private Log log = Log.getInstance();
 	private String query;
 	private PreparedStatement prepared;
 	private ResultSet rs;
@@ -18,7 +19,6 @@ public class DBReport extends DBManagerImpl implements Dao<Report> {
 	public List<Report> read() {
 		List<Report> list = new ArrayList<>();
 		query = "Select * from REPORT";
-
 		try {
 			rs = open().executeQuery(query);
 			while (rs.next()) {
@@ -26,7 +26,7 @@ public class DBReport extends DBManagerImpl implements Dao<Report> {
 			}
 			return list;
 		} catch (Exception e) {
-			System.out.println("Error while loading categories");
+			log.logWarning("Error while download all reports");
 			return list;
 		} finally {
 			close();
@@ -47,7 +47,7 @@ public class DBReport extends DBManagerImpl implements Dao<Report> {
 			prepared.executeUpdate();
 			return true;
 		} catch (Exception e) {
-			System.out.println("\nError while adding new discussion " + e);
+			log.logWarning("Error while create new discussion " + e);
 			return false;
 		} finally {
 			close();
@@ -65,7 +65,7 @@ public class DBReport extends DBManagerImpl implements Dao<Report> {
 			prepared.executeUpdate();
 			return true;
 		} catch (Exception e) {
-			System.out.println("\nError while update report " + e);
+			log.logWarning("\nError while update report (idReport="/*+idReport*/+")" + e);
 			return false;
 		} finally {
 			close();
@@ -82,7 +82,7 @@ public class DBReport extends DBManagerImpl implements Dao<Report> {
 			prepared.executeUpdate();
 			return true;
 		} catch (SQLException e) {
-			System.out.println("Error while delete report" + e);
+			log.logWarning("Error while delete report(idReport"+ id + ")" + e);
 			return false;
 		} finally {
 			close();
