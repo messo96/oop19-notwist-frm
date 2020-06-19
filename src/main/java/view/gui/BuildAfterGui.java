@@ -66,7 +66,6 @@ public class BuildAfterGui extends JFrame {
 		profile_panel.setVisible(true);
 		bodyHolder.add(profile_panel, "profile_panel");
 		topic_panel = new TopicPan();
-		topic_panel.setBackground(new Color(45,123,41));
 		topic_panel.setVisible(true);
 		bodyHolder.add(topic_panel, "topic_panel");
 		bodyHolder.setBorder(BorderFactory.createMatteBorder(3, 0, 0, 0, Color.BLACK));

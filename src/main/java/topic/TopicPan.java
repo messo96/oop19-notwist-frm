@@ -24,7 +24,7 @@ public class TopicPan extends JPanel {
 	topic_panel= new JPanel();
 	 topic = new Topic();
 	 topic_panel.add(topic, new AbsoluteConstraints(0, 0, -1,-1));
-	 topic_panel.setBackground(new Color(12,15,163));
+	 topic.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
 	add(topic_panel);
 		
@@ -33,7 +33,6 @@ public class TopicPan extends JPanel {
 	private JPanel topic_panel;
 
 }
-
 
 
 

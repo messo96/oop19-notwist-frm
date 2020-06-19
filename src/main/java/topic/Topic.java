@@ -67,8 +67,7 @@ public class Topic extends JPanel{
 
 	//	discussion_panel.setPreferredSize(new java.awt.Dimension(450, 231));
 		discussion_panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-		discussion_part.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+	//	discussion_part.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
 		jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
@@ -99,7 +98,7 @@ public class Topic extends JPanel{
 
 		date_user.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 		
-		date_user.setText("testing lenght while waiting for a fix");
+		date_user.setText("super lungo per vedere come funziona la lunghezza miaomiao");
 		//date_user.setText(this.discussion.getData() + "by " + dbuser.getUser(discussion.getIdUser()).get().getUsername());
 		date_user.setHorizontalAlignment(SwingConstants.RIGHT);
 
@@ -110,38 +109,37 @@ public class Topic extends JPanel{
 		discussion_partLayout.setAutoCreateContainerGaps(true);
 		discussion_partLayout.setAutoCreateGaps(true);
 		discussion_part.setLayout(discussion_partLayout);
-		discussion_partLayout.setHorizontalGroup(discussion_partLayout
-			    .createParallelGroup(GroupLayout.Alignment.LEADING)
-			    .addGroup(discussion_partLayout.createSequentialGroup()
-			        .addComponent(title_label)
-				.addGroup(discussion_partLayout.createSequentialGroup()
-					        .addComponent(jScrollPane1,javax.swing.GroupLayout.PREFERRED_SIZE, 400,	javax.swing.GroupLayout.PREFERRED_SIZE)
-					        .addComponent(menu))
-			    .addGroup(discussion_partLayout.createSequentialGroup()
-			        .addComponent(n_likes, javax.swing.GroupLayout.PREFERRED_SIZE, 20,	javax.swing.GroupLayout.PREFERRED_SIZE)
-			        .addComponent(like, javax.swing.GroupLayout.PREFERRED_SIZE, 20,	javax.swing.GroupLayout.PREFERRED_SIZE))
-			    	.addComponent(dislike, javax.swing.GroupLayout.PREFERRED_SIZE, 20,	javax.swing.GroupLayout.PREFERRED_SIZE))
-			    .addComponent(date_user));
-			
-		discussion_partLayout.setVerticalGroup(discussion_partLayout
-				.createSequentialGroup()
-				.addGroup(discussion_partLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-					.addComponent(title_label))
-		.addGroup(discussion_partLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-				.addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100,
-						javax.swing.GroupLayout.PREFERRED_SIZE)
-				.addComponent(menu))
-		.addGroup(discussion_partLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-					.addComponent(n_likes)
-					.addComponent(like)
-					.addComponent(dislike)
-					.addComponent(date_user)));
+		discussion_partLayout.setHorizontalGroup(discussion_partLayout.createSequentialGroup()
+                .addGroup(discussion_partLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addComponent(discussion_area, GroupLayout.PREFERRED_SIZE, 720, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(title_label)
+                 
+                        .addGroup(discussion_partLayout.createSequentialGroup()
+                        		
+                        	    .addComponent(n_likes)
+                                .addComponent(like,GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(dislike,GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
+                    
+                        .addComponent(date_user, GroupLayout.Alignment.TRAILING))
+         
 
-		discussion_panel.add(discussion_part, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1080, -1));
-		
-		discussion_part.setBackground(new Color(12,15,63));
-		discussion_panel.setBackground(new Color(123,15,63));
-    	add(discussion_panel,new AbsoluteConstraints(0, 0, -1,-1));
+                .addComponent(menu,GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE));
+
+		discussion_partLayout.setVerticalGroup(discussion_partLayout.createSequentialGroup()
+                .addGroup(discussion_partLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                        .addComponent(title_label))
+                .addGroup(discussion_partLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                        .addComponent(discussion_area,GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(menu,GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
+                .addGroup(discussion_partLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                        .addComponent(n_likes)
+                        .addComponent(like,GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(dislike,GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(date_user)));
+
+		discussion_panel.add(discussion_part, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 1080, -1));
+
+    	add(discussion_panel);
     	
     	
     	
