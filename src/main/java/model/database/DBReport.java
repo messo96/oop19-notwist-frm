@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import main.Log;
+import model.Log;
 import model.base.Report;
 
 public class DBReport extends DBManagerImpl implements Dao<Report> {

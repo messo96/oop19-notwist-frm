@@ -10,7 +10,7 @@ import java.util.List;
 import controller.database.DBCategoryImpl;
 import controller.database.DBCommentsImpl;
 import controller.database.DBUserImpl;
-import main.Log;
+import model.Log;
 import model.base.DiscussionImpl;
 
 /**

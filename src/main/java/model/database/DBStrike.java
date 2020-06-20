@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
-import main.Log;
+import model.Log;
 import model.base.Strike;
 
 public class DBStrike extends DBManagerImpl implements Dao<Strike> {

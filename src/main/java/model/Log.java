@@ -1,4 +1,4 @@
-package main;
+package model;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,10 +19,10 @@ public class Log {
 	private Logger logger;
 	private FileHandler fh = new FileHandler(file.getPath(), true);
 
-	public Log() throws IOException, SecurityException {
+	private Log() throws IOException, SecurityException {
 		if (!file.exists())
 			file.createNewFile();
-		logger = Logger.getLogger("ntwst");
+		logger = Logger.getLogger("notwist.log");
 		logger.addHandler(fh);
 		SimpleFormatter form = new SimpleFormatter();
 		fh.setFormatter(form);

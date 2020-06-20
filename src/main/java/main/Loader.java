@@ -2,6 +2,7 @@ package main;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Shape;
 import java.awt.image.IndexColorModel;
 
@@ -25,7 +26,7 @@ public class Loader extends JWindow{
 				this.setAlwaysOnTop(true);
 				loader.setOpaque(true);
 				this.setBackground(new Color(0,0,0,0));
-				this.pack();
+//				loader.setSize(new Dimension(200,300));
 			}
 		 
 		 public void start() {

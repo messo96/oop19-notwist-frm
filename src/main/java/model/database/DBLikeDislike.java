@@ -5,8 +5,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
-import main.Log;
+import model.Log;
 import model.base.LikeSet;
 
 /**
@@ -29,7 +30,8 @@ public class DBLikeDislike extends DBManagerImpl implements Dao<LikeSet> {
 			rs = open().executeQuery(query);
 			while (rs.next()) {
 				list.add(new LikeSet(rs.getInt("idLikes"), rs.getBoolean("isLike"), rs.getBoolean("isDislike"),
-						rs.getInt("idUser"), rs.getInt("idDiscussion")));
+						rs.getInt("idUser"), Optional.of(rs.getInt("idDiscussion")),
+						Optional.of(rs.getInt("idComment"))));
 			}
 			return list;
 		} catch (SQLException e) {
@@ -43,18 +45,27 @@ public class DBLikeDislike extends DBManagerImpl implements Dao<LikeSet> {
 	@Override
 	public boolean create(LikeSet t) {
 		try {
-			query = "insert into LIKES (idUser, idDiscussion, isLike, isDislike) values (?,?,?,?)";
 			open();
-			prepared = super.getConn().prepareStatement(query);
-			prepared.setInt(1, t.getIdUser());
-			prepared.setInt(2, t.getIdDiscussion());
-			prepared.setBoolean(3, t.getLike());
-			prepared.setBoolean(4, t.getDislike());
+			if (t.getIdDiscussion().isPresent()) {
+				query = "insert into LIKES (idUser, idDiscussion, isLike, isDislike) values (?,?,?,?)";
+				prepared = super.getConn().prepareStatement(query);
+				prepared.setInt(1, t.getIdUser());
+				prepared.setInt(2, t.getIdDiscussion().get());
+				prepared.setBoolean(3, t.getLike());
+				prepared.setBoolean(4, t.getDislike());
 
+			} else {
+				query = "insert into LIKES (idUser, idComment, isLike, isDislike) values (?,?,?,?)";
+				prepared = super.getConn().prepareStatement(query);
+				prepared.setInt(1, t.getIdUser());
+				prepared.setInt(2, t.getIdComment().get());
+				prepared.setBoolean(3, t.getLike());
+				prepared.setBoolean(4, t.getDislike());
+			}
 			prepared.executeUpdate();
 			return true;
 		} catch (Exception e) {
-			log.logWarning("\nError while adding new like/dislike in discussion " + e);
+			log.logWarning("\nError while adding new like/dislike in discussion or comment " + e);
 			return false;
 		} finally {
 			close();
@@ -64,13 +75,12 @@ public class DBLikeDislike extends DBManagerImpl implements Dao<LikeSet> {
 	@Override
 	public boolean update(LikeSet t) {
 		try {
-			query = "update LIKES set isLike= ?, isDislike= ? where idUser= ? AND idDiscussion= ?";
+			query = "update LIKES set isLike= ?, isDislike= ? where idLikes= ?";
 			open();
 			prepared = super.getConn().prepareStatement(query);
 			prepared.setBoolean(1, t.getLike());
 			prepared.setBoolean(2, t.getDislike());
-			prepared.setInt(3, t.getIdUser());
-			prepared.setInt(4, t.getIdDiscussion());
+			prepared.setInt(3, t.getId());
 
 			prepared.executeUpdate();
 			return true;

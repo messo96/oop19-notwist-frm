@@ -7,7 +7,7 @@ import java.sql.Statement;
 
 import javax.swing.JOptionPane;
 
-import main.Log;
+import model.Log;
 
 /**
  * Abstract class that establish a connection from remote database

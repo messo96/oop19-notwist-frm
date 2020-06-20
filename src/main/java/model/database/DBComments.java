@@ -9,7 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
-import main.Log;
+import model.Log;
 import rombo.new_class.*;
 
 /**

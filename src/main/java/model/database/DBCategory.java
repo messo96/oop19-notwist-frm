@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import main.Log;
+import model.Log;
 import model.base.CategoryImpl;
 
 /**
