@@ -2,7 +2,6 @@ package test.model.database;
 
 import static org.junit.Assert.*;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,7 +10,7 @@ import org.junit.Test;
 import controller.database.DBCategoryImpl;
 import controller.database.DBCommentsImpl;
 import controller.database.DBDiscussionImpl;
-import controller.database.DBLikeDislikeImpl;
+import controller.database.DBLikeDislikeImplDiscussion;
 import controller.database.DBStrikeImpl;
 import controller.database.DBUserImpl;
 import rombo.new_class.*;
@@ -25,7 +24,7 @@ public class DBTest {
 	private DBCommentsImpl dbcomments = new DBCommentsImpl();
 	private DBCategoryImpl dbcategory = new DBCategoryImpl();
 	private DBStrikeImpl dbstrike = new DBStrikeImpl();
-	private DBLikeDislikeImpl dblike = new DBLikeDislikeImpl();
+	private DBLikeDislikeImplDiscussion dblike = new DBLikeDislikeImplDiscussion();
 	private User testUser = new User(0, "test", "test", "test@test.com", false);
 	Optional<CategoryImpl> cat = dbcategory.getCategory("SPORT");
 

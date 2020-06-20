@@ -11,7 +11,7 @@ import javax.swing.JEditorPane;
 import javax.swing.JOptionPane;
 
 import controller.database.DBCommentsImpl;
-import controller.database.DBLikeDislikeImpl;
+import controller.database.DBLikeDislikeImplComments;
 import controller.database.DBUserImpl;
 import model.base.Discussion;
 import model.base.User;
@@ -29,7 +29,7 @@ public class Topic_gui extends javax.swing.JFrame {
 	private User user;
 	private Discussion discussion = null;
 	private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-	private DBLikeDislikeImpl dblike = new DBLikeDislikeImpl();
+	private DBLikeDislikeImplComments dblike = new DBLikeDislikeImplComments();
 	private DBCommentsImpl dbcomments = new DBCommentsImpl();
 	public Topic_gui(final Discussion discussion, final User user) {
 		this.user = user;

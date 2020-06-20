@@ -141,7 +141,6 @@ public class NewTopicPan extends JPanel {
 		topic_panel.add(jSeparator2, new AbsoluteConstraints(10, 257, 675, 10));
 
 		preview_editorPane.setContentType("text/html");
-///////        ep.setText("html code");
 		preview_editorPane.setEnabled(false);
 		jScrollPane2.setViewportView(preview_editorPane);
 

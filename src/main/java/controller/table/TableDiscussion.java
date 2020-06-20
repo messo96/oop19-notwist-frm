@@ -1,26 +1,29 @@
 package controller.table;
 
+import java.awt.CardLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import controller.database.DBCommentsImpl;
 import controller.database.DBDiscussionImpl;
-import controller.database.DBLikeDislikeImpl;
+import controller.database.DBLikeDislikeImplDiscussion;
 import controller.database.DBUserImpl;
 import model.base.Category;
 import model.base.Discussion;
+import model.base.DiscussionImpl;
 import model.base.User;
-
+import topic.TopicPan;
 import topic_gui.Topic_gui;
 
 public class TableDiscussion {
 
 	private JTable tableDiscussion;
 	private DefaultTableModel modelDiscussion;
-	private DBLikeDislikeImpl dblike = new DBLikeDislikeImpl();
+	private DBLikeDislikeImplDiscussion dblike = new DBLikeDislikeImplDiscussion();
 	private DBCommentsImpl dbcomment = new DBCommentsImpl();
 	private DBUserImpl dbuser = new DBUserImpl();
 	private DBDiscussionImpl dbdiscussion = new DBDiscussionImpl();
@@ -63,11 +66,13 @@ public class TableDiscussion {
 			public void mousePressed(MouseEvent mouseEvent) {
 				if (mouseEvent.getClickCount() == 2) {
 
-					Discussion disc = dbdiscussion.getDiscussion(Integer.parseInt(
+					DiscussionImpl disc = dbdiscussion.getDiscussion(Integer.parseInt(
 							tableDiscussion.getModel().getValueAt(tableDiscussion.getSelectedRow(), 5).toString()))
 							.get();
-
-					new Topic_gui(disc, user);
+					JFrame fr = new JFrame();
+					fr.setContentPane(new TopicPan(disc, user));
+					fr.pack();
+					fr.setVisible(true);
 				}
 			}
 		});

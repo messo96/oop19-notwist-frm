@@ -34,6 +34,7 @@ import org.netbeans.lib.awtextra.AbsoluteConstraints;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
 
 import controller.database.DBUserImpl;
+import main.Loader;
 import model.base.User;
 
 import view.gui.BuildAfterGui;
@@ -153,7 +154,6 @@ public class LoginPan extends JPanel {
 					if (user.isPresent()) {
 						JOptionPane.showMessageDialog(null, "Credenziali corrette, Benvenuto!");
 						new BuildAfterGui(user.get()).start();
-
 						win.dispose();
 						return "Credenziali corrette";
 					} else {
