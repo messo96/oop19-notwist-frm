@@ -7,18 +7,18 @@ import java.util.stream.Collectors;
 
 import model.base.Category;
 import model.base.DiscussionImpl;
-import model.database.DBDiscussion;
-import model.database.DBLikeDislike;
+import model.database.DiscussionDB;
+import model.database.LikeDislikeDB;
 
 /**
- * Class that through model class {@link DBDiscussion} connect view
+ * Class that through model class {@link DiscussionDB} connect view
  * 
  * @author Giovanni Messina
  *
  */
-public class DBDiscussionImpl {
-	private DBDiscussion dbd = new DBDiscussion();
-	private DBLikeDislikeImplDiscussion dblike = new DBLikeDislikeImplDiscussion();
+public class DiscussionImplDB {
+	private DiscussionDB dbd = new DiscussionDB();
+	private LikeDislikeImplDiscussionDB dblike = new LikeDislikeImplDiscussionDB();
 	private final Integer MAX_TOP = 5;
 
 	/**

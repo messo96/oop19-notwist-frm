@@ -1,16 +1,16 @@
 package controller.database;
 
 import model.base.Strike;
-import model.database.DBStrike;
+import model.database.StrikeDB;
 
 /**
- * Class that through model class {@link DBStrike} connect view
+ * Class that through model class {@link StrikeDB} connect view
  * 
  * @author Giovanni Messina
  *
  */
-public class DBStrikeImpl {
-	private DBStrike dbs = new DBStrike();
+public class StrikeImplDB {
+	private StrikeDB dbs = new StrikeDB();
 
 	/**
 	 * get number of strikes of the user

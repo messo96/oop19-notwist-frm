@@ -18,7 +18,7 @@ import rombo.new_class.*;
  * @author Giovanni Messina
  *
  */
-public class DBComments extends DBManagerImpl implements Dao<CommentsImplement> {
+public class CommentsDB extends ManagerImplDB implements Dao<CommentsImplement> {
 	private Log log = Log.getInstance();
 	private ResultSet rs;
 	private PreparedStatement prepared;

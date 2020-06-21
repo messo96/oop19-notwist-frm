@@ -13,7 +13,7 @@ import model.base.Strike;
  * @author Giovanni Messina
  *
  */
-public class DBStrike extends DBManagerImpl implements Dao<Strike> {
+public class StrikeDB extends ManagerImplDB implements Dao<Strike> {
 	private Log log = Log.getInstance();
 	private String query;
 	private ResultSet rs;

@@ -6,7 +6,7 @@ import javax.swing.GroupLayout;
 import javax.swing.JEditorPane;
 import javax.swing.JPanel;
 
-import controller.database.DBCommentsImpl;
+import controller.database.CommentsImplDB;
 
 public class Newcomment extends JPanel {
 
@@ -18,7 +18,7 @@ public class Newcomment extends JPanel {
 	private Integer idDiscussion;
 	private Integer idUser;
 
-	private DBCommentsImpl dbcomment = new DBCommentsImpl();
+	private CommentsImplDB dbcomment = new CommentsImplDB();
 
 	public Newcomment(final Integer idDiscussion, Integer idUser) {
 		this.idDiscussion = idDiscussion;

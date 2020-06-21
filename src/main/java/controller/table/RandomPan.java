@@ -10,17 +10,17 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.SwingWorker;
 
-import controller.database.DBDiscussionImpl;
+import controller.database.DiscussionImplDB;
 import main.Loader;
 import model.base.Discussion;
-import model.database.DBDiscussion;
+import model.database.DiscussionDB;
 import topic.Topic;
 import topic_gui.Topic_gui;
 
 public class RandomPan extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private DBDiscussionImpl dbdiscussion = new DBDiscussionImpl();
+	private DiscussionImplDB dbdiscussion = new DiscussionImplDB();
 	private Loader loader;
 
 	public RandomPan(TableDiscussion tableDiscussion) {

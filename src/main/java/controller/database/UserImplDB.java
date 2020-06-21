@@ -4,16 +4,16 @@ import java.util.List;
 import java.util.Optional;
 
 import model.base.User;
-import model.database.DBUser;
+import model.database.UserDB;
 
 /**
- * Class that through model class {@link DBUser} connect view
+ * Class that through model class {@link UserDB} connect view
  * 
  * @author Giovanni Messina
  *
  */
-public class DBUserImpl {
-	private DBUser dbu = new DBUser();
+public class UserImplDB {
+	private UserDB dbu = new UserDB();
 
 	/**
 	 * get all users

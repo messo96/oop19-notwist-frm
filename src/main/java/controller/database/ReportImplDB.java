@@ -4,15 +4,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import model.base.Report;
-import model.database.DBReport;
+import model.database.ReportDB;
 
 /**
  * 
  * @author Francesco Rombaldoni
  *
  */
-public class DBReportImpl {
-	private DBReport dbr = new DBReport();
+public class ReportImplDB {
+	private ReportDB dbr = new ReportDB();
 
 	// list of all report in DB
 	public List<Report> getAll() {
@@ -43,7 +43,7 @@ public class DBReportImpl {
 	}
 
 	/* Builder senza argometni */
-	public DBReportImpl() {
+	public ReportImplDB() {
 	}
 
 }

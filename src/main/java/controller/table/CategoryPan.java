@@ -16,17 +16,17 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingWorker;
 import javax.swing.border.TitledBorder;
 
-import controller.database.DBCategoryImpl;
+import controller.database.CategoryImplDB;
 import main.Loader;
 import model.base.Category;
 import model.base.CategoryImpl;
-import model.database.DBCategory;
+import model.database.CategoryDB;
 
 public class CategoryPan extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private Loader loader = new Loader();
-	private DBCategoryImpl dbcategory = new DBCategoryImpl();
+	private CategoryImplDB dbcategory = new CategoryImplDB();
 
 	public CategoryPan(TableDiscussion tableDiscussion) {
 		drawComp(tableDiscussion);
@@ -59,7 +59,7 @@ public class CategoryPan extends JPanel {
 		);
 
 		jList.setModel(new AbstractListModel<String>() {
-			List<CategoryImpl> list = new DBCategory().read();
+			List<CategoryImpl> list = new CategoryDB().read();
 
 			public int getSize() {
 				return list.size();

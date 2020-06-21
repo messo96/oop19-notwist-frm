@@ -2,7 +2,7 @@ package main;
 
 import com.formdev.flatlaf.FlatLightLaf;
 
-import controller.database.DBLikeDislikeImplDiscussion;
+import controller.database.LikeDislikeImplDiscussionDB;
 import view.gui.BuildPreGui;
 
 import java.io.IOException;

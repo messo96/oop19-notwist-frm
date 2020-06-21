@@ -13,7 +13,7 @@ import javax.swing.ScrollPaneConstants;
 import org.netbeans.lib.awtextra.AbsoluteConstraints;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
 
-import controller.database.DBCommentsImpl;
+import controller.database.CommentsImplDB;
 import model.base.DiscussionImpl;
 import model.base.User;
 import rombo.new_class.CommentsImplement;
@@ -22,7 +22,7 @@ import rombo.new_class.CommentsImplement;
 
 public class TopicPan extends JPanel {
 	private static final long serialVersionUID = 1L;
-	private DBCommentsImpl dbcomment = new DBCommentsImpl();
+	private CommentsImplDB dbcomment = new CommentsImplDB();
 
 	public TopicPan(DiscussionImpl disc, User user) {
 

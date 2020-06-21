@@ -1,12 +1,12 @@
 package controller.database;
 
 /**
- * The interface is used to manage {@link DBLikeDislikeImplDiscussion} and {@link DBLikeDislikeImplComments}
+ * The interface is used to manage {@link LikeDislikeImplDiscussionDB} and {@link LikeDislikeImplCommentsDB}
  * @author gio
  *
  */
 
-public interface IDBLikeDislike {
+public interface ILikeDislikeDB {
 
 	/**
 	 * get number of likes

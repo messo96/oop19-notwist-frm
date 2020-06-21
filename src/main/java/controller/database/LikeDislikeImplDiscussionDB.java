@@ -3,16 +3,16 @@ package controller.database;
 import java.util.Optional;
 
 import model.base.LikeSet;
-import model.database.DBLikeDislike;
-import controller.database.IDBLikeDislike;
+import model.database.LikeDislikeDB;
+import controller.database.ILikeDislikeDB;
 
 /**
- * Class that through {@link DBLikeDislike} connect view
+ * Class that through {@link LikeDislikeDB} connect view
  * @author Giovanni Messina
  *
  */
-public class DBLikeDislikeImplDiscussion implements IDBLikeDislike {
-	private DBLikeDislike dbl = new DBLikeDislike();
+public class LikeDislikeImplDiscussionDB implements ILikeDislikeDB {
+	private LikeDislikeDB dbl = new LikeDislikeDB();
 
 	/**
 	 * {@inheritDoc}

@@ -23,9 +23,9 @@ import javax.swing.SwingConstants;
 
 import org.netbeans.lib.awtextra.AbsoluteLayout;
 
-import controller.database.DBLikeDislikeImplDiscussion;
-import controller.database.DBUserImpl;
-import controller.database.IDBLikeDislike;
+import controller.database.LikeDislikeImplDiscussionDB;
+import controller.database.UserImplDB;
+import controller.database.ILikeDislikeDB;
 import model.base.Discussion;
 import model.base.User;
 
@@ -42,7 +42,7 @@ public class Topic extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private Discussion discussion = null;
 	private User user;
-	private IDBLikeDislike dblike = new DBLikeDislikeImplDiscussion();
+	private ILikeDislikeDB dblike = new LikeDislikeImplDiscussionDB();
 	private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 
 	public Topic(Discussion disc, User user) {
@@ -108,7 +108,7 @@ public class Topic extends JPanel {
 		date_user.setFont(new Font("Tahoma", 0, 14)); // NOI18N
 
 		date_user.setText(sdf.format(discussion.getData()) + " by "
-				+ new DBUserImpl().getUser(discussion.getIdUser()).get().getUsername());
+				+ new UserImplDB().getUser(discussion.getIdUser()).get().getUsername());
 		date_user.setHorizontalAlignment(SwingConstants.RIGHT);
 
 		date_user.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));

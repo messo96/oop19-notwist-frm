@@ -7,24 +7,24 @@ import java.util.Optional;
 
 import org.junit.Test;
 
-import controller.database.DBCategoryImpl;
-import controller.database.DBCommentsImpl;
-import controller.database.DBDiscussionImpl;
-import controller.database.DBLikeDislikeImplDiscussion;
-import controller.database.DBStrikeImpl;
-import controller.database.DBUserImpl;
+import controller.database.CategoryImplDB;
+import controller.database.CommentsImplDB;
+import controller.database.DiscussionImplDB;
+import controller.database.LikeDislikeImplDiscussionDB;
+import controller.database.StrikeImplDB;
+import controller.database.UserImplDB;
 import rombo.new_class.*;
 import rombo.new_class.Comments;
 import model.base.*;
 
 public class DBTest {
 
-	private DBUserImpl dbuser = new DBUserImpl();
-	private DBDiscussionImpl dbdiscussion = new DBDiscussionImpl();
-	private DBCommentsImpl dbcomments = new DBCommentsImpl();
-	private DBCategoryImpl dbcategory = new DBCategoryImpl();
-	private DBStrikeImpl dbstrike = new DBStrikeImpl();
-	private DBLikeDislikeImplDiscussion dblike = new DBLikeDislikeImplDiscussion();
+	private UserImplDB dbuser = new UserImplDB();
+	private DiscussionImplDB dbdiscussion = new DiscussionImplDB();
+	private CommentsImplDB dbcomments = new CommentsImplDB();
+	private CategoryImplDB dbcategory = new CategoryImplDB();
+	private StrikeImplDB dbstrike = new StrikeImplDB();
+	private LikeDislikeImplDiscussionDB dblike = new LikeDislikeImplDiscussionDB();
 	private User testUser = new User(0, "test", "test", "test@test.com", false);
 	Optional<CategoryImpl> cat = dbcategory.getCategory("SPORT");
 

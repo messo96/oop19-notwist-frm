@@ -19,9 +19,9 @@ import javax.swing.SwingConstants;
 import org.netbeans.lib.awtextra.AbsoluteConstraints;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
 
-import controller.database.DBLikeDislikeImplComments;
-import controller.database.DBUserImpl;
-import controller.database.IDBLikeDislike;
+import controller.database.LikeDislikeImplCommentsDB;
+import controller.database.UserImplDB;
+import controller.database.ILikeDislikeDB;
 import model.base.User;
 import rombo.new_class.CommentsImplement;
 
@@ -32,8 +32,8 @@ public class Comment extends JPanel {
 	 */
 
 	private static final long serialVersionUID = 1L;
-	private DBUserImpl dbuser = new DBUserImpl();
-	private IDBLikeDislike dblike = new DBLikeDislikeImplComments();
+	private UserImplDB dbuser = new UserImplDB();
+	private ILikeDislikeDB dblike = new LikeDislikeImplCommentsDB();
 	private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 	private User user;
 	public Comment(final CommentsImplement com, User user) {

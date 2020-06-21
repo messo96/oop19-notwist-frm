@@ -29,16 +29,16 @@ import javax.swing.JTextField;
 import org.netbeans.lib.awtextra.AbsoluteConstraints;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
 
-import controller.database.DBCategoryImpl;
-import controller.database.DBDiscussionImpl;
+import controller.database.CategoryImplDB;
+import controller.database.DiscussionImplDB;
 import controller.table.TableDiscussion;
 import model.base.Category;
 import model.base.CategoryImpl;
 import model.base.DiscussionImpl;
 import model.base.User;
 
-import model.database.DBCategory;
-import model.database.DBDiscussion;
+import model.database.CategoryDB;
+import model.database.DiscussionDB;
 import model.database.Dao;
 import util.RulesPan;
 import util.TipsPan;
@@ -59,8 +59,8 @@ public class NewTopicPan extends JPanel {
 	 */
 
 	private User user;
-	private DBCategoryImpl dbcategory = new DBCategoryImpl();
-	private DBDiscussionImpl dbdiscussion = new DBDiscussionImpl();
+	private CategoryImplDB dbcategory = new CategoryImplDB();
+	private DiscussionImplDB dbdiscussion = new DiscussionImplDB();
 
 	// private JTable table;
 	// public newtopic_gui(User user, JTable table)

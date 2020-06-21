@@ -9,7 +9,7 @@ import java.util.List;
 import model.Log;
 import model.base.Report;
 
-public class DBReport extends DBManagerImpl implements Dao<Report> {
+public class ReportDB extends ManagerImplDB implements Dao<Report> {
 	private Log log = Log.getInstance();
 	private String query;
 	private PreparedStatement prepared;

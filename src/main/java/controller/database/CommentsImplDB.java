@@ -5,17 +5,17 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import model.database.DBComments;
+import model.database.CommentsDB;
 import rombo.new_class.CommentsImplement;
 
 /**
- * Class that through model class {@link DBComments} connect view
+ * Class that through model class {@link CommentsDB} connect view
  * 
  * @author gio
  *
  */
-public class DBCommentsImpl {
-	private DBComments dbc = new DBComments();
+public class CommentsImplDB {
+	private CommentsDB dbc = new CommentsDB();
 
 	/**
 	 * Find all the comments in that discussion

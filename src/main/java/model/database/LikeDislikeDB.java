@@ -16,7 +16,7 @@ import model.base.LikeSet;
  * @author Giovanni Messina
  *
  */
-public class DBLikeDislike extends DBManagerImpl implements Dao<LikeSet> {
+public class LikeDislikeDB extends ManagerImplDB implements Dao<LikeSet> {
 	private Log log = Log.getInstance();
 	private String query;
 	private PreparedStatement prepared;

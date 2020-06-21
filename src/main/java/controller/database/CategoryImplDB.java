@@ -4,16 +4,16 @@ import java.util.List;
 import java.util.Optional;
 
 import model.base.CategoryImpl;
-import model.database.DBCategory;
+import model.database.CategoryDB;
 
 /**
- * Class that through model class {@link DBCategory} connects view
+ * Class that through model class {@link CategoryDB} connects view
  * 
  * @author Giovanni Messina
  *
  */
-public class DBCategoryImpl {
-	private DBCategory dbc = new DBCategory();
+public class CategoryImplDB {
+	private CategoryDB dbc = new CategoryDB();
 
 	/**
 	 * read all the category present on database

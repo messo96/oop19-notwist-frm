@@ -33,7 +33,7 @@ import javax.swing.SwingWorker;
 import org.netbeans.lib.awtextra.AbsoluteConstraints;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
 
-import controller.database.DBUserImpl;
+import controller.database.UserImplDB;
 import main.Loader;
 import model.base.User;
 
@@ -41,7 +41,7 @@ import view.gui.BuildAfterGui;
 
 public class LoginPan extends JPanel {
 	private static final long serialVersionUID = 1L;
-	private DBUserImpl dbuser = new DBUserImpl();
+	private UserImplDB dbuser = new UserImplDB();
 
 	public LoginPan() {
 

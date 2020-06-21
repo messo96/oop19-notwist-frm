@@ -7,9 +7,9 @@ import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.List;
 
-import controller.database.DBCategoryImpl;
-import controller.database.DBCommentsImpl;
-import controller.database.DBUserImpl;
+import controller.database.CategoryImplDB;
+import controller.database.CommentsImplDB;
+import controller.database.UserImplDB;
 import model.Log;
 import model.base.DiscussionImpl;
 
@@ -19,11 +19,11 @@ import model.base.DiscussionImpl;
  * @author Giovanni Messina
  *
  */
-public class DBDiscussion extends DBManagerImpl implements Dao<DiscussionImpl> {
+public class DiscussionDB extends ManagerImplDB implements Dao<DiscussionImpl> {
 	private Log log = Log.getInstance();
-	private DBCategoryImpl dbcategory = new DBCategoryImpl();
-	private DBCommentsImpl dbcomments = new DBCommentsImpl();
-	private DBUserImpl dbuser = new DBUserImpl();
+	private CategoryImplDB dbcategory = new CategoryImplDB();
+	private CommentsImplDB dbcomments = new CommentsImplDB();
+	private UserImplDB dbuser = new UserImplDB();
 	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	private ResultSet rs = null;
 	private PreparedStatement prepared;

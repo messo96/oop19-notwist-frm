@@ -15,13 +15,13 @@ import model.Log;
  * @author Giovanni Messina
  *
  */
-abstract class DBManagerImpl {
+abstract class ManagerImplDB {
 
 	private Connection conn;
 	private Statement stmt;
 	private Log log = Log.getInstance();
 
-	public DBManagerImpl() {
+	public ManagerImplDB() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			open();

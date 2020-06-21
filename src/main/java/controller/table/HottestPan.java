@@ -12,12 +12,12 @@ import javax.swing.JTable;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
-import controller.database.DBCommentsImpl;
-import controller.database.DBDiscussionImpl;
+import controller.database.CommentsImplDB;
+import controller.database.DiscussionImplDB;
 import model.base.Discussion;
 import model.base.DiscussionImpl;
-import model.database.DBComments;
-import model.database.DBDiscussion;
+import model.database.CommentsDB;
+import model.database.DiscussionDB;
 import model.database.Dao;
 import rombo.new_class.CommentsImplement;
 
@@ -26,7 +26,7 @@ import rombo.new_class.CommentsImplement;
 public class HottestPan extends JPanel{
 
 	private static final long serialVersionUID = 1L;
-	private DBDiscussionImpl dbdiscussion = new DBDiscussionImpl();
+	private DiscussionImplDB dbdiscussion = new DiscussionImplDB();
 		
 	public HottestPan() {
 		

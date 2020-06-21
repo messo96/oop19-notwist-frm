@@ -23,8 +23,8 @@ import javax.swing.SwingConstants;
 
 import main.Loader;
 import model.base.DiscussionImpl;
-import model.database.DBDiscussion;
-import model.database.DBDiscussion;
+import model.database.DiscussionDB;
+import model.database.DiscussionDB;
 import model.database.Dao;
 
 public class Header extends JPanel {

@@ -35,13 +35,13 @@ import javax.swing.UIManager;
 import org.netbeans.lib.awtextra.AbsoluteConstraints;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
 
-import controller.database.DBUserImpl;
+import controller.database.UserImplDB;
 
 
 public class RegisterPan extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private DBUserImpl dbuser = new DBUserImpl();
+	private UserImplDB dbuser = new UserImplDB();
 
 	public RegisterPan() {
 

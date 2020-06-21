@@ -10,9 +10,9 @@ import java.text.SimpleDateFormat;
 import javax.swing.JEditorPane;
 import javax.swing.JOptionPane;
 
-import controller.database.DBCommentsImpl;
-import controller.database.DBLikeDislikeImplComments;
-import controller.database.DBUserImpl;
+import controller.database.CommentsImplDB;
+import controller.database.LikeDislikeImplCommentsDB;
+import controller.database.UserImplDB;
 import model.base.Discussion;
 import model.base.User;
 
@@ -29,8 +29,8 @@ public class Topic_gui extends javax.swing.JFrame {
 	private User user;
 	private Discussion discussion = null;
 	private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-	private DBLikeDislikeImplComments dblike = new DBLikeDislikeImplComments();
-	private DBCommentsImpl dbcomments = new DBCommentsImpl();
+	private LikeDislikeImplCommentsDB dblike = new LikeDislikeImplCommentsDB();
+	private CommentsImplDB dbcomments = new CommentsImplDB();
 	public Topic_gui(final Discussion discussion, final User user) {
 		this.user = user;
 		this.discussion = discussion;
@@ -161,7 +161,7 @@ public class Topic_gui extends javax.swing.JFrame {
 		menu.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
 		date_user.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-		date_user.setText("Published by: " + new DBUserImpl().getUser(discussion.getIdUser()).get().getUsername()
+		date_user.setText("Published by: " + new UserImplDB().getUser(discussion.getIdUser()).get().getUsername()
 				+ " on: " + sdf.format(discussion.getData()));
 		date_user.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -346,7 +346,7 @@ public class Topic_gui extends javax.swing.JFrame {
 
 		jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 		jLabel8.setText(
-				discussion.getData() + "by" + new DBUserImpl().getUser(discussion.getIdUser()).get().getUsername());
+				discussion.getData() + "by" + new UserImplDB().getUser(discussion.getIdUser()).get().getUsername());
 		jLabel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
 		jTextArea4.setColumns(20);

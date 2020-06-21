@@ -14,7 +14,7 @@ import model.base.CategoryImpl;
  * @author Giovanni Messina
  *
  */
-public class DBCategory extends DBManagerImpl implements Dao<CategoryImpl> {
+public class CategoryDB extends ManagerImplDB implements Dao<CategoryImpl> {
 	private Log log = Log.getInstance();
 	private ResultSet rs = null;
 	private String query;

@@ -14,7 +14,7 @@ import model.crypt.CrypterImplementation;
  * 
  * @author Giovanni Messina
  */
-public class DBUser extends DBManagerImpl implements Dao<User> {
+public class UserDB extends ManagerImplDB implements Dao<User> {
 	private Log log = Log.getInstance();
 	private ResultSet rs = null;
 	private PreparedStatement prepared;

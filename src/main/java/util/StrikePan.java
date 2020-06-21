@@ -23,12 +23,12 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
-import controller.database.DBStrikeImpl;
-import controller.database.DBUserImpl;
+import controller.database.StrikeImplDB;
+import controller.database.UserImplDB;
 import model.base.User;
-import model.database.DBStrike;
-import model.database.DBStrike;
-import model.database.DBUser;
+import model.database.StrikeDB;
+import model.database.StrikeDB;
+import model.database.UserDB;
 import model.database.Dao;
 
 public class StrikePan extends JPanel {
@@ -36,8 +36,8 @@ public class StrikePan extends JPanel {
 	 * Create panel for the strike tab
 	 */
 	private static final long serialVersionUID = 1L;
-	private DBUserImpl dbuser = new DBUserImpl();
-	private DBStrikeImpl dbstrike = new DBStrikeImpl();
+	private UserImplDB dbuser = new UserImplDB();
+	private StrikeImplDB dbstrike = new StrikeImplDB();
 	private User user;
 	private final Integer MAX_STRIKE = 3;
 
