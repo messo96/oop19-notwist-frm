@@ -8,9 +8,9 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
 /**
- * Class that work same as a log
- * used Singleton
- * @author gio
+ * Class that work same as a log Design pattern Singleton
+ * 
+ * @author Giovanni Messina
  *
  */
 public class Log {
@@ -30,6 +30,7 @@ public class Log {
 
 	/**
 	 * write info message in log file
+	 * 
 	 * @param s details of info
 	 */
 	public void logInfo(String s) {
@@ -38,6 +39,7 @@ public class Log {
 
 	/**
 	 * write warning message in log file
+	 * 
 	 * @param s details of warning
 	 */
 	public void logWarning(String s) {

@@ -11,14 +11,15 @@ import model.Log;
 
 /**
  * Abstract class that establish a connection from remote database
- * @author gio
+ * 
+ * @author Giovanni Messina
  *
  */
 abstract class DBManagerImpl {
 
 	private Connection conn;
 	private Statement stmt;
-	private  Log log = Log.getInstance();
+	private Log log = Log.getInstance();
 
 	public DBManagerImpl() {
 		try {
@@ -32,6 +33,7 @@ abstract class DBManagerImpl {
 
 	/**
 	 * open connection for the transfer data
+	 * 
 	 * @return Statement object if open worked, null otherwise
 	 */
 	protected Statement open() {
@@ -45,7 +47,7 @@ abstract class DBManagerImpl {
 		} catch (SQLException e) {
 			log.logWarning("Error while connect with database" + e);
 			JOptionPane.showMessageDialog(null, "Errore di connessione al database, controlla la connessione! ");
-			
+
 		}
 		return null;
 	}

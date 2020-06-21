@@ -15,6 +15,9 @@ public class DBReport extends DBManagerImpl implements Dao<Report> {
 	private PreparedStatement prepared;
 	private ResultSet rs;
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<Report> read() {
 		List<Report> list = new ArrayList<>();
@@ -33,6 +36,9 @@ public class DBReport extends DBManagerImpl implements Dao<Report> {
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean create(Report t) {
 		try {
@@ -54,6 +60,9 @@ public class DBReport extends DBManagerImpl implements Dao<Report> {
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean update(Report t) {
 		try {
@@ -65,7 +74,7 @@ public class DBReport extends DBManagerImpl implements Dao<Report> {
 			prepared.executeUpdate();
 			return true;
 		} catch (Exception e) {
-			log.logWarning("\nError while update report (idReport="/*+idReport*/+")" + e);
+			log.logWarning("\nError while update report (idReport="/* +idReport */ + ")" + e);
 			return false;
 		} finally {
 			close();
@@ -82,7 +91,7 @@ public class DBReport extends DBManagerImpl implements Dao<Report> {
 			prepared.executeUpdate();
 			return true;
 		} catch (SQLException e) {
-			log.logWarning("Error while delete report(idReport"+ id + ")" + e);
+			log.logWarning("Error while delete report(idReport" + id + ")" + e);
 			return false;
 		} finally {
 			close();

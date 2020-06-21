@@ -31,7 +31,7 @@ public class DBTest {
 	@Test
 	public void testDBUser() {
 
-		assertTrue(dbuser.existUser("test@test.com"));
+		// assertTrue(dbuser.existUser("test@test.com"));
 		assertFalse(dbuser.register("test", "test", "test@test.com", false));
 		User compareUser = dbuser.login("test@test.com", "test").get();
 		assertEquals(testUser.getId(), compareUser.getId());
@@ -42,7 +42,7 @@ public class DBTest {
 	}
 
 	@Test
-	public void testDBDiscussionAndCommentsAndLikes() {
+	public void testDBDiscussion() {
 		assertNotEquals(cat, Optional.empty());
 		assertEquals(dbdiscussion.getDiscussions(testUser.getId()).get().size(), 0);
 		dbdiscussion.createDiscussion(testUser.getId(), "TITLE TEST", "This is a description", cat.get());
@@ -73,7 +73,7 @@ public class DBTest {
 		assertTrue(dblike.getDislikes(disc.getIdDiscussion()) == 1);
 		dblike.setDislike(disc.getIdDiscussion(), testUser.getId());
 		assertTrue(dblike.getDislikes(disc.getIdDiscussion()) == 0);
-		
+
 		assertTrue(dbdiscussion.remove(disc.getIdDiscussion()));
 
 	}
@@ -109,7 +109,7 @@ public class DBTest {
 		assertTrue(dbstrike.getStrike(testUser.getId()) == 3);
 		dbstrike.reset(testUser.getId());
 		assertTrue(dbstrike.getStrike(testUser.getId()) == 0);
-
 	}
+
 
 }

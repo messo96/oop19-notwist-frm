@@ -11,6 +11,8 @@ import model.crypt.CrypterImplementation;
 
 /**
  * Class for manage interaction with database from Users
+ * 
+ * @author Giovanni Messina
  */
 public class DBUser extends DBManagerImpl implements Dao<User> {
 	private Log log = Log.getInstance();
@@ -19,6 +21,9 @@ public class DBUser extends DBManagerImpl implements Dao<User> {
 	private String query;
 	private CrypterImplementation crp = new CrypterImplementation();
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<User> read() {
 		List<User> list = new LinkedList<>();
@@ -38,6 +43,9 @@ public class DBUser extends DBManagerImpl implements Dao<User> {
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean create(User t) {
 		try {
@@ -59,12 +67,18 @@ public class DBUser extends DBManagerImpl implements Dao<User> {
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean update(User t) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean delete(Integer id) {
 		try {

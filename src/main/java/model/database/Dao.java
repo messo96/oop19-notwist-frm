@@ -4,9 +4,9 @@ import java.util.List;
 
 
 /**
- * 
- * @author gio
- *Design pattern DatabaseAccessObject
+ * Design pattern DatabaseAccessObject based on CRUD
+ * @author Giovanni Messina
+ *
  * @param <T>
  */
 public interface Dao<T> {

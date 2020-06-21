@@ -15,7 +15,7 @@ import rombo.new_class.*;
 /**
  * Class for Comment table based on DAO
  * 
- * @author gio
+ * @author Giovanni Messina
  *
  */
 public class DBComments extends DBManagerImpl implements Dao<CommentsImplement> {
@@ -25,6 +25,9 @@ public class DBComments extends DBManagerImpl implements Dao<CommentsImplement> 
 	private String query;
 	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<CommentsImplement> read() {
 		List<CommentsImplement> list = new LinkedList<>();
@@ -47,6 +50,9 @@ public class DBComments extends DBManagerImpl implements Dao<CommentsImplement> 
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean create(CommentsImplement t) {
 		try {
@@ -70,6 +76,9 @@ public class DBComments extends DBManagerImpl implements Dao<CommentsImplement> 
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean update(CommentsImplement t) {
 		try {
@@ -90,6 +99,9 @@ public class DBComments extends DBManagerImpl implements Dao<CommentsImplement> 
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean delete(final Integer id) {
 		try {

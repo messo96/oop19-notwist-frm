@@ -8,12 +8,19 @@ import java.util.List;
 
 import model.Log;
 import model.base.Strike;
-
+/**
+ * 
+ * @author Giovanni Messina
+ *
+ */
 public class DBStrike extends DBManagerImpl implements Dao<Strike> {
 	private Log log = Log.getInstance();
 	private String query;
 	private ResultSet rs;
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<Strike> read() {
 		List<Strike> list = new LinkedList<>();
@@ -34,12 +41,18 @@ public class DBStrike extends DBManagerImpl implements Dao<Strike> {
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean create(Strike t) {
 		// Automatic create a strike when create User (default strike = 0)
 		return false;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean update(Strike t) {
 		try {
@@ -59,6 +72,9 @@ public class DBStrike extends DBManagerImpl implements Dao<Strike> {
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean delete(Integer id) {
 		return this.update(new Strike(id, 0));

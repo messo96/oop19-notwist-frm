@@ -11,7 +11,7 @@ import model.base.CategoryImpl;
 /**
  * Class for Category table based on DAO
  * 
- * @author gio
+ * @author Giovanni Messina
  *
  */
 public class DBCategory extends DBManagerImpl implements Dao<CategoryImpl> {
@@ -20,6 +20,9 @@ public class DBCategory extends DBManagerImpl implements Dao<CategoryImpl> {
 	private String query;
 	private PreparedStatement prepared;
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<CategoryImpl> read() {
 		List<CategoryImpl> list = new ArrayList<>();
@@ -39,6 +42,9 @@ public class DBCategory extends DBManagerImpl implements Dao<CategoryImpl> {
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean create(CategoryImpl t) {
 		try {
@@ -56,6 +62,9 @@ public class DBCategory extends DBManagerImpl implements Dao<CategoryImpl> {
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean update(CategoryImpl t) {
 		try {
@@ -74,6 +83,9 @@ public class DBCategory extends DBManagerImpl implements Dao<CategoryImpl> {
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean delete(Integer id) {
 		try {

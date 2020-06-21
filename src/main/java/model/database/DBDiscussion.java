@@ -16,7 +16,7 @@ import model.base.DiscussionImpl;
 /**
  * Class for Discussion table based on DAO
  * 
- * @author gio
+ * @author Giovanni Messina
  *
  */
 public class DBDiscussion extends DBManagerImpl implements Dao<DiscussionImpl> {
@@ -29,6 +29,9 @@ public class DBDiscussion extends DBManagerImpl implements Dao<DiscussionImpl> {
 	private PreparedStatement prepared;
 	private String query;
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<DiscussionImpl> read() {
 		List<DiscussionImpl> discussion = new LinkedList<>();
@@ -51,6 +54,9 @@ public class DBDiscussion extends DBManagerImpl implements Dao<DiscussionImpl> {
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean create(DiscussionImpl t) {
 		try {
@@ -75,6 +81,9 @@ public class DBDiscussion extends DBManagerImpl implements Dao<DiscussionImpl> {
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean update(DiscussionImpl t) {
 		try {
@@ -98,6 +107,9 @@ public class DBDiscussion extends DBManagerImpl implements Dao<DiscussionImpl> {
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean delete(Integer idDiscussion) {
 		try {

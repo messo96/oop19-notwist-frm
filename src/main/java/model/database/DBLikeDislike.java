@@ -13,7 +13,7 @@ import model.base.LikeSet;
 /**
  * Class for Likes table based on DAO
  * 
- * @author gio
+ * @author Giovanni Messina
  *
  */
 public class DBLikeDislike extends DBManagerImpl implements Dao<LikeSet> {
@@ -22,6 +22,9 @@ public class DBLikeDislike extends DBManagerImpl implements Dao<LikeSet> {
 	private PreparedStatement prepared;
 	private ResultSet rs;
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<LikeSet> read() {
 		List<LikeSet> list = new LinkedList<>();
@@ -42,6 +45,9 @@ public class DBLikeDislike extends DBManagerImpl implements Dao<LikeSet> {
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean create(LikeSet t) {
 		try {
@@ -72,6 +78,9 @@ public class DBLikeDislike extends DBManagerImpl implements Dao<LikeSet> {
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean update(LikeSet t) {
 		try {
@@ -92,6 +101,9 @@ public class DBLikeDislike extends DBManagerImpl implements Dao<LikeSet> {
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean delete(Integer id) {
 		try {
