@@ -1,6 +1,5 @@
 package controller.table;
 
-import java.awt.CardLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -17,7 +16,6 @@ import model.base.Discussion;
 import model.base.DiscussionImpl;
 import model.base.User;
 import topic.TopicPan;
-import topic_gui.Topic_gui;
 
 public class TableDiscussion {
 
@@ -30,6 +28,11 @@ public class TableDiscussion {
 
 	public TableDiscussion(final User user) {
 		tableDiscussion = new JTable() {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public boolean isCellEditable(int row, int column) {
 				return false;
@@ -38,7 +41,7 @@ public class TableDiscussion {
 
 		tableDiscussion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 		modelDiscussion = new DefaultTableModel(
-				new Object[] { "Titolo", "Categoria", "Like", "Created By", "Risposte", "ID" }, 0);
+				new Object[] { "Titolo", "Categoria", "Like", "Dislike", "Created By", "Risposte", "ID" }, 0);
 		tableDiscussion.setModel(modelDiscussion);
 
 		tableDiscussion.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
@@ -53,21 +56,21 @@ public class TableDiscussion {
 			tableDiscussion.getColumnModel().getColumn(3).setResizable(false);
 			tableDiscussion.getColumnModel().getColumn(4).setResizable(false);
 			tableDiscussion.getColumnModel().getColumn(5).setResizable(false);
-
 		}
 		tableDiscussion.getColumnModel().getColumn(0).setPreferredWidth(320);
 		tableDiscussion.getColumnModel().getColumn(1).setPreferredWidth(108);
 		tableDiscussion.getColumnModel().getColumn(2).setPreferredWidth(60);
 		tableDiscussion.getColumnModel().getColumn(3).setPreferredWidth(60);
 		tableDiscussion.getColumnModel().getColumn(4).setPreferredWidth(90);
-		tableDiscussion.getColumnModel().getColumn(5).setPreferredWidth(0);
+		tableDiscussion.getColumnModel().getColumn(5).setPreferredWidth(90);
+		tableDiscussion.removeColumn(tableDiscussion.getColumnModel().getColumn(6));
 
 		tableDiscussion.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent mouseEvent) {
 				if (mouseEvent.getClickCount() == 2) {
 
 					DiscussionImpl disc = dbdiscussion.getDiscussion(Integer.parseInt(
-							tableDiscussion.getModel().getValueAt(tableDiscussion.getSelectedRow(), 5).toString()))
+							tableDiscussion.getModel().getValueAt(tableDiscussion.getSelectedRow(), 6).toString()))
 							.get();
 					JFrame fr = new JFrame();
 					fr.setContentPane(new TopicPan(disc, user));
@@ -113,7 +116,7 @@ public class TableDiscussion {
 	private void loadDiscussion(DefaultTableModel model) {
 		for (Discussion s : dbdiscussion.getAll()) {
 			model.addRow(new Object[] { s.getTitle(), s.getCategory().getName(), dblike.getLikes(s.getIdDiscussion()),
-					dbuser.getUser(s.getIdUser()).get().getUsername(),
+					dblike.getDislikes(s.getIdDiscussion()), dbuser.getUser(s.getIdUser()).get().getUsername(),
 					dbcomment.getComments(s.getIdDiscussion()).get().size(), s.getIdDiscussion() });
 		}
 	}
@@ -121,7 +124,7 @@ public class TableDiscussion {
 	private void loadDiscussion(DefaultTableModel model, final Category category) {
 		for (Discussion s : dbdiscussion.getDiscussion(category).get()) {
 			model.addRow(new Object[] { s.getTitle(), s.getCategory().getName(), dblike.getLikes(s.getIdDiscussion()),
-					dbuser.getUser(s.getIdUser()).get().getUsername(),
+					dblike.getDislikes(s.getIdDiscussion()), dbuser.getUser(s.getIdUser()).get().getUsername(),
 					dbcomment.getComments(s.getIdDiscussion()).get().size(), s.getIdDiscussion() });
 		}
 	}
@@ -129,7 +132,7 @@ public class TableDiscussion {
 	private void loadDiscussion(DefaultTableModel model, final String filter) {
 		for (Discussion s : dbdiscussion.getDiscussion(filter).get()) {
 			model.addRow(new Object[] { s.getTitle(), s.getCategory().getName(), dblike.getLikes(s.getIdDiscussion()),
-					dbuser.getUser(s.getIdUser()).get().getUsername(),
+					dblike.getDislikes(s.getIdDiscussion()), dbuser.getUser(s.getIdUser()).get().getUsername(),
 					dbcomment.getComments(s.getIdDiscussion()).get().size(), s.getIdDiscussion() });
 		}
 	}

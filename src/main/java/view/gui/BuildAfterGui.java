@@ -56,7 +56,7 @@ public class BuildAfterGui extends JFrame {
 
 		bodyHolder.setLayout(new CardLayout());
 		// Add HolderPan with the homepage tables to card
-		holder_panel = new HolderPan(tableDiscussion);
+		holder_panel = new HolderPan(tableDiscussion, user);
 		holder_panel.setVisible(true);
 		bodyHolder.add(holder_panel, "homepage_panel");
 		newtopic_panel = new NewTopicPan(user, tableDiscussion);

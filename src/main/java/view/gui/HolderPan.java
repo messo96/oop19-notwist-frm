@@ -2,7 +2,6 @@ package view.gui;
 
 
 
-import java.awt.Container;
 
 import javax.swing.JPanel;
 
@@ -14,16 +13,17 @@ import controller.table.HottestPan;
 import controller.table.Homepage;
 import controller.table.RandomPan;
 import controller.table.TableDiscussion;
+import model.base.User;
 
 public class HolderPan extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	
-    public HolderPan(TableDiscussion tableDiscussion) {
-        initComponents(tableDiscussion);
+    public HolderPan(TableDiscussion tableDiscussion, User user) {
+        initComponents(tableDiscussion, user);
     }
 
-    private void initComponents(TableDiscussion tableDiscussion) {
+    private void initComponents(TableDiscussion tableDiscussion, User user) {
     	
     	holder_panel = new JPanel();
     	holder_panel.setLayout(new AbsoluteLayout());
@@ -35,7 +35,7 @@ public class HolderPan extends JPanel {
       
         
     	//Get hottest panel and add it to the main frame
-        hottest_panel = new HottestPan();
+        hottest_panel = new HottestPan(user);
         hottest_panel.setVisible(true);      
         holder_panel.add(hottest_panel, new AbsoluteConstraints(814, 21, 240, -1));
    

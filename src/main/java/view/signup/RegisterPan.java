@@ -37,7 +37,6 @@ import org.netbeans.lib.awtextra.AbsoluteLayout;
 
 import controller.database.UserImplDB;
 
-
 public class RegisterPan extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -242,14 +241,16 @@ public class RegisterPan extends JPanel {
 		signup_button.addActionListener(e -> {
 			if (!jCheckBox1.isSelected())
 				JOptionPane.showMessageDialog(null, "You have to accept our rules before sign up :0");
-			else if (dbuser.register(this.getUsername(), this.getrPassword(), this.getEmail(), false)) {
+			else if (this.getEmail().isBlank() || !this.getEmail().contains("@"))
+				JOptionPane.showMessageDialog(null, "You must have a valid email");
+			else if (this.getUsername().isBlank() || this.getrPassword().isBlank()
+					|| !dbuser.register(this.getUsername(), this.getrPassword(), this.getEmail(), false)) {
+				JOptionPane.showMessageDialog(null, "You have to fill all the fields");
+			} else {
 				JOptionPane.showMessageDialog(null, "Account created succesfully! :) ");
 				CardLayout card = (CardLayout) getParent().getLayout();
 				card.show(getParent(), "login");
 			}
-
-			else
-				JOptionPane.showMessageDialog(null, "Error, something goes wrong!:(\nRetry ");
 
 		});
 	}
