@@ -1,4 +1,4 @@
-package topic;
+package view.topic.comment;
 
 import java.awt.Color;
 import java.awt.Font;

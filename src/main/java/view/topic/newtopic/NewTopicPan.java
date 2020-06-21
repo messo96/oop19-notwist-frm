@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller.newtopic;
+package view.topic.newtopic;
 
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -31,7 +31,6 @@ import org.netbeans.lib.awtextra.AbsoluteLayout;
 
 import controller.database.CategoryImplDB;
 import controller.database.DiscussionImplDB;
-import controller.table.TableDiscussion;
 import model.base.Category;
 import model.base.CategoryImpl;
 import model.base.DiscussionImpl;
@@ -42,6 +41,7 @@ import model.database.DiscussionDB;
 import model.database.Dao;
 import util.RulesPan;
 import util.TipsPan;
+import view.TableDiscussion;
 
 /**
  *

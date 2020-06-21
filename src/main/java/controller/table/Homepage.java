@@ -3,6 +3,8 @@ package controller.table;
 
 import javax.swing.JPanel;
 
+import view.TableDiscussion;
+
 
 public class Homepage extends JPanel{
 

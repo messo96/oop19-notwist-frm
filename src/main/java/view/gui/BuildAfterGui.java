@@ -14,13 +14,13 @@ import javax.swing.JPanel;
 import org.netbeans.lib.awtextra.AbsoluteConstraints;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
 
-import controller.newtopic.NewTopicPan;
 import controller.table.Header;
-import controller.table.TableDiscussion;
 import model.base.User;
-import topic.TopicPan;
 import util.UpperPan;
+import view.TableDiscussion;
 import view.profile.Profile;
+import view.topic.TopicPan;
+import view.topic.newtopic.NewTopicPan;
 
 public class BuildAfterGui extends JFrame {
 

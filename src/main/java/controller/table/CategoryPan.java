@@ -21,6 +21,7 @@ import main.Loader;
 import model.base.Category;
 import model.base.CategoryImpl;
 import model.database.CategoryDB;
+import view.TableDiscussion;
 
 public class CategoryPan extends JPanel {
 

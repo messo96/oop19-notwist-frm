@@ -14,8 +14,9 @@ import controller.database.DiscussionImplDB;
 import main.Loader;
 import model.base.Discussion;
 import model.database.DiscussionDB;
-import topic.Topic;
 import topic_gui.Topic_gui;
+import view.TableDiscussion;
+import view.topic.Topic;
 
 public class RandomPan extends JPanel {
 

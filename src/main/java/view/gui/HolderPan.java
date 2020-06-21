@@ -12,8 +12,8 @@ import controller.table.CategoryPan;
 import controller.table.HottestPan;
 import controller.table.Homepage;
 import controller.table.RandomPan;
-import controller.table.TableDiscussion;
 import model.base.User;
+import view.TableDiscussion;
 
 public class HolderPan extends JPanel {
 

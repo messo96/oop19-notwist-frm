@@ -1,9 +1,8 @@
-package topic;
+package view.topic;
 
 import java.awt.Color;
 import java.awt.Dimension;
 import java.util.List;
-import java.util.Optional;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
@@ -17,6 +16,8 @@ import controller.database.CommentsImplDB;
 import model.base.DiscussionImpl;
 import model.base.User;
 import rombo.new_class.CommentsImplement;
+import view.topic.comment.AllComments;
+import view.topic.comment.Newcomment;
 
 //In realtà ci sono gli altri import nascosti ma PER ORA non servono in quanto nello stesso package
 

@@ -1,4 +1,4 @@
-package topic;
+package view.topic.comment;
 
 import java.util.List;
 
@@ -77,8 +77,7 @@ public class AllComments extends JPanel {
 	private JPanel panel;
 	private JPanel history;
 	private Comment comment;
-	private Comment comment2;
-	private Comment comment3;
+
 }
 
 /*

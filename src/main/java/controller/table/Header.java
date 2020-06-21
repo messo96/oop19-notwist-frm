@@ -24,6 +24,7 @@ import javax.swing.SwingConstants;
 import main.Loader;
 import model.base.DiscussionImpl;
 import model.database.DiscussionDB;
+import view.TableDiscussion;
 import model.database.DiscussionDB;
 import model.database.Dao;
 

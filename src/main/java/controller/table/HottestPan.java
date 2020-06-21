@@ -18,8 +18,7 @@ import controller.database.DiscussionImplDB;
 import model.base.Discussion;
 import model.base.DiscussionImpl;
 import model.base.User;
-
-import topic.TopicPan;
+import view.topic.TopicPan;
 
 public class HottestPan extends JPanel {
 
