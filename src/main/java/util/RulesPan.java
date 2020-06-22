@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.Writer;
 
 import javax.swing.BorderFactory;
@@ -73,8 +74,9 @@ public class RulesPan extends JPanel {
 	
 	private void importRules(){
 			BufferedReader buf;
+			InputStreamReader in = new InputStreamReader(this.getClass().getResourceAsStream("/Rules.txt"));
 			try {
-				buf = new BufferedReader(new FileReader("docs/Rules.txt"));
+				buf = new BufferedReader(in);
 				rules_area.read(buf, null);
 			} catch (IOException e) {
 				System.out.println("File Rules.txt not found! ");

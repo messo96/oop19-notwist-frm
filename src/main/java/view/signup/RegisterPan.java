@@ -15,6 +15,7 @@ import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
@@ -287,13 +288,15 @@ public class RegisterPan extends JPanel {
 	}
 
 	public String getrPassword() {
+		//cause we use our crypt
 		return pssw_field.getText();
 	}
 
 	private void importTerms() {
 		BufferedReader buf;
+		InputStreamReader in = new InputStreamReader(this.getClass().getResourceAsStream("/Terms.txt"));
 		try {
-			buf = new BufferedReader(new FileReader("docs/Terms.txt"));
+			buf = new BufferedReader(in);
 			termsText.read(buf, null);
 		} catch (IOException e) {
 			System.out.println("File Terms.txt not found! ");

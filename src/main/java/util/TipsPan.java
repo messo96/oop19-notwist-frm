@@ -3,21 +3,15 @@ package util;
 import java.awt.Color;
 import java.awt.Font;
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JEditorPane;
-import javax.swing.JLabel;
+
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JSeparator;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
 public class TipsPan extends JPanel {
@@ -67,8 +61,9 @@ public class TipsPan extends JPanel {
 
 	private void importTips() {
 		BufferedReader buf;
+		InputStreamReader in = new InputStreamReader(this.getClass().getResourceAsStream("/Tips.txt"));
 		try {
-			buf = new BufferedReader(new FileReader("docs/Tips.txt"));
+			buf = new BufferedReader(in);
 			tips_panel.read(buf, null);
 		} catch (IOException e) {
 			System.out.println("File Tips.txt not found! ");

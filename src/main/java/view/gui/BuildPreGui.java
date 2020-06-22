@@ -12,6 +12,7 @@ import java.awt.image.BufferedImage;
 import java.net.URL;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -44,7 +45,7 @@ public class BuildPreGui extends JFrame {
         getContentPane().setLayout(new AbsoluteLayout());
    
 
-        Image icon = Toolkit.getDefaultToolkit().getImage("img/icon.jpg");    
+        Image icon = Toolkit.getDefaultToolkit().getImage(this.getClass().getClassLoader().getResource("font_test_1.png"));    
         setIconImage(icon);   
         //Get upper panel and add it to the main frame
         upper_panel = new UpperPan();

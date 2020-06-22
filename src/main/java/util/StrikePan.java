@@ -9,6 +9,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -60,7 +61,8 @@ public class StrikePan extends JPanel {
 
 		strikedialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		strikedialog.setTitle("Modifica uno strike");
-		Image icon = Toolkit.getDefaultToolkit().getImage("img/skull2.png");
+		Image icon = Toolkit.getDefaultToolkit()
+				.getImage(this.getClass().getClassLoader().getResource("skull2.png"));
 		strikedialog.setIconImage(icon);
 		usernamestrikable.setFont(new Font("Tahoma", 0, 14)); // NOI18N
 		usernamestrikable.setText("Nomeutente");
@@ -180,8 +182,9 @@ public class StrikePan extends JPanel {
 		if (strikes_table.getSelectionModel().isSelectionEmpty())
 			JOptionPane.showMessageDialog(null, "You have to select a row in the table before");
 		else {
-			user = dbuser.getUser(Integer
-					.parseInt(strikes_table.getModel().getValueAt(strikes_table.getSelectedRow(), 0).toString())).get();
+			user = dbuser.getUser(
+					Integer.parseInt(strikes_table.getModel().getValueAt(strikes_table.getSelectedRow(), 0).toString()))
+					.get();
 			usernamestrikable.setText(user.getUsername());
 			nstrike.setText(dbstrike.getStrike(user.getId()).toString());
 			try {

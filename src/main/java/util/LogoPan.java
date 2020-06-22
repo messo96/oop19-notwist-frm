@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 public class LogoPan extends JPanel{
 
 	private static final long serialVersionUID = 1L;
-	
+
 	public LogoPan() {
 		
 		drawComp();
@@ -24,7 +24,7 @@ public class LogoPan extends JPanel{
         
         //Draw logo_panel, get the picture and fix the size to fit the panel itself
         logo_panel.setBackground(new Color(67, 71, 91));
-        logo.setIcon(new ImageIcon("img/font_test_1.png")); // NOI18N
+        logo.setIcon(new ImageIcon(this.getClass().getClassLoader().getResource("font_test_1.png"))); // NOI18N
         logo.setDoubleBuffered(true);
         logo.setFocusable(false);
         logo.setRequestFocusEnabled(false);

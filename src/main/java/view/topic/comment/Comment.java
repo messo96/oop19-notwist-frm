@@ -49,8 +49,8 @@ public class Comment extends JPanel {
 		comment_part = new JPanel();
 		n_likes = new JLabel();
 		menu = new JButton();
-		Icon yes = new ImageIcon("img/like.png");
-		Icon no = new ImageIcon("img/dislike.png");
+		Icon yes = new ImageIcon(this.getClass().getClassLoader().getResource("like.png"));
+		Icon no = new ImageIcon(this.getClass().getClassLoader().getResource("dislike.png"));
 		like = new JButton(yes);
 		dislike = new JButton(no);
 		date_user = new JLabel();

@@ -1,6 +1,5 @@
 package view.comment;
 
-import javax.swing.JEditorPane;
 import javax.swing.JPanel;
 
 public class NewComment extends JPanel{
