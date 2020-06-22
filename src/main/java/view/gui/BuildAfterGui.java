@@ -16,11 +16,11 @@ import org.netbeans.lib.awtextra.AbsoluteLayout;
 
 import controller.table.Header;
 import model.base.User;
-import util.UpperPan;
 import view.TableDiscussion;
 import view.profile.Profile;
 import view.topic.TopicPan;
 import view.topic.newtopic.NewTopicPan;
+import view.util.UpperPan;
 
 public class BuildAfterGui extends JFrame {
 

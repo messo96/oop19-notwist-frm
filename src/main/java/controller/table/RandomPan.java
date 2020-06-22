@@ -11,7 +11,7 @@ import javax.swing.JTable;
 import javax.swing.SwingWorker;
 
 import controller.database.DiscussionImplDB;
-import main.Loader;
+import model.Loader;
 import model.base.Discussion;
 import model.database.DiscussionDB;
 import topic_gui.Topic_gui;

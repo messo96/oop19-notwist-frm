@@ -17,12 +17,12 @@ public class Log {
 	private static Log instance = null;
 	private File file = new File("src/main/java/main/notwist.log");
 	private Logger logger;
-	private FileHandler fh = new FileHandler(file.getPath(), true);
+	private FileHandler fh = new FileHandler(file.getName());
 
 	private Log() throws IOException, SecurityException {
 		if (!file.exists())
 			file.createNewFile();
-		logger = Logger.getLogger("notwist.log");
+		logger = Logger.getLogger("logFile");
 		logger.addHandler(fh);
 		SimpleFormatter form = new SimpleFormatter();
 		fh.setFormatter(form);

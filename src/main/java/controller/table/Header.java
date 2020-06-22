@@ -21,7 +21,7 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 import javax.swing.SwingConstants;
 
-import main.Loader;
+import model.Loader;
 import model.base.DiscussionImpl;
 import model.database.DiscussionDB;
 import view.TableDiscussion;

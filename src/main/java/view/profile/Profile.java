@@ -12,7 +12,7 @@ import message.MessagePan;
 import model.base.User;
 import user.Activities;
 import user.Infos;
-import util.StrikePan;
+import view.util.StrikePan;
 
 public class Profile extends JPanel{
 

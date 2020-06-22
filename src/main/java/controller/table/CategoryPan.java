@@ -17,7 +17,7 @@ import javax.swing.SwingWorker;
 import javax.swing.border.TitledBorder;
 
 import controller.database.CategoryImplDB;
-import main.Loader;
+import model.Loader;
 import model.base.Category;
 import model.base.CategoryImpl;
 import model.database.CategoryDB;

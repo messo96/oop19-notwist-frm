@@ -19,10 +19,10 @@ import javax.swing.JPanel;
 import org.netbeans.lib.awtextra.AbsoluteConstraints;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
 
-import util.LogoPan;
-import util.UpperPan;
 import view.gui.login.LoginPan;
 import view.signup.RegisterPan;
+import view.util.LogoPan;
+import view.util.UpperPan;
 
 public class BuildPreGui extends JFrame {
  

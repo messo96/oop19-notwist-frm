@@ -39,9 +39,9 @@ import model.base.User;
 import model.database.CategoryDB;
 import model.database.DiscussionDB;
 import model.database.Dao;
-import util.RulesPan;
-import util.TipsPan;
 import view.TableDiscussion;
+import view.util.RulesPan;
+import view.util.TipsPan;
 
 /**
  *
