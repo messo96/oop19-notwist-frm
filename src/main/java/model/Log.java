@@ -3,6 +3,7 @@ package model;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.FileHandler;
+import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
@@ -17,15 +18,25 @@ public class Log {
 	private static Log instance = null;
 	private File file = new File("src/main/java/main/notwist.log");
 	private Logger logger;
-	private FileHandler fh = new FileHandler(file.getName());
+	private FileHandler fh = new FileHandler(file.getPath(), true);
 
 	private Log() throws IOException, SecurityException {
+		if (instance == null) {
+			try {
+				instance = new Log();
+			} catch (SecurityException | IOException e) {
+
+				System.out.println("Error log \n " + e);
+			}
+		}
 		if (!file.exists())
 			file.createNewFile();
 		logger = Logger.getLogger("logFile");
+		logger.setUseParentHandlers(false);
 		logger.addHandler(fh);
 		SimpleFormatter form = new SimpleFormatter();
 		fh.setFormatter(form);
+
 	}
 
 	/**
@@ -51,13 +62,6 @@ public class Log {
 	 * @return instance of this class
 	 */
 	public static Log getInstance() {
-		if (instance == null)
-			try {
-				instance = new Log();
-			} catch (SecurityException | IOException e) {
-
-				System.out.println("Error log \n " + e);
-			}
 		return instance;
 	}
 
