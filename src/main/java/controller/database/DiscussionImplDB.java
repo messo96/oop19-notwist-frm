@@ -97,10 +97,9 @@ public class DiscussionImplDB {
 	 *         limited to {{@link #MAX_TOP}, Optional of empty otherwise
 	 */
 	public Optional<List<DiscussionImpl>> getTopDiscussion() {
-		return Optional.of(dbd.read().stream()
-				.sorted((d1, d2) -> Integer.compare(
-						dblike.getLikes(d1.getIdDiscussion()) - dblike.getDislikes(d1.getIdDiscussion()),
-						dblike.getLikes(d2.getIdDiscussion() - dblike.getDislikes(d2.getIdDiscussion()))))
+		return Optional.of(dbd.read().stream().sorted((d1,
+				d2) -> Integer.compare(dblike.getLikes(d2.getIdDiscussion()) - dblike.getDislikes(d2.getIdDiscussion()),
+						dblike.getLikes(d1.getIdDiscussion()) - dblike.getDislikes(d1.getIdDiscussion())))
 				.limit(MAX_TOP).collect(Collectors.toList()));
 	}
 
