@@ -98,7 +98,7 @@ public class Comment extends JPanel {
 		date_user.setHorizontalAlignment(SwingConstants.RIGHT);
 
 		date_user.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
-		date_user.setText(sdf.format(com.getData()) + "by " + dbuser.getUser(com.getIDUser()).get().getUsername());
+		date_user.setText(sdf.format(com.getData()) + " by " + dbuser.getUser(com.getIDUser()).get().getUsername());
 
 		comment_area.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
 		jScrollPane1.setViewportView(comment_area);

@@ -1,4 +1,4 @@
-package view.gui.login;
+package view.login;
 
 public @interface SuppressWarnings {
 

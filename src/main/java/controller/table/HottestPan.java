@@ -33,7 +33,6 @@ public class HottestPan extends JPanel {
 	private void drawComp(final User user) {
 		hottest_panel = new JPanel();
 		topdiscussiontable = new JTable() {
-			
 
 			/**
 			 * 
@@ -63,15 +62,15 @@ public class HottestPan extends JPanel {
 
 		topdiscussiontable.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent mouseEvent) {
-				if (mouseEvent.getClickCount() == 2) {
-
-					DiscussionImpl disc = dbdiscussion.getDiscussion(Integer.parseInt(topdiscussiontable.getModel()
-							.getValueAt(topdiscussiontable.getSelectedRow(), 1).toString())).get();
-					JFrame fr = new JFrame();
-					fr.setContentPane(new TopicPan(disc, user));
-					fr.pack();
-					fr.setVisible(true);
-				}
+				DiscussionImpl disc = dbdiscussion.getDiscussion(Integer.parseInt(
+						topdiscussiontable.getModel().getValueAt(topdiscussiontable.getSelectedRow(), 1).toString()))
+						.get();
+				JFrame fr = new JFrame();
+				fr.setContentPane(new TopicPan(disc, user));
+				fr.pack();
+				fr.setVisible(true);
+				topdiscussiontable.setFocusable(false);
+				topdiscussiontable.setFocusable(true);
 			}
 		});
 

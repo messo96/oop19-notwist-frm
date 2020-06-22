@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import javax.swing.GroupLayout;
 import javax.swing.JEditorPane;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import controller.database.CommentsImplDB;
@@ -44,7 +45,11 @@ public class Newcomment extends JPanel {
 		post_it.setText("Commenta");
 		post_it.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 		post_it.addActionListener(e -> {
-			dbcomment.createComment(idDiscussion, idUser, newcomment_area.getText());
+			if(dbcomment.createComment(idDiscussion, idUser, newcomment_area.getText()))
+				JOptionPane.showMessageDialog(null, "Comment create successfully");
+			else
+				JOptionPane.showMessageDialog(null, "Error");
+
 			//refreshare i commenti aggiungendo quello appena creato
 		});
 

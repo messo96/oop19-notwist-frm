@@ -1,4 +1,4 @@
-package view.gui.login;
+package view.login;
 
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -12,8 +12,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Optional;
 
-
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JEditorPane;
@@ -23,8 +21,6 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
-
-
 
 import javax.swing.SwingUtilities;
 import javax.swing.BorderFactory;
@@ -149,19 +145,26 @@ public class LoginPan extends JPanel {
 
 				@Override
 				protected String doInBackground() throws Exception {
-					Optional<User> user = getCredential();
-					if (user.isPresent()) {
-						JOptionPane.showMessageDialog(null, "Credenziali corrette, Benvenuto!");
-						new BuildAfterGui(user.get()).start();
-						win.dispose();
-						return "Credenziali corrette";
+					if (getMail().isBlank() || getPassword().isBlank() || !getMail().contains("@")) {
+						JOptionPane.showMessageDialog(null, "You have to fill correctly fields email and password");
 					} else {
-						JOptionPane.showMessageDialog(null, "Credenziali errate, riprovare! :(");
-						loader.setVisible(false);
-						login_button.setVisible(true);
-						return "Credenziali errate";
+						Optional<User> user = getCredential();
+						if (user.isPresent()) {
+							JOptionPane.showMessageDialog(null, "Credenziali corrette, Benvenuto!");
+							loader.setVisible(false);
+							new BuildAfterGui(user.get()).start();
+							win.dispose();
+							return "Credenziali corrette";
+						} else {
+							JOptionPane.showMessageDialog(null, "Credenziali errate, riprovare! :(");
+						}
+
 					}
+					loader.setVisible(false);
+					login_button.setVisible(true);
+					return "error";
 				}
+
 			}.execute();
 		});
 	}
@@ -190,6 +193,7 @@ public class LoginPan extends JPanel {
 	}
 
 	public Optional<User> getCredential() {
+
 		return dbuser.login(getMail(), getPassword());
 	}
 

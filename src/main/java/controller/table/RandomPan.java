@@ -1,22 +1,21 @@
 package controller.table;
 
-import java.awt.Container;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.SwingWorker;
 
 import controller.database.DiscussionImplDB;
 import model.Loader;
-import model.base.Discussion;
-import model.database.DiscussionDB;
-import topic_gui.Topic_gui;
+import model.base.DiscussionImpl;
+import model.base.User;
+
 import view.TableDiscussion;
-import view.topic.Topic;
+import view.topic.TopicPan;
 
 public class RandomPan extends JPanel {
 
@@ -24,12 +23,12 @@ public class RandomPan extends JPanel {
 	private DiscussionImplDB dbdiscussion = new DiscussionImplDB();
 	private Loader loader;
 
-	public RandomPan(TableDiscussion tableDiscussion) {
-		this.loader = new Loader();
-		drawComp(tableDiscussion);
+	public RandomPan(TableDiscussion tableDiscussion, User user) {
+		this.loader = Loader.getInstance();
+		drawComp(tableDiscussion, user);
 	}
 
-	private void drawComp(TableDiscussion tableDiscussion) {
+	private void drawComp(TableDiscussion tableDiscussion, User user) {
 		random_button = new JButton("Scegli una discussione randomica!");
 		button_panel = new JPanel();
 		GroupLayout button_panelLayout = new GroupLayout(button_panel);
@@ -51,11 +50,15 @@ public class RandomPan extends JPanel {
 				@Override
 				protected String doInBackground() throws Exception {
 					JTable table = tableDiscussion.getTableDiscussion();
-					Integer rand = Integer
-							.parseInt(table.getValueAt(new Random().nextInt(table.getRowCount()), 4).toString());
+					Random rand = new Random();
+					Integer r = rand.nextInt(table.getRowCount());
 
-					Discussion disc = dbdiscussion.getDiscussion(rand).get();
-//	      	        		new Topic_gui(disc, user);
+					DiscussionImpl disc = dbdiscussion
+							.getDiscussion(Integer.parseInt(table.getModel().getValueAt(r, 6).toString())).get();
+					JFrame fr = new JFrame();
+					fr.setContentPane(new TopicPan(disc, user));
+					fr.pack();
+					fr.setVisible(true);
 					loader.end();
 					return "";
 				}

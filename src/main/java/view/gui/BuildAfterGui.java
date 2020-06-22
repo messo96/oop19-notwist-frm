@@ -15,6 +15,7 @@ import org.netbeans.lib.awtextra.AbsoluteConstraints;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
 
 import controller.table.Header;
+import model.Loader;
 import model.base.User;
 import view.TableDiscussion;
 import view.profile.Profile;
@@ -27,6 +28,7 @@ public class BuildAfterGui extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private TableDiscussion tableDiscussion;
 	private User user;
+	private Loader loader = Loader.getInstance();
 	
 	public BuildAfterGui(final User user) {
 		this.user = user;
@@ -36,7 +38,7 @@ public class BuildAfterGui extends JFrame {
 	}
 
 	private void initComponents(TableDiscussion tableDiscussion) {
-
+		loader.start();
 		bodyHolder = new JPanel(); // Holder for body
 
 		// JFrame properties
@@ -77,7 +79,7 @@ public class BuildAfterGui extends JFrame {
 		header_panel.setVisible(true);
 
 		getContentPane().add(header_panel, new AbsoluteConstraints(0, 20, 1080, -1));
-
+		loader.end();
 		pack();
 
 		// <--------------METHODS---------------------------------------->

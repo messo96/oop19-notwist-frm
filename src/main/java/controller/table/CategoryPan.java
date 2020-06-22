@@ -26,7 +26,7 @@ import view.TableDiscussion;
 public class CategoryPan extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private Loader loader = new Loader();
+	private Loader loader = Loader.getInstance();
 	private CategoryImplDB dbcategory = new CategoryImplDB();
 
 	public CategoryPan(TableDiscussion tableDiscussion) {
@@ -83,6 +83,9 @@ public class CategoryPan extends JPanel {
 						Category cat = dbcategory.getCategory(jList.getSelectedValue()).get();
 						tableDiscussion.refreshTableDiscussion(cat);
 						loader.end();
+						jList.setFocusable(false);
+						jList.setFocusable(true);
+						
 						return "";
 					}
 

@@ -46,7 +46,7 @@ public class HolderPan extends JPanel {
    
 
         //GGet Button Pan and add it
-        button_panel = new RandomPan(tableDiscussion);
+        button_panel = new RandomPan(tableDiscussion, user);
         button_panel.setVisible(true);     
         holder_panel.add(button_panel, new AbsoluteConstraints(814, 410, -1, -1));
         
