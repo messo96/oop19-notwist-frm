@@ -4,16 +4,16 @@ import model.base.Strike;
 import model.database.StrikeDB;
 
 /**
- * Class that through model class {@link StrikeDB} connect view
+ * Class that through model class {@link StrikeDB} connect view.
  * 
- * @author Giovanni Messina
  *
  */
 public class StrikeImplDB {
+	
 	private StrikeDB dbs = new StrikeDB();
 
 	/**
-	 * get number of strikes of the user
+	 * get number of strikes of the user.
 	 * 
 	 * @param idUser id of the user that wants to know number of strikes
 	 * @return number of strikes
@@ -23,7 +23,7 @@ public class StrikeImplDB {
 	}
 
 	/**
-	 * set the strike to the user
+	 * set the strike to the user.
 	 * 
 	 * @param idUser id of the user that want to strike
 	 * @param value  number of strike to update
@@ -34,7 +34,8 @@ public class StrikeImplDB {
 	}
 
 	/**
-	 * reset strike of the user
+	 * reset strike of the user.
+	 * 
 	 * @param idUser id of the user to reset strike
 	 * @return true if reset completed successfully, false otherwise
 	 */

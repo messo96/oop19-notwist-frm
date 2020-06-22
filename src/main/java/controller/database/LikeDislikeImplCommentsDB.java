@@ -6,12 +6,12 @@ import model.base.LikeSet;
 import model.database.LikeDislikeDB;
 
 /**
- * Class that through {@link LikeDislikeDB} connect view
+ * Class that through {@link LikeDislikeDB} connect view.
  * 
- * @author Giovanni Messina
  *
  */
 public class LikeDislikeImplCommentsDB implements ILikeDislikeDB {
+	
 	private LikeDislikeDB dbl = new LikeDislikeDB();
 
 	/**
@@ -33,26 +33,28 @@ public class LikeDislikeImplCommentsDB implements ILikeDislikeDB {
 	 * {@inheritDoc}
 	 */
 	public boolean setLike(final Integer idComment, final Integer idUser) {
-		if (isStillLiked(idComment, idUser))
+		if (isStillLiked(idComment, idUser)) {
 			return dbl.delete(this.getIdLikes(idComment, idUser));
-		else if (isStillDisliked(idComment, idUser))
+		} else if (isStillDisliked(idComment, idUser)) {
 			return dbl.update(new LikeSet(getIdLikes(idComment, idUser), true, false, idUser, Optional.empty(),
 					Optional.of(idComment)));
-		else
+		} else {
 			return dbl.create(new LikeSet(0, true, false, idUser, Optional.empty(), Optional.of(idComment)));
+		}
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	public boolean setDislike(final Integer idComment, final Integer idUser) {
-		if (isStillDisliked(idComment, idUser))
+		if (isStillDisliked(idComment, idUser)) {
 			return dbl.delete(this.getIdLikes(idComment, idUser));
-		else if (isStillLiked(idComment, idUser))
+		} else if (isStillLiked(idComment, idUser)) {
 			return dbl.update(new LikeSet(getIdLikes(idComment, idUser), false, true, idUser, Optional.empty(),
 					Optional.of(idComment)));
-		else
+		} else {
 			return dbl.create(new LikeSet(0, false, true, idUser, Optional.empty(), Optional.of(idComment)));
+		}
 	}
 
 	// control if the comment is still liked by that user, return true if it is

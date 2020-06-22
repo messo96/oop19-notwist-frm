@@ -13,12 +13,12 @@ import model.Log;
 import rombo.new_class.*;
 
 /**
- * Class for Comment table based on DAO
+ * Class for Comment table based on DAO.
  * 
- * @author Giovanni Messina
  *
  */
 public class CommentsDB extends ManagerImplDB implements Dao<CommentsImplement> {
+	
 	private Log log = Log.getInstance();
 	private ResultSet rs;
 	private PreparedStatement prepared;
@@ -54,7 +54,7 @@ public class CommentsDB extends ManagerImplDB implements Dao<CommentsImplement> 
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean create(CommentsImplement t) {
+	public boolean create(final CommentsImplement t) {
 		try {
 
 			query = "insert into COMMENT (idUser, idDiscussion, commento, data) values (?,?,?,?)";
@@ -80,7 +80,7 @@ public class CommentsDB extends ManagerImplDB implements Dao<CommentsImplement> 
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean update(CommentsImplement t) {
+	public boolean update(final CommentsImplement t) {
 		try {
 			open();
 

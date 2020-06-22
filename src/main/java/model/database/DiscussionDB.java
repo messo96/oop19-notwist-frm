@@ -14,12 +14,12 @@ import model.Log;
 import model.base.DiscussionImpl;
 
 /**
- * Class for Discussion table based on DAO
+ * Class for Discussion table based on DAO.
  * 
- * @author Giovanni Messina
  *
  */
 public class DiscussionDB extends ManagerImplDB implements Dao<DiscussionImpl> {
+
 	private Log log = Log.getInstance();
 	private CategoryImplDB dbcategory = new CategoryImplDB();
 	private CommentsImplDB dbcomments = new CommentsImplDB();
@@ -58,7 +58,7 @@ public class DiscussionDB extends ManagerImplDB implements Dao<DiscussionImpl> {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean create(DiscussionImpl t) {
+	public boolean create(final DiscussionImpl t) {
 		try {
 			query = "insert into DISCUSSION (idUser, title, description, idMacro,data) values (?,?,?,?,?)";
 			open();
@@ -85,7 +85,7 @@ public class DiscussionDB extends ManagerImplDB implements Dao<DiscussionImpl> {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean update(DiscussionImpl t) {
+	public boolean update(final DiscussionImpl t) {
 		try {
 			query = "update DISCUSSION set title = ?, description = ?, idMacro= ? where idDiscussion= ? ";
 			open();
@@ -111,7 +111,7 @@ public class DiscussionDB extends ManagerImplDB implements Dao<DiscussionImpl> {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean delete(Integer idDiscussion) {
+	public boolean delete(final Integer idDiscussion) {
 		try {
 			open();
 			query = "delete from DISCUSSION where idDiscussion = ?";

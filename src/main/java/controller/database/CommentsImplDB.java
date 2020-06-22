@@ -9,16 +9,16 @@ import model.database.CommentsDB;
 import rombo.new_class.CommentsImplement;
 
 /**
- * Class that through model class {@link CommentsDB} connect view
+ * Class that through model class {@link CommentsDB} connect view.
  * 
- * @author gio
  *
  */
 public class CommentsImplDB {
+	
 	private CommentsDB dbc = new CommentsDB();
 
 	/**
-	 * Find all the comments in that discussion
+	 * Find all the comments in that discussion.
 	 * 
 	 * @param idDiscussion id of the discussion where to search relative comments
 	 * @return Optional of list of {@linkCommentsImplement} if that discussion has
@@ -30,7 +30,7 @@ public class CommentsImplDB {
 	}
 
 	/**
-	 * Upload a new comment of a discussion in database
+	 * Upload a new comment of a discussion in database.
 	 * 
 	 * @param idDiscussion id of the discussion where to comment
 	 * @param idUser       id of the user that write the comment
@@ -43,7 +43,7 @@ public class CommentsImplDB {
 	}
 
 	/**
-	 * Delete a comment from database
+	 * Delete a comment from database.
 	 * 
 	 * @param idComment id of the comment to remove
 	 * @return true if comment deleted successfully, false otherwise

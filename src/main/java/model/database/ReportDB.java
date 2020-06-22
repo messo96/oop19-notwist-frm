@@ -10,6 +10,7 @@ import model.Log;
 import model.base.Report;
 
 public class ReportDB extends ManagerImplDB implements Dao<Report> {
+	
 	private Log log = Log.getInstance();
 	private String query;
 	private PreparedStatement prepared;
@@ -40,7 +41,7 @@ public class ReportDB extends ManagerImplDB implements Dao<Report> {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean create(Report t) {
+	public boolean create(final Report t) {
 		try {
 			query = "insert into REPORT (idUser, idDiscussion, description) values (?,?,?,?)";
 			open();
@@ -64,7 +65,7 @@ public class ReportDB extends ManagerImplDB implements Dao<Report> {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean update(Report t) {
+	public boolean update(final Report t) {
 		try {
 			query = "update REPORT set pending = ? where idReport = ?";
 			open();
@@ -82,7 +83,7 @@ public class ReportDB extends ManagerImplDB implements Dao<Report> {
 	}
 
 	@Override
-	public boolean delete(Integer id) {
+	public final boolean delete(final Integer id) {
 		try {
 			open();
 			query = "delete from REPORT where idReport= ?";

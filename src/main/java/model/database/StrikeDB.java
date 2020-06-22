@@ -10,10 +10,10 @@ import model.Log;
 import model.base.Strike;
 /**
  * 
- * @author Giovanni Messina
  *
  */
 public class StrikeDB extends ManagerImplDB implements Dao<Strike> {
+	
 	private Log log = Log.getInstance();
 	private String query;
 	private ResultSet rs;
@@ -45,7 +45,7 @@ public class StrikeDB extends ManagerImplDB implements Dao<Strike> {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean create(Strike t) {
+	public boolean create(final Strike t) {
 		// Automatic create a strike when create User (default strike = 0)
 		return false;
 	}
@@ -54,7 +54,7 @@ public class StrikeDB extends ManagerImplDB implements Dao<Strike> {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean update(Strike t) {
+	public boolean update(final Strike t) {
 		try {
 			open();
 			PreparedStatement prepared = getConn().prepareStatement("update UTENTE set strike = ? where idUser = ?");
@@ -76,7 +76,7 @@ public class StrikeDB extends ManagerImplDB implements Dao<Strike> {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean delete(Integer id) {
+	public boolean delete(final Integer id) {
 		return this.update(new Strike(id, 0));
 	}
 

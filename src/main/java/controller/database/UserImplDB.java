@@ -7,16 +7,16 @@ import model.base.User;
 import model.database.UserDB;
 
 /**
- * Class that through model class {@link UserDB} connect view
+ * Class that through model class {@link UserDB} connect view.
  * 
- * @author Giovanni Messina
  *
  */
 public class UserImplDB {
+	
 	private UserDB dbu = new UserDB();
 
 	/**
-	 * get all users
+	 * get all users.
 	 * 
 	 * @return list of {@link User}
 	 */
@@ -25,7 +25,7 @@ public class UserImplDB {
 	}
 
 	/**
-	 * get {@link User} from id
+	 * get {@link User} from id.
 	 * 
 	 * @param idUser id of the user to find
 	 * @return Optional of {@link User} if exist, false otherwise
@@ -35,7 +35,7 @@ public class UserImplDB {
 	}
 
 	/**
-	 * control if combination email-password correspond to a {@link User}
+	 * control if combination email-password correspond to a {@link User}.
 	 * 
 	 * @param email    of the user
 	 * @param password of the user
@@ -48,7 +48,7 @@ public class UserImplDB {
 	}
 
 	/**
-	 * create new user
+	 * create new user.
 	 * 
 	 * @param username of the new user
 	 * @param password of the new user
@@ -57,8 +57,9 @@ public class UserImplDB {
 	 * @return true if registered correctly, false otherwise
 	 */
 	public boolean register(final String username, final String password, final String email, final boolean isMod) {
-		if (existUser(email))
+		if (existUser(email)) {
 			return false;
+		}
 		return dbu.create(new User(0, username, password, email, isMod));
 	}
 

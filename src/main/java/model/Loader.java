@@ -8,8 +8,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JWindow;
 
-public class Loader extends JWindow {
-
+public final class Loader extends JWindow {
+	
 	/**
 	 * 
 	 */
@@ -37,15 +37,15 @@ public class Loader extends JWindow {
 	}
 
 	public static Loader getInstance() {
-		if (instance == null)
+		if (instance == null) {
 			instance = new Loader();
+		}
 		return instance;
 	}
 
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 		Loader l = new Loader();
 		l.start();
-		
 	}
 
 }

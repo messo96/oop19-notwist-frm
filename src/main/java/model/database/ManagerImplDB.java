@@ -10,18 +10,17 @@ import javax.swing.JOptionPane;
 import model.Log;
 
 /**
- * Abstract class that establish a connection from remote database
+ * Abstract class that establish a connection from remote database.
  * 
- * @author Giovanni Messina
  *
  */
 abstract class ManagerImplDB {
-
+	
 	private Connection conn;
 	private Statement stmt;
 	private Log log = Log.getInstance();
 
-	public ManagerImplDB() {
+	 ManagerImplDB() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			open();
@@ -32,7 +31,7 @@ abstract class ManagerImplDB {
 	}
 
 	/**
-	 * open connection for the transfer data
+	 * open connection for the transfer data.
 	 * 
 	 * @return Statement object if open worked, null otherwise
 	 */
@@ -53,7 +52,7 @@ abstract class ManagerImplDB {
 	}
 
 	/**
-	 * close the connection
+	 * close the connection.
 	 */
 	protected void close() {
 		try {

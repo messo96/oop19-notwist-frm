@@ -11,18 +11,18 @@ import model.database.DiscussionDB;
 import model.database.LikeDislikeDB;
 
 /**
- * Class that through model class {@link DiscussionDB} connect view
+ * Class that through model class {@link DiscussionDB} connect view.
  * 
- * @author Giovanni Messina
  *
  */
 public class DiscussionImplDB {
+	
 	private DiscussionDB dbd = new DiscussionDB();
 	private LikeDislikeImplDiscussionDB dblike = new LikeDislikeImplDiscussionDB();
 	private final Integer MAX_TOP = 5;
 
 	/**
-	 * read all the discussion from database
+	 * read all the discussion from database.
 	 * 
 	 * @return list of {@link DiscussionImpl}
 	 */
@@ -31,7 +31,7 @@ public class DiscussionImplDB {
 	}
 
 	/**
-	 * Upload a new discussion
+	 * Upload a new discussion.
 	 * 
 	 * @param idUser      id of the user that write the new discussion
 	 * @param title       of the discussion
@@ -47,7 +47,7 @@ public class DiscussionImplDB {
 	}
 
 	/**
-	 * get a discussion from idDiscussion
+	 * get a discussion from idDiscussion.
 	 * 
 	 * @param idDiscussion id of the discussion to get
 	 * @return if exist Optional of {@link DiscussionImpl}, Optional empty otherwise
@@ -57,7 +57,7 @@ public class DiscussionImplDB {
 	}
 
 	/**
-	 * get all the discussion filtered by title
+	 * get all the discussion filtered by title.
 	 * 
 	 * @param title or part of this that is contained in discussions
 	 * @return if exists Optional of list of {@link DiscussionImpl}, Optional empty
@@ -68,7 +68,7 @@ public class DiscussionImplDB {
 	}
 
 	/**
-	 * get all the discussions identified from the category
+	 * get all the discussions identified from the category.
 	 * 
 	 * @param category to find discussions
 	 * @return if exists Optional of list of {@link DiscussionImpl}, Optional empty
@@ -80,7 +80,7 @@ public class DiscussionImplDB {
 	}
 
 	/**
-	 * get all the discussions write to the user
+	 * get all the discussions write to the user.
 	 * 
 	 * @param idUser id of the user to search his/her discussion
 	 * @return if exists Optional of list of {@link DiscussionImpl}, Optional empty
@@ -91,7 +91,7 @@ public class DiscussionImplDB {
 	}
 
 	/**
-	 * get discussions based on relation like/dislike
+	 * get discussions based on relation like/dislike.
 	 * 
 	 * @return if exists discussions Optional of list of {@link DiscussionImpl}
 	 *         limited to {{@link #MAX_TOP}, Optional of empty otherwise
@@ -104,7 +104,7 @@ public class DiscussionImplDB {
 	}
 
 	/**
-	 * delete a discussion from database
+	 * delete a discussion from database.
 	 * 
 	 * @param idDiscussion id of the discussion to remove
 	 * @return true if discussion deleted successfully, false otherwise

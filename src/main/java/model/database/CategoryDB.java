@@ -9,12 +9,12 @@ import model.Log;
 import model.base.CategoryImpl;
 
 /**
- * Class for Category table based on DAO
+ * Class for Category table based on DAO.
  * 
- * @author Giovanni Messina
  *
  */
 public class CategoryDB extends ManagerImplDB implements Dao<CategoryImpl> {
+	
 	private Log log = Log.getInstance();
 	private ResultSet rs = null;
 	private String query;
@@ -46,7 +46,7 @@ public class CategoryDB extends ManagerImplDB implements Dao<CategoryImpl> {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean create(CategoryImpl t) {
+	public boolean create(final CategoryImpl t) {
 		try {
 			query = "insert into TOPIC (title) values (?)";
 			open();
@@ -66,7 +66,7 @@ public class CategoryDB extends ManagerImplDB implements Dao<CategoryImpl> {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean update(CategoryImpl t) {
+	public boolean update(final CategoryImpl t) {
 		try {
 			query = "update TOPIC set title = (?) where idMacro = ?";
 			open();
@@ -87,7 +87,7 @@ public class CategoryDB extends ManagerImplDB implements Dao<CategoryImpl> {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean delete(Integer id) {
+	public boolean delete(final Integer id) {
 		try {
 			query = "delete from TOPIC where idMacro = ?";
 			open();

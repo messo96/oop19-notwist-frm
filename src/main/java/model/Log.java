@@ -9,12 +9,12 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
 /**
- * Class that work same as a log Design pattern Singleton
+ * Class that work same as a log Design pattern Singleton.
  * 
- * @author Giovanni Messina
  *
  */
-public class Log {
+public final class Log {
+	
 	private static Log instance = null;
 	private File file = new File("src/main/java/main/notwist.log");
 	private Logger logger;
@@ -29,8 +29,9 @@ public class Log {
 				System.out.println("Error log \n " + e);
 			}
 		}
-		if (!file.exists())
+		if (!file.exists()) {
 			file.createNewFile();
+		}
 		logger = Logger.getLogger("logFile");
 		logger.setUseParentHandlers(false);
 		logger.addHandler(fh);
@@ -40,20 +41,20 @@ public class Log {
 	}
 
 	/**
-	 * write info message in log file
+	 * write info message in log file.
 	 * 
 	 * @param s details of info
 	 */
-	public void logInfo(String s) {
+	public void logInfo(final String s) {
 		logger.log(Level.INFO, s);
 	}
 
 	/**
-	 * write warning message in log file
+	 * write warning message in log file.
 	 * 
 	 * @param s details of warning
 	 */
-	public void logWarning(String s) {
+	public void logWarning(final String s) {
 		logger.log(Level.WARNING, s);
 	}
 

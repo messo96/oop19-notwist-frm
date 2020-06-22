@@ -11,12 +11,12 @@ import model.Log;
 import model.base.LikeSet;
 
 /**
- * Class for Likes table based on DAO
+ * Class for Likes table based on DAO.
  * 
- * @author Giovanni Messina
  *
  */
 public class LikeDislikeDB extends ManagerImplDB implements Dao<LikeSet> {
+	
 	private Log log = Log.getInstance();
 	private String query;
 	private PreparedStatement prepared;
@@ -49,7 +49,7 @@ public class LikeDislikeDB extends ManagerImplDB implements Dao<LikeSet> {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean create(LikeSet t) {
+	public boolean create(final LikeSet t) {
 		try {
 			open();
 			if (t.getIdDiscussion().isPresent()) {
@@ -82,7 +82,7 @@ public class LikeDislikeDB extends ManagerImplDB implements Dao<LikeSet> {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean update(LikeSet t) {
+	public boolean update(final LikeSet t) {
 		try {
 			query = "update LIKES set isLike= ?, isDislike= ? where idLikes= ?";
 			open();
@@ -105,7 +105,7 @@ public class LikeDislikeDB extends ManagerImplDB implements Dao<LikeSet> {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean delete(Integer id) {
+	public boolean delete(final Integer id) {
 		try {
 			query = "delete from LIKES where idLikes = ?";
 			open();
