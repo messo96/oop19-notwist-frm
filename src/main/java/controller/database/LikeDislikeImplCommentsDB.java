@@ -19,14 +19,14 @@ public class LikeDislikeImplCommentsDB implements ILikeDislikeDB {
 	 */
 
 	public Integer getLikes(final Integer idComment) {
-		return (int) dbl.read().stream().filter(l -> l.getIdComment().get() == idComment && l.getLike()).count();
+		return (int) dbl.read().stream().filter(l -> l.getIdComment().get().equals(idComment) && l.getLike()).count();
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	public Integer getDislikes(final Integer idComment) {
-		return (int) dbl.read().stream().filter(l -> l.getIdComment().get() == idComment && l.getDislike()).count();
+		return (int) dbl.read().stream().filter(l -> l.getIdComment().get().equals(idComment) && l.getDislike()).count();
 	}
 
 	/**
@@ -61,7 +61,7 @@ public class LikeDislikeImplCommentsDB implements ILikeDislikeDB {
 	// still liked by that user, false if it is not
 	private boolean isStillLiked(final Integer idComment, final Integer idUser) {
 		return dbl.read().stream()
-				.filter(l -> l.getIdComment().get() == idComment && l.getIdUser() == idUser && l.getLike()).iterator()
+				.filter(l -> l.getIdComment().get().equals(idComment) && l.getIdUser().equals(idUser) && l.getLike()).iterator()
 				.hasNext();
 	}
 
@@ -69,14 +69,14 @@ public class LikeDislikeImplCommentsDB implements ILikeDislikeDB {
 	// still disliked by that user, false if it is not
 	private boolean isStillDisliked(final Integer idComment, final Integer idUser) {
 		return dbl.read().stream()
-				.filter(l -> l.getIdComment().get() == idComment && l.getIdUser() == idUser && l.getDislike())
+				.filter(l -> l.getIdComment().get().equals(idComment) && l.getIdUser().equals(idUser) && l.getDislike())
 				.iterator().hasNext();
 	}
 
 	// return the identifier of the tuple like/dislike, you can find that through
 	// idComment and idUser
 	private Integer getIdLikes(final Integer idComment, final Integer idUser) {
-		return dbl.read().stream().filter(l -> l.getIdComment().get() == idComment && l.getIdUser() == idUser)
+		return dbl.read().stream().filter(l -> l.getIdComment().get().equals(idComment) && l.getIdUser().equals(idUser))
 				.findFirst().get().getId();
 	}
 

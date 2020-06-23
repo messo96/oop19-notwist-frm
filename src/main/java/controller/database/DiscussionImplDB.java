@@ -74,7 +74,7 @@ public class DiscussionImplDB {
 	 *         otherwise
 	 */
 	public Optional<List<DiscussionImpl>> getDiscussion(final Category category) {
-		return Optional.of(dbd.read().stream().filter(d -> d.getCategory().getId() == category.getId())
+		return Optional.of(dbd.read().stream().filter(d -> d.getCategory().getId().equals(category.getId()))
 				.collect(Collectors.toList()));
 	}
 

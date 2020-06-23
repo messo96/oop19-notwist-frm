@@ -19,7 +19,7 @@ public class StrikeImplDB {
 	 * @return number of strikes
 	 */
 	public Integer getStrike(final Integer idUser) {
-		return dbs.read().stream().filter(u -> u.getIdUser() == idUser).findFirst().get().getStrike();
+		return dbs.read().stream().filter(u -> u.getIdUser().equals(idUser)).findFirst().get().getStrike();
 	}
 
 	/**

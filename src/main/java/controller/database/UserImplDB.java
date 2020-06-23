@@ -31,7 +31,7 @@ public class UserImplDB {
 	 * @return Optional of {@link User} if exist, false otherwise
 	 */
 	public Optional<User> getUser(final Integer idUser) {
-		return dbu.read().stream().filter(u -> u.getId() == idUser).findFirst();
+		return dbu.read().stream().filter(u -> u.getId().equals(idUser)).findFirst();
 	}
 
 	/**

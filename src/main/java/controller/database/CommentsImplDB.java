@@ -25,7 +25,7 @@ public class CommentsImplDB {
 	 *         comments, Optional of empty otherwise
 	 */
 	public Optional<List<CommentsImplement>> getComments(final Integer idDiscussion) {
-		return Optional.of(dbc.read().stream().filter(c -> c.GetIDDiscussion().get() == idDiscussion)
+		return Optional.of(dbc.read().stream().filter(c -> c.GetIDDiscussion().get().equals(idDiscussion))
 				.collect(Collectors.toList()));
 	}
 

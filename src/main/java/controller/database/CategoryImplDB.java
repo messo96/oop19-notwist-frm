@@ -43,7 +43,7 @@ public class CategoryImplDB {
 	 *         otherwise
 	 */
 	public Optional<CategoryImpl> getCategory(final Integer idCategory) {
-		return list.stream().filter(c -> c.getId() == idCategory).findFirst();
+		return list.stream().filter(c -> c.getId().equals(idCategory)).findFirst();
 	}
 
 }

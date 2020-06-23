@@ -18,14 +18,14 @@ public class LikeDislikeImplDiscussionDB implements ILikeDislikeDB {
 	 * {@inheritDoc}
 	 */
 	public Integer getLikes(final Integer idDiscussion) {
-		return (int) dbl.read().stream().filter(l -> l.getIdDiscussion().get() == idDiscussion && l.getLike()).count();
+		return (int) dbl.read().stream().filter(l -> l.getIdDiscussion().get().equals(idDiscussion) && l.getLike()).count();
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	public Integer getDislikes(final Integer idDiscussion) {
-		return (int) dbl.read().stream().filter(l -> l.getIdDiscussion().get() == idDiscussion && l.getDislike())
+		return (int) dbl.read().stream().filter(l -> l.getIdDiscussion().get().equals(idDiscussion) && l.getDislike())
 				.count();
 	}
 
@@ -61,7 +61,7 @@ public class LikeDislikeImplDiscussionDB implements ILikeDislikeDB {
 	// still liked by that user, false if it is not
 	private boolean isStillLiked(final Integer idDiscussion, final Integer idUser) {
 		return dbl.read().stream()
-				.filter(l -> l.getIdDiscussion().get() == idDiscussion && l.getIdUser() == idUser && l.getLike())
+				.filter(l -> l.getIdDiscussion().get().equals(idDiscussion) && l.getIdUser().equals(idUser) && l.getLike())
 				.iterator().hasNext();
 	}
 
@@ -69,14 +69,14 @@ public class LikeDislikeImplDiscussionDB implements ILikeDislikeDB {
 	// is still disliked by that user, false if it is not
 	private boolean isStillDisliked(final Integer idDiscussion, final Integer idUser) {
 		return dbl.read().stream()
-				.filter(l -> l.getIdDiscussion().get() == idDiscussion && l.getIdUser() == idUser && l.getDislike())
+				.filter(l -> l.getIdDiscussion().get().equals(idDiscussion) && l.getIdUser().equals(idUser) && l.getDislike())
 				.iterator().hasNext();
 	}
 
 	// return the identifier of the tuple like/dislike, you can find that through
 	// idDiscussion and idUser
 	private Integer getIdLikes(final Integer idDiscussion, final Integer idUser) {
-		return dbl.read().stream().filter(l -> l.getIdDiscussion().get() == idDiscussion && l.getIdUser() == idUser)
+		return dbl.read().stream().filter(l -> l.getIdDiscussion().get().equals(idDiscussion) && l.getIdUser().equals(idUser))
 				.findFirst().get().getId();
 	}
 
