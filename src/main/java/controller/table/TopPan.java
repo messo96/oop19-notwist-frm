@@ -20,18 +20,18 @@ import model.base.DiscussionImpl;
 import model.base.User;
 import view.topic.TopicPan;
 
-public class HottestPan extends JPanel {
+public class TopPan extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private DiscussionImplDB dbdiscussion = new DiscussionImplDB();
 
-	public HottestPan(final User user) {
+	public TopPan(final User user) {
 
 		drawComp(user);
 	}
 
 	private void drawComp(final User user) {
-		hottest_panel = new JPanel();
+		topPanel = new JPanel();
 		topdiscussiontable = new JTable() {
 
 			/**
@@ -45,10 +45,10 @@ public class HottestPan extends JPanel {
 			}
 		};
 		// Panel Title
-		hottest_panel.setBorder(BorderFactory.createTitledBorder(
+		topPanel.setBorder(BorderFactory.createTitledBorder(
 				BorderFactory.createMatteBorder(3, 3, 3, 3, new Color(0, 0, 0)), "Hottest Topics", TitledBorder.CENTER,
 				TitledBorder.DEFAULT_POSITION, new Font("Tahoma", 0, 14))); // NOI18N
-		hottest_panel.setFont(new Font("Tahoma", 0, 14)); // NOI18N
+		topPanel.setFont(new Font("Tahoma", 0, 14)); // NOI18N
 		// Draw Table
 		topdiscussiontable.setFont(new Font("Tahoma", 0, 14)); // NOI18N
 		model_hot = new DefaultTableModel(new Object[] { "Title", "ID" }, 0);
@@ -79,8 +79,8 @@ public class HottestPan extends JPanel {
 		topdiscussiontable.setRowHeight(25);
 		topdiscussiontable.getTableHeader().setReorderingAllowed(false);
 		fillTable();
-		GroupLayout hottest_panelLayout = new GroupLayout(hottest_panel);
-		hottest_panel.setLayout(hottest_panelLayout);
+		GroupLayout hottest_panelLayout = new GroupLayout(topPanel);
+		topPanel.setLayout(hottest_panelLayout);
 		hottest_panelLayout.setHorizontalGroup(hottest_panelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(hottest_panelLayout.createSequentialGroup().addContainerGap()
 						.addComponent(topdiscussiontable, 210, 210, Short.MAX_VALUE).addContainerGap()));
@@ -89,7 +89,7 @@ public class HottestPan extends JPanel {
 						hottest_panelLayout.createSequentialGroup().addContainerGap()
 								.addComponent(topdiscussiontable, GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
 								.addContainerGap()));
-		add(hottest_panel);
+		add(topPanel);
 	}
 
 	private void fillTable() {
@@ -101,7 +101,7 @@ public class HottestPan extends JPanel {
 		topdiscussiontable.revalidate();
 	}
 
-	private javax.swing.JPanel hottest_panel;
+	private javax.swing.JPanel topPanel;
 	private javax.swing.JTable topdiscussiontable;
 	private DefaultTableModel model_hot;
 

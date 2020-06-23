@@ -10,6 +10,8 @@ import java.awt.event.MouseMotionAdapter;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 
 import org.netbeans.lib.awtextra.AbsoluteConstraints;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
@@ -48,6 +50,7 @@ public class BuildAfterGui extends JFrame {
 		setResizable(false);
 		getContentPane().setLayout(new AbsoluteLayout());
 
+		
 		// Get upper panel and add it to the main frame
 		upper_panel = new UpperPan();
 		upper_panel.setVisible(true);
@@ -116,6 +119,7 @@ public class BuildAfterGui extends JFrame {
 
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
+
 				setVisible(true);
 			}
 		});

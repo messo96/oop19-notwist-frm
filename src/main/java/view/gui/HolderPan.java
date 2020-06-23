@@ -9,7 +9,7 @@ import org.netbeans.lib.awtextra.AbsoluteConstraints;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
 
 import controller.table.CategoryPan;
-import controller.table.HottestPan;
+import controller.table.TopPan;
 import controller.table.Homepage;
 import controller.table.RandomPan;
 import model.base.User;
@@ -35,7 +35,7 @@ public class HolderPan extends JPanel {
       
         
     	//Get hottest panel and add it to the main frame
-        hottest_panel = new HottestPan(user);
+        hottest_panel = new TopPan(user);
         hottest_panel.setVisible(true);      
         holder_panel.add(hottest_panel, new AbsoluteConstraints(814, 21, 240, -1));
    
@@ -58,7 +58,7 @@ public class HolderPan extends JPanel {
     // Variables declaration - do not modify
 
     private Homepage table_panel;
-    private HottestPan hottest_panel;
+    private TopPan hottest_panel;
     private CategoryPan category_panel;
     private JPanel holder_panel;
     private RandomPan button_panel;
