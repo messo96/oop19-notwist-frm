@@ -10,8 +10,9 @@ import org.netbeans.lib.awtextra.AbsoluteLayout;
 
 import message.MessagePan;
 import model.base.User;
-import user.Activities;
+import user.UserDiscussions;
 import user.Infos;
+import user.UserComments;
 import view.util.StrikePan;
 
 public class Profile extends JPanel{
@@ -32,14 +33,14 @@ public class Profile extends JPanel{
     	   	profile_panel = new JPanel();
             profile_panel.setLayout(new AbsoluteLayout());   
             
-            activities_panel = new Activities();
-            profile_panel.add(activities_panel, new AbsoluteConstraints(10, 0, -1, -1));
+            reportedDiscussions = new UserDiscussions();
+            profile_panel.add(reportedDiscussions, new AbsoluteConstraints(10, 0, -1, -1));
             
             myinfos_panel = new Infos(user);
             profile_panel.add(myinfos_panel, new  AbsoluteConstraints(730, 0, -1, -1));
 
-            message_panel = new MessagePan(user);
-            profile_panel.add(message_panel, new  AbsoluteConstraints(10, 200, -1, -1)); 	   
+            reportedComments = new UserComments();
+            profile_panel.add(reportedComments, new  AbsoluteConstraints(10, 200, -1, -1)); 	   
     	   
             strike_panel = new StrikePan();
             profile_panel.add(strike_panel, new  AbsoluteConstraints(730, 150, 310, 310));
@@ -53,15 +54,13 @@ public class Profile extends JPanel{
     	profile_panel = new  JPanel();
         profile_panel.setLayout(new  AbsoluteLayout());   
         
-        activities_panel = new Activities();
+        activities_panel = new UserDiscussions();
         profile_panel.add(activities_panel, new  AbsoluteConstraints(10, 0,  -1, -1));
         
 
         myinfos_panel = new Infos(user);
         profile_panel.add(myinfos_panel, new  AbsoluteConstraints(730, 0, -1, -1));
 
-        message_panel = new MessagePan(user);
-        profile_panel.add(message_panel, new  AbsoluteConstraints(0, 230, -1, -1));
         
         add(profile_panel);
        }
@@ -71,10 +70,11 @@ public class Profile extends JPanel{
     
     // Variables declaration
     private JPanel profile_panel;
-    private Activities activities_panel;
+    private UserDiscussions activities_panel;
     private Infos myinfos_panel;
-    private MessagePan message_panel;
+    private UserComments reportedComments;
     private StrikePan strike_panel;
+    private UserDiscussions reportedDiscussions;
     // End of variables declaration
     
    
