@@ -1,7 +1,7 @@
 package model.base;
 
 public class CategoryImpl implements Category {
-
+	
 	private Integer id;
 	private String name;
 	
@@ -11,11 +11,11 @@ public class CategoryImpl implements Category {
 	}
 	
 	@Override
-	public Integer getId() {
+	public final Integer getId() {
 		return this.id;
 	}
 	@Override
-	public String getName() {
+	public final String getName() {
 		return this.name;
 	}
 	

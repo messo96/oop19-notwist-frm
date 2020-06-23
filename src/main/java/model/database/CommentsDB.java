@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 import model.Log;
-import rombo.new_class.*;
+import rombo.new_class.CommentsImplement;
 
 /**
  * Class for Comment table based on DAO.

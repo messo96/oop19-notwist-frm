@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 import model.base.Category;
 import model.base.DiscussionImpl;
 import model.database.DiscussionDB;
-import model.database.LikeDislikeDB;
 
 /**
  * Class that through model class {@link DiscussionDB} connect view.
@@ -19,7 +18,7 @@ public class DiscussionImplDB {
 	
 	private DiscussionDB dbd = new DiscussionDB();
 	private LikeDislikeImplDiscussionDB dblike = new LikeDislikeImplDiscussionDB();
-	private final Integer MAX_TOP = 5;
+	private static final Integer MAX_TOP = 5;
 
 	/**
 	 * read all the discussion from database.

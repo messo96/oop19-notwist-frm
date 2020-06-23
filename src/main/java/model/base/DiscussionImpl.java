@@ -2,17 +2,18 @@ package model.base;
 
 import java.util.Date;
 
-public class DiscussionImpl implements Discussion{
+public class DiscussionImpl implements Discussion {
+
 	private Integer id;
 	private Integer idUser;
 	private String title;
 	private String description;
 	private Category category;
 	private Date data;
-	//maybe add List of comments ? Ask rombo for comments class
-	
+	// maybe add List of comments ? Ask rombo for comments class
 
-	public DiscussionImpl(Integer id, Integer idUser,String title, String description, Category category, Date data) {
+	public DiscussionImpl(final Integer id, final Integer idUser, final String title, final String description,
+			final Category category, final Date data) {
 		this.id = id;
 		this.idUser = idUser;
 		this.title = title;
@@ -20,34 +21,33 @@ public class DiscussionImpl implements Discussion{
 		this.category = category;
 		this.data = data;
 	}
-	
-	
-	public String getTitle() {
+
+	public final String getTitle() {
 		return title;
 	}
-	public String getDescription() {
+
+	public final String getDescription() {
 		return description;
 	}
-	
-	public int getIdUser() {
+
+	public final int getIdUser() {
 		return idUser;
 	}
-	
-	public int getIdDiscussion() {
+
+	public final int getIdDiscussion() {
 		return id;
 	}
-	
-	public Category getCategory() {
+
+	public final Category getCategory() {
 		return category;
 	}
-	
-	public Date getData() {
+
+	public final Date getData() {
 		return data;
 	}
-	
 
-	public String toString() {
-		return "\nID=  " + getIdUser() + "\t TITLE= "+ getTitle() + "\nDESCRIPTION:\n" + getDescription();
+	public final String toString() {
+		return "\nID=  " + getIdUser() + "\t TITLE= " + getTitle() + "\nDESCRIPTION:\n" + getDescription();
 	}
 
 }

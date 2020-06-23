@@ -8,7 +8,7 @@ import java.util.List;
  * @param <T>
  */
 public interface Dao<T> {
-
+	
 	/**
 	 * Read database table about T object.
 	 * 

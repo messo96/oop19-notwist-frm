@@ -3,6 +3,7 @@ package model.base;
 import java.util.Optional;
 
 public class LikeSet {
+	
 	private Integer id;
 	private Boolean like;
 	private Boolean dislike;
@@ -20,27 +21,27 @@ public class LikeSet {
 		this.idComment = idComment;
 	}
 
-	public Integer getId() {
+	public final Integer getId() {
 		return this.id;
 	}
 
-	public Boolean getLike() {
+	public final Boolean getLike() {
 		return this.like;
 	}
 
-	public Boolean getDislike() {
+	public final Boolean getDislike() {
 		return this.dislike;
 	}
 
-	public Integer getIdUser() {
+	public final Integer getIdUser() {
 		return this.idUser;
 	}
 
-	public Optional<Integer> getIdDiscussion() {
+	public final Optional<Integer> getIdDiscussion() {
 		return this.idDiscussion;
 	}
 	
-	public Optional<Integer> getIdComment() {
+	public final Optional<Integer> getIdComment() {
 		return this.idComment;
 	}
 

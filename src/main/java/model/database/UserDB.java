@@ -14,7 +14,7 @@ import model.crypt.CrypterImplementation;
  * 
  */
 public class UserDB extends ManagerImplDB implements Dao<User> {
-
+	
 	private Log log = Log.getInstance();
 	private ResultSet rs = null;
 	private PreparedStatement prepared;

@@ -1,21 +1,20 @@
 package model.base;
 
 /**
- * Category (or topic) when there are all the categories that tag various discussion
- * @author gio
+ * Category (or topic) when there are all the categories that tag various discussion.
  *
  */
 public interface Category {
-
+	
 	/**
 	 * 
-	 * @return id of category
+	 * @return id of category.
 	 */
-	public Integer getId();
+	 Integer getId();
 	
 	/**
 	 * 
 	 * @return name of the category
 	 */
-	public String getName();
+	 String getName();
 }

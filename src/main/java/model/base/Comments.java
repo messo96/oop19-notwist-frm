@@ -8,12 +8,15 @@ import rombo.discuss.BaseAccount;
 
 public interface Comments extends BaseAccount {
 	
-	/*This method must return the comment.*/
-	public String GetComment();
-	
-	/*This optional method if possible return the topic where the comments is wrote.*/
-	public Optional<String> GetTopic();
-	
-	/*this optional method if possible return the number of the comments.*/
-	public Optional<Integer> GetNumberOfCommet();
+	/* This method must return the comment. */
+	String getComment();
+
+	/*
+	 * This optional method if possible return the topic where the comments is
+	 * wrote.
+	 */
+	Optional<String> getTopic();
+
+	/* this optional method if possible return the number of the comments. */
+	Optional<Integer> getNumberOfCommet();
 }

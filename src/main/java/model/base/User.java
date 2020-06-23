@@ -1,14 +1,16 @@
 package model.base;
 
-public class User {
 
+public class User {
+	
 	private Integer id;
 	private String username;
 	private String password;
 	private String email;
 	private boolean isModerator;
-	
-	public User(Integer id,String username,String password,String email,boolean isMod) {
+
+	public User(final Integer id, final String username, final String password, final String email,
+			final boolean isMod) {
 		this.id = id;
 		this.username = username;
 		this.password = password;
@@ -16,30 +18,29 @@ public class User {
 		this.isModerator = isMod;
 	}
 
-	public Integer getId() {
+	public final Integer getId() {
 		return id;
 	}
-	public String getUsername() {
+
+	public final String getUsername() {
 		return username;
 	}
 
-	public String getPassword() {
+	public final String getPassword() {
 		return password;
 	}
 
-	public String getEmail() {
+	public final String getEmail() {
 		return email;
 	}
 
-	public boolean isModerator() {
+	public final boolean isModerator() {
 		return isModerator;
 	}
-	
-	public String toString() {
-		return this.getUsername() + " (" + this.getId() + ")\n" + "Email: "
-								+ getEmail() + "\tPassword: " + getPassword() + "\tIsMod: " + isModerator();
+
+	public final String toString() {
+		return this.getUsername() + " (" + this.getId() + ")\n" + "Email: " + getEmail() + "\tPassword: "
+				+ getPassword() + "\tIsMod: " + isModerator();
 	}
-	
-	
-	
+
 }

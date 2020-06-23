@@ -15,6 +15,8 @@ public final class Loader extends JWindow {
 	 */
 	private static final long serialVersionUID = 1L;
 	private static Loader instance = null;
+	private static final Integer WIDTH = 200;
+	private static final Integer HEIGHT = 300;
 
 	private Loader() {
 		this.setLayout(new BorderLayout());
@@ -24,7 +26,7 @@ public final class Loader extends JWindow {
 		this.setAlwaysOnTop(true);
 		loader.setOpaque(true);
 		this.setBackground(new Color(0, 0, 0, 0));
-		loader.setSize(new Dimension(200, 300));
+		loader.setSize(new Dimension(WIDTH, HEIGHT));
 		this.pack();
 	}
 
