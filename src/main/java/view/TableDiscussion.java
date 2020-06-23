@@ -18,7 +18,7 @@ import model.base.User;
 import view.topic.TopicPan;
 
 public class TableDiscussion {
-
+	
 	private JTable tableDiscussion;
 	private DefaultTableModel modelDiscussion;
 	private LikeDislikeImplDiscussionDB dblike = new LikeDislikeImplDiscussionDB();
@@ -34,7 +34,7 @@ public class TableDiscussion {
 			private static final long serialVersionUID = 1L;
 
 			@Override
-			public boolean isCellEditable(int row, int column) {
+			public boolean isCellEditable(final int row, final int column) {
 				return false;
 			}
 		};
@@ -82,38 +82,38 @@ public class TableDiscussion {
 
 	}
 
-	public JTable getTableDiscussion() {
+	public final JTable getTableDiscussion() {
 		return tableDiscussion;
 	}
 
-	public DefaultTableModel getModelDiscussion() {
+	public final DefaultTableModel getModelDiscussion() {
 		return modelDiscussion;
 	}
 
-	/*--------------UTIL METHODS?? ----------*/
+	/*--------------UTIL METHODS ----------*/
 
-	public void refreshTableDiscussion() {
+	public final void refreshTableDiscussion() {
 		this.getModelDiscussion().getDataVector().removeAllElements();
 		loadDiscussion(this.getModelDiscussion());
 		tableDiscussion.setModel(this.getModelDiscussion());
 		tableDiscussion.revalidate();
 	}
 
-	public void refreshTableDiscussion(Category category) {
+	public final void refreshTableDiscussion(final Category category) {
 		this.getModelDiscussion().getDataVector().removeAllElements();
 		loadDiscussion(this.getModelDiscussion(), category);
 		tableDiscussion.setModel(this.getModelDiscussion());
 		tableDiscussion.revalidate();
 	}
 
-	public void refreshTableDiscussion(String filter) {
+	public final void refreshTableDiscussion(final String filter) {
 		this.getModelDiscussion().getDataVector().removeAllElements();
 		loadDiscussion(this.getModelDiscussion(), filter);
 		tableDiscussion.setModel(this.getModelDiscussion());
 		tableDiscussion.revalidate();
 	}
 
-	private void loadDiscussion(DefaultTableModel model) {
+	private void loadDiscussion(final DefaultTableModel model) {
 		for (Discussion s : dbdiscussion.getAll()) {
 			model.addRow(new Object[] { s.getTitle(), s.getCategory().getName(), dblike.getLikes(s.getIdDiscussion()),
 					dblike.getDislikes(s.getIdDiscussion()), dbuser.getUser(s.getIdUser()).get().getUsername(),
@@ -121,7 +121,7 @@ public class TableDiscussion {
 		}
 	}
 
-	private void loadDiscussion(DefaultTableModel model, final Category category) {
+	private void loadDiscussion(final DefaultTableModel model, final Category category) {
 		for (Discussion s : dbdiscussion.getDiscussion(category).get()) {
 			model.addRow(new Object[] { s.getTitle(), s.getCategory().getName(), dblike.getLikes(s.getIdDiscussion()),
 					dblike.getDislikes(s.getIdDiscussion()), dbuser.getUser(s.getIdUser()).get().getUsername(),
@@ -129,7 +129,7 @@ public class TableDiscussion {
 		}
 	}
 
-	private void loadDiscussion(DefaultTableModel model, final String filter) {
+	private void loadDiscussion(final DefaultTableModel model, final String filter) {
 		for (Discussion s : dbdiscussion.getDiscussion(filter).get()) {
 			model.addRow(new Object[] { s.getTitle(), s.getCategory().getName(), dblike.getLikes(s.getIdDiscussion()),
 					dblike.getDislikes(s.getIdDiscussion()), dbuser.getUser(s.getIdUser()).get().getUsername(),

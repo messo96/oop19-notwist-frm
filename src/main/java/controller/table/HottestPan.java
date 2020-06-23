@@ -94,9 +94,9 @@ public class HottestPan extends JPanel {
 
 	private void fillTable() {
 		List<DiscussionImpl> list = dbdiscussion.getTopDiscussion().get();
-		for (Discussion d : list)
+		for (Discussion d : list) {
 			model_hot.addRow(new Object[] { d.getTitle(), d.getIdDiscussion() });
-
+		}
 		topdiscussiontable.setModel(model_hot);
 		topdiscussiontable.revalidate();
 	}

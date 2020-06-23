@@ -28,7 +28,7 @@ public class BuildPreGui extends JFrame {
  
 	private static final long serialVersionUID = 1L;
 
-    public BuildPreGui() {
+	public BuildPreGui() {
     	
         initComponents();
     }
@@ -45,7 +45,7 @@ public class BuildPreGui extends JFrame {
         getContentPane().setLayout(new AbsoluteLayout());
    
 
-        Image icon = Toolkit.getDefaultToolkit().getImage(this.getClass().getClassLoader().getResource("font_test_1.png"));    
+        Image icon = Toolkit.getDefaultToolkit().getImage(this.getClass().getClassLoader().getResource("img/font_test_1.png"));    
         setIconImage(icon);   
         //Get upper panel and add it to the main frame
         upper_panel = new UpperPan();

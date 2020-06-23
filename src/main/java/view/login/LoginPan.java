@@ -35,6 +35,7 @@ import model.base.User;
 import view.gui.BuildAfterGui;
 
 public class LoginPan extends JPanel {
+	
 	private static final long serialVersionUID = 1L;
 	private UserImplDB dbuser = new UserImplDB();
 
@@ -100,7 +101,7 @@ public class LoginPan extends JPanel {
 		login_panel.add(login_button, new AbsoluteConstraints(60, 270, 290, 60));
 
 		// Loader after Login
-		JLabel loader = new JLabel(new ImageIcon(this.getClass().getClassLoader().getResource("loader_login.gif")));
+		JLabel loader = new JLabel(new ImageIcon(this.getClass().getClassLoader().getResource("img/loader_login.gif")));
 		loader.setBounds(login_button.getBounds());
 		login_panel.add(loader, new AbsoluteConstraints(60, 270, 300, 60));
 

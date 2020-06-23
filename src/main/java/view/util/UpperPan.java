@@ -16,11 +16,11 @@ import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 
 public class UpperPan extends JPanel {
-
+	
 	private static final long serialVersionUID = 1L;
-	private final ImageIcon dark = new ImageIcon(this.getClass().getClassLoader().getResource("light.png"));
-	private final ImageIcon light = new ImageIcon(this.getClass().getClassLoader().getResource("dark.png"));
-	private final ImageIcon close = new ImageIcon(this.getClass().getClassLoader().getResource("close.png"));
+	private final ImageIcon dark = new ImageIcon(this.getClass().getClassLoader().getResource("img/light.png"));
+	private final ImageIcon light = new ImageIcon(this.getClass().getClassLoader().getResource("img/dark.png"));
+	private final ImageIcon close = new ImageIcon(this.getClass().getClassLoader().getResource("img/close.png"));
 
 	public UpperPan() {
 

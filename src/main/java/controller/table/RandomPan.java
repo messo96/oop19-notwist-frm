@@ -18,17 +18,17 @@ import view.TableDiscussion;
 import view.topic.TopicPan;
 
 public class RandomPan extends JPanel {
-
+	
 	private static final long serialVersionUID = 1L;
 	private DiscussionImplDB dbdiscussion = new DiscussionImplDB();
 	private Loader loader;
 
-	public RandomPan(TableDiscussion tableDiscussion, User user) {
+	public RandomPan(final TableDiscussion tableDiscussion, User user) {
 		this.loader = Loader.getInstance();
 		drawComp(tableDiscussion, user);
 	}
 
-	private void drawComp(TableDiscussion tableDiscussion, User user) {
+	private void drawComp(final TableDiscussion tableDiscussion, User user) {
 		random_button = new JButton("Scegli una discussione randomica!");
 		button_panel = new JPanel();
 		GroupLayout button_panelLayout = new GroupLayout(button_panel);

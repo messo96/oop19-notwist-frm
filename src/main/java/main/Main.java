@@ -13,8 +13,12 @@ import javax.swing.UIManager;
  */
 
 public class Main {
-	/*
-	 * Load the look and feel theme.
+	
+	/**
+	 *  Load the look and feel theme.
+	 * @param args main parameter
+	 * @throws SecurityException
+	 * @throws IOException
 	 */
 	public static void main(String[] args) throws SecurityException, IOException {
 		// <----------LOOK AND FEEL FOR THE GUI -------->
@@ -27,10 +31,6 @@ public class Main {
 		BuildPreGui gui = new BuildPreGui();
 
 		gui.start();
-		
-		
-		
-		
 	}
 
 }

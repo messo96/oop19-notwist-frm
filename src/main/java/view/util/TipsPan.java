@@ -61,7 +61,7 @@ public class TipsPan extends JPanel {
 
 	private void importTips() {
 		BufferedReader buf;
-		InputStreamReader in = new InputStreamReader(this.getClass().getResourceAsStream("/Tips.txt"));
+		InputStreamReader in = new InputStreamReader(this.getClass().getResourceAsStream("/docs/Tips.txt"));
 		try {
 			buf = new BufferedReader(in);
 			tips_panel.read(buf, null);

@@ -16,14 +16,14 @@ import model.base.User;
 import view.TableDiscussion;
 
 public class HolderPan extends JPanel {
-
+	
 	private static final long serialVersionUID = 1L;
 	
-    public HolderPan(TableDiscussion tableDiscussion, User user) {
+    public HolderPan(final TableDiscussion tableDiscussion, final User user) {
         initComponents(tableDiscussion, user);
     }
 
-    private void initComponents(TableDiscussion tableDiscussion, User user) {
+    private void initComponents(final TableDiscussion tableDiscussion, final User user) {
     	
     	holder_panel = new JPanel();
     	holder_panel.setLayout(new AbsoluteLayout());

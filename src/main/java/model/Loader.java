@@ -20,7 +20,7 @@ public final class Loader extends JWindow {
 
 	private Loader() {
 		this.setLayout(new BorderLayout());
-		JLabel loader = new JLabel(new ImageIcon(this.getClass().getClassLoader().getResource("loaderNotwist.gif")));
+		JLabel loader = new JLabel(new ImageIcon(this.getClass().getClassLoader().getResource("img/loaderNotwist.gif")));
 		this.add(loader, BorderLayout.CENTER);
 		this.setLocationRelativeTo(null);
 		this.setAlwaysOnTop(true);

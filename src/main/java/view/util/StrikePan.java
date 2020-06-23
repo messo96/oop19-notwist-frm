@@ -62,7 +62,7 @@ public class StrikePan extends JPanel {
 		strikedialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		strikedialog.setTitle("Modifica uno strike");
 		Image icon = Toolkit.getDefaultToolkit()
-				.getImage(this.getClass().getClassLoader().getResource("skull2.png"));
+				.getImage(this.getClass().getClassLoader().getResource("img/skull2.png"));
 		strikedialog.setIconImage(icon);
 		usernamestrikable.setFont(new Font("Tahoma", 0, 14)); // NOI18N
 		usernamestrikable.setText("Nomeutente");

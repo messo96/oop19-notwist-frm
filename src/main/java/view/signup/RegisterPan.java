@@ -13,7 +13,6 @@ import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
@@ -39,7 +38,7 @@ import org.netbeans.lib.awtextra.AbsoluteLayout;
 import controller.database.UserImplDB;
 
 public class RegisterPan extends JPanel {
-
+	
 	private static final long serialVersionUID = 1L;
 	private UserImplDB dbuser = new UserImplDB();
 
@@ -244,8 +243,8 @@ public class RegisterPan extends JPanel {
 				JOptionPane.showMessageDialog(null, "You have to accept our rules before sign up :0");
 			else if (this.getEmail().isBlank() || !this.getEmail().contains("@"))
 				JOptionPane.showMessageDialog(null, "You must have a valid email");
-			else if (this.getUsername().isBlank() || this.getrPassword().isBlank()
-					|| !dbuser.register(this.getUsername(), this.getrPassword(), this.getEmail(), false)) {
+			else if (this.getUsername().isBlank() || this.getPassword().isBlank()
+					|| !dbuser.register(this.getUsername(), this.getPassword(), this.getEmail(), false)) {
 				JOptionPane.showMessageDialog(null, "You have to fill all the fields");
 			} else {
 				JOptionPane.showMessageDialog(null, "Account created succesfully! :) ");
@@ -279,22 +278,22 @@ public class RegisterPan extends JPanel {
 		}
 	}
 
-	public String getUsername() {
+	public final String getUsername() {
 		return username_field.getText();
 	}
 
-	public String getEmail() {
+	public final String getEmail() {
 		return mail_field.getText();
 	}
 
-	public String getrPassword() {
+	public final String getPassword() {
 		//cause we use our crypt
 		return pssw_field.getText();
 	}
 
 	private void importTerms() {
 		BufferedReader buf;
-		InputStreamReader in = new InputStreamReader(this.getClass().getResourceAsStream("/Terms.txt"));
+		InputStreamReader in = new InputStreamReader(this.getClass().getResourceAsStream("/docs/Terms.txt"));
 		try {
 			buf = new BufferedReader(in);
 			termsText.read(buf, null);

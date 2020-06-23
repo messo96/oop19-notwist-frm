@@ -74,7 +74,7 @@ public class RulesPan extends JPanel {
 	
 	private void importRules(){
 			BufferedReader buf;
-			InputStreamReader in = new InputStreamReader(this.getClass().getResourceAsStream("/Rules.txt"));
+			InputStreamReader in = new InputStreamReader(this.getClass().getResourceAsStream("/docs/Rules.txt"));
 			try {
 				buf = new BufferedReader(in);
 				rules_area.read(buf, null);

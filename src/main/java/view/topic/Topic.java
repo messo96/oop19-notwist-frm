@@ -62,8 +62,8 @@ public class Topic extends JPanel {
 		discussion_area = new JEditorPane();
 		title_label = new JLabel();
 		n_likes = new JLabel();
-		Icon yes = new ImageIcon(this.getClass().getClassLoader().getResource("like.png"));
-		Icon no = new ImageIcon(this.getClass().getClassLoader().getResource("dislike.png"));
+		Icon yes = new ImageIcon(this.getClass().getClassLoader().getResource("img/like.png"));
+		Icon no = new ImageIcon(this.getClass().getClassLoader().getResource("img/dislike.png"));
 		like = new JButton(yes);
 		dislike = new JButton(no);
 		menu = new JButton();

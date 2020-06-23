@@ -14,14 +14,14 @@ import model.database.CategoryDB;
 public class CategoryImplDB {
 	
 	private CategoryDB dbc = new CategoryDB();
-
+	private List<CategoryImpl> list = dbc.read();
 	/**
 	 * read all the category present on database.
 	 * 
 	 * @return List of {@link CategoryImpl}
 	 */
 	public List<CategoryImpl> getAll() {
-		return dbc.read();
+		return list;
 	}
 
 	/**
@@ -32,7 +32,7 @@ public class CategoryImplDB {
 	 *         otherwise
 	 */
 	public Optional<CategoryImpl> getCategory(final String name) {
-		return dbc.read().stream().filter(c -> c.getName().equals(name)).findFirst();
+		return list.stream().filter(c -> c.getName().equals(name)).findFirst();
 	}
 
 	/**
@@ -43,7 +43,7 @@ public class CategoryImplDB {
 	 *         otherwise
 	 */
 	public Optional<CategoryImpl> getCategory(final Integer idCategory) {
-		return dbc.read().stream().filter(c -> c.getId() == idCategory).findFirst();
+		return list.stream().filter(c -> c.getId() == idCategory).findFirst();
 	}
 
 }

@@ -24,12 +24,12 @@ import view.topic.newtopic.NewTopicPan;
 import view.util.UpperPan;
 
 public class BuildAfterGui extends JFrame {
-
+	
 	private static final long serialVersionUID = 1L;
 	private TableDiscussion tableDiscussion;
 	private User user;
 	private Loader loader = Loader.getInstance();
-	
+
 	public BuildAfterGui(final User user) {
 		this.user = user;
 		this.tableDiscussion = new TableDiscussion(user);
@@ -37,7 +37,7 @@ public class BuildAfterGui extends JFrame {
 
 	}
 
-	private void initComponents(TableDiscussion tableDiscussion) {
+	private void initComponents(final TableDiscussion tableDiscussion) {
 		loader.start();
 		bodyHolder = new JPanel(); // Holder for body
 
@@ -53,8 +53,6 @@ public class BuildAfterGui extends JFrame {
 		upper_panel.setVisible(true);
 
 		getContentPane().add(upper_panel, new AbsoluteConstraints(670, 0, -1, 40));
-		
-
 
 		bodyHolder.setLayout(new CardLayout());
 		// Add HolderPan with the homepage tables to card

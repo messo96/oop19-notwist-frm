@@ -28,12 +28,13 @@ public class CategoryPan extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private Loader loader = Loader.getInstance();
 	private CategoryImplDB dbcategory = new CategoryImplDB();
+	private CategoryImpl cat;
 
-	public CategoryPan(TableDiscussion tableDiscussion) {
+	public CategoryPan(final TableDiscussion tableDiscussion) {
 		drawComp(tableDiscussion);
 	}
 
-	private void drawComp(TableDiscussion tableDiscussion) {
+	private void drawComp(final TableDiscussion tableDiscussion) {
 
 		category_panel = new JPanel();
 		category_list = new JScrollPane();
@@ -74,18 +75,25 @@ public class CategoryPan extends JPanel {
 		// Filter results of discussions by choosen category on list on the right
 		jList.addMouseListener(new MouseAdapter() {
 
-			public void mouseClicked(MouseEvent e) {
+			public void mouseClicked(final MouseEvent e) {
 				loader.start();
 				new SwingWorker<String, Object>() {
 
 					@Override
 					protected String doInBackground() throws Exception {
-						Category cat = dbcategory.getCategory(jList.getSelectedValue()).get();
-						tableDiscussion.refreshTableDiscussion(cat);
+						if (cat != null && jList.getSelectedValue().equals(cat.getName())) {
+							tableDiscussion.refreshTableDiscussion();
+							jList.clearSelection();
+							cat = null;
+
+						} else {
+							cat = dbcategory.getCategory(jList.getSelectedValue()).get();
+							tableDiscussion.refreshTableDiscussion(cat);
+
+						}
+
 						loader.end();
-						jList.setFocusable(false);
-						jList.setFocusable(true);
-						
+
 						return "";
 					}
 

@@ -19,7 +19,7 @@ import model.base.DiscussionImpl;
  *
  */
 public class DiscussionDB extends ManagerImplDB implements Dao<DiscussionImpl> {
-	
+
 	private Log log = Log.getInstance();
 	private CategoryImplDB dbcategory = new CategoryImplDB();
 	private CommentsImplDB dbcomments = new CommentsImplDB();
@@ -70,10 +70,8 @@ public class DiscussionDB extends ManagerImplDB implements Dao<DiscussionImpl> {
 			prepared.setDate(5, java.sql.Date.valueOf(sdf.format(t.getData())));
 
 			prepared.executeUpdate();
-			log.logInfo("Discussion create successfully( " + t.getTitle() + " | "
-					+ dbuser.getUser(t.getIdUser()).get().getUsername() + " )");
 			return true;
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			log.logWarning("Error while adding new discussion " + e);
 			return false;
 		} finally {
