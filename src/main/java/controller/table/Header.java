@@ -12,7 +12,6 @@ import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -21,7 +20,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
@@ -31,7 +29,6 @@ import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
 import controller.database.CategoryImplDB;
-import model.Loader;
 import model.base.CategoryImpl;
 import model.base.User;
 import view.TableDiscussion;
@@ -39,44 +36,46 @@ import view.TableDiscussion;
 
 public class Header extends JPanel {
 
+	/*
+	 * Building the Header with drawComp as Builder.
+	 */
 	private static final long serialVersionUID = 1L;
 	private CategoryImplDB dbcategory = new CategoryImplDB();
-	private Loader loader;
 	private CardLayout card;
 	private JPanel parent;
 	private DefaultTableModel model;
-	private final ImageIcon Ihome = new ImageIcon(this.getClass().getClassLoader().getResource("img/Ihome.png"));
-	private final ImageIcon Isearch = new ImageIcon(this.getClass().getClassLoader().getResource("img/Isearch.png"));
-	private final ImageIcon Iprofile = new ImageIcon(this.getClass().getClassLoader().getResource("img/Iprofile.png"));
-	private final ImageIcon Ipencil = new ImageIcon(
+	private final ImageIcon iHome = new ImageIcon(this.getClass().getClassLoader().getResource("img/Ihome.png"));
+	private final ImageIcon iSearch = new ImageIcon(this.getClass().getClassLoader().getResource("img/Isearch.png"));
+	private final ImageIcon iProfile = new ImageIcon(this.getClass().getClassLoader().getResource("img/Iprofile.png"));
+	private final ImageIcon iPencil = new ImageIcon(
 			this.getClass().getClassLoader().getResource("img/Ipencilsmaller.png"));
 
-	public Header(TableDiscussion tableDiscussion, JPanel parent, User user) {
+	public Header(final TableDiscussion tableDiscussion, final JPanel parent, final User user) {
 		this.parent = parent;
 		this.card = (CardLayout) parent.getLayout();
 		drawComp(tableDiscussion, user);
 	}
 
-	private void drawComp(TableDiscussion tableDiscussion, User user) {
+	private void drawComp(final TableDiscussion tableDiscussion, final User user) {
 
-		header_panel = new JPanel();
-		homepage_button = new JLabel();
-		addCatbtn = new JButton(); // Combobox per le categorie
-		profile_icon = new JLabel(); // TBA
-		new_discussion = new JButton();
-		search_field = new JTextField(); // Spazio filtro
-		search_button = new JButton();
-		CatDialog = new JDialog();
-		CatPan = new JPanel();
+		headerPanel = new JPanel();
+		homepageButton = new JLabel();
+		addCatbtn = new JButton(); // Add new category.
+		profileIcon = new JLabel(); 
+		newDiscussion = new JButton();
+		searchField = new JTextField(); // Search area.
+		searchButton = new JButton();
+		catDialog = new JDialog();
+		catPan = new JPanel();
 		catScroll = new JScrollPane();
 		catTable = new JTable();
 		newCat = new JTextField();
 		addbtn = new JButton();
 
-		CatDialog.setTitle("Lista Categorie");
-		Image Ipen = Toolkit.getDefaultToolkit()
+		catDialog.setTitle("Lista Categorie");
+		Image iPen = Toolkit.getDefaultToolkit()
 				.getImage(this.getClass().getClassLoader().getResource("img/Ipencilsmaller.png"));
-		CatDialog.setIconImage(Ipen);
+		catDialog.setIconImage(iPen);
 
 		fillTable(catTable);
 
@@ -89,160 +88,166 @@ public class Header extends JPanel {
 		newCat.setText("");
 
 		addbtn.setText("Aggiungi");
-		
+
 		addbtn.addActionListener(e -> {
-			if(!newCat.getText().isBlank() && !dbcategory.createCategory(newCat.getText()))
+			if (!newCat.getText().isBlank() && !dbcategory.createCategory(newCat.getText())) {
 				JOptionPane.showMessageDialog(null, "Something goes wrong! :(");
-			else {
+			} else {
 				fillTable(catTable);
 				newCat.setText("");
 			}
 		});
-		
+
 		addbtn.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent evt) {
+			public void mouseClicked(final MouseEvent evt) {
 				addbtnMouseClicked(evt);
 			}
 
 		});
 
-		javax.swing.GroupLayout CatDialogLayout = new javax.swing.GroupLayout(CatPan);
-		CatPan.setLayout(CatDialogLayout);
-		CatDialogLayout.setHorizontalGroup(CatDialogLayout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(CatDialogLayout.createSequentialGroup().addGroup(CatDialogLayout
-						.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-						.addGroup(CatDialogLayout.createSequentialGroup().addGap(26, 26, 26)
-								.addComponent(newCat, javax.swing.GroupLayout.PREFERRED_SIZE, 163,
-										javax.swing.GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+		GroupLayout catDialogLayout = new GroupLayout(catPan);
+		catPan.setLayout(catDialogLayout);
+		catDialogLayout.setHorizontalGroup(catDialogLayout
+				.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addGroup(catDialogLayout.createSequentialGroup().addGroup(catDialogLayout
+						.createParallelGroup(GroupLayout.Alignment.LEADING)
+						.addGroup(catDialogLayout.createSequentialGroup().addGap(26, 26, 26)
+								.addComponent(newCat, GroupLayout.PREFERRED_SIZE, 163,
+										GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 								.addComponent(addbtn))
-						.addGroup(CatDialogLayout.createSequentialGroup().addGap(23, 23, 23).addComponent(catScroll,
-								javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)))
+						.addGroup(catDialogLayout.createSequentialGroup().addGap(23, 23, 23).addComponent(catScroll,
+								GroupLayout.PREFERRED_SIZE, 242, GroupLayout.PREFERRED_SIZE)))
 						.addContainerGap(22, Short.MAX_VALUE)));
-		CatDialogLayout.setVerticalGroup(CatDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(CatDialogLayout.createSequentialGroup().addGap(26, 26, 26)
-						.addComponent(catScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 245,
-								javax.swing.GroupLayout.PREFERRED_SIZE)
+		catDialogLayout.setVerticalGroup(catDialogLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addGroup(catDialogLayout.createSequentialGroup().addGap(26, 26, 26)
+						.addComponent(catScroll, GroupLayout.PREFERRED_SIZE, 245,
+								GroupLayout.PREFERRED_SIZE)
 						.addGap(18, 18, 18)
-						.addGroup(CatDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-								.addComponent(newCat, javax.swing.GroupLayout.PREFERRED_SIZE,
-										javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addGroup(catDialogLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+								.addComponent(newCat, GroupLayout.PREFERRED_SIZE,
+										GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 								.addComponent(addbtn))
 						.addContainerGap(20, Short.MAX_VALUE)));
 
-		CatDialog.add(CatPan);
+		catDialog.add(catPan);
 
-		homepage_button.setFont(new Font("Bauhaus 93", 0, 18)); // NOI18N
-		homepage_button.setText("NOTWIST");
-		homepage_button.setVerticalAlignment(SwingConstants.BOTTOM);
+		homepageButton.setFont(new Font("Bauhaus 93", 0, 18)); // NOI18N
+		homepageButton.setText("NOTWIST");
+		homepageButton.setVerticalAlignment(SwingConstants.BOTTOM);
 
-		homepage_button.setIcon(Ihome);
+		homepageButton.setIcon(iHome);
 
-		homepage_button.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent evt) {
-				homepage_buttonMouseClicked(evt);
+		homepageButton.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(final MouseEvent evt) {
+				homepageButtonMouseClicked(evt);
 			}
 		});
 
 			addCatbtn.setFont(new Font("Tahoma", 0, 14)); // NOI18N
 			addCatbtn.setText("Aggiungi una categoria");
-			if(!user.isModerator())
+			if (!user.isModerator()) {
 				addCatbtn.setVisible(false);
+			}
 			addCatbtn.addMouseListener(new MouseAdapter() {
-				public void mouseClicked(MouseEvent evt) {
-					category_filterMouseClicked(evt);
+				public void mouseClicked(final MouseEvent evt) {
+					categoryFilterMouseClicked(evt);
 				}
 			});
 
 
-		profile_icon.setIcon(Iprofile);
+		profileIcon.setIcon(iProfile);
 
-		new_discussion.setFont(new Font("Tahoma", 0, 14)); // NOI18N
-		new_discussion.setText("Crea una nuova discussione");
-		new_discussion.setIcon(Ipencil);
-		new_discussion.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent evt) {
-				new_discussionMouseClicked(evt);
+		newDiscussion.setFont(new Font("Tahoma", 0, 14)); // NOI18N
+		newDiscussion.setText("Crea una nuova discussione");
+		newDiscussion.setIcon(iPencil);
+		newDiscussion.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(final MouseEvent evt) {
+				newDiscussionMouseClicked(evt);
 			}
 		});
 
-		search_field.setFont(new Font("Tahoma", 0, 14)); // NOI18N
-		search_field.setText("Search..");
-		search_field.setMargin(new Insets(2, 2, 2, 3));
-		search_field.setPreferredSize(new Dimension(7, 25));
-		search_field.addFocusListener(new FocusListener() {
+		searchField.setFont(new Font("Tahoma", 0, 14)); // NOI18N
+		searchField.setText("Search..");
+		searchField.setMargin(new Insets(2, 2, 2, 3));
+		searchField.setPreferredSize(new Dimension(7, 25));
+		searchField.addFocusListener(new FocusListener() {
 
 			@Override
-			public void focusGained(FocusEvent e) {
-				if (search_field.getText().equals("Search.."))
-					search_field.setText("");
-
+			public void focusGained(final FocusEvent e) {
+				if (searchField.getText().equals("Search..")) {
+					searchField.setText("");
+				}
 			}
 
 			@Override
-			public void focusLost(FocusEvent e) {
-				if (search_field.getText().equals(""))
-					search_field.setText("Search..");
+			public void focusLost(final FocusEvent e) {
+				if (searchField.getText().equals("")) {
+				searchField.setText("Search..");
+				}
 			}
 
 		});
-		search_button.setText("Go");
-		search_button.setIcon(Isearch);
+		searchButton.setText("Go");
+		searchButton.setIcon(iSearch);
 
-		search_button.addActionListener(e -> {
-			if (search_field.getText().equals("") || search_field.getText().equals("Search.."))
+		searchButton.addActionListener(e -> {
+			if (searchField.getText().equals("") || searchField.getText().equals("Search..")) {
 				tableDiscussion.refreshTableDiscussion();
-			else
-				tableDiscussion.refreshTableDiscussion(search_field.getText());
+			} else {
+				tableDiscussion.refreshTableDiscussion(searchField.getText());
+			}
 		});
 
-		javax.swing.GroupLayout header_panelLayout = new javax.swing.GroupLayout(header_panel);
-		header_panel.setLayout(header_panelLayout);
-		header_panelLayout
-				.setHorizontalGroup(header_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-						.addGroup(header_panelLayout.createSequentialGroup().addGap(10, 10, 10)
-								.addComponent(homepage_button).addGap(25, 25, 25)
-								.addComponent(addCatbtn, javax.swing.GroupLayout.PREFERRED_SIZE,
-										javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+		GroupLayout headerPanelLayout = new GroupLayout(headerPanel);
+		headerPanel.setLayout(headerPanelLayout);
+		headerPanelLayout
+				.setHorizontalGroup(headerPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+						.addGroup(headerPanelLayout.createSequentialGroup().addGap(10, 10, 10)
+								.addComponent(homepageButton).addGap(25, 25, 25)
+								.addComponent(addCatbtn, GroupLayout.PREFERRED_SIZE,
+										GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 								.addGap(100, 100, 100)
-								.addComponent(search_field, javax.swing.GroupLayout.PREFERRED_SIZE, 218,
-										javax.swing.GroupLayout.PREFERRED_SIZE)
+								.addComponent(searchField, GroupLayout.PREFERRED_SIZE, 218,
+										GroupLayout.PREFERRED_SIZE)
 								.addGap(5, 5, 5)
-								.addComponent(search_button, javax.swing.GroupLayout.PREFERRED_SIZE,
-										javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-								.addGap(25, 25, 25).addComponent(new_discussion).addGap(50, 50, 50)
+								.addComponent(searchButton, GroupLayout.PREFERRED_SIZE,
+										GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addGap(25, 25, 25).
+								addComponent(newDiscussion)
+								.addGap(50, 50, 50)
 
-								.addComponent(profile_icon, javax.swing.GroupLayout.PREFERRED_SIZE, 25,
-										javax.swing.GroupLayout.PREFERRED_SIZE)
+								.addComponent(profileIcon, GroupLayout.PREFERRED_SIZE, 25,
+										GroupLayout.PREFERRED_SIZE)
 								.addGap(10, 10, 10)));
-		header_panelLayout.setVerticalGroup(header_panelLayout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(header_panelLayout.createSequentialGroup().addGap(45, 45, 45).addGroup(header_panelLayout
-						.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-						.addComponent(new_discussion, javax.swing.GroupLayout.DEFAULT_SIZE,
-								javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addGroup(header_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-								.addComponent(addCatbtn, javax.swing.GroupLayout.PREFERRED_SIZE,
-										javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-								.addComponent(profile_icon)
-								.addComponent(search_field, javax.swing.GroupLayout.PREFERRED_SIZE,
-										javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-								.addComponent(search_button, javax.swing.GroupLayout.PREFERRED_SIZE, 29,
-										javax.swing.GroupLayout.PREFERRED_SIZE)
-								.addComponent(homepage_button)))
+		headerPanelLayout.setVerticalGroup(headerPanelLayout
+				.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addGroup(headerPanelLayout.createSequentialGroup().addGap(45, 45, 45)
+						.addGroup(headerPanelLayout
+						.createParallelGroup(GroupLayout.Alignment.LEADING)
+						.addComponent(newDiscussion, GroupLayout.DEFAULT_SIZE,
+								GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addGroup(headerPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+								.addComponent(addCatbtn, GroupLayout.PREFERRED_SIZE,
+										GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(profileIcon)
+								.addComponent(searchField, GroupLayout.PREFERRED_SIZE,
+										GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(searchButton, GroupLayout.PREFERRED_SIZE, 29,
+										GroupLayout.PREFERRED_SIZE)
+								.addComponent(homepageButton)))
 						.addGap(16, 16, 16)));
 
-		profile_icon.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent evt) {
-				profile_iconMouseClicked(evt);
+		profileIcon.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(final MouseEvent evt) {
+				profileIconMouseClicked(evt);
 			}
 		});
-		add(header_panel);
+		add(headerPanel);
 
 	}
 
-	private void fillTable(JTable table) {
+	private void fillTable(final JTable table) {
 		model = new DefaultTableModel(new Object[] { "Nome" }, 0);
 		model.getDataVector().removeAllElements();
 		for (CategoryImpl c : dbcategory.getAll()) {
@@ -252,33 +257,33 @@ public class Header extends JPanel {
 
 	}
 
-	private void new_discussionMouseClicked(MouseEvent evt) {
+	private void newDiscussionMouseClicked(final MouseEvent evt) {
 		card.show(parent, "newtopic_panel");
 	}
 
-	private void homepage_buttonMouseClicked(MouseEvent evt) {
+	private void homepageButtonMouseClicked(final MouseEvent evt) {
 		card.show(parent, "homepage_panel");
 	}
 
-	private void profile_iconMouseClicked(MouseEvent evt) {
+	private void profileIconMouseClicked(final MouseEvent evt) {
 		card.show(parent, "profile_panel");
 	}
 
-	private void addbtnMouseClicked(MouseEvent evt) {
+	private void addbtnMouseClicked(final MouseEvent evt) {
 		// TODO Auto-generated method stub
 
 	}
 
-	private void category_filterMouseClicked(MouseEvent evt) {
+	private void categoryFilterMouseClicked(final MouseEvent evt) {
 		try {
 			UIManager.getLookAndFeel();
-			SwingUtilities.updateComponentTreeUI(CatDialog);
-			CatDialog.getContentPane();
-			CatDialog.setSize(400, 350);
-			CatDialog.setResizable(false);
-			CatDialog.pack();
-			CatDialog.setLocationRelativeTo(getParent());
-			CatDialog.setVisible(true);
+			SwingUtilities.updateComponentTreeUI(catDialog);
+			catDialog.getContentPane();
+			catDialog.setSize(400, 350);
+			catDialog.setResizable(false);
+			catDialog.pack();
+			catDialog.setLocationRelativeTo(getParent());
+			catDialog.setVisible(true);
 		} catch (Exception ex) {
 			System.err.println("Failed to initialize LaF");
 			ex.printStackTrace();
@@ -286,17 +291,16 @@ public class Header extends JPanel {
 	}
 
 	private JButton addCatbtn;
-	private JPanel header_panel;
-	private JLabel homepage_button;
-	private JButton new_discussion;
-	private JLabel profile_icon;
-	private JButton search_button;
-	private JTextField search_field;
-
-	private JDialog CatDialog;
+	private JPanel headerPanel;
+	private JLabel homepageButton;
+	private JButton newDiscussion;
+	private JLabel profileIcon;
+	private JButton searchButton;
+	private JTextField searchField;
+	private JDialog catDialog;
 	private JScrollPane catScroll;
 	private JTable catTable;
 	private JTextField newCat;
 	private JButton addbtn;
-	private JPanel CatPan;
+	private JPanel catPan;
 }

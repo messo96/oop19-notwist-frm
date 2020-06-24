@@ -13,9 +13,9 @@ public class CommentsImplement implements Comments {
 	private final Date data;
 	
 	/*Builder*/
-	public CommentsImplement(int IDUser, String Comment, Optional<Integer> IDComment, Optional<Integer> IDDiscussion,
-			Date data) {
-		
+	public CommentsImplement(final int IDUser, String Comment, Optional<Integer> IDComment, Optional<Integer> IDDiscussion,
+			final Date data) {
+
 		this.IDUser = IDUser;
 		this.Comment = Comment;
 		this.IDComment = IDComment;
@@ -26,19 +26,19 @@ public class CommentsImplement implements Comments {
 
 	/*Return methods*/
 	
-	public String GetComment() {
+	public final String GetComment() {
 		return this.Comment;
 	}
 
 	
-	public int GetIDUser() {
+	public final int GetIDUser() {
 		return this.IDUser;
 	}
 	
 	
-	public Optional<Integer> GetIDComment() {
-		
-		if(this.IDComment.isPresent()) {
+	public final Optional<Integer> GetIDComment() {
+
+		if (this.IDComment.isPresent()) {
 			return this.IDComment;
 		} else {
 			return Optional.empty();
@@ -47,9 +47,9 @@ public class CommentsImplement implements Comments {
 
 	
 	
-	public Optional<Integer> GetIDDiscussion() {
-		
-		if(this.IDDiscussion.isPresent()) {
+	public final Optional<Integer> GetIDDiscussion() {
+
+		if (this.IDDiscussion.isPresent()) {
 			return this.IDDiscussion;
 		} else {
 			return Optional.empty();
@@ -57,27 +57,27 @@ public class CommentsImplement implements Comments {
 	}
 
 
-	public int getIDUser() {
+	public final int getIDUser() {
 		return IDUser;
 	}
 
 
-	public String getComment() {
+	public final String getComment() {
 		return Comment;
 	}
 
 
-	public Optional<Integer> getIDComment() {
+	public final Optional<Integer> getIDComment() {
 		return IDComment;
 	}
 
 
-	public Optional<Integer> getIDDiscussion() {
+	public final Optional<Integer> getIDDiscussion() {
 		return IDDiscussion;
 	}
 
 
-	public Date getData() {
+	public final Date getData() {
 		return data;
 	}
 	

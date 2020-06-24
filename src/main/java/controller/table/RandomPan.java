@@ -18,32 +18,34 @@ import view.TableDiscussion;
 import view.topic.TopicPan;
 
 public class RandomPan extends JPanel {
-	
+	/*
+	 * Random discussion when pressing the button.
+	 */
 	private static final long serialVersionUID = 1L;
 	private DiscussionImplDB dbdiscussion = new DiscussionImplDB();
 	private Loader loader;
 
-	public RandomPan(final TableDiscussion tableDiscussion, User user) {
+	public RandomPan(final TableDiscussion tableDiscussion, final User user) {
 		this.loader = Loader.getInstance();
 		drawComp(tableDiscussion, user);
 	}
 
-	private void drawComp(final TableDiscussion tableDiscussion, User user) {
-		random_button = new JButton("Scegli una discussione randomica!");
-		button_panel = new JPanel();
-		GroupLayout button_panelLayout = new GroupLayout(button_panel);
-		button_panel.setLayout(button_panelLayout);
-		button_panelLayout.setHorizontalGroup(
-				button_panelLayout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(random_button,
+	private void drawComp(final TableDiscussion tableDiscussion, final User user) {
+		randomButton = new JButton("Scegli una discussione randomica!");
+		buttonPanel = new JPanel();
+		GroupLayout buttonPanelLayout = new GroupLayout(buttonPanel);
+		buttonPanel.setLayout(buttonPanelLayout);
+		buttonPanelLayout.setHorizontalGroup(
+				buttonPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(randomButton,
 						GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE));
-		button_panelLayout
-				.setVerticalGroup(button_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-						.addGroup(button_panelLayout.createSequentialGroup()
-								.addComponent(random_button, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+		buttonPanelLayout
+				.setVerticalGroup(buttonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+						.addGroup(buttonPanelLayout.createSequentialGroup()
+								.addComponent(randomButton, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
 								.addGap(0, 6, Short.MAX_VALUE)));
-		add(button_panel);
+		add(buttonPanel);
 
-		random_button.addActionListener(e -> {
+		randomButton.addActionListener(e -> {
 			loader.start();
 			new SwingWorker<String, Object>() {
 
@@ -68,6 +70,6 @@ public class RandomPan extends JPanel {
 
 	}
 
-	private JButton random_button;
-	private JPanel button_panel;
+	private JButton randomButton;
+	private JPanel buttonPanel;
 }

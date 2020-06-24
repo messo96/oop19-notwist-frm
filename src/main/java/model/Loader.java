@@ -11,7 +11,8 @@ import javax.swing.JWindow;
 public final class Loader extends JWindow {
 	
 	/**
-	 * 
+	 * This class loads a small gif to show a feedback to the user. 
+	 * It means that the application is loading.
 	 */
 	private static final long serialVersionUID = 1L;
 	private static Loader instance = null;

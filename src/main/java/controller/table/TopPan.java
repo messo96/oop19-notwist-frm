@@ -21,7 +21,9 @@ import model.base.User;
 import view.topic.TopicPan;
 
 public class TopPan extends JPanel {
-
+/*
+ * Shows the most answered discussions (which means more attention).
+ */
 	private static final long serialVersionUID = 1L;
 	private DiscussionImplDB dbdiscussion = new DiscussionImplDB();
 
@@ -40,7 +42,7 @@ public class TopPan extends JPanel {
 			private static final long serialVersionUID = 1L;
 
 			@Override
-			public boolean isCellEditable(int row, int column) {
+			public boolean isCellEditable(final int row, final int column) {
 				return false;
 			}
 		};
@@ -51,8 +53,8 @@ public class TopPan extends JPanel {
 		topPanel.setFont(new Font("Tahoma", 0, 14)); // NOI18N
 		// Draw Table
 		topdiscussiontable.setFont(new Font("Tahoma", 0, 14)); // NOI18N
-		model_hot = new DefaultTableModel(new Object[] { "Title", "ID" }, 0);
-		topdiscussiontable.setModel(model_hot);
+		modelHot = new DefaultTableModel(new Object[] { "Title", "ID" }, 0);
+		topdiscussiontable.setModel(modelHot);
 		topdiscussiontable.setFocusable(true);
 		topdiscussiontable.setEnabled(true);
 
@@ -61,7 +63,7 @@ public class TopPan extends JPanel {
 		topdiscussiontable.removeColumn(topdiscussiontable.getColumnModel().getColumn(1));
 
 		topdiscussiontable.addMouseListener(new MouseAdapter() {
-			public void mousePressed(MouseEvent mouseEvent) {
+			public void mousePressed(final MouseEvent mouseEvent) {
 				DiscussionImpl disc = dbdiscussion.getDiscussion(Integer.parseInt(
 						topdiscussiontable.getModel().getValueAt(topdiscussiontable.getSelectedRow(), 1).toString()))
 						.get();
@@ -79,14 +81,14 @@ public class TopPan extends JPanel {
 		topdiscussiontable.setRowHeight(25);
 		topdiscussiontable.getTableHeader().setReorderingAllowed(false);
 		fillTable();
-		GroupLayout hottest_panelLayout = new GroupLayout(topPanel);
-		topPanel.setLayout(hottest_panelLayout);
-		hottest_panelLayout.setHorizontalGroup(hottest_panelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-				.addGroup(hottest_panelLayout.createSequentialGroup().addContainerGap()
+		GroupLayout topPanelLayout = new GroupLayout(topPanel);
+		topPanel.setLayout(topPanelLayout);
+		topPanelLayout.setHorizontalGroup(topPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addGroup(topPanelLayout.createSequentialGroup().addContainerGap()
 						.addComponent(topdiscussiontable, 210, 210, Short.MAX_VALUE).addContainerGap()));
-		hottest_panelLayout.setVerticalGroup(hottest_panelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+		topPanelLayout.setVerticalGroup(topPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(GroupLayout.Alignment.TRAILING,
-						hottest_panelLayout.createSequentialGroup().addContainerGap()
+						topPanelLayout.createSequentialGroup().addContainerGap()
 								.addComponent(topdiscussiontable, GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
 								.addContainerGap()));
 		add(topPanel);
@@ -95,14 +97,14 @@ public class TopPan extends JPanel {
 	private void fillTable() {
 		List<DiscussionImpl> list = dbdiscussion.getTopDiscussion().get();
 		for (Discussion d : list) {
-			model_hot.addRow(new Object[] { d.getTitle(), d.getIdDiscussion() });
+			modelHot.addRow(new Object[] { d.getTitle(), d.getIdDiscussion() });
 		}
-		topdiscussiontable.setModel(model_hot);
+		topdiscussiontable.setModel(modelHot);
 		topdiscussiontable.revalidate();
 	}
 
-	private javax.swing.JPanel topPanel;
-	private javax.swing.JTable topdiscussiontable;
-	private DefaultTableModel model_hot;
+	private JPanel topPanel;
+	private JTable topdiscussiontable;
+	private DefaultTableModel modelHot;
 
 }

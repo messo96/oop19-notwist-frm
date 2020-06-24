@@ -8,7 +8,7 @@ import model.base.Report;
 import model.database.ReportDB;
 
 /**
- * 
+ *
  *
  */
 public class ReportImplDiscussionDB {
@@ -25,7 +25,7 @@ public class ReportImplDiscussionDB {
 		return this.getAll().stream().filter(R -> R.getIdUser() == idUser).collect(Collectors.toList());
 	}
 
-	// crea nuova segnalazione
+	// create a new report
 	public final boolean createReport(final Integer idUser, final Integer idDiscussion, final String description) {
 
 		return this.dbr.create(new Report(0, Optional.of(idDiscussion), Optional.empty(), idUser, description, false));
@@ -38,13 +38,13 @@ public class ReportImplDiscussionDB {
 				.collect(Collectors.toList()).size();
 	}
 
-	// si è risolta una segnalazione
+	// report solved
 	public final boolean setSolved(final Integer idReport) {
 
 		return this.dbr.update(this.dbr.read().stream().filter(R -> R.getIdReport() == idReport).findFirst().get());
 	}
 
-	// rimuovi segnalazione
+	// remove report
 	public final boolean removeReport(final Integer idReport) {
 		return this.dbr.delete(idReport);
 	}

@@ -24,6 +24,10 @@ import model.database.CategoryDB;
 import view.TableDiscussion;
 
 public class CategoryPan extends JPanel {
+	
+	/**
+	 * Creating a Panel for categories, it is going to filter the table.
+	 */
 
 	private static final long serialVersionUID = 1L;
 	private Loader loader = Loader.getInstance();
@@ -36,43 +40,47 @@ public class CategoryPan extends JPanel {
 
 	private void drawComp(final TableDiscussion tableDiscussion) {
 
-		category_panel = new JPanel();
-		category_list = new JScrollPane();
-		jList = new javax.swing.JList<>();
-		category_panel.setBorder(
+		categoryPanel = new JPanel();
+		categoryList = new JScrollPane();
+		jList = new JList<>();
+		categoryPanel.setBorder(
 				BorderFactory.createTitledBorder(BorderFactory.createMatteBorder(3, 3, 3, 3, new Color(0, 0, 0)),
 						"category", TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION, new Font("Tahoma", 0, 14))); // NOI18N
-		category_panel.setFont(new Font("Tahoma", 0, 14)); // NOI18N
+		categoryPanel.setFont(new Font("Tahoma", 0, 14)); // NOI18N
 
 		jList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		category_list.setViewportView(jList);
+		categoryList.setViewportView(jList);
 
 		jList.setFont(new Font("Tahoma", 0, 14)); // NOI18N
 
-		GroupLayout category_panelLayout = new GroupLayout(category_panel);
-		category_panel.setLayout(category_panelLayout);
-		category_panelLayout.setHorizontalGroup(category_panelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-				.addGroup(category_panelLayout.createSequentialGroup().addContainerGap()
-						.addComponent(category_list, 210, 210, Short.MAX_VALUE).addContainerGap()));
-		category_panelLayout.setVerticalGroup(category_panelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-				.addGroup(category_panelLayout.createSequentialGroup().addContainerGap()
-						.addComponent(category_list, GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE).addContainerGap())
+		GroupLayout categoryPanelLayout = new GroupLayout(categoryPanel);
+		categoryPanel.setLayout(categoryPanelLayout);
+		categoryPanelLayout.setHorizontalGroup(categoryPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addGroup(categoryPanelLayout.createSequentialGroup().addContainerGap()
+						.addComponent(categoryList, 210, 210, Short.MAX_VALUE).addContainerGap()));
+		categoryPanelLayout.setVerticalGroup(categoryPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addGroup(categoryPanelLayout.createSequentialGroup().addContainerGap()
+						.addComponent(categoryList, GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE).addContainerGap())
 
 		);
 
 		jList.setModel(new AbstractListModel<String>() {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 			List<CategoryImpl> list = new CategoryDB().read();
 
 			public int getSize() {
 				return list.size();
 			}
 
-			public String getElementAt(int i) {
+			public String getElementAt(final int i) {
 				return list.get(i).getName();
 			}
 		});
 
-		// Filter results of discussions by choosen category on list on the right
+		// Filter results of discussions by choosen category on list on the right.
 		jList.addMouseListener(new MouseAdapter() {
 
 			public void mouseClicked(final MouseEvent e) {
@@ -101,11 +109,11 @@ public class CategoryPan extends JPanel {
 			}
 		});
 
-		add(category_panel);
+		add(categoryPanel);
 	}
 
-	private JPanel category_panel;
-	private JScrollPane category_list;
+	private JPanel categoryPanel;
+	private JScrollPane categoryList;
 	private JList<String> jList;
 
 }

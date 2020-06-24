@@ -1,6 +1,8 @@
 package model.base;
 
-
+/*
+ * Methods for the user.
+ */
 public class User {
 	
 	private Integer id;

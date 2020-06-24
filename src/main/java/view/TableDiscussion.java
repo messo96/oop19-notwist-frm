@@ -1,5 +1,7 @@
 package view;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -39,15 +41,15 @@ public class TableDiscussion {
 			}
 		};
 
-		tableDiscussion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+		tableDiscussion.setFont(new Font("Tahoma", 0, 14)); // NOI18N
 		modelDiscussion = new DefaultTableModel(
 				new Object[] { "Titolo", "Categoria", "Like", "Dislike", "Created By", "Risposte", "ID" }, 0);
 		tableDiscussion.setModel(modelDiscussion);
 
-		tableDiscussion.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+		tableDiscussion.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		tableDiscussion.setAutoscrolls(false);
 		tableDiscussion.setEnabled(true);
-		tableDiscussion.setGridColor(new java.awt.Color(0, 0, 0));
+		tableDiscussion.setGridColor(new Color(0, 0, 0));
 		tableDiscussion.setShowGrid(true);
 		if (tableDiscussion.getColumnModel().getColumnCount() > 0) {
 			tableDiscussion.getColumnModel().getColumn(0).setResizable(false);
@@ -66,7 +68,7 @@ public class TableDiscussion {
 		tableDiscussion.removeColumn(tableDiscussion.getColumnModel().getColumn(6));
 
 		tableDiscussion.addMouseListener(new MouseAdapter() {
-			public void mousePressed(MouseEvent mouseEvent) {
+			public void mousePressed(final MouseEvent mouseEvent) {
 				if (mouseEvent.getClickCount() == 2) {
 
 					DiscussionImpl disc = dbdiscussion.getDiscussion(Integer.parseInt(
@@ -89,6 +91,7 @@ public class TableDiscussion {
 	public final DefaultTableModel getModelDiscussion() {
 		return modelDiscussion;
 	}
+
 
 	// Utility methods place.
 

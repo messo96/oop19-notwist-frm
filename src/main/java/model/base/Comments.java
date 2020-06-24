@@ -18,5 +18,5 @@ public interface Comments extends BaseAccount {
 	Optional<String> getTopic();
 
 	/* this optional method if possible return the number of the comments. */
-	Optional<Integer> getNumberOfCommet();
+	Optional<Integer> getNumberOfComment();
 }

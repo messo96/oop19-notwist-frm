@@ -20,7 +20,7 @@ public class Main {
 	 * @throws SecurityException
 	 * @throws IOException
 	 */
-	public static void main(String[] args) throws SecurityException, IOException {
+	public static void main(final String[] args) throws SecurityException, IOException {
 		// <----------LOOK AND FEEL FOR THE GUI -------->
 		try {
 			UIManager.setLookAndFeel(new FlatLightLaf());

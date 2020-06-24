@@ -44,7 +44,7 @@ public class CommentsImplements extends BaseAccountImplements implements Comment
 	 * @Return a Optional about the number of the comment, if the number of the
 	 * comment is not counted return Optional.Empty.
 	 */
-	public final Optional<Integer> getNumberOfCommet() {
+	public final Optional<Integer> getNumberOfComment() {
 		if (this.number != null) {
 			return this.number;
 		} else {
