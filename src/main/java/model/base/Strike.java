@@ -1,19 +1,23 @@
 package model.base;
 
+/**
+*This class implements the methods for the strike.
+*/
 public class Strike {
+
 	private Integer idUser;
 	private Integer strike;
 
-	public Strike(Integer idUser, Integer strike) {
+	public Strike(final Integer idUser, final Integer strike) {
 		this.idUser = idUser;
 		this.strike = strike;
 	}
 
-	public Integer getIdUser() {
+	public final Integer getIdUser() {
 		return idUser;
 	}
 
-	public Integer getStrike() {
+	public final Integer getStrike() {
 		return strike;
 	}
 

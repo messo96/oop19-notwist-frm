@@ -1,6 +1,13 @@
 package user;
 
+import java.awt.Color;
+import java.awt.Font;
+
+import javax.swing.BorderFactory;
+import javax.swing.GroupLayout;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.TitledBorder;
 
 import model.base.User;
 
@@ -9,56 +16,58 @@ public class Infos extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	/*
-	 * Creating the user infos panel
+	 * Creating the infos panel, displaying mail and user; 
+	 * From the database side it is possible to change these variables, 
+	 * but it's not implemented.
 	 */
 	public Infos(final User user) {
-		
+
 		drawComps(user);
 	}
 	
-	private void drawComps(User user) {
-        myinfos_panel = new javax.swing.JPanel();
-        name = new javax.swing.JLabel();
-        mail = new javax.swing.JLabel();
-		
-        myinfos_panel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 0, 0)), "My Infos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
+	private void drawComps(final User user) {
+        myinfosPanel = new JPanel();
+        name = new JLabel();
+        mail = new JLabel();
 
-        name.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        myinfosPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, new Color(0, 0, 0)), "My Infos", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, new Font("Tahoma", 0, 14))); // NOI18N
+
+        name.setFont(new Font("Tahoma", 0, 14)); // NOI18N
         name.setText("Name:" + user.getUsername());
-        name.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
+        name.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(0, 0, 0)));
 
-        mail.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        mail.setFont(new Font("Tahoma", 0, 14)); // NOI18N
         mail.setText("Email: " + user.getEmail());
-        mail.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
+        mail.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(0, 0, 0)));
 
-        javax.swing.GroupLayout myinfos_panelLayout = new javax.swing.GroupLayout(myinfos_panel);
-        myinfos_panel.setLayout(myinfos_panelLayout);
-        myinfos_panelLayout.setHorizontalGroup(
-            myinfos_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(myinfos_panelLayout.createSequentialGroup()
+        GroupLayout myinfosPanelLayout = new GroupLayout(myinfosPanel);
+        myinfosPanel.setLayout(myinfosPanelLayout);
+        myinfosPanelLayout.setHorizontalGroup(
+            myinfosPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(myinfosPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(myinfos_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(mail, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(myinfosPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addComponent(name, GroupLayout.PREFERRED_SIZE, 280, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(mail, GroupLayout.PREFERRED_SIZE, 280, GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        myinfos_panelLayout.setVerticalGroup(
-            myinfos_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(myinfos_panelLayout.createSequentialGroup()
+        myinfosPanelLayout.setVerticalGroup(
+            myinfosPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(myinfosPanelLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(mail)
                 .addGap(18, 18, 18)
                 .addComponent(name)
                 .addContainerGap(21, Short.MAX_VALUE))
         );
-		
-		add(myinfos_panel);
-		
+
+		add(myinfosPanel);
+
 	}
 	
-    private javax.swing.JLabel mail;
+    private JLabel mail;
 
-    private javax.swing.JPanel myinfos_panel;
-    private javax.swing.JLabel name;
+    private JPanel myinfosPanel;
+    private JLabel name;
 
 }

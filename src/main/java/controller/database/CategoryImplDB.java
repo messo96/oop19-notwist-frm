@@ -12,7 +12,7 @@ import model.database.CategoryDB;
  *
  */
 public class CategoryImplDB {
-
+	
 	private CategoryDB dbc = new CategoryDB();
 	private List<CategoryImpl> list = dbc.read();
 

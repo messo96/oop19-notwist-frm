@@ -50,7 +50,7 @@ public class TopicPan extends JPanel {
 		List<CommentsImplement> list = dbcomment.getComments(disc.getIdDiscussion()).get();
 		if (list.size() != 0) {
 			comments = new AllComments(disc.getIdDiscussion(), list, user);
-			topicPanel.add(comments, new AbsoluteConstraints(0, 440, 1, -1));
+			topicPanel.add(comments, new AbsoluteConstraints(0, 440, -1, -1));
 			comments.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
 		}
 		bodyScroll.setViewportView(topicPanel);

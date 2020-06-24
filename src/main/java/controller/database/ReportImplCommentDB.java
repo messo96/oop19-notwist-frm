@@ -21,26 +21,26 @@ public class ReportImplCommentDB {
 		return this.getAll().stream().filter(u -> u.getIdUser() == idUser).collect(Collectors.toList());
 	}
 
-	// crea nuova segnalazione
+	// create a new report
 	public final boolean createReport(final Integer idUser, final Integer idComment, final String description) {
 
 		return this.dbr.create(new Report(0, Optional.empty(), Optional.of(idComment), idUser, description, false));
 
 	}
-
+	// number of report
 	public final Integer numberOfReport(final Integer idDiscussion, final Integer idComment) {
 		return this.getAll().stream()
 				.filter(r -> r.getIdDiscuss().get() == idDiscussion && r.getIdComment().get() == idComment)
 				.collect(Collectors.toList()).size();
 	}
 
-	// si è risolta una segnalazione
+	// the report got solved
 	public final boolean setSolved(final Integer idReport) {
 
 		return this.dbr.update(this.dbr.read().stream().filter(R -> R.getIdReport() == idReport).findFirst().get());
 	}
 
-	// rimuovi segnalazione
+	// remove all reports
 	public final boolean removeReport(final Integer idReport) {
 		return this.dbr.delete(idReport);
 	}

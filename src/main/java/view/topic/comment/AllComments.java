@@ -26,7 +26,7 @@ public class AllComments extends JPanel {
 	private List<CommentsImplement> list;
 	
 
-	public AllComments(final Integer idDiscussion, final List<CommentsImplement> list, final User user) {
+	public AllComments(final Integer idDiscussion,  List<CommentsImplement> list,  User user) {
 		this.user = user;
 		this.list = list;
 		initComponents(idDiscussion);
