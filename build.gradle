@@ -18,7 +18,6 @@ dependencies {
     testImplementation     'junit:junit:4.13'
     compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.6'
     compile group: 'org.netbeans.external', name: 'AbsoluteLayout', version: 'RELEASE701'
-   	compile group: 'org.kefirsf', name: 'kefirbb', version:'1.5'
 	runtime group: 'com.formdev', name: 'flatlaf', version: '0.20'
 
  

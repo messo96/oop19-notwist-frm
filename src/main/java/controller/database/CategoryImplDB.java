@@ -45,5 +45,12 @@ public class CategoryImplDB {
 	public Optional<CategoryImpl> getCategory(final Integer idCategory) {
 		return list.stream().filter(c -> c.getId().equals(idCategory)).findFirst();
 	}
+	
+	public boolean createCategory(final String name) {
+		if(!dbc.create(new CategoryImpl(0,name)))
+			return false;
+		list = dbc.read();
+		return true;
+	}
 
 }
