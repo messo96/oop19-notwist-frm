@@ -15,17 +15,17 @@ import rombo.new_class.CommentsImplement;
 
 public class AllComments extends JPanel {
 
-	/**
-	 * JPanel to handle all comments
-	 */
+	
+	// JPanel to handle all comments.
+	
+	//Fields.
 	private static final long serialVersionUID = 1L;
 	private User user;
 	private GroupLayout.ParallelGroup parallel;
 	private GroupLayout.SequentialGroup sequential;
-	
 	private List<CommentsImplement> list;
 	
-
+	/*Build*/
 	public AllComments(final Integer idDiscussion, final List<CommentsImplement> list, final User user) {
 		this.user = user;
 		this.list = list;
@@ -42,7 +42,7 @@ public class AllComments extends JPanel {
 
     	GroupLayout historyLayout = new GroupLayout(history);
 
-    	//Calling same instance to check the print
+    	//Calling same instance to check the print.
     	history.setLayout(historyLayout);
     	parallel = historyLayout.createParallelGroup();
     	historyLayout.setHorizontalGroup(historyLayout.createSequentialGroup().addGroup(parallel));

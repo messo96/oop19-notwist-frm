@@ -19,6 +19,7 @@ import view.topic.TopicPan;
 
 public class TableDiscussion {
 	
+	// Fields.
 	private JTable tableDiscussion;
 	private DefaultTableModel modelDiscussion;
 	private LikeDislikeImplDiscussionDB dblike = new LikeDislikeImplDiscussionDB();
@@ -26,11 +27,10 @@ public class TableDiscussion {
 	private UserImplDB dbuser = new UserImplDB();
 	private DiscussionImplDB dbdiscussion = new DiscussionImplDB();
 
+	/*Builder.*/
 	public TableDiscussion(final User user) {
 		tableDiscussion = new JTable() {
-			/**
-			 * 
-			 */
+			
 			private static final long serialVersionUID = 1L;
 
 			@Override
@@ -90,7 +90,7 @@ public class TableDiscussion {
 		return modelDiscussion;
 	}
 
-	/*--------------UTIL METHODS ----------*/
+	// Utility methods place.
 
 	public final void refreshTableDiscussion() {
 		this.getModelDiscussion().getDataVector().removeAllElements();

@@ -28,6 +28,7 @@ public class BuildPreGui extends JFrame {
  
 	private static final long serialVersionUID = 1L;
 
+	/*Builder.*/
 	public BuildPreGui() {
     	
         initComponents();
@@ -37,7 +38,7 @@ public class BuildPreGui extends JFrame {
 
         panelHolder = new JPanel(); //Holder for Login and Register
        
-        //JFrame properties
+        //JFrame properties.
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationByPlatform(true);
         setUndecorated(true);
@@ -47,31 +48,31 @@ public class BuildPreGui extends JFrame {
 
         Image icon = Toolkit.getDefaultToolkit().getImage(this.getClass().getClassLoader().getResource("img/font_test_1.png"));    
         setIconImage(icon);   
-        //Get upper panel and add it to the main frame
+        //Get upper panel and add it to the main frame.
         upper_panel = new UpperPan();
         upper_panel.setVisible(true);
         
         getContentPane().add(upper_panel, new AbsoluteConstraints(510, 0, 420, 40));
         
-        //Card space
+        //Card space.
         panelHolder.setLayout(new CardLayout());
 
-        //Add login to card
+        //Add login to card.
         login_panel = new LoginPan();
         login_panel.setVisible(true);
         panelHolder.add(login_panel, "login");
      
-        //Add register to card
+        //Add register to card.
         register_panel = new RegisterPan();
         register_panel.setVisible(true);
 		panelHolder.add(register_panel, "register_panel");
 
-        //Adding the card!
+        //Adding card.
         getContentPane().add(panelHolder, new AbsoluteConstraints(510, 40, 370, 480));
         
 
      
-        //Get logo panel and add it to the main frame
+        //Get logo panel and add it to the main frame.
         logo = new LogoPan();
         logo.setVisible(true);
         logo.setBackground(new Color(67, 71, 91));
@@ -80,9 +81,9 @@ public class BuildPreGui extends JFrame {
         
         pack();
         
-        //<--------------METHODS---------------------------------------->
+        //Methods place.
         
-        //Call Drag the frame
+        //Call Drag the frame.
 		getContentPane().addMouseMotionListener(new MouseMotionAdapter() {
             public void mouseDragged(MouseEvent evt) {
                 FrameMouseDragged(evt);
@@ -95,9 +96,9 @@ public class BuildPreGui extends JFrame {
         });
     }
 		
-    	//<------------------------END---------------------------->
+    	//End methods place.
     
-    //Drag the frame 
+    //Drag the frame. 
     private  int xy;
     private  int xx;
     
@@ -118,7 +119,7 @@ public class BuildPreGui extends JFrame {
     
     
     
-   //<------------BUILD THE GUI----------------->
+   //Builder GUI.
     public void start() {
 
     	EventQueue.invokeLater(new Runnable() {
@@ -131,11 +132,11 @@ public class BuildPreGui extends JFrame {
     
   
 
-    // Variables declaration - do not modify
+    
     private JPanel panelHolder;   
     private LoginPan login_panel;
     private LogoPan logo;
     private UpperPan upper_panel;
     private RegisterPan register_panel;
-    // End of variables declaration
+
 }

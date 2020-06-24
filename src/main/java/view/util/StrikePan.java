@@ -28,15 +28,16 @@ import controller.database.UserImplDB;
 import model.base.User;
 
 public class StrikePan extends JPanel {
-	/*
-	 * Create panel for the strike tab
-	 */
+	
+	// Create panel for the strike tab.
+	
 	private static final long serialVersionUID = 1L;
 	private UserImplDB dbuser = new UserImplDB();
 	private StrikeImplDB dbstrike = new StrikeImplDB();
 	private User user;
 	private final Integer MAX_STRIKE = 3; //max strikes for a user
 
+	/*Builder.*/
 	public StrikePan() {
 		draw();
 	}
@@ -54,7 +55,7 @@ public class StrikePan extends JPanel {
 		plus = new JButton();
 		minus = new JButton();
 
-		//Strike Dialog
+		//Strike Dialog.
 		strikedialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		strikedialog.setTitle("Modifica uno strike");
 		Image icon = Toolkit.getDefaultToolkit()
@@ -124,7 +125,7 @@ public class StrikePan extends JPanel {
 				BorderFactory.createMatteBorder(2, 2, 2, 2, new Color(194, 192, 192)), "Strikes",
 				TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, new Font("Tahoma", 0, 14))); // NOI18N
 
-		//Strike table
+		//Strike table.
 		modelStrikes = new DefaultTableModel(new Object[] { "ID", "Username", "Strikes" }, 0);
 		strikesTable.setModel(modelStrikes);
 

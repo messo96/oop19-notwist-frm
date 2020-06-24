@@ -16,12 +16,13 @@ import javax.swing.border.TitledBorder;
 
 public class TipsPan extends JPanel {
 
-	/**
-	 * Creating tips panel by importing a txt.
-	 */
+	
+	// Creating tips panel by importing a txt.
+	
 	private static final long serialVersionUID = 1L;
 
 
+	/*Builder.*/
 	public TipsPan() {
 
 		drawPan();
@@ -34,7 +35,7 @@ public class TipsPan extends JPanel {
 
 		markupsPanel.setBorder(
 				BorderFactory.createTitledBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, new Color(194, 192, 192)),
-						"Tips", TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION, new Font("Tahoma", 0, 14))); // NOI18N
+						"Tips", TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION, new Font("Tahoma", 0, 14))); //<-NOI18N
 
 		tipsScroll.setEnabled(false);
 
@@ -59,10 +60,7 @@ public class TipsPan extends JPanel {
 
 	}
 	
-	private JScrollPane tipsScroll;
-	private JPanel markupsPanel;
-	private JTextArea tipsPanel;
-
+	
 	private void importTips() {
 		BufferedReader buf;
 		InputStreamReader in = new InputStreamReader(this.getClass().getResourceAsStream("/docs/Tips.txt"));
@@ -70,8 +68,12 @@ public class TipsPan extends JPanel {
 			buf = new BufferedReader(in);
 			tipsPanel.read(buf, null);
 		} catch (IOException e) {
-			System.out.println("File Tips.txt non trovato! ");
+			System.out.println("File Tips.txt non trovato!");
 			e.printStackTrace();
 		}
 	}
+	
+	private JScrollPane tipsScroll;
+	private JPanel markupsPanel;
+	private JTextArea tipsPanel;
 }

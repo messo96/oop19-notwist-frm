@@ -17,9 +17,10 @@ public class RulesPan extends JPanel {
 
 private static final long serialVersionUID = 1L;
 
-	/**
-	 * Creates panel for NewTopic Rules.
-	 */
+	
+	  //Creates panel for NewTopic Rules.
+	 
+	/*Builder.*/
 	public RulesPan() {
 		initComponents();
 	}
@@ -59,6 +60,7 @@ private static final long serialVersionUID = 1L;
 	private JEditorPane rulesArea;
 	private JPanel rulesPanel;
 	
+	/*import the rules of forum.*/
 	private void importRules() {
 			BufferedReader buf;
 			InputStreamReader in = new InputStreamReader(this.getClass().getResourceAsStream("/docs/Rules.txt"));

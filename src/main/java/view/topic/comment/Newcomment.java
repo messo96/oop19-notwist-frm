@@ -17,16 +17,17 @@ import controller.database.CommentsImplDB;
 
 public class Newcomment extends JPanel {
 
-	/**
-	 * Creates a new comment
-	 */
-
+	
+	  //Creates a new comment.
+	 
+	//fields.
 	private static final long serialVersionUID = 1L;
 	private Integer idDiscussion;
 	private Integer idUser;
 
 	private CommentsImplDB dbcomment = new CommentsImplDB();
 
+	/*Builder.*/
 	public Newcomment(final Integer idDiscussion, final Integer idUser) {
 		this.idDiscussion = idDiscussion;
 		this.idUser = idUser;

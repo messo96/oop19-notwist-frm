@@ -6,9 +6,10 @@ import javax.swing.JPanel;
 public class Comments extends JPanel {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * Creates new Profile Panel
-	 */
+	
+	  //Creates new Profile Panel
+	 
+	/*Builder.*/
 	public Comments() {
 		initComponents();
 	}
@@ -162,17 +163,10 @@ public class Comments extends JPanel {
 	}
 
 	private javax.swing.JPanel body_panel;
-
 	private javax.swing.JPanel comment1;
 	private javax.swing.JPanel comment2;
 	private javax.swing.JButton comment_menu;
 	private javax.swing.JButton comment_menu1;
-	private javax.swing.JLabel date_user;
-	private JEditorPane discussion_area;
-	private javax.swing.JPanel discussion_panel;
-	private javax.swing.JPanel discussion_part;
-	private javax.swing.JButton dislike;
-
 	private javax.swing.JButton jButton10;
 	private javax.swing.JButton jButton11;
 	private javax.swing.JButton jButton8;
@@ -181,23 +175,10 @@ public class Comments extends JPanel {
 	private javax.swing.JLabel jLabel6;
 	private javax.swing.JLabel jLabel7;
 	private javax.swing.JLabel jLabel8;
-	private javax.swing.JScrollPane jScrollPane1;
-	private javax.swing.JScrollPane jScrollPane2;
 	private javax.swing.JScrollPane jScrollPane3;
 	private javax.swing.JScrollPane jScrollPane4;
 	private javax.swing.JScrollPane jScrollPane5;
 	private javax.swing.JScrollPane jScrollPane6;
-	private javax.swing.JScrollPane jScrollPane7;
-	private javax.swing.JSeparator jSeparator1;
-	private javax.swing.JSeparator jSeparator2;
 	private javax.swing.JTextArea jTextArea3;
 	private javax.swing.JTextArea jTextArea4;
-	private javax.swing.JButton like;
-	private javax.swing.JButton menu;
-	private javax.swing.JLabel n_likes;
-	private javax.swing.JPanel new_comment;
-	private javax.swing.JTextArea newcomment_area;
-	private javax.swing.JButton post_it;
-
-	private javax.swing.JLabel title_label;
 }

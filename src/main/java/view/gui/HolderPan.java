@@ -1,8 +1,5 @@
 package view.gui;
 
-
-
-
 import javax.swing.JPanel;
 
 import org.netbeans.lib.awtextra.AbsoluteConstraints;
@@ -19,6 +16,7 @@ public class HolderPan extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
 	
+	/*Builder.*/
     public HolderPan(final TableDiscussion tableDiscussion, final User user) {
         initComponents(tableDiscussion, user);
     }
@@ -28,13 +26,13 @@ public class HolderPan extends JPanel {
     	holder_panel = new JPanel();
     	holder_panel.setLayout(new AbsoluteLayout());
     	
-        //Get Table Pan and add it
+        //Get Table Pan and add it.
         table_panel = new Homepage(tableDiscussion);
         table_panel.setVisible(true);
         holder_panel.add(table_panel, new AbsoluteConstraints(0, 21, -1, -1));
       
         
-    	//Get hottest panel and add it to the main frame
+    	//Get hottest panel and add it to the main frame.
         hottest_panel = new TopPan(user);
         hottest_panel.setVisible(true);      
         holder_panel.add(hottest_panel, new AbsoluteConstraints(814, 21, 240, -1));
@@ -45,22 +43,22 @@ public class HolderPan extends JPanel {
         holder_panel.add(category_panel, new AbsoluteConstraints(814, 192, 240, -1));
    
 
-        //GGet Button Pan and add it
+        //GGet Button Pan and add it.
         button_panel = new RandomPan(tableDiscussion, user);
         button_panel.setVisible(true);     
         holder_panel.add(button_panel, new AbsoluteConstraints(814, 410, -1, -1));
         
-        //Draw the whole thingy
+        //Draw the whole thingy.
         add(holder_panel);
     	
     	
     }
-    // Variables declaration - do not modify
+    
 
     private Homepage table_panel;
     private TopPan hottest_panel;
     private CategoryPan category_panel;
     private JPanel holder_panel;
     private RandomPan button_panel;
-    // End of variables declaration
+  
 }

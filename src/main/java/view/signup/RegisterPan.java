@@ -40,9 +40,11 @@ import view.gui.PreGui;
 
 public class RegisterPan extends JPanel implements PreGui {
 	
+	//Fields.
 	private static final long serialVersionUID = 1L;
 	private UserImplDB dbuser = new UserImplDB();
 
+	/*Builder.*/
 	public RegisterPan() {
 
 		drawComp();
@@ -70,9 +72,9 @@ public class RegisterPan extends JPanel implements PreGui {
 		termsCheck = new JCheckBox();
 		termsButton = new JButton();
 
-		// <------------------Draw register panel ------------>
+		// Draw register panel place.
 
-		// Dialog
+		// Dialog.
 		termsTitle.setText("Informativa Privacy:");
 		termsTitle.setFont(new Font("Tahoma", 0, 18));
 		importTerms();
@@ -111,10 +113,10 @@ public class RegisterPan extends JPanel implements PreGui {
 		termsDialogLayout.setVerticalGroup(termsDialogLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addComponent(termsPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
 
-		// Setting panel
+		// Setting panel.
 		registerPanel.setLayout(new AbsoluteLayout());
 
-		// Username
+		// Username.
 		userLabel.setFont(new Font("Tahoma", 0, 14)); // NOI18N
 		userLabel.setText("Username");
 		registerPanel.add(userLabel, new AbsoluteConstraints(53, 80, -1, -1));
@@ -129,7 +131,7 @@ public class RegisterPan extends JPanel implements PreGui {
 
 		registerPanel.add(usernameField, new AbsoluteConstraints(53, 110, 290, 25));
 
-		// Separator
+		// Separator.
 		sep1.setBackground(new Color(0, 0, 0));
 		sep1.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, new java.awt.Color(194, 192, 192)));
 		sep1.setMinimumSize(new Dimension(30, 20));
@@ -137,7 +139,7 @@ public class RegisterPan extends JPanel implements PreGui {
 		sep1.setBackground(new Color(255, 255, 255));
 		registerPanel.add(sep1, new AbsoluteConstraints(53, 140, 290, -1));
 
-		// Mail
+		// Mail.
 
 		mailLabel.setFont(new Font("Tahoma", 0, 14)); // NOI18N
 		mailLabel.setText("Mail");
@@ -151,7 +153,7 @@ public class RegisterPan extends JPanel implements PreGui {
 		});
 		registerPanel.add(mailField, new AbsoluteConstraints(53, 200, 290, 25));
 
-		// Separator
+		// Separator.
 		sep2.setBackground(new Color(0, 0, 0));
 		sep2.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, new java.awt.Color(194, 192, 192)));
 		sep2.setMinimumSize(new Dimension(30, 20));
@@ -159,7 +161,7 @@ public class RegisterPan extends JPanel implements PreGui {
 		sep2.setBackground(new Color(255, 255, 255));
 		registerPanel.add(sep2, new AbsoluteConstraints(53, 230, 290, -1));
 
-		// Password
+		// Password.
 		psswLabel.setFont(new Font("Tahoma", 0, 14)); // NOI18N
 		psswLabel.setText("Password");
 		registerPanel.add(psswLabel, new AbsoluteConstraints(53, 260, -1, -1));
@@ -172,7 +174,7 @@ public class RegisterPan extends JPanel implements PreGui {
 		});
 		registerPanel.add(psswField, new AbsoluteConstraints(53, 290, 290, 25));
 
-		// Separator
+		// Separator.
 
 		sep3.setBackground(new Color(0, 0, 0));
 		sep3.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, new Color(194, 192, 192)));
@@ -186,7 +188,7 @@ public class RegisterPan extends JPanel implements PreGui {
 
 		registerPanel.add(signupBtn, new AbsoluteConstraints(53, 360, 290, 60));
 
-		// Informativa
+		// Informative.
 		termsCheck.setFont(new Font("Tahoma", 0, 10)); // NOI18N
 		termsCheck.setText("Accetto i termini e le condizioni.");
 		registerPanel.add(termsCheck, new AbsoluteConstraints(53, 330, -1, -1));
@@ -204,7 +206,7 @@ public class RegisterPan extends JPanel implements PreGui {
 		});
 		registerPanel.add(termsButton, new AbsoluteConstraints(220, 330, -1, -1));
 
-		// Infos
+		// Info.
 		registerLabel.setContentType("text/html");
 		registerLabel.setOpaque(false);
 		registerLabel.setText("Hai già un account? Loggati <font color =FF6347>qui </font>.");
@@ -238,7 +240,7 @@ public class RegisterPan extends JPanel implements PreGui {
 			}
 		});
 
-		// Register method
+		// Register method.
 		signupBtn.addActionListener(e -> {
 			if (!termsCheck.isSelected()) {
 				JOptionPane.showMessageDialog(null, "Accetta i termini e condizioni!");
@@ -291,7 +293,7 @@ public class RegisterPan extends JPanel implements PreGui {
 
 	@Override
 	public final String getPassword() {
-		//cause we use our crypt
+		//this method is deprecated, but this is the only strategy to pass the string.
 		return psswField.getText();
 	}
 
@@ -307,7 +309,7 @@ public class RegisterPan extends JPanel implements PreGui {
 		}
 	}
 
-	// Focus
+	// Focus.
 	private void mailFieldFocusGained(final FocusEvent evt) {
 		psswLabel.setForeground(new Color(0, 0, 0));
 		mailLabel.setForeground(new Color(135, 175, 218));
@@ -335,9 +337,7 @@ public class RegisterPan extends JPanel implements PreGui {
 	private JDialog termsDialog;
 	private JLabel psswLabel;
 	private JLabel userLabel;
-
 	private JButton signupBtn;
-
 	private JPanel registerPanel;
 	private JTextField mailField;
 	private JPasswordField psswField;

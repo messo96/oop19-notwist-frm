@@ -26,7 +26,7 @@ public class Profile extends JPanel {
  
     private void initComponents(final User user) {
 
-    	//If user is a mod
+    	//Part of moderator.
     	if (user.isModerator()) {
 
     	   	profilePanel = new JPanel();
@@ -39,7 +39,7 @@ public class Profile extends JPanel {
             profilePanel.add(strikePanel, new  AbsoluteConstraints(730, 150, 310, 310));
            add(profilePanel);
 
-    	 } else { //If not a mod, display different things
+    	 } else { //Part of normal user.
 
     	profilePanel = new  JPanel();
         profilePanel.setLayout(new  AbsoluteLayout());
@@ -54,10 +54,10 @@ public class Profile extends JPanel {
        }
     }
 
-    // Variables declaration
+    
     private JPanel profilePanel;
     private UserDiscussions activitiesPanel;
     private Infos myinfosPanel;
     private StrikePan strikePanel;
-    // End of variables declaration
+    
 }

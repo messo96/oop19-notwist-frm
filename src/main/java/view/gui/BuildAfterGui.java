@@ -27,11 +27,13 @@ import view.util.UpperPan;
 
 public class BuildAfterGui extends JFrame {
 	
+	//Fields.
 	private static final long serialVersionUID = 1L;
 	private TableDiscussion tableDiscussion;
 	private User user;
 	private Loader loader = Loader.getInstance();
 
+	/*Builder.*/
 	public BuildAfterGui(final User user) {
 		this.user = user;
 		this.tableDiscussion = new TableDiscussion(user);
@@ -41,9 +43,9 @@ public class BuildAfterGui extends JFrame {
 
 	private void initComponents(final TableDiscussion tableDiscussion) {
 		loader.start();
-		bodyHolder = new JPanel(); // Holder for body
+		bodyHolder = new JPanel(); // Holder for body.
 
-		// JFrame properties
+		// JFrame properties.
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocationByPlatform(true);
 		setUndecorated(true);
@@ -51,14 +53,14 @@ public class BuildAfterGui extends JFrame {
 		getContentPane().setLayout(new AbsoluteLayout());
 
 		
-		// Get upper panel and add it to the main frame
+		// Get upper panel and add it to the main frame.
 		upper_panel = new UpperPan();
 		upper_panel.setVisible(true);
 
 		getContentPane().add(upper_panel, new AbsoluteConstraints(670, 0, -1, 40));
 
 		bodyHolder.setLayout(new CardLayout());
-		// Add HolderPan with the homepage tables to card
+		// Add HolderPan with the homepage tables to card.
 		holder_panel = new HolderPan(tableDiscussion, user);
 		holder_panel.setVisible(true);
 		bodyHolder.add(holder_panel, "homepage_panel");
@@ -68,12 +70,9 @@ public class BuildAfterGui extends JFrame {
 		profile_panel = new Profile(user);
 		profile_panel.setVisible(true);
 		bodyHolder.add(profile_panel, "profile_panel");
-//		topic_panel = new TopicPan(, idUser);
-//		topic_panel.setVisible(true);
-//		bodyHolder.add(topic_panel, "topic_panel");
 		bodyHolder.setBorder(BorderFactory.createMatteBorder(3, 0, 0, 0, Color.BLACK));
 
-		// Adding the card!
+		// Adding card.
 		getContentPane().add(bodyHolder, new AbsoluteConstraints(0, 120, 1080, 490));
 
 		header_panel = new Header(tableDiscussion, bodyHolder, user);
@@ -83,9 +82,9 @@ public class BuildAfterGui extends JFrame {
 		loader.end();
 		pack();
 
-		// <--------------METHODS---------------------------------------->
+		// Methods place.
 
-		// Call Drag the frame
+		// Call Drag the frame.
 		getContentPane().addMouseMotionListener(new MouseMotionAdapter() {
 			public void mouseDragged(MouseEvent evt) {
 				FrameMouseDragged(evt);
@@ -98,9 +97,9 @@ public class BuildAfterGui extends JFrame {
 		});
 	}
 
-	// <------------------------END---------------------------->
+	// End method place.
 
-	// Drag the frame
+	// Drag the frame.
 	private int xy;
 	private int xx;
 
@@ -125,7 +124,7 @@ public class BuildAfterGui extends JFrame {
 		});
 	}
 
-	// Variables declaration - do not modify
+	
 	private JPanel bodyHolder;
 	private HolderPan holder_panel;
 	private UpperPan upper_panel;
@@ -134,5 +133,5 @@ public class BuildAfterGui extends JFrame {
 	private Profile profile_panel;
 	private TopicPan topic_panel;
 
-	// End of variables declaration
+	
 }

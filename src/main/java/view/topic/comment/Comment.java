@@ -27,16 +27,17 @@ import rombo.new_class.CommentsImplement;
 
 public class Comment extends JPanel {
 
-	/**
-	 * Creates a new comment.
-	 */
-
+	
+	  //Creates a new comment.
+	 
+	//Fields.
 	private static final long serialVersionUID = 1L;
 	private UserImplDB dbuser = new UserImplDB();
 	private ILikeDislikeDB dblike = new LikeDislikeImplCommentsDB();
 	private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 	private User user;
 
+	/*Builder.*/
 	public Comment(final CommentsImplement com, final User user) {
 		initComponents(com);
 		this.user = user;
@@ -60,7 +61,7 @@ public class Comment extends JPanel {
 		commentScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		commentScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 
-		// Comment area
+		// Comment area.
 		commentArea.setText(com.getComment());
 		commentArea.setEditable(false);
 		commentArea.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
@@ -96,8 +97,7 @@ public class Comment extends JPanel {
 
 		dateUser.setFont(new Font("Tahoma", 0, 14)); // NOI18N
 
-		// date_user.setText(this.discussion.getData() + "by " +
-		// dbuser.getUser(discussion.getIdUser()).get().getUsername());
+		
 		dateUser.setHorizontalAlignment(SwingConstants.RIGHT);
 
 		dateUser.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));

@@ -1,6 +1,6 @@
 /*
  * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To change this template file, choose Tools | Templates,
  * and open the template in the editor.
  */
 package view.topic.newtopic;
@@ -40,23 +40,20 @@ import view.util.TipsPan;
 
 public class NewTopicPan extends JPanel {
 
-	/**
-	 * Creates new form Homepage_gui
-	 */
+	
+	  //Creates new form Homepage_gui.
+	 
 	private static final long serialVersionUID = 1L;
 
 	private User user;
 	private CategoryImplDB dbcategory = new CategoryImplDB();
 	private DiscussionImplDB dbdiscussion = new DiscussionImplDB();
 
-	// private JTable table;
-	// public newtopic_gui(User user, JTable table)
+	/*Builder.*/
 	public NewTopicPan(final User user, final TableDiscussion table) {
 		this.user = user;
 		initComponents(table);
-		// this.actualUser = user;
-		// this.setVisible(true);
-		// this.table = table;
+		
 
 	}
 
@@ -106,6 +103,7 @@ public class NewTopicPan extends JPanel {
 		jScrollPane1.setViewportView(descriptionTextArea);
 		descriptionTextArea.addKeyListener(new KeyListener() {
 
+			// Allert of keyListener if this methods aren`t present.
 			@Override
 			public void keyTyped(final KeyEvent e) {
 				//nothing
@@ -134,8 +132,6 @@ public class NewTopicPan extends JPanel {
 		topicPanel.add(jScrollPane2, new AbsoluteConstraints(10, 111, 675, 135));
 
 
-//		preview_button.setText("Preview");
-//		topicPanel.add(preview_button, new AbsoluteConstraints(500, 450, -1, -1));
 
 		postPutton.setText("Posta");
 		postPutton.addActionListener(e -> {
@@ -160,11 +156,11 @@ public class NewTopicPan extends JPanel {
 
 		newtopicPanel.add(topicPanel, new AbsoluteConstraints(0, 0, 700, 490));
 
-		// Importing Rules Pan
+		// Importing Rules Pan.
 		rulesPanel = new RulesPan();
 		newtopicPanel.add(rulesPanel, new AbsoluteConstraints(720, 0, -1, 250));
 
-		// Importing MarkupsPan
+		// Importing MarkupsPan.
 		markupsPanel = new TipsPan();
 		newtopicPanel.add(markupsPanel, new AbsoluteConstraints(720, 260, -1, 210));
 
@@ -179,7 +175,7 @@ public class NewTopicPan extends JPanel {
 		}
 	}
 
-	// Variables declaration - do not modify
+	// Variables declaration - do not modify.
 	private JComboBox<String> category;
 	private JLabel categoryLabel;
 	private JPanel newtopicPanel;
@@ -196,5 +192,5 @@ public class NewTopicPan extends JPanel {
 	private JLabel textPreviewLabel1;
 	private JLabel titleLabel;
 	private JPanel topicPanel;
-	// End of variables declaration
+	// End of variables declaration.
 }

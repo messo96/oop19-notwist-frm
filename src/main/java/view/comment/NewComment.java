@@ -5,9 +5,10 @@ import javax.swing.JPanel;
 public class NewComment extends JPanel {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * Creates new Profile Panel
-	 */
+	
+	// Creates new Profile Panel
+	
+	/*Builder.*/
 	public NewComment() {
 		initComponents();
 	}
@@ -48,12 +49,9 @@ public class NewComment extends JPanel {
 
 	}
 
-	private void post_itActionPerformed(java.awt.event.ActionEvent evt) { // GEN-FIRST:event_post_itActionPerformed
-		// TODO add your handling code here:
-	}// GEN-LAST:event_post_itActionPerformed
+	
 
 	private javax.swing.JScrollPane jScrollPane2;
-
 	private javax.swing.JTextArea newcomment_area;
 	private javax.swing.JPanel newpost;
 	private javax.swing.JButton post_it;

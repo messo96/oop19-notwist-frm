@@ -31,16 +31,17 @@ import model.base.User;
 
 public class Topic extends JPanel {
 
-	/**
-	 * Creates topic area
-	 */
-
+	
+	// Creates topic area.
+	
+	//Fields.
 	private static final long serialVersionUID = 1L;
 	private Discussion discussion = null;
 	private User user;
 	private ILikeDislikeDB dblike = new LikeDislikeImplDiscussionDB();
 	private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 
+	/*Builder.*/
 	public Topic(final Discussion disc, final User user) {
 		this.user = user;
 		this.discussion = disc;

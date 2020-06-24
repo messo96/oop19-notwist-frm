@@ -16,14 +16,16 @@ import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 
 public class UpperPan extends JPanel {
-	/*
-	 * Creating Close JFrame menu, with icons and theme swap.
-	 */
+	
+	 //Creating Close JFrame menu, with icons and theme swap.
+	 
+	//Fields.
 	private static final long serialVersionUID = 1L;
 	private final ImageIcon dark = new ImageIcon(this.getClass().getClassLoader().getResource("img/light.png"));
 	private final ImageIcon light = new ImageIcon(this.getClass().getClassLoader().getResource("img/dark.png"));
 	private final ImageIcon close = new ImageIcon(this.getClass().getClassLoader().getResource("img/close.png"));
 
+	/*Builder.*/
 	public UpperPan() {
 
 		drawComp();
@@ -34,27 +36,27 @@ public class UpperPan extends JPanel {
 		closeLabel = new JLabel();
 		switchLabel = new JLabel();
 
-		// Setting upper menu layout
+		// Setting upper menu layout.
 		upperPanel.setLayout(new AbsoluteLayout());
 
-		// Switch "button"
+		// Switch "button".
 		switchLabel.setIcon(light);
 		upperPanel.add(switchLabel, new AbsoluteConstraints(330, 10, -1, -1));
 
-		// Close "button"
+		// Close "button".
 		closeLabel.setIcon(close);
 		upperPanel.add(closeLabel, new AbsoluteConstraints(380, 10, -1, -1));
 
 		add(upperPanel);
 
-		// Close method
+		// Close method.
 		closeLabel.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(final MouseEvent evt) {
 				closeLabelMouseClicked(evt);
 			}
 		});
 
-		// Switch theme
+		// Switch theme.
 		switchLabel.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(final MouseEvent evt) {
 				switchLabelMouseClicked(evt);
@@ -62,12 +64,12 @@ public class UpperPan extends JPanel {
 		});
 	}
 
-	// Close
+	// Close.
 	private void closeLabelMouseClicked(final MouseEvent evt) {
 		System.exit(0);
 	}
 
-	// Switch method between light and dark
+	// Switch method between light and dark mode.
 	private void switchLabelMouseClicked(final MouseEvent evt) {
 
 		if (light == switchLabel.getIcon()) {

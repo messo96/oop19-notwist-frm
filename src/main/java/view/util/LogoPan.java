@@ -12,6 +12,7 @@ public class LogoPan extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
+	/*Builder.*/
 	public LogoPan() {
 
 		drawComp();
@@ -22,7 +23,7 @@ public class LogoPan extends JPanel {
         logoPanel = new JPanel();
         logo = new JLabel();
 
-        //Draw logoPanel, get the picture and fix the size to fit the panel itself
+        //Draw logoPanel, get the picture and fix the size to fit the panel itself.
         logoPanel.setBackground(new Color(67, 71, 91));
         logo.setIcon(new ImageIcon(this.getClass().getClassLoader().getResource("img/font_test_1.png"))); // NOI18N
         logo.setDoubleBuffered(true);

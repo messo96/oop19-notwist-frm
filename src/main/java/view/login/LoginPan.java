@@ -37,9 +37,11 @@ import view.gui.PreGui;
 
 public class LoginPan extends JPanel implements PreGui {
 
+	//Fields.
 	private static final long serialVersionUID = 1L;
 	private UserImplDB dbuser = new UserImplDB();
 
+	/*Builder.*/
 	public LoginPan() {
 
 		drawComp();
@@ -58,10 +60,10 @@ public class LoginPan extends JPanel implements PreGui {
 		loginBtn = new JButton();
 		signupLabel = new JEditorPane();
 
-		// <------------Draw login panel------------------->
+		// Draw login panel place.
 		loginPanel.setLayout(new AbsoluteLayout());
 
-		// Mail section
+		// Mail section.
 		mailLabel.setFont(new Font("Tahoma", 0, 14)); // NOI18N
 		mailLabel.setText("Mail");
 		mailLabel.setToolTipText("Utilizza una mail valida!");
@@ -70,42 +72,42 @@ public class LoginPan extends JPanel implements PreGui {
 		mailField.setFont(new Font("Tahoma", 0, 14)); // NOI18N
 		loginPanel.add(mailField, new AbsoluteConstraints(60, 110, 290, 25));
 
-		// Separator
+		// Separator.
 		sep1.setBackground(new Color(0, 0, 0));
 		sep1.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, new Color(194, 192, 192)));
 		sep1.setMinimumSize(new Dimension(30, 20));
 		sep1.setPreferredSize(new Dimension(30, 20));
 		loginPanel.add(sep1, new AbsoluteConstraints(60, 140, 290, -1));
 
-		// Password section
+		// Password section.
 		psswLabel.setFont(new Font("Tahoma", 0, 14)); // NOI18N
 		psswLabel.setText("Password");
 		psswLabel.setToolTipText("Utilizza una password sicura!");
 		loginPanel.add(psswLabel, new AbsoluteConstraints(60, 170, -1, -1));
 
-		// psswField.setBackground(new Color(242, 242, 242));
+		
 
 		psswField.setFont(new Font("Tahoma", 0, 14)); // NOI18N
 		loginPanel.add(psswField, new AbsoluteConstraints(60, 200, 290, 25));
 
-		// Separator
+		// Separator.
 		sep2.setBackground(new Color(0, 0, 0));
 		sep2.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, new Color(194, 192, 192)));
 		sep2.setMinimumSize(new Dimension(30, 20));
 		sep2.setPreferredSize(new Dimension(30, 20));
 		loginPanel.add(sep2, new AbsoluteConstraints(60, 230, 290, -1));
 
-		// Login button
+		// Login button.
 		loginBtn.setFont(new Font("Tahoma", 0, 14)); // NOI18N
 		loginBtn.setText("LOGIN");
 		loginPanel.add(loginBtn, new AbsoluteConstraints(60, 270, 290, 60));
 
-		// Loader after Login
+		// Loader after Login.
 		JLabel loader = new JLabel(new ImageIcon(this.getClass().getClassLoader().getResource("img/loader_login.gif")));
 		loader.setBounds(loginBtn.getBounds());
 		loginPanel.add(loader, new AbsoluteConstraints(60, 270, 300, 60));
 
-		// Link section
+		// Link section.
 		signupLabel.setContentType("text/html");
 		signupLabel.setOpaque(false);
 		signupLabel.setText("Non hai un account? Registrati <font color =FF6347>qui </font>.");
@@ -121,7 +123,7 @@ public class LoginPan extends JPanel implements PreGui {
 
 		add(loginPanel);
 
-		// Change label color on focus
+		// Change label color on focus.
 		mailField.addFocusListener(new FocusAdapter() {
 			public void focusGained(final FocusEvent evt) {
 				mailFieldFocusGained(evt);
@@ -134,7 +136,7 @@ public class LoginPan extends JPanel implements PreGui {
 			}
 		});
 
-		// Login_button method
+		// Login button method.
 		this.loginBtn.addActionListener(e -> {
 			loginBtn.setVisible(false);
 			loader.setVisible(true);
@@ -156,7 +158,7 @@ public class LoginPan extends JPanel implements PreGui {
 							loader.setVisible(false);
 							new BuildAfterGui(user.get()).start();
 							win.dispose();
-							return "Credenziali corrette";
+							return "Credenziali corrette.";
 						} else {
 							JOptionPane.showMessageDialog(null, "Credenziali errate, riprovare! :(");
 						}
