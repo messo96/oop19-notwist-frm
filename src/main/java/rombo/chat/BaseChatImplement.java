@@ -12,7 +12,7 @@ public class BaseChatImplement extends BaseAccountImplements implements BaseChat
 	
 	/*Builder.*/
 	public BaseChatImplement(int ID, int ID2, Optional<String> UserName, Optional<String> UserName2) {
-		super(ID,UserName);
+		super(ID, UserName);
 		this.ID2 = ID2;
 		this.UserName2 = UserName2;
 	}
@@ -32,8 +32,7 @@ public class BaseChatImplement extends BaseAccountImplements implements BaseChat
 		
 		if(this.UserName2==null) {
 			return Optional.empty();
-		}
-		else {
+		} else {
 			
 			return this.UserName2;
 		}

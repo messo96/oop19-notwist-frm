@@ -21,24 +21,21 @@ public class LikeAndDislikeImplements implements LikeAndDislike {
 	
 	
 	/*@Input the ID of the user the pouted like.*/
-	public void ADDLike(BaseAccountImplements ID) {
+	public final void ADDLike(BaseAccountImplements ID) {
 		
 		/*Control if this is a new user.*/
-		if(User.containsKey(ID)) {
+		if (User.containsKey(ID)) {
 			/*Control if the user made other action.*/
-			if(User.get(ID) == DISLIKE) {
+			if (User.get(ID) == DISLIKE) {
 				this.NumberDisLike--;
 				this.NumberLike++;
-			}
-			else {
-				if(User.get(ID) == LIKE) {
+			} else {
+				if (User.get(ID) == LIKE) {
 					User.remove(ID);
 					this.NumberLike--;
 				}
 			}
-		}
-		/*If this is a new user*/
-		else {
+		} else {
 			User.put(ID, LIKE);
 			this.NumberLike++;
 		}
@@ -53,24 +50,21 @@ public class LikeAndDislikeImplements implements LikeAndDislike {
 
 	
 	/*@Input the ID of the user the pouted dislike.*/
-	public void ADDDislike(BaseAccountImplements ID) {
+	public final void ADDDislike(BaseAccountImplements ID) {
 		
 		/*Control if this is a new user.*/
-		if(User.containsKey(ID)) {
+		if (User.containsKey(ID)) {
 			/*Control if the user made other action.*/
-			if(User.get(ID) == LIKE) {
+			if (User.get(ID) == LIKE) {
 				this.NumberLike--;
 				this.NumberDisLike++;
-			}
-			else {
-				if(User.get(ID) == DISLIKE) {
+			} else {
+				if (User.get(ID) == DISLIKE) {
 					this.NumberDisLike--;
 					User.remove(ID);
 				}
 			}
-		}
-		/*If this is a new user*/
-		else {
+		} else {
 			User.put(ID, DISLIKE);
 			this.NumberDisLike++;
 		}

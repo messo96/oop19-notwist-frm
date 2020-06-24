@@ -15,7 +15,7 @@ import user.Infos;
 import user.UserComments;
 import view.util.StrikePan;
 
-public class Profile extends JPanel{
+public class Profile extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	/**
@@ -49,7 +49,7 @@ public class Profile extends JPanel{
        }
        
        //If user is not a mod
-       else{
+		else {
     	
     	profile_panel = new  JPanel();
         profile_panel.setLayout(new  AbsoluteLayout());   

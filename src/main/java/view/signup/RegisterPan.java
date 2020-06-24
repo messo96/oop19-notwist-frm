@@ -36,8 +36,9 @@ import org.netbeans.lib.awtextra.AbsoluteConstraints;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
 
 import controller.database.UserImplDB;
+import view.gui.PreGui;
 
-public class RegisterPan extends JPanel {
+public class RegisterPan extends JPanel implements PreGui{
 	
 	private static final long serialVersionUID = 1L;
 	private UserImplDB dbuser = new UserImplDB();
@@ -241,10 +242,10 @@ public class RegisterPan extends JPanel {
 		signup_button.addActionListener(e -> {
 			if (!jCheckBox1.isSelected())
 				JOptionPane.showMessageDialog(null, "You have to accept our rules before sign up :0");
-			else if (this.getEmail().isBlank() || !this.getEmail().contains("@"))
+			else if (this.getMail().isBlank() || !this.getMail().contains("@"))
 				JOptionPane.showMessageDialog(null, "You must have a valid email");
 			else if (this.getUsername().isBlank() || this.getPassword().isBlank()
-					|| !dbuser.register(this.getUsername(), this.getPassword(), this.getEmail(), false)) {
+					|| !dbuser.register(this.getUsername(), this.getPassword(), this.getMail(), false)) {
 				JOptionPane.showMessageDialog(null, "You have to fill all the fields");
 			} else {
 				JOptionPane.showMessageDialog(null, "Account created succesfully! :) ");
@@ -278,14 +279,17 @@ public class RegisterPan extends JPanel {
 		}
 	}
 
+	@Override
 	public final String getUsername() {
 		return username_field.getText();
 	}
 
-	public final String getEmail() {
+	@Override
+	public final String getMail() {
 		return mail_field.getText();
 	}
 
+	@Override
 	public final String getPassword() {
 		//cause we use our crypt
 		return pssw_field.getText();
@@ -349,4 +353,6 @@ public class RegisterPan extends JPanel {
 	private JButton termsAccept;
 	private JButton terms_button;
 	private JSeparator jSeparator5;
+
+	
 }

@@ -10,7 +10,7 @@ import javax.swing.border.TitledBorder;
 
 import model.base.User;
 
-public class HistoryMsg extends JPanel{
+public class HistoryMsg extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 

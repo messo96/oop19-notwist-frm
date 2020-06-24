@@ -2,7 +2,7 @@ package user;
 
 import javax.swing.JPanel;
 
-public class UserComments extends JPanel{
+public class UserComments extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
 	/**

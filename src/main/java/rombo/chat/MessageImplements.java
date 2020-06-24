@@ -10,7 +10,7 @@ public class MessageImplements extends BaseAccountImplements implements Message 
 	private final String Message;
 	
 	/*Builders.*/	
-	public MessageImplements(int ID,Optional<String> UserName, String Message) {
+	public MessageImplements(int ID, Optional<String> UserName, String Message) {
 		super(ID, UserName);
 		this.Message = Message;
 	}

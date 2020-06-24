@@ -3,29 +3,27 @@ package rombo.new_class;
 import java.util.*;
 
 public class LikeAndDisLikeImplement implements LikeAndDisLike {
-	
-	
-	/*Fields*/
-	
+
+	/* Fields */
+
 	private final int IDUser;
 	private final int IDDiscuss;
 	private final Optional<Boolean> Like;
 	private final Optional<Boolean> DisLike;
-	
-	
-	/*builder*/
-	public LikeAndDisLikeImplement(int IDUser, int IDDiscuss,Optional<Boolean> Like, Optional<Boolean> DisLike) {
-		
+
+	/* builder */
+	public LikeAndDisLikeImplement(final int IDUser, final int IDDiscuss, final Optional<Boolean> Like,
+			final Optional<Boolean> DisLike) {
+
 		this.Like = Like;
 		this.DisLike = DisLike;
 		this.IDUser = IDUser;
 		this.IDDiscuss = IDDiscuss;
-		
+
 	}
 
-	
-	/*Return methods*/
-	
+	/* Return methods */
+
 	public int GetIDUser() {
 		return this.IDUser;
 	}
@@ -33,29 +31,22 @@ public class LikeAndDisLikeImplement implements LikeAndDisLike {
 	public int GetIDDiscussion() {
 		return this.IDDiscuss;
 	}
-	
-	
+
 	public Optional<Boolean> IsLike() {
-		if(this.Like.isPresent()) {
+		if (this.Like.isPresent()) {
 			return this.Like;
-		}
-		else {
+		} else {
 			return Optional.empty();
 		}
 	}
 
-	
 	public Optional<Boolean> IsDisLike() {
-		
-		if(this.DisLike.isPresent()) {
+
+		if (this.DisLike.isPresent()) {
 			return this.DisLike;
-		}
-		else {
+		} else {
 			return Optional.empty();
 		}
 	}
-
-	
-	
 
 }

@@ -14,7 +14,7 @@ import javax.swing.LayoutStyle;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.TitledBorder;
 
-public class NewMsg extends JPanel{
+public class NewMsg extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
 	/**

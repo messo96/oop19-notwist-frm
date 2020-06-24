@@ -16,7 +16,6 @@ import controller.database.UserImplDB;
 import model.base.Discussion;
 import model.base.User;
 
-
 /**
  *
  * @author emily
@@ -31,6 +30,7 @@ public class Topic_gui extends javax.swing.JFrame {
 	private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 	private LikeDislikeImplCommentsDB dblike = new LikeDislikeImplCommentsDB();
 	private CommentsImplDB dbcomments = new CommentsImplDB();
+
 	public Topic_gui(final Discussion discussion, final User user) {
 		this.user = user;
 		this.discussion = discussion;
@@ -137,10 +137,10 @@ public class Topic_gui extends javax.swing.JFrame {
 
 		like.setText(String.valueOf(dblike.getLikes(this.discussion.getIdDiscussion())));
 		like.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-		like.addActionListener(e ->{
-			if(!dblike.setLike(discussion.getIdDiscussion(), user.getId()))
+		like.addActionListener(e -> {
+			if (!dblike.setLike(discussion.getIdDiscussion(), user.getId())) {
 				JOptionPane.showMessageDialog(null, "You have still liked this");
-			else {
+			} else {
 				like.setText(String.valueOf(dblike.getLikes(this.discussion.getIdDiscussion())));
 				dislike.setText(String.valueOf(dblike.getDislikes(this.discussion.getIdDiscussion())));
 			}
@@ -148,15 +148,15 @@ public class Topic_gui extends javax.swing.JFrame {
 		dislike.setText(String.valueOf(dblike.getDislikes(this.discussion.getIdDiscussion())));
 		dislike.setToolTipText("");
 		dislike.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-		dislike.addActionListener(e ->{
-			if(!dblike.setDislike(discussion.getIdDiscussion(), user.getId()))
+		dislike.addActionListener(e -> {
+			if (!dblike.setDislike(discussion.getIdDiscussion(), user.getId())) {
 				JOptionPane.showMessageDialog(null, "You have still disliked this");
-			else {
+			} else {
 				like.setText(String.valueOf(dblike.getLikes(this.discussion.getIdDiscussion())));
 				dislike.setText(String.valueOf(dblike.getDislikes(this.discussion.getIdDiscussion())));
 			}
 		});
-		
+
 		menu.setText(".");
 		menu.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -165,11 +165,11 @@ public class Topic_gui extends javax.swing.JFrame {
 				+ " on: " + sdf.format(discussion.getData()));
 		date_user.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-		javax.swing.GroupLayout discussion_partLayout = new javax.swing.GroupLayout(discussion_part);
-		discussion_part.setLayout(discussion_partLayout);
-		discussion_partLayout.setHorizontalGroup(discussion_partLayout
+		javax.swing.GroupLayout discussionPartLayout = new javax.swing.GroupLayout(discussion_part);
+		discussion_part.setLayout(discussionPartLayout);
+		discussionPartLayout.setHorizontalGroup(discussionPartLayout
 				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(discussion_partLayout.createSequentialGroup().addContainerGap()
+				.addGroup(discussionPartLayout.createSequentialGroup().addContainerGap()
 						.addComponent(n_likes, javax.swing.GroupLayout.PREFERRED_SIZE, 23,
 								javax.swing.GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -182,9 +182,9 @@ public class Topic_gui extends javax.swing.JFrame {
 						.addComponent(date_user, javax.swing.GroupLayout.PREFERRED_SIZE, 110,
 								javax.swing.GroupLayout.PREFERRED_SIZE)
 						.addGap(47, 47, 47))
-				.addGroup(discussion_partLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-						.addGroup(discussion_partLayout.createSequentialGroup().addContainerGap()
-								.addGroup(discussion_partLayout
+				.addGroup(discussionPartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+						.addGroup(discussionPartLayout.createSequentialGroup().addContainerGap()
+								.addGroup(discussionPartLayout
 										.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
 										.addComponent(title_label, javax.swing.GroupLayout.DEFAULT_SIZE,
 												javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -194,22 +194,21 @@ public class Topic_gui extends javax.swing.JFrame {
 								.addComponent(menu, javax.swing.GroupLayout.PREFERRED_SIZE, 31,
 										javax.swing.GroupLayout.PREFERRED_SIZE)
 								.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))));
-		discussion_partLayout.setVerticalGroup(discussion_partLayout
+		discussionPartLayout.setVerticalGroup(discussionPartLayout
 				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, discussion_partLayout.createSequentialGroup()
+				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, discussionPartLayout.createSequentialGroup()
 						.addContainerGap(177, Short.MAX_VALUE)
-						.addGroup(discussion_partLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+						.addGroup(discussionPartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 								.addComponent(n_likes)
-								.addGroup(discussion_partLayout
+								.addGroup(discussionPartLayout
 										.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
 										.addComponent(like).addComponent(dislike))
 								.addComponent(date_user))
 						.addContainerGap())
-				.addGroup(discussion_partLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-						.addGroup(discussion_partLayout.createSequentialGroup().addContainerGap()
-								.addComponent(title_label)
+				.addGroup(discussionPartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+						discussionPartLayout.createSequentialGroup().addContainerGap().addComponent(title_label)
 								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-								.addGroup(discussion_partLayout
+								.addGroup(discussionPartLayout
 										.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 										.addComponent(menu, javax.swing.GroupLayout.PREFERRED_SIZE, 26,
 												javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -228,23 +227,24 @@ public class Topic_gui extends javax.swing.JFrame {
 			dbcomments.createComment(user.getId(), discussion.getIdDiscussion(), newcomment_area.getText());
 		});
 
-		javax.swing.GroupLayout new_commentLayout = new javax.swing.GroupLayout(new_comment);
-		new_comment.setLayout(new_commentLayout);
-		new_commentLayout.setHorizontalGroup(new_commentLayout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 760, Short.MAX_VALUE)
-				.addGroup(new_commentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-						.addGroup(new_commentLayout.createSequentialGroup().addContainerGap()
-								.addGroup(new_commentLayout
-										.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-										.addComponent(post_it, javax.swing.GroupLayout.PREFERRED_SIZE, 103,
-												javax.swing.GroupLayout.PREFERRED_SIZE)
-										.addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 740,
-												javax.swing.GroupLayout.PREFERRED_SIZE))
-								.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))));
-		new_commentLayout.setVerticalGroup(new_commentLayout
+		javax.swing.GroupLayout newCommentLayout = new javax.swing.GroupLayout(new_comment);
+		new_comment.setLayout(newCommentLayout);
+		newCommentLayout
+				.setHorizontalGroup(newCommentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+						.addGap(0, 760, Short.MAX_VALUE)
+						.addGroup(newCommentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+								.addGroup(newCommentLayout.createSequentialGroup().addContainerGap()
+										.addGroup(newCommentLayout
+												.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+												.addComponent(post_it, javax.swing.GroupLayout.PREFERRED_SIZE, 103,
+														javax.swing.GroupLayout.PREFERRED_SIZE)
+												.addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 740,
+														javax.swing.GroupLayout.PREFERRED_SIZE))
+										.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))));
+		newCommentLayout.setVerticalGroup(newCommentLayout
 				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 169, Short.MAX_VALUE)
-				.addGroup(new_commentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-						.addGroup(new_commentLayout.createSequentialGroup().addContainerGap()
+				.addGroup(newCommentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+						.addGroup(newCommentLayout.createSequentialGroup().addContainerGap()
 								.addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 119,
 										javax.swing.GroupLayout.PREFERRED_SIZE)
 								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -399,12 +399,12 @@ public class Topic_gui extends javax.swing.JFrame {
 
 		jScrollPane6.setViewportView(comment2);
 
-		javax.swing.GroupLayout discussion_panelLayout = new javax.swing.GroupLayout(discussion_panel);
-		discussion_panel.setLayout(discussion_panelLayout);
-		discussion_panelLayout.setHorizontalGroup(discussion_panelLayout
+		javax.swing.GroupLayout discussionPanelLayout = new javax.swing.GroupLayout(discussion_panel);
+		discussion_panel.setLayout(discussionPanelLayout);
+		discussionPanelLayout.setHorizontalGroup(discussionPanelLayout
 				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(discussion_panelLayout.createSequentialGroup().addContainerGap()
-						.addGroup(discussion_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(discussionPanelLayout.createSequentialGroup().addContainerGap()
+						.addGroup(discussionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 								.addComponent(discussion_part, javax.swing.GroupLayout.PREFERRED_SIZE,
 										javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
 								.addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 1080,
@@ -413,13 +413,13 @@ public class Topic_gui extends javax.swing.JFrame {
 										javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
 								.addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 919,
 										javax.swing.GroupLayout.PREFERRED_SIZE)
-								.addGroup(discussion_panelLayout.createSequentialGroup().addGap(9, 9, 9).addComponent(
+								.addGroup(discussionPanelLayout.createSequentialGroup().addGap(9, 9, 9).addComponent(
 										jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 919,
 										javax.swing.GroupLayout.PREFERRED_SIZE)))
 						.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
-		discussion_panelLayout
-				.setVerticalGroup(discussion_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-						.addGroup(discussion_panelLayout.createSequentialGroup().addContainerGap()
+		discussionPanelLayout
+				.setVerticalGroup(discussionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+						.addGroup(discussionPanelLayout.createSequentialGroup().addContainerGap()
 								.addComponent(discussion_part, javax.swing.GroupLayout.PREFERRED_SIZE,
 										javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
 								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -447,20 +447,20 @@ public class Topic_gui extends javax.swing.JFrame {
 		exit.setForeground(new java.awt.Color(0, 150, 0));
 		exit.setText("X");
 		exit.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mouseClicked(java.awt.event.MouseEvent evt) {
+			public void mouseClicked(final java.awt.event.MouseEvent evt) {
 				exitMouseClicked(evt);
 			}
 		});
 
-		javax.swing.GroupLayout commands_panelLayout = new javax.swing.GroupLayout(commands_panel);
-		commands_panel.setLayout(commands_panelLayout);
-		commands_panelLayout.setHorizontalGroup(
-				commands_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-						javax.swing.GroupLayout.Alignment.TRAILING, commands_panelLayout.createSequentialGroup()
+		javax.swing.GroupLayout commandsPanelLayout = new javax.swing.GroupLayout(commands_panel);
+		commands_panel.setLayout(commandsPanelLayout);
+		commandsPanelLayout.setHorizontalGroup(
+				commandsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+						javax.swing.GroupLayout.Alignment.TRAILING, commandsPanelLayout.createSequentialGroup()
 								.addContainerGap(231, Short.MAX_VALUE).addComponent(exit).addGap(19, 19, 19)));
-		commands_panelLayout
-				.setVerticalGroup(commands_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-						.addGroup(commands_panelLayout.createSequentialGroup().addContainerGap().addComponent(exit)
+		commandsPanelLayout
+				.setVerticalGroup(commandsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+						.addGroup(commandsPanelLayout.createSequentialGroup().addContainerGap().addComponent(exit)
 								.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 
 		drag_panel.add(commands_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 0, 260, 40));
@@ -498,19 +498,19 @@ public class Topic_gui extends javax.swing.JFrame {
 		search_button.setMaximumSize(new java.awt.Dimension(45, 25));
 		search_button.setMinimumSize(new java.awt.Dimension(45, 25));
 		search_button.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+			public void actionPerformed(final java.awt.event.ActionEvent evt) {
 				search_buttonActionPerformed(evt);
 			}
 		});
 
-		javax.swing.GroupLayout header_panelLayout = new javax.swing.GroupLayout(header_panel);
-		header_panel.setLayout(header_panelLayout);
-		header_panelLayout
-				.setHorizontalGroup(header_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-						.addGroup(header_panelLayout.createSequentialGroup().addGap(0, 0, Short.MAX_VALUE).addComponent(
+		javax.swing.GroupLayout headerPanelLayout = new javax.swing.GroupLayout(header_panel);
+		header_panel.setLayout(headerPanelLayout);
+		headerPanelLayout
+				.setHorizontalGroup(headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+						.addGroup(headerPanelLayout.createSequentialGroup().addGap(0, 0, Short.MAX_VALUE).addComponent(
 								jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 1080,
 								javax.swing.GroupLayout.PREFERRED_SIZE))
-						.addGroup(header_panelLayout.createSequentialGroup().addContainerGap()
+						.addGroup(headerPanelLayout.createSequentialGroup().addContainerGap()
 								.addComponent(homepage_button).addGap(30, 30, 30)
 								.addComponent(category_filter, javax.swing.GroupLayout.PREFERRED_SIZE,
 										javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -527,14 +527,14 @@ public class Topic_gui extends javax.swing.JFrame {
 								.addGap(18, 18, 18).addComponent(profile_icon, javax.swing.GroupLayout.PREFERRED_SIZE,
 										21, javax.swing.GroupLayout.PREFERRED_SIZE)
 								.addContainerGap()));
-		header_panelLayout.setVerticalGroup(header_panelLayout
+		headerPanelLayout.setVerticalGroup(headerPanelLayout
 				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, header_panelLayout.createSequentialGroup()
+				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headerPanelLayout.createSequentialGroup()
 						.addGap(45, 45, 45)
-						.addGroup(header_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+						.addGroup(headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 								.addComponent(new_discussion, javax.swing.GroupLayout.DEFAULT_SIZE,
 										javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addGroup(header_panelLayout
+								.addGroup(headerPanelLayout
 										.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
 										.addComponent(homepage_button)
 										.addComponent(category_filter, javax.swing.GroupLayout.PREFERRED_SIZE,
@@ -565,7 +565,7 @@ public class Topic_gui extends javax.swing.JFrame {
 		pack();
 		setVisible(true);
 
-	}// </editor-fold>//GEN-END:initComponents
+	} // </editor-fold>//GEN-END:initComponents
 
 	// ####################
 	// #################### NOTWIST CUSTOM
@@ -573,7 +573,7 @@ public class Topic_gui extends javax.swing.JFrame {
 
 	// fill Discussion field
 
-	public void start() {
+	public final void start() {
 		discussion_area.setText(discussion.getDescription());
 		this.title_label.setText(discussion.getTitle());
 		upladComments();
@@ -584,11 +584,11 @@ public class Topic_gui extends javax.swing.JFrame {
 
 	}
 
-	private void exitMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_exitMouseClicked
+	private void exitMouseClicked(final java.awt.event.MouseEvent evt) { // GEN-FIRST:event_exitMouseClicked
 		dispose();
 	}// GEN-LAST:event_exitMouseClicked
 
-	private void search_buttonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_search_buttonActionPerformed
+	private void search_buttonActionPerformed(final java.awt.event.ActionEvent evt) { // GEN-FIRST:event_search_buttonActionPerformed
 		// TODO add your handling code here:
 	}
 
@@ -610,7 +610,7 @@ public class Topic_gui extends javax.swing.JFrame {
 
 //GEN-LAST:event_search_buttonActionPerformed
 
-	private void post_itActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_post_itActionPerformed
+	private void post_itActionPerformed(java.awt.event.ActionEvent evt) { // GEN-FIRST:event_post_itActionPerformed
 		// TODO add your handling code here:
 	}// GEN-LAST:event_post_itActionPerformed
 

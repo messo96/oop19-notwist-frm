@@ -5,7 +5,7 @@ import javax.swing.JPanel;
 import model.base.User;
 
 
-public class MessagePan extends JPanel{
+public class MessagePan extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	/**

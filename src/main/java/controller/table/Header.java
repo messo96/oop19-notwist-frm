@@ -92,7 +92,7 @@ public class Header extends JPanel {
 		
 		addbtn.addActionListener(e -> {
 			if(!newCat.getText().isBlank() && !dbcategory.createCategory(newCat.getText()))
-				JOptionPane.showMessageDialog(null, "Something goes wrong! :(" );
+				JOptionPane.showMessageDialog(null, "Something goes wrong! :(");
 			else {
 				fillTable(catTable);
 				newCat.setText("");
@@ -243,7 +243,7 @@ public class Header extends JPanel {
 	}
 
 	private void fillTable(JTable table) {
-		model = new DefaultTableModel(new Object[] {"Nome"},0);
+		model = new DefaultTableModel(new Object[] { "Nome" }, 0);
 		model.getDataVector().removeAllElements();
 		for (CategoryImpl c : dbcategory.getAll()) {
 			model.addRow(new Object[] { c.getName() });
