@@ -1,6 +1,7 @@
 package controller.database;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import model.base.Report;
@@ -10,24 +11,24 @@ import model.database.ReportDB;
  * 
  *
  */
-public class ReportImplDB {
-	
+public class ReportImplDiscussionDB {
+
 	private ReportDB dbr = new ReportDB();
 
 	// list of all report in DB
 	public final List<Report> getAll() {
-		return this.dbr.read();
+		return this.dbr.read().stream().filter(r -> r.getIdDiscuss().isPresent()).collect(Collectors.toList());
 	}
 
 	// list of all report of a user
 	public final List<Report> getAll(final Integer idUser) {
-		return this.dbr.read().stream().filter(R -> R.getIdUser() == idUser).collect(Collectors.toList());
+		return this.getAll().stream().filter(R -> R.getIdUser() == idUser).collect(Collectors.toList());
 	}
 
 	// crea nuova segnalazione
 	public final boolean createReport(final Integer idUser, final Integer idDiscussion, final String description) {
 
-		return this.dbr.create(new Report(0, idDiscussion, idUser, description, false));
+		return this.dbr.create(new Report(0, Optional.of(idDiscussion), Optional.empty(), idUser, description, false));
 
 	}
 
@@ -40,10 +41,6 @@ public class ReportImplDB {
 	// rimuovi segnalazione
 	public final boolean removeReport(final Integer idReport) {
 		return this.dbr.delete(idReport);
-	}
-
-	/* Builder senza argometni */
-	public ReportImplDB() {
 	}
 
 }

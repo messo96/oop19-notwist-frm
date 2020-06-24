@@ -5,12 +5,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import model.Log;
 import model.base.Report;
 
 public class ReportDB extends ManagerImplDB implements Dao<Report> {
-	
+
 	private Log log = Log.getInstance();
 	private String query;
 	private PreparedStatement prepared;
@@ -26,7 +27,9 @@ public class ReportDB extends ManagerImplDB implements Dao<Report> {
 		try {
 			rs = open().executeQuery(query);
 			while (rs.next()) {
-//				list.add(new Report("idUser, idDiscussion, description, pending(bool)");
+				list.add(new Report(rs.getInt("idReport"), Optional.of(rs.getInt("idDiscussion")),
+						Optional.of(rs.getInt("idComment")), rs.getInt("idUser"), rs.getString("description"),
+						rs.getBoolean("pending")));
 			}
 			return list;
 		} catch (Exception e) {

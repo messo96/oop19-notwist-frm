@@ -33,7 +33,7 @@ public class Profile extends JPanel {
     	   	profile_panel = new JPanel();
             profile_panel.setLayout(new AbsoluteLayout());   
             
-            reportedDiscussions = new UserDiscussions();
+            reportedDiscussions = new UserDiscussions(user);
             profile_panel.add(reportedDiscussions, new AbsoluteConstraints(10, 0, -1, -1));
             
             myinfos_panel = new Infos(user);
@@ -54,7 +54,7 @@ public class Profile extends JPanel {
     	profile_panel = new  JPanel();
         profile_panel.setLayout(new  AbsoluteLayout());   
         
-        activities_panel = new UserDiscussions();
+        activities_panel = new UserDiscussions(user);
         profile_panel.add(activities_panel, new  AbsoluteConstraints(10, 0,  -1, -1));
         
 
