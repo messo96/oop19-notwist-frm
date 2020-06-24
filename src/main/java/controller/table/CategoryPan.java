@@ -18,7 +18,6 @@ import javax.swing.border.TitledBorder;
 
 import controller.database.CategoryImplDB;
 import model.Loader;
-import model.base.Category;
 import model.base.CategoryImpl;
 import model.database.CategoryDB;
 import view.TableDiscussion;

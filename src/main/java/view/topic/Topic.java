@@ -57,8 +57,8 @@ public class Topic extends JPanel {
 		discussionArea = new JEditorPane();
 		titleLabel = new JLabel();
 		nLikes = new JLabel();
-		Icon yes = new ImageIcon(this.getClass().getClassLoader().getResource("img/like.png"));
-		Icon no = new ImageIcon(this.getClass().getClassLoader().getResource("img/dislike.png"));
+		Icon yes = new ImageIcon(this.getClass().getClassLoader().getResource("img/Ilike.png"));
+		Icon no = new ImageIcon(this.getClass().getClassLoader().getResource("img/Idislike.png"));
 		like = new JButton(yes);
 		dislike = new JButton(no);
 		dateUser = new JLabel();
@@ -79,6 +79,7 @@ public class Topic extends JPanel {
 		titleLabel.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
 
 		nLikes.setFont(new Font("Tahoma", 0, 14)); // NOI18N
+		nLikes.setHorizontalAlignment(SwingConstants.CENTER);
 		nLikes.setText(String.valueOf(
 				dblike.getLikes(discussion.getIdDiscussion()) - dblike.getDislikes(discussion.getIdDiscussion())));
 		nLikes.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
@@ -114,9 +115,10 @@ public class Topic extends JPanel {
 						.addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 720, GroupLayout.PREFERRED_SIZE)
 						.addComponent(titleLabel)
 
-						.addGroup(discussionPartLayout.createSequentialGroup().addComponent(nLikes)
-								.addComponent(like, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
-								.addComponent(dislike, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
+						.addGroup(discussionPartLayout.createSequentialGroup()
+								.addComponent(nLikes, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
+								.addComponent(like, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+								.addComponent(dislike, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
 
 						.addComponent(dateUser, GroupLayout.Alignment.TRAILING))
 
@@ -132,8 +134,8 @@ public class Topic extends JPanel {
 
 				.addGroup(
 						discussionPartLayout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(nLikes)
-								.addComponent(like, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
-								.addComponent(dislike, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
+								.addComponent(like, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+								.addComponent(dislike, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 								.addComponent(dateUser)));
 
 		discussionPanel.add(discussionPart, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 1080, -1));

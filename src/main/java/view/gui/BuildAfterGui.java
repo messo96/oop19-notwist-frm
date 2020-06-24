@@ -3,6 +3,8 @@ package view.gui;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -10,8 +12,6 @@ import java.awt.event.MouseMotionAdapter;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
 
 import org.netbeans.lib.awtextra.AbsoluteConstraints;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
@@ -21,7 +21,6 @@ import model.Loader;
 import model.base.User;
 import view.TableDiscussion;
 import view.profile.Profile;
-import view.topic.TopicPan;
 import view.topic.newtopic.NewTopicPan;
 import view.util.UpperPan;
 
@@ -42,6 +41,8 @@ public class BuildAfterGui extends JFrame {
 	}
 
 	private void initComponents(final TableDiscussion tableDiscussion) {
+        Image icon = Toolkit.getDefaultToolkit().getImage(this.getClass().getClassLoader().getResource("img/icon.jpg"));    
+        setIconImage(icon);   
 		loader.start();
 		bodyHolder = new JPanel(); // Holder for body.
 
@@ -131,7 +132,6 @@ public class BuildAfterGui extends JFrame {
 	private Header header_panel;
 	private NewTopicPan newtopic_panel;
 	private Profile profile_panel;
-	private TopicPan topic_panel;
 
 	
 }

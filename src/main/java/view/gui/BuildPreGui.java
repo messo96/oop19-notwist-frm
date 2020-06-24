@@ -8,11 +8,7 @@ import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
-import java.awt.image.BufferedImage;
-import java.net.URL;
 
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -37,23 +33,23 @@ public class BuildPreGui extends JFrame {
     private void initComponents() {
 
         panelHolder = new JPanel(); //Holder for Login and Register
-       
+
         //JFrame properties.
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationByPlatform(true);
         setUndecorated(true);
         setResizable(false);
         getContentPane().setLayout(new AbsoluteLayout());
-   
 
-        Image icon = Toolkit.getDefaultToolkit().getImage(this.getClass().getClassLoader().getResource("img/font_test_1.png"));    
+
+        Image icon = Toolkit.getDefaultToolkit().getImage(this.getClass().getClassLoader().getResource("img/icon.jpg"));    
         setIconImage(icon);   
         //Get upper panel and add it to the main frame.
         upper_panel = new UpperPan();
         upper_panel.setVisible(true);
-        
+
         getContentPane().add(upper_panel, new AbsoluteConstraints(510, 0, 420, 40));
-        
+
         //Card space.
         panelHolder.setLayout(new CardLayout());
 
@@ -61,7 +57,7 @@ public class BuildPreGui extends JFrame {
         login_panel = new LoginPan();
         login_panel.setVisible(true);
         panelHolder.add(login_panel, "login");
-     
+
         //Add register to card.
         register_panel = new RegisterPan();
         register_panel.setVisible(true);
