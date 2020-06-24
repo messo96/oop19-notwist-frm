@@ -16,57 +16,63 @@ import javax.swing.border.TitledBorder;
 
 public class TipsPan extends JPanel {
 
+	/**
+	 * Creating tips panel by importing a txt.
+	 */
+	private static final long serialVersionUID = 1L;
+
+
 	public TipsPan() {
 
 		drawPan();
 	}
 
 	private void drawPan() {
-		markups_panel = new JPanel();
-		jScrollPane4 = new JScrollPane();
-		tips_panel = new JTextArea();
+		markupsPanel = new JPanel();
+		tipsScroll = new JScrollPane();
+		tipsPanel = new JTextArea();
 
-		markups_panel.setBorder(
-				BorderFactory.createTitledBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, new Color(0, 0, 0)),
+		markupsPanel.setBorder(
+				BorderFactory.createTitledBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, new Color(194, 192, 192)),
 						"Tips", TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION, new Font("Tahoma", 0, 14))); // NOI18N
 
-		jScrollPane4.setEnabled(false);
+		tipsScroll.setEnabled(false);
 
 		importTips();
-		tips_panel.setColumns(20);
-		tips_panel.setRows(5);
-		tips_panel.setWrapStyleWord(true);
-		tips_panel.setLineWrap(true);
-		tips_panel.setEnabled(false);
-		jScrollPane4.setViewportView(tips_panel);
+		tipsPanel.setColumns(20);
+		tipsPanel.setRows(5);
+		tipsPanel.setWrapStyleWord(true);
+		tipsPanel.setLineWrap(true);
+		tipsPanel.setEnabled(false);
+		tipsScroll.setViewportView(tipsPanel);
 
-		GroupLayout markups_panelLayout = new GroupLayout(markups_panel);
-		markups_panel.setLayout(markups_panelLayout);
-		markups_panelLayout.setHorizontalGroup(markups_panelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-				.addGroup(markups_panelLayout.createSequentialGroup().addContainerGap()
-						.addComponent(jScrollPane4, GroupLayout.PREFERRED_SIZE, 318, GroupLayout.PREFERRED_SIZE)
+		GroupLayout markupsPanelLayout = new GroupLayout(markupsPanel);
+		markupsPanel.setLayout(markupsPanelLayout);
+		markupsPanelLayout.setHorizontalGroup(markupsPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addGroup(markupsPanelLayout.createSequentialGroup().addContainerGap()
+						.addComponent(tipsScroll, GroupLayout.PREFERRED_SIZE, 318, GroupLayout.PREFERRED_SIZE)
 						.addContainerGap()));
-		markups_panelLayout.setVerticalGroup(markups_panelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-				.addGroup(markups_panelLayout.createSequentialGroup().addContainerGap()
-						.addComponent(jScrollPane4, GroupLayout.PREFERRED_SIZE, 163, GroupLayout.PREFERRED_SIZE)
+		markupsPanelLayout.setVerticalGroup(markupsPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addGroup(markupsPanelLayout.createSequentialGroup().addContainerGap()
+						.addComponent(tipsScroll, GroupLayout.PREFERRED_SIZE, 163, GroupLayout.PREFERRED_SIZE)
 						.addContainerGap()));
 
-		add(markups_panel);
+		add(markupsPanel);
 
 	}
 	
-	private JScrollPane jScrollPane4;
-	private JPanel markups_panel;
-	private JTextArea tips_panel;
+	private JScrollPane tipsScroll;
+	private JPanel markupsPanel;
+	private JTextArea tipsPanel;
 
 	private void importTips() {
 		BufferedReader buf;
 		InputStreamReader in = new InputStreamReader(this.getClass().getResourceAsStream("/docs/Tips.txt"));
 		try {
 			buf = new BufferedReader(in);
-			tips_panel.read(buf, null);
+			tipsPanel.read(buf, null);
 		} catch (IOException e) {
-			System.out.println("File Tips.txt not found! ");
+			System.out.println("File Tips.txt non trovato! ");
 			e.printStackTrace();
 		}
 	}

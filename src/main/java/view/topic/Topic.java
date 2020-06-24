@@ -32,10 +32,6 @@ import controller.database.ILikeDislikeDB;
 import model.base.Discussion;
 import model.base.User;
 
-/**
- *
- * @author emily
- */
 public class Topic extends JPanel {
 
 	/**
@@ -48,19 +44,17 @@ public class Topic extends JPanel {
 	private ILikeDislikeDB dblike = new LikeDislikeImplDiscussionDB();
 	private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 
-	public Topic(Discussion disc, User user) {
+	public Topic(final Discussion disc, final User user) {
 		this.user = user;
 		this.discussion = disc;
 		initComponents();
 
 	}
 
-	@SuppressWarnings("unchecked")
-
 	private void initComponents() {
 
 		discussion_panel = new JPanel();
-		discussion_part = new JPanel();
+		discussionPart = new JPanel();
 		jScrollPane1 = new JScrollPane();
 		discussion_area = new JEditorPane();
 		title_label = new JLabel();
@@ -126,17 +120,17 @@ public class Topic extends JPanel {
 
 		date_user.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
 
-		GroupLayout discussion_partLayout = new GroupLayout(discussion_part);
+		GroupLayout discussionPartLayout = new GroupLayout(discussionPart);
 
-		discussion_partLayout.setAutoCreateContainerGaps(true);
-		discussion_partLayout.setAutoCreateGaps(true);
-		discussion_part.setLayout(discussion_partLayout);
-		discussion_partLayout.setHorizontalGroup(discussion_partLayout.createSequentialGroup()
-				.addGroup(discussion_partLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+		discussionPartLayout.setAutoCreateContainerGaps(true);
+		discussionPartLayout.setAutoCreateGaps(true);
+		discussionPart.setLayout(discussionPartLayout);
+		discussionPartLayout.setHorizontalGroup(discussionPartLayout.createSequentialGroup()
+				.addGroup(discussionPartLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
 						.addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 720, GroupLayout.PREFERRED_SIZE)
 						.addComponent(title_label)
 
-						.addGroup(discussion_partLayout.createSequentialGroup().addComponent(n_likes)
+						.addGroup(discussionPartLayout.createSequentialGroup().addComponent(n_likes)
 								.addComponent(like, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
 								.addComponent(dislike, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
 
@@ -144,21 +138,21 @@ public class Topic extends JPanel {
 
 				.addComponent(menu, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE));
 
-		discussion_partLayout.setVerticalGroup(discussion_partLayout.createSequentialGroup()
-				.addGroup(discussion_partLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+		discussionPartLayout.setVerticalGroup(discussionPartLayout.createSequentialGroup()
+				.addGroup(discussionPartLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 						.addComponent(title_label))
 
-				.addGroup(discussion_partLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+				.addGroup(discussionPartLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 						.addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
 						.addComponent(menu, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
 
 				.addGroup(
-						discussion_partLayout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(n_likes)
+						discussionPartLayout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(n_likes)
 								.addComponent(like, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
 								.addComponent(dislike, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
 								.addComponent(date_user)));
 
-		discussion_panel.add(discussion_part, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 1080, -1));
+		discussion_panel.add(discussionPart, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 1080, -1));
 
 		add(discussion_panel);
 	}
@@ -167,7 +161,7 @@ public class Topic extends JPanel {
 	private JLabel title_label;
 	private JLabel date_user;
 	private JPanel discussion_panel;
-	private JPanel discussion_part;
+	private JPanel discussionPart;
 	private JButton dislike;
 	private JScrollPane jScrollPane1;
 	private JButton like;

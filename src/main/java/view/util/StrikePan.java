@@ -9,7 +9,6 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -27,10 +26,6 @@ import javax.swing.table.DefaultTableModel;
 import controller.database.StrikeImplDB;
 import controller.database.UserImplDB;
 import model.base.User;
-import model.database.StrikeDB;
-import model.database.StrikeDB;
-import model.database.UserDB;
-import model.database.Dao;
 
 public class StrikePan extends JPanel {
 	/*
@@ -40,7 +35,7 @@ public class StrikePan extends JPanel {
 	private UserImplDB dbuser = new UserImplDB();
 	private StrikeImplDB dbstrike = new StrikeImplDB();
 	private User user;
-	private final Integer MAX_STRIKE = 3;
+	private final Integer MAX_STRIKE = 3; //max strikes for a user
 
 	public StrikePan() {
 		draw();
@@ -52,13 +47,14 @@ public class StrikePan extends JPanel {
 		usernamestrikable = new JTextField();
 		nstrike = new JLabel();
 		submitstrike = new JButton();
-		jScrollPane4 = new JScrollPane();
-		strikes_panel = new JPanel();
-		strikes_table = new JTable();
-		new_strike = new JButton();
+		tableScroll = new JScrollPane();
+		strikesPanel = new JPanel();
+		strikesTable = new JTable();
+		newStrike = new JButton();
 		plus = new JButton();
 		minus = new JButton();
-
+		
+		//Strike Dialog
 		strikedialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		strikedialog.setTitle("Modifica uno strike");
 		Image icon = Toolkit.getDefaultToolkit()
@@ -94,6 +90,7 @@ public class StrikePan extends JPanel {
 				nstrike.setText(String.valueOf(strike - 1));
 			}
 		});
+
 		GroupLayout strikedialogLayout = new GroupLayout(strikedialog.getContentPane());
 		strikedialog.getContentPane().setLayout(strikedialogLayout);
 		strikedialogLayout.setHorizontalGroup(strikedialogLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -123,69 +120,71 @@ public class StrikePan extends JPanel {
 								.addComponent(minus, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
 						.addContainerGap(19, Short.MAX_VALUE)));
 
-		strikes_panel.setBorder(BorderFactory.createTitledBorder(
-				BorderFactory.createMatteBorder(2, 2, 2, 2, new Color(0, 0, 0)), "Strikes",
+		strikesPanel.setBorder(BorderFactory.createTitledBorder(
+				BorderFactory.createMatteBorder(2, 2, 2, 2, new Color(194, 192, 192)), "Strikes",
 				TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, new Font("Tahoma", 0, 14))); // NOI18N
 
-		model_strikes = new DefaultTableModel(new Object[] { "ID", "Username", "Strikes" }, 0);
-		strikes_table.setModel(model_strikes);
+		//Strike table
+		modelStrikes = new DefaultTableModel(new Object[] { "ID", "Username", "Strikes" }, 0);
+		strikesTable.setModel(modelStrikes);
 
-		jScrollPane4.setViewportView(strikes_table);
-		if (strikes_table.getColumnModel().getColumnCount() > 0) {
-			strikes_table.getColumnModel().getColumn(0).setResizable(false);
-			strikes_table.getColumnModel().getColumn(1).setResizable(false);
-			strikes_table.getColumnModel().getColumn(2).setResizable(false);
+		tableScroll.setViewportView(strikesTable);
+		if (strikesTable.getColumnModel().getColumnCount() > 0) {
+			strikesTable.getColumnModel().getColumn(0).setResizable(false);
+			strikesTable.getColumnModel().getColumn(1).setResizable(false);
+			strikesTable.getColumnModel().getColumn(2).setResizable(false);
 
 		}
-		strikes_table.setEnabled(true);
-		strikes_table.setFocusable(true);
-		strikes_table.setOpaque(false);
-		strikes_table.getColumnModel().getColumn(0).setPreferredWidth(5);
-		strikes_table.getColumnModel().getColumn(1).setPreferredWidth(90);
-		strikes_table.getColumnModel().getColumn(2).setPreferredWidth(5);
+		strikesTable.setEnabled(true);
+		strikesTable.setFocusable(true);
+		strikesTable.setOpaque(false);
+		strikesTable.getColumnModel().getColumn(0).setPreferredWidth(5);
+		strikesTable.getColumnModel().getColumn(1).setPreferredWidth(90);
+		strikesTable.getColumnModel().getColumn(2).setPreferredWidth(5);
 
 		refreshTable();
 		DefaultTableCellRenderer center = new DefaultTableCellRenderer();
 		center.setHorizontalAlignment(JLabel.CENTER);
-		strikes_table.getColumnModel().getColumn(1).setCellRenderer(center);
-		new_strike.setText("Aggiungi o togli uno strike");
-		new_strike.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent evt) {
-				new_strikeMouseClicked(evt);
+		strikesTable.getColumnModel().getColumn(1).setCellRenderer(center);
+		newStrike.setText("Aggiungi o togli uno strike");
+		newStrike.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(final MouseEvent evt) {
+				newStrikeMouseClicked(evt);
 			}
 		});
 
-		GroupLayout strikes_panelLayout = new GroupLayout(strikes_panel);
-		strikes_panel.setLayout(strikes_panelLayout);
-		strikes_panelLayout.setHorizontalGroup(strikes_panelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-				.addGroup(strikes_panelLayout.createSequentialGroup().addContainerGap()
-						.addGroup(strikes_panelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-								.addComponent(new_strike, GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
-								.addComponent(jScrollPane4, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+		GroupLayout strikesPanelLayout = new GroupLayout(strikesPanel);
+		strikesPanel.setLayout(strikesPanelLayout);
+		strikesPanelLayout.setHorizontalGroup(strikesPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addGroup(strikesPanelLayout.createSequentialGroup().addContainerGap()
+						.addGroup(strikesPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+								.addComponent(newStrike, GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
+								.addComponent(tableScroll, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
 						.addContainerGap()));
-		strikes_panelLayout.setVerticalGroup(strikes_panelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-				.addGroup(strikes_panelLayout.createSequentialGroup()
-						.addComponent(jScrollPane4, GroupLayout.PREFERRED_SIZE, 241, GroupLayout.PREFERRED_SIZE)
+		strikesPanelLayout.setVerticalGroup(strikesPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addGroup(strikesPanelLayout.createSequentialGroup()
+						.addComponent(tableScroll, GroupLayout.PREFERRED_SIZE, 241, GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
-						.addComponent(new_strike).addContainerGap()));
+						.addComponent(newStrike).addContainerGap()));
 
-		add(strikes_panel);
+		add(strikesPanel);
 	}
 
 	private void refreshTable() {
-		model_strikes.getDataVector().removeAllElements();
-		for (User u : dbuser.getAll())
-			model_strikes.addRow(new Object[] { u.getId(), u.getUsername(), dbstrike.getStrike(u.getId()) });
-		strikes_table.setModel(model_strikes);
-		strikes_table.revalidate();
+		modelStrikes.getDataVector().removeAllElements();
+		for (User u : dbuser.getAll()) {
+			modelStrikes.addRow(new Object[] { u.getId(), u.getUsername(), dbstrike.getStrike(u.getId()) });
+		strikesTable.setModel(modelStrikes);
+		strikesTable.revalidate();
+		}
 	}
 
-	private void new_strikeMouseClicked(MouseEvent evt) {
-		if (strikes_table.getSelectionModel().isSelectionEmpty())
-			JOptionPane.showMessageDialog(null, "You have to select a row in the table before");
-		else {
+	private void newStrikeMouseClicked(final MouseEvent evt) {
+		if (strikesTable.getSelectionModel().isSelectionEmpty()) {
+			JOptionPane.showMessageDialog(null, "Seleziona una riga della tabella");
+		} else {
 			user = dbuser.getUser(
-					Integer.parseInt(strikes_table.getModel().getValueAt(strikes_table.getSelectedRow(), 0).toString()))
+					Integer.parseInt(strikesTable.getModel().getValueAt(strikesTable.getSelectedRow(), 0).toString()))
 					.get();
 			usernamestrikable.setText(user.getUsername());
 			nstrike.setText(dbstrike.getStrike(user.getId()).toString());
@@ -202,15 +201,15 @@ public class StrikePan extends JPanel {
 
 	}
 
-	private JScrollPane jScrollPane4;
-	private JButton new_strike;
+	private JScrollPane tableScroll;
+	private JButton newStrike;
 	private JButton plus;
 	private JButton minus;
 	private JLabel nstrike;
 	private JDialog strikedialog;
-	private JPanel strikes_panel;
-	private JTable strikes_table;
+	private JPanel strikesPanel;
+	private JTable strikesTable;
 	private JButton submitstrike;
 	private JTextField usernamestrikable;
-	private DefaultTableModel model_strikes;
+	private DefaultTableModel modelStrikes;
 }

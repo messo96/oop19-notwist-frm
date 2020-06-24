@@ -2,10 +2,16 @@ package view.topic.comment;
 
 import java.awt.Color;
 
+import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
+import javax.swing.JButton;
 import javax.swing.JEditorPane;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+
+import org.netbeans.lib.awtextra.AbsoluteConstraints;
+import org.netbeans.lib.awtextra.AbsoluteLayout;
 
 import controller.database.CommentsImplDB;
 
@@ -21,65 +27,60 @@ public class Newcomment extends JPanel {
 
 	private CommentsImplDB dbcomment = new CommentsImplDB();
 
-	public Newcomment(final Integer idDiscussion, Integer idUser) {
+	public Newcomment(final Integer idDiscussion, final Integer idUser) {
 		this.idDiscussion = idDiscussion;
 		this.idUser = idUser;
 		initComponents();
 
 	}
 
-	@SuppressWarnings("unchecked")
-
 	private void initComponents() {
 		space = new JPanel();
-		new_comment = new javax.swing.JPanel();
-		jScrollPane2 = new javax.swing.JScrollPane();
-		newcomment_area = new javax.swing.JEditorPane();
-		post_it = new javax.swing.JButton();
+		newComment = new JPanel();
+		jScrollPane2 = new  JScrollPane();
+		newcommentArea = new  JEditorPane();
+		postIt = new  JButton();
 
-		space.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+		space.setLayout(new  AbsoluteLayout());
 
-		newcomment_area.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-		jScrollPane2.setViewportView(newcomment_area);
+		newcommentArea.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
+		jScrollPane2.setViewportView(newcommentArea);
 
-		post_it.setText("Commenta");
-		post_it.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-		post_it.addActionListener(e -> {
-			if(dbcomment.createComment(idDiscussion, idUser, newcomment_area.getText()))
+		postIt.setText("Commenta");
+		postIt.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
+		postIt.addActionListener(e -> {
+			if (dbcomment.createComment(idDiscussion, idUser, newcommentArea.getText())) {
 				JOptionPane.showMessageDialog(null, "Comment create successfully");
-			else
+			} else {
 				JOptionPane.showMessageDialog(null, "Error");
-
-			//refreshare i commenti aggiungendo quello appena creato
+			}
 		});
 
-		javax.swing.GroupLayout new_commentLayout = new javax.swing.GroupLayout(new_comment);
+		 GroupLayout newCommentLayout = new  GroupLayout(newComment);
 
-		new_commentLayout.setAutoCreateContainerGaps(true);
-		new_commentLayout.setAutoCreateGaps(true);
-		new_comment.setLayout(new_commentLayout);
-		new_commentLayout.setHorizontalGroup(new_commentLayout.createSequentialGroup()
-				.addGroup(new_commentLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+		newCommentLayout.setAutoCreateContainerGaps(true);
+		newCommentLayout.setAutoCreateGaps(true);
+		newComment.setLayout(newCommentLayout);
+		newCommentLayout.setHorizontalGroup(newCommentLayout.createSequentialGroup()
+				.addGroup(newCommentLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
 						.addComponent(jScrollPane2, GroupLayout.PREFERRED_SIZE, 720, GroupLayout.PREFERRED_SIZE)
-						.addComponent(post_it, GroupLayout.Alignment.TRAILING)));
+						.addComponent(postIt, GroupLayout.Alignment.TRAILING)));
 
-		new_commentLayout.setVerticalGroup(new_commentLayout.createSequentialGroup()
+		newCommentLayout.setVerticalGroup(newCommentLayout.createSequentialGroup()
 
-				.addGroup(new_commentLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+				.addGroup(newCommentLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 						.addComponent(jScrollPane2, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE))
-				.addGroup(new_commentLayout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(post_it)));
+				.addGroup(newCommentLayout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(postIt)));
 
-		space.add(new_comment, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 1080, -1));
+		space.add(newComment, new  AbsoluteConstraints(20, 0, 1080, -1));
 		add(space);
 
 	}
 
-	private javax.swing.JScrollPane jScrollPane2;
-
+	private  JScrollPane jScrollPane2;
 	private JPanel space;
-	private javax.swing.JPanel new_comment;
-
-	private JEditorPane newcomment_area;
-	private javax.swing.JButton post_it;
+	private  JPanel newComment;
+	private JEditorPane newcommentArea;
+	private  JButton postIt;
 
 }

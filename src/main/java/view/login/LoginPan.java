@@ -47,108 +47,108 @@ public class LoginPan extends JPanel implements PreGui {
 
 	private void drawComp() {
 
-		jSeparator2 = new JSeparator();
+		sep2 = new JSeparator();
 
-		login_panel = new JPanel();
-		pssw_label = new JLabel();
-		jSeparator1 = new JSeparator();
-		mail_field = new JTextField();
-		jSeparator2 = new JSeparator();
-		pssw_field = new JPasswordField();
-		mail_label = new JLabel();
-		login_button = new JButton();
-		signup_label = new JEditorPane();
+		loginPanel = new JPanel();
+		psswLabel = new JLabel();
+		sep1 = new JSeparator();
+		mailField = new JTextField();
+		psswField = new JPasswordField();
+		mailLabel = new JLabel();
+		loginBtn = new JButton();
+		signupLabel = new JEditorPane();
 
 		// <------------Draw login panel------------------->
-		login_panel.setLayout(new AbsoluteLayout());
+		loginPanel.setLayout(new AbsoluteLayout());
 
 		// Mail section
-		mail_label.setFont(new Font("Tahoma", 0, 14)); // NOI18N
-		mail_label.setText("Mail");
-		mail_label.setToolTipText("Utilizza una mail valida!");
-		login_panel.add(mail_label, new AbsoluteConstraints(60, 80, -1, -1));
+		mailLabel.setFont(new Font("Tahoma", 0, 14)); // NOI18N
+		mailLabel.setText("Mail");
+		mailLabel.setToolTipText("Utilizza una mail valida!");
+		loginPanel.add(mailLabel, new AbsoluteConstraints(60, 80, -1, -1));
 
-		mail_field.setFont(new Font("Tahoma", 0, 14)); // NOI18N
-		login_panel.add(mail_field, new AbsoluteConstraints(60, 110, 290, 25));
+		mailField.setFont(new Font("Tahoma", 0, 14)); // NOI18N
+		loginPanel.add(mailField, new AbsoluteConstraints(60, 110, 290, 25));
 
 		// Separator
-		jSeparator1.setBackground(new Color(0, 0, 0));
-		jSeparator1.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, new Color(194, 192, 192)));
-		jSeparator1.setMinimumSize(new Dimension(30, 20));
-		jSeparator1.setPreferredSize(new Dimension(30, 20));
-		login_panel.add(jSeparator1, new AbsoluteConstraints(60, 140, 290, -1));
+		sep1.setBackground(new Color(0, 0, 0));
+		sep1.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, new Color(194, 192, 192)));
+		sep1.setMinimumSize(new Dimension(30, 20));
+		sep1.setPreferredSize(new Dimension(30, 20));
+		loginPanel.add(sep1, new AbsoluteConstraints(60, 140, 290, -1));
 
 		// Password section
-		pssw_label.setFont(new Font("Tahoma", 0, 14)); // NOI18N
-		pssw_label.setText("Password");
-		pssw_label.setToolTipText("Utilizza una password sicura!");
-		login_panel.add(pssw_label, new AbsoluteConstraints(60, 170, -1, -1));
+		psswLabel.setFont(new Font("Tahoma", 0, 14)); // NOI18N
+		psswLabel.setText("Password");
+		psswLabel.setToolTipText("Utilizza una password sicura!");
+		loginPanel.add(psswLabel, new AbsoluteConstraints(60, 170, -1, -1));
 
-		// pssw_field.setBackground(new Color(242, 242, 242));
+		// psswField.setBackground(new Color(242, 242, 242));
 
-		pssw_field.setFont(new Font("Tahoma", 0, 14)); // NOI18N
-		login_panel.add(pssw_field, new AbsoluteConstraints(60, 200, 290, 25));
+		psswField.setFont(new Font("Tahoma", 0, 14)); // NOI18N
+		loginPanel.add(psswField, new AbsoluteConstraints(60, 200, 290, 25));
 
 		// Separator
-		jSeparator2.setBackground(new Color(0, 0, 0));
-		jSeparator2.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, new Color(194, 192, 192)));
-		jSeparator2.setMinimumSize(new Dimension(30, 20));
-		jSeparator2.setPreferredSize(new Dimension(30, 20));
-		login_panel.add(jSeparator2, new AbsoluteConstraints(60, 230, 290, -1));
+		sep2.setBackground(new Color(0, 0, 0));
+		sep2.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, new Color(194, 192, 192)));
+		sep2.setMinimumSize(new Dimension(30, 20));
+		sep2.setPreferredSize(new Dimension(30, 20));
+		loginPanel.add(sep2, new AbsoluteConstraints(60, 230, 290, -1));
 
 		// Login button
-		login_button.setFont(new Font("Tahoma", 0, 14)); // NOI18N
-		login_button.setText("LOGIN");
-		login_panel.add(login_button, new AbsoluteConstraints(60, 270, 290, 60));
+		loginBtn.setFont(new Font("Tahoma", 0, 14)); // NOI18N
+		loginBtn.setText("LOGIN");
+		loginPanel.add(loginBtn, new AbsoluteConstraints(60, 270, 290, 60));
 
 		// Loader after Login
 		JLabel loader = new JLabel(new ImageIcon(this.getClass().getClassLoader().getResource("img/loader_login.gif")));
-		loader.setBounds(login_button.getBounds());
-		login_panel.add(loader, new AbsoluteConstraints(60, 270, 300, 60));
+		loader.setBounds(loginBtn.getBounds());
+		loginPanel.add(loader, new AbsoluteConstraints(60, 270, 300, 60));
 
 		// Link section
-		signup_label.setContentType("text/html");
-		signup_label.setOpaque(false);
-		signup_label.setText("Non hai un account? Registrati <font color =FF6347>qui </font>.");
-		signup_label.setToolTipText("Hai bisogno di un account per poter entrare");
-		signup_label.getCaret().setVisible(false);
-		login_panel.add(signup_label, new AbsoluteConstraints(60, 350, -1, -1));
+		signupLabel.setContentType("text/html");
+		signupLabel.setOpaque(false);
+		signupLabel.setText("Non hai un account? Registrati <font color =FF6347>qui </font>.");
+		signupLabel.setToolTipText("Hai bisogno di un account per poter entrare");
+		signupLabel.getCaret().setVisible(false);
+		loginPanel.add(signupLabel, new AbsoluteConstraints(60, 350, -1, -1));
 
-		signup_label.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent evt) {
-				signup_linkMouseClicked(evt);
+		signupLabel.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(final MouseEvent evt) {
+				signupLinkMouseClicked(evt);
 			}
 		});
 
-		add(login_panel);
+		add(loginPanel);
 
 		// Change label color on focus
-		mail_field.addFocusListener(new FocusAdapter() {
-			public void focusGained(FocusEvent evt) {
-				mail_fieldFocusGained(evt);
+		mailField.addFocusListener(new FocusAdapter() {
+			public void focusGained(final FocusEvent evt) {
+				mailFieldFocusGained(evt);
 			}
 		});
 
-		pssw_field.addFocusListener(new FocusAdapter() {
-			public void focusGained(FocusEvent evt) {
-				pssw_fieldFocusGained(evt);
+		psswField.addFocusListener(new FocusAdapter() {
+			public void focusGained(final FocusEvent evt) {
+				psswFieldFocusGained(evt);
 			}
 		});
 
 		// Login_button method
-		this.login_button.addActionListener(e -> {
-			login_button.setVisible(false);
+		this.loginBtn.addActionListener(e -> {
+			loginBtn.setVisible(false);
 			loader.setVisible(true);
 			Window win = ((Window) SwingUtilities.getRoot(this));
 
-			if (this.login_button.getActionListeners().length == 0)
+			if (this.loginBtn.getActionListeners().length == 0) {
 				throw new IllegalStateException();
-			new SwingWorker<String, Object>() {
+			}
+			 new SwingWorker<String, Object>() {
 
 				@Override
 				protected String doInBackground() throws Exception {
 					if (getMail().isBlank() || getPassword().isBlank() || !getMail().contains("@")) {
-						JOptionPane.showMessageDialog(null, "You have to fill correctly fields email and password");
+						JOptionPane.showMessageDialog(null, "I campi sono obbligatori!");
 					} else {
 						Optional<User> user = getCredential();
 						if (user.isPresent()) {
@@ -163,7 +163,7 @@ public class LoginPan extends JPanel implements PreGui {
 
 					}
 					loader.setVisible(false);
-					login_button.setVisible(true);
+					loginBtn.setVisible(true);
 					return "error";
 				}
 
@@ -171,55 +171,56 @@ public class LoginPan extends JPanel implements PreGui {
 		});
 	}
 
-	private void mail_fieldFocusGained(FocusEvent evt) {
-		pssw_label.setForeground(new Color(0, 0, 0));
-		mail_label.setForeground(new Color(135, 175, 218));
+	private void mailFieldFocusGained(final FocusEvent evt) {
+		psswLabel.setForeground(new Color(0, 0, 0));
+		mailLabel.setForeground(new Color(135, 175, 218));
 
 	}
 
-	private void pssw_fieldFocusGained(FocusEvent evt) {
-		mail_label.setForeground(new Color(0, 0, 0));
-		pssw_label.setForeground(new Color(135, 175, 218));
+	private void psswFieldFocusGained(final FocusEvent evt) {
+		mailLabel.setForeground(new Color(0, 0, 0));
+		psswLabel.setForeground(new Color(135, 175, 218));
 	}
 
-	public JButton getLogBtn() {
-		return this.login_button;
+	public final JButton getLogBtn() {
+		return this.loginBtn;
 	}
 
 	@Override
-	public String getUsername() {
-		// TODO Auto-generated method stub
+	public final String getUsername() {
+		//No need to get Username here
 		return null;
 	}
 
 	@Override
-	public String getMail() {
-		return this.mail_field.getText();
+	public final String getMail() {
+		return this.mailField.getText();
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
-	public String getPassword() {
-		return this.pssw_field.getText();
+	public final String getPassword() {
+		return this.psswField.getText(); //We need to get the text to pass it to the cripter
 	}
 
-	public Optional<User> getCredential() {
+	public final Optional<User> getCredential() {
 
 		return dbuser.login(getMail(), getPassword());
 	}
 
-	private void signup_linkMouseClicked(MouseEvent evt) {
+	private void signupLinkMouseClicked(final MouseEvent evt) {
 		CardLayout card = (CardLayout) getParent().getLayout();
 		card.show(getParent(), "register_panel");
 	}
 
-	private JLabel pssw_label;
-	private JLabel mail_label;
-	private JButton login_button;
-	private JEditorPane signup_label;
-	private JPanel login_panel;
-	private JSeparator jSeparator1;
-	private JSeparator jSeparator2;
-	private JTextField mail_field;
-	private JPasswordField pssw_field;
+	private JLabel psswLabel;
+	private JLabel mailLabel;
+	private JButton loginBtn;
+	private JEditorPane signupLabel;
+	private JPanel loginPanel;
+	private JSeparator sep1;
+	private JSeparator sep2;
+	private JTextField mailField;
+	private JPasswordField psswField;
 
 }

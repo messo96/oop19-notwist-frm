@@ -19,49 +19,48 @@ import rombo.new_class.CommentsImplement;
 import view.topic.comment.AllComments;
 import view.topic.comment.Newcomment;
 
-//In realtà ci sono gli altri import nascosti ma PER ORA non servono in quanto nello stesso package
-
 public class TopicPan extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private CommentsImplDB dbcomment = new CommentsImplDB();
 
-	public TopicPan(DiscussionImpl disc, User user) {
+	public TopicPan(final DiscussionImpl disc, final User user) {
 
 		initComponents(disc, user);
 	}
 
-	private void initComponents(DiscussionImpl disc, User user) {
-		jScrollPane1 = new JScrollPane();
-		topic_panel = new JPanel();
+	private void initComponents(final DiscussionImpl disc, final User user) {
+		bodyScroll = new JScrollPane();
+		topicPanel = new JPanel();
 
-		topic_panel.setLayout(new AbsoluteLayout());
+		topicPanel.setLayout(new AbsoluteLayout());
 
 		// We're scrolling here uuh
-		jScrollPane1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		jScrollPane1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-		jScrollPane1.setPreferredSize(new Dimension(1080, 490));
+		bodyScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		bodyScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+		bodyScroll.setPreferredSize(new Dimension(1080, 490));
+		bodyScroll.getVerticalScrollBar().setUnitIncrement(16);
 
 		topic = new Topic(disc, user);
 
-		topic_panel.add(topic, new AbsoluteConstraints(0, 0, -1, -1));
+		topicPanel.add(topic, new AbsoluteConstraints(0, 0, -1, -1));
 		topic.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
 
-		new_comment = new Newcomment(disc.getIdDiscussion(), user.getId());
-		topic_panel.add(new_comment, new AbsoluteConstraints(0, 300, -1, -1));
+		newComment = new Newcomment(disc.getIdDiscussion(), user.getId());
+		topicPanel.add(newComment, new AbsoluteConstraints(0, 300, -1, -1));
 		List<CommentsImplement> list = dbcomment.getComments(disc.getIdDiscussion()).get();
 		if (list.size() != 0) {
 			comments = new AllComments(disc.getIdDiscussion(), list, user);
-			topic_panel.add(comments, new AbsoluteConstraints(0, 440, -1, -1));
+			topicPanel.add(comments, new AbsoluteConstraints(0, 440, 1, -1));
 			comments.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
 		}
-		jScrollPane1.setViewportView(topic_panel);
-		add(jScrollPane1);
-		
+		bodyScroll.setViewportView(topicPanel);
+		add(bodyScroll);
+
 	}
 
-	private JScrollPane jScrollPane1;
+	private JScrollPane bodyScroll;
 	private Topic topic;
-	private JPanel topic_panel;
-	private Newcomment new_comment;
+	private JPanel topicPanel;
+	private Newcomment newComment;
 	private AllComments comments;
 }

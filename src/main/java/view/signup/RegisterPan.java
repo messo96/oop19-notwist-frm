@@ -38,7 +38,7 @@ import org.netbeans.lib.awtextra.AbsoluteLayout;
 import controller.database.UserImplDB;
 import view.gui.PreGui;
 
-public class RegisterPan extends JPanel implements PreGui{
+public class RegisterPan extends JPanel implements PreGui {
 	
 	private static final long serialVersionUID = 1L;
 	private UserImplDB dbuser = new UserImplDB();
@@ -49,28 +49,26 @@ public class RegisterPan extends JPanel implements PreGui{
 	}
 
 	private void drawComp() {
-		register_label = new JEditorPane();
-
+		registerLabel = new JEditorPane();
 		termsDialog = new JDialog();
 		termsPanel = new JPanel();
 		termsTitle = new JLabel();
-		jScrollPane1 = new JScrollPane();
+		termsScroll = new JScrollPane();
 		termsText = new JEditorPane("text/html", "");
 		termsAccept = new JButton();
-		register_panel = new JPanel();
-		pssw_label = new JLabel();
-		mail_field = new JTextField();
-		jSeparator3 = new JSeparator();
-		jSeparator5 = new JSeparator();
-		pssw_field = new JPasswordField();
-		user_label = new JLabel();
-		signup_button = new JButton();
-
-		mail_label = new JLabel();
-		jSeparator4 = new JSeparator();
-		username_field = new JTextField();
-		jCheckBox1 = new JCheckBox();
-		terms_button = new JButton();
+		registerPanel = new JPanel();
+		psswLabel = new JLabel();
+		mailField = new JTextField();
+		sep2 = new JSeparator();
+		sep1 = new JSeparator();
+		psswField = new JPasswordField();
+		userLabel = new JLabel();
+		signupBtn = new JButton();
+		mailLabel = new JLabel();
+		sep3 = new JSeparator();
+		usernameField = new JTextField();
+		termsCheck = new JCheckBox();
+		termsButton = new JButton();
 
 		// <------------------Draw register panel ------------>
 
@@ -80,11 +78,11 @@ public class RegisterPan extends JPanel implements PreGui{
 		importTerms();
 		termsText.setEditable(false);
 		termsText.setOpaque(false);
-		jScrollPane1.setViewportView(termsText);
+		termsScroll.setViewportView(termsText);
 
-		termsAccept.setText("Ok, ho letto");
+		termsAccept.setText("Ok, ho letto!");
 		termsAccept.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
+			public void actionPerformed(final ActionEvent evt) {
 				termsAcceptActionPerformed(evt);
 			}
 		});
@@ -94,14 +92,16 @@ public class RegisterPan extends JPanel implements PreGui{
 		termsPanelLayout.setHorizontalGroup(termsPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(termsPanelLayout.createSequentialGroup().addGap(42, 42, 42)
 						.addGroup(termsPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-								.addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 459, GroupLayout.PREFERRED_SIZE)
+								.addComponent(termsScroll, GroupLayout.PREFERRED_SIZE, 459, GroupLayout.PREFERRED_SIZE)
 								.addComponent(termsTitle).addComponent(termsAccept, GroupLayout.Alignment.TRAILING))
 						.addContainerGap(49, Short.MAX_VALUE)));
 		termsPanelLayout.setVerticalGroup(termsPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(termsPanelLayout.createSequentialGroup().addGap(29, 29, 29).addComponent(termsTitle)
 						.addGap(18, 18, 18)
-						.addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 250, GroupLayout.PREFERRED_SIZE)
-						.addGap(18, 18, 18).addComponent(termsAccept).addContainerGap(23, Short.MAX_VALUE)));
+						.addComponent(termsScroll, GroupLayout.PREFERRED_SIZE, 250, GroupLayout.PREFERRED_SIZE)
+						.addGap(18, 18, 18)
+						.addComponent(termsAccept)
+						.addContainerGap(23, Short.MAX_VALUE)));
 
 		GroupLayout termsDialogLayout = new GroupLayout(termsDialog.getContentPane());
 		termsDialog.getContentPane().setLayout(termsDialogLayout);
@@ -112,143 +112,143 @@ public class RegisterPan extends JPanel implements PreGui{
 				.addComponent(termsPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
 
 		// Setting panel
-		register_panel.setLayout(new AbsoluteLayout());
+		registerPanel.setLayout(new AbsoluteLayout());
 
 		// Username
-		user_label.setFont(new Font("Tahoma", 0, 14)); // NOI18N
-		user_label.setText("Username");
-		register_panel.add(user_label, new AbsoluteConstraints(53, 80, -1, -1));
+		userLabel.setFont(new Font("Tahoma", 0, 14)); // NOI18N
+		userLabel.setText("Username");
+		registerPanel.add(userLabel, new AbsoluteConstraints(53, 80, -1, -1));
 
-		username_field.setFont(new Font("Tahoma", 0, 14)); // NOI18N
-		username_field.setActionCommand("<Not Set>");
-		username_field.addFocusListener(new FocusAdapter() {
-			public void focusGained(FocusEvent evt) {
-				username_fieldFocusGained(evt);
+		usernameField.setFont(new Font("Tahoma", 0, 14)); // NOI18N
+		usernameField.setActionCommand("<Not Set>");
+		usernameField.addFocusListener(new FocusAdapter() {
+			public void focusGained(final FocusEvent evt) {
+				usernameFieldFocusGained(evt);
 			}
 		});
 
-		register_panel.add(username_field, new AbsoluteConstraints(53, 110, 290, 25));
+		registerPanel.add(usernameField, new AbsoluteConstraints(53, 110, 290, 25));
 
 		// Separator
-		jSeparator5.setBackground(new Color(0, 0, 0));
-		jSeparator5.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, new java.awt.Color(194, 192, 192)));
-		jSeparator5.setMinimumSize(new Dimension(30, 20));
-		jSeparator5.setPreferredSize(new Dimension(30, 20));
-		jSeparator5.setBackground(new Color(255, 255, 255));
-		register_panel.add(jSeparator5, new AbsoluteConstraints(53, 140, 290, -1));
+		sep1.setBackground(new Color(0, 0, 0));
+		sep1.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, new java.awt.Color(194, 192, 192)));
+		sep1.setMinimumSize(new Dimension(30, 20));
+		sep1.setPreferredSize(new Dimension(30, 20));
+		sep1.setBackground(new Color(255, 255, 255));
+		registerPanel.add(sep1, new AbsoluteConstraints(53, 140, 290, -1));
 
 		// Mail
 
-		mail_label.setFont(new Font("Tahoma", 0, 14)); // NOI18N
-		mail_label.setText("Mail");
-		register_panel.add(mail_label, new AbsoluteConstraints(53, 170, -1, -1));
+		mailLabel.setFont(new Font("Tahoma", 0, 14)); // NOI18N
+		mailLabel.setText("Mail");
+		registerPanel.add(mailLabel, new AbsoluteConstraints(53, 170, -1, -1));
 
-		mail_field.setFont(new Font("Tahoma", 0, 14)); // NOI18N
-		mail_field.addFocusListener(new FocusAdapter() {
-			public void focusGained(FocusEvent evt) {
-				mail_fieldFocusGained(evt);
+		mailField.setFont(new Font("Tahoma", 0, 14)); // NOI18N
+		mailField.addFocusListener(new FocusAdapter() {
+			public void focusGained(final FocusEvent evt) {
+				mailFieldFocusGained(evt);
 			}
 		});
-		register_panel.add(mail_field, new AbsoluteConstraints(53, 200, 290, 25));
+		registerPanel.add(mailField, new AbsoluteConstraints(53, 200, 290, 25));
 
 		// Separator
-		jSeparator3.setBackground(new Color(0, 0, 0));
-		jSeparator3.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, new java.awt.Color(194, 192, 192)));
-		jSeparator3.setMinimumSize(new Dimension(30, 20));
-		jSeparator3.setPreferredSize(new Dimension(30, 20));
-		jSeparator3.setBackground(new Color(255, 255, 255));
-		register_panel.add(jSeparator3, new AbsoluteConstraints(53, 230, 290, -1));
+		sep2.setBackground(new Color(0, 0, 0));
+		sep2.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, new java.awt.Color(194, 192, 192)));
+		sep2.setMinimumSize(new Dimension(30, 20));
+		sep2.setPreferredSize(new Dimension(30, 20));
+		sep2.setBackground(new Color(255, 255, 255));
+		registerPanel.add(sep2, new AbsoluteConstraints(53, 230, 290, -1));
 
 		// Password
-		pssw_label.setFont(new Font("Tahoma", 0, 14)); // NOI18N
-		pssw_label.setText("Password");
-		register_panel.add(pssw_label, new AbsoluteConstraints(53, 260, -1, -1));
+		psswLabel.setFont(new Font("Tahoma", 0, 14)); // NOI18N
+		psswLabel.setText("Password");
+		registerPanel.add(psswLabel, new AbsoluteConstraints(53, 260, -1, -1));
 
-		pssw_field.setFont(new Font("Tahoma", 0, 14)); // NOI18N
-		pssw_field.addFocusListener(new FocusAdapter() {
-			public void focusGained(FocusEvent evt) {
-				pssw_fieldFocusGained(evt);
+		psswField.setFont(new Font("Tahoma", 0, 14)); // NOI18N
+		psswField.addFocusListener(new FocusAdapter() {
+			public void focusGained(final FocusEvent evt) {
+				psswFieldFocusGained(evt);
 			}
 		});
-		register_panel.add(pssw_field, new AbsoluteConstraints(53, 290, 290, 25));
+		registerPanel.add(psswField, new AbsoluteConstraints(53, 290, 290, 25));
 
 		// Separator
 
-		jSeparator4.setBackground(new Color(0, 0, 0));
-		jSeparator4.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, new Color(194, 192, 192)));
-		jSeparator4.setMinimumSize(new Dimension(30, 20));
-		jSeparator4.setPreferredSize(new Dimension(30, 20));
-		jSeparator4.setBackground(new Color(255, 255, 255));
-		register_panel.add(jSeparator4, new AbsoluteConstraints(53, 320, 290, -1));
+		sep3.setBackground(new Color(0, 0, 0));
+		sep3.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, new Color(194, 192, 192)));
+		sep3.setMinimumSize(new Dimension(30, 20));
+		sep3.setPreferredSize(new Dimension(30, 20));
+		sep3.setBackground(new Color(255, 255, 255));
+		registerPanel.add(sep3, new AbsoluteConstraints(53, 320, 290, -1));
 
-		signup_button.setFont(new Font("Tahoma", 0, 14)); // NOI18N
-		signup_button.setText("REGISTER");
+		signupBtn.setFont(new Font("Tahoma", 0, 14)); // NOI18N
+		signupBtn.setText("REGISTER");
 
-		register_panel.add(signup_button, new AbsoluteConstraints(53, 360, 290, 60));
+		registerPanel.add(signupBtn, new AbsoluteConstraints(53, 360, 290, 60));
 
 		// Informativa
-		jCheckBox1.setFont(new Font("Tahoma", 0, 10)); // NOI18N
-		jCheckBox1.setText("Accetto i termini e le condizioni.");
-		register_panel.add(jCheckBox1, new AbsoluteConstraints(53, 330, -1, -1));
+		termsCheck.setFont(new Font("Tahoma", 0, 10)); // NOI18N
+		termsCheck.setText("Accetto i termini e le condizioni.");
+		registerPanel.add(termsCheck, new AbsoluteConstraints(53, 330, -1, -1));
 
-		terms_button.setText("Informativa");
-		terms_button.setForeground(new Color(255, 99, 71));
-		terms_button.setFont(new Font("Tahoma", 0, 10));
-		terms_button.setBorderPainted(false);
-		terms_button.setContentAreaFilled(false);
+		termsButton.setText("Informativa");
+		termsButton.setForeground(new Color(255, 99, 71));
+		termsButton.setFont(new Font("Tahoma", 0, 10));
+		termsButton.setBorderPainted(false);
+		termsButton.setContentAreaFilled(false);
 
-		terms_button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
-				terms_buttonActionPerformed(evt);
+		termsButton.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent evt) {
+				termsButtonActionPerformed(evt);
 			}
 		});
-		register_panel.add(terms_button, new AbsoluteConstraints(220, 330, -1, -1));
+		registerPanel.add(termsButton, new AbsoluteConstraints(220, 330, -1, -1));
 
 		// Infos
-		register_label.setContentType("text/html");
-		register_label.setOpaque(false);
-		register_label.setText("Hai già un account? Loggati <font color =FF6347>qui </font>.");
-		register_label.getCaret().setVisible(false);
-		register_label.setToolTipText("Se hai già un account, passa al login.");
-		register_panel.add(register_label, new AbsoluteConstraints(53, 440, -1, -1));
+		registerLabel.setContentType("text/html");
+		registerLabel.setOpaque(false);
+		registerLabel.setText("Hai già un account? Loggati <font color =FF6347>qui </font>.");
+		registerLabel.getCaret().setVisible(false);
+		registerLabel.setToolTipText("Se hai già un account, passa al login.");
+		registerPanel.add(registerLabel, new AbsoluteConstraints(53, 440, -1, -1));
 
-		add(register_panel);
+		add(registerPanel);
 
-		register_label.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent evt) {
-				login_linkMouseClicked(evt);
+		registerLabel.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(final MouseEvent evt) {
+				loginLinkMouseClicked(evt);
 			}
 		});
 
-		mail_field.addFocusListener(new FocusAdapter() {
-			public void focusGained(FocusEvent evt) {
-				mail_fieldFocusGained(evt);
+		mailField.addFocusListener(new FocusAdapter() {
+			public void focusGained(final FocusEvent evt) {
+				mailFieldFocusGained(evt);
 			}
 		});
 
-		pssw_field.addFocusListener(new FocusAdapter() {
-			public void focusGained(FocusEvent evt) {
-				pssw_fieldFocusGained(evt);
+		psswField.addFocusListener(new FocusAdapter() {
+			public void focusGained(final FocusEvent evt) {
+				psswFieldFocusGained(evt);
 			}
 		});
 
-		username_field.addFocusListener(new FocusAdapter() {
-			public void focusGained(FocusEvent evt) {
-				username_fieldFocusGained(evt);
+		usernameField.addFocusListener(new FocusAdapter() {
+			public void focusGained(final FocusEvent evt) {
+				usernameFieldFocusGained(evt);
 			}
 		});
 
 		// Register method
-		signup_button.addActionListener(e -> {
-			if (!jCheckBox1.isSelected())
-				JOptionPane.showMessageDialog(null, "You have to accept our rules before sign up :0");
-			else if (this.getMail().isBlank() || !this.getMail().contains("@"))
-				JOptionPane.showMessageDialog(null, "You must have a valid email");
-			else if (this.getUsername().isBlank() || this.getPassword().isBlank()
+		signupBtn.addActionListener(e -> {
+			if (!termsCheck.isSelected()) {
+				JOptionPane.showMessageDialog(null, "Accetta i termini e condizioni!");
+			} else if (this.getMail().isBlank() || !this.getMail().contains("@")) {
+				JOptionPane.showMessageDialog(null, "La mail dev'essere valida!");
+			} else if (this.getUsername().isBlank() || this.getPassword().isBlank()
 					|| !dbuser.register(this.getUsername(), this.getPassword(), this.getMail(), false)) {
-				JOptionPane.showMessageDialog(null, "You have to fill all the fields");
+				JOptionPane.showMessageDialog(null, "Devi riempire tutti i campi.");
 			} else {
-				JOptionPane.showMessageDialog(null, "Account created succesfully! :) ");
+				JOptionPane.showMessageDialog(null, "Account creato correttamente! ");
 				CardLayout card = (CardLayout) getParent().getLayout();
 				card.show(getParent(), "login");
 			}
@@ -256,12 +256,12 @@ public class RegisterPan extends JPanel implements PreGui{
 		});
 	}
 
-	private void termsAcceptActionPerformed(ActionEvent evt) {
+	private void termsAcceptActionPerformed(final ActionEvent evt) {
 
 		termsDialog.dispose();
 	}
 
-	private void terms_buttonActionPerformed(ActionEvent evt) {
+	private void termsButtonActionPerformed(final ActionEvent evt) {
 		try {
 			UIManager.getLookAndFeel();
 			SwingUtilities.updateComponentTreeUI(termsDialog);
@@ -281,18 +281,18 @@ public class RegisterPan extends JPanel implements PreGui{
 
 	@Override
 	public final String getUsername() {
-		return username_field.getText();
+		return usernameField.getText();
 	}
 
 	@Override
 	public final String getMail() {
-		return mail_field.getText();
+		return mailField.getText();
 	}
 
 	@Override
 	public final String getPassword() {
 		//cause we use our crypt
-		return pssw_field.getText();
+		return psswField.getText();
 	}
 
 	private void importTerms() {
@@ -302,57 +302,57 @@ public class RegisterPan extends JPanel implements PreGui{
 			buf = new BufferedReader(in);
 			termsText.read(buf, null);
 		} catch (IOException e) {
-			System.out.println("File Terms.txt not found! ");
+			System.out.println("Terms.txt non trovato! ");
 			e.printStackTrace();
 		}
 	}
 
 	// Focus
-	private void mail_fieldFocusGained(FocusEvent evt) {
-		pssw_label.setForeground(new Color(0, 0, 0));
-		mail_label.setForeground(new Color(135, 175, 218));
-		user_label.setForeground(new Color(0, 0, 0));
+	private void mailFieldFocusGained(final FocusEvent evt) {
+		psswLabel.setForeground(new Color(0, 0, 0));
+		mailLabel.setForeground(new Color(135, 175, 218));
+		userLabel.setForeground(new Color(0, 0, 0));
 	}
 
-	private void pssw_fieldFocusGained(FocusEvent evt) {
-		pssw_label.setForeground(new Color(135, 175, 218));
-		mail_label.setForeground(new Color(0, 0, 0));
-		user_label.setForeground(new Color(0, 0, 0));
+	private void psswFieldFocusGained(final FocusEvent evt) {
+		psswLabel.setForeground(new Color(135, 175, 218));
+		mailLabel.setForeground(new Color(0, 0, 0));
+		userLabel.setForeground(new Color(0, 0, 0));
 	}
 
-	private void username_fieldFocusGained(FocusEvent evt) {
-		pssw_label.setForeground(new Color(0, 0, 0));
-		mail_label.setForeground(new Color(0, 0, 0));
-		user_label.setForeground(new Color(135, 175, 218));
+	private void usernameFieldFocusGained(final FocusEvent evt) {
+		psswLabel.setForeground(new Color(0, 0, 0));
+		mailLabel.setForeground(new Color(0, 0, 0));
+		userLabel.setForeground(new Color(135, 175, 218));
 	}
 
-	private void login_linkMouseClicked(MouseEvent evt) {
+	private void loginLinkMouseClicked(final MouseEvent evt) {
 		CardLayout card = (CardLayout) getParent().getLayout();
 		card.show(getParent(), "login");
 	}
 
-	private JCheckBox jCheckBox1;
+	private JCheckBox termsCheck;
 	private JDialog termsDialog;
-	private JLabel pssw_label;
-	private JLabel user_label;
+	private JLabel psswLabel;
+	private JLabel userLabel;
 
-	private JButton signup_button;
+	private JButton signupBtn;
 
-	private JPanel register_panel;
-	private JTextField mail_field;
-	private JPasswordField pssw_field;
-	private JTextField username_field;
-	private JEditorPane register_label;
-	private JLabel mail_label;
+	private JPanel registerPanel;
+	private JTextField mailField;
+	private JPasswordField psswField;
+	private JTextField usernameField;
+	private JEditorPane registerLabel;
+	private JLabel mailLabel;
 	private JLabel termsTitle;
 	private JPanel termsPanel;
-	private JScrollPane jScrollPane1;
-	private JSeparator jSeparator3;
-	private JSeparator jSeparator4;
+	private JScrollPane termsScroll;
+	private JSeparator sep2;
+	private JSeparator sep3;
 	private JEditorPane termsText;
 	private JButton termsAccept;
-	private JButton terms_button;
-	private JSeparator jSeparator5;
+	private JButton termsButton;
+	private JSeparator sep1;
 
 	
 }
