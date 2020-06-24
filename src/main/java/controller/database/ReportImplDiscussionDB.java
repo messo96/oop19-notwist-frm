@@ -31,6 +31,12 @@ public class ReportImplDiscussionDB {
 		return this.dbr.create(new Report(0, Optional.of(idDiscussion), Optional.empty(), idUser, description, false));
 
 	}
+	
+	public final Integer numberOfReport(final Integer idDiscussion) {
+		return this.getAll().stream()
+				.filter(r -> r.getIdDiscuss().get() == idDiscussion && r.getIdComment().isEmpty())
+				.collect(Collectors.toList()).size();
+	}
 
 	// si è risolta una segnalazione
 	public final boolean setSolved(final Integer idReport) {

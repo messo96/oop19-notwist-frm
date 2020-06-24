@@ -39,7 +39,7 @@ public class Profile extends JPanel {
             myinfos_panel = new Infos(user);
             profile_panel.add(myinfos_panel, new  AbsoluteConstraints(730, 0, -1, -1));
 
-            reportedComments = new UserComments();
+            reportedComments = new UserComments(user);
             profile_panel.add(reportedComments, new  AbsoluteConstraints(10, 200, -1, -1)); 	   
     	   
             strike_panel = new StrikePan();

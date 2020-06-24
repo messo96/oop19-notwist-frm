@@ -82,15 +82,17 @@ public class StrikePan extends JPanel {
 		plus.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
 		plus.addActionListener(e -> {
 			Integer strike = Integer.parseInt(nstrike.getText());
-			if (strike < MAX_STRIKE)
+			if (strike < MAX_STRIKE) {
 				nstrike.setText(String.valueOf(strike + 1));
+			}
 		});
 		minus.setText("-");
 		minus.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
 		minus.addActionListener(e -> {
 			Integer strike = Integer.parseInt(nstrike.getText());
-			if (strike > 0)
+			if (strike > 0) {
 				nstrike.setText(String.valueOf(strike - 1));
+			}
 		});
 		GroupLayout strikedialogLayout = new GroupLayout(strikedialog.getContentPane());
 		strikedialog.getContentPane().setLayout(strikedialogLayout);

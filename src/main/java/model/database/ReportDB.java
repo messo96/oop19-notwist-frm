@@ -45,19 +45,27 @@ public class ReportDB extends ManagerImplDB implements Dao<Report> {
 	 */
 	@Override
 	public boolean create(final Report t) {
+		open();
 		try {
-			query = "insert into REPORT (idUser, idDiscussion, description) values (?,?,?,?)";
-			open();
-			PreparedStatement prepared = super.getConn().prepareStatement(query);
-//			prepared.setInt(1, t);
-//			prepared.setInt(2, t);
-//			prepared.setString(3, t);
-//			prepared.setBoolean(4, t);
+			if (t.getIdComment().isEmpty()) {
+				query = "insert into REPORT (idUser, idDiscussion, description) values (?,?,?)";
+				PreparedStatement prepared = super.getConn().prepareStatement(query);
+				prepared.setInt(1, t.getIdUser());
+				prepared.setInt(2, t.getIdDiscuss().get());
+				prepared.setString(3, t.getDescrtiption());
+			} else {
+				query = "insert into REPORT (idUser, idDiscussion, idComment, description) values (?,?,?)";
+				PreparedStatement prepared = super.getConn().prepareStatement(query);
+				prepared.setInt(1, t.getIdUser());
+				prepared.setInt(2, t.getIdDiscuss().get());
+				prepared.setInt(3, t.getIdComment().get());
+				prepared.setString(4, t.getDescrtiption());
+			}
 
 			prepared.executeUpdate();
 			return true;
 		} catch (Exception e) {
-			log.logWarning("Error while create new discussion " + e);
+			log.logWarning("Error while create new report " + e);
 			return false;
 		} finally {
 			close();

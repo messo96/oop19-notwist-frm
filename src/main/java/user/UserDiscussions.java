@@ -2,7 +2,6 @@ package user;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.stream.Collectors;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -11,8 +10,10 @@ import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.table.DefaultTableModel;
 
+import controller.database.CommentsImplDB;
 import controller.database.DiscussionImplDB;
 import controller.database.ReportImplDiscussionDB;
+import controller.database.UserImplDB;
 import model.base.DiscussionImpl;
 import model.base.Report;
 import model.base.User;
@@ -23,8 +24,10 @@ public class UserDiscussions extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private DefaultTableModel model;
 	private ReportImplDiscussionDB dbreport = new ReportImplDiscussionDB();
+	private CommentsImplDB dbcomment = new CommentsImplDB();
 	private DiscussionImplDB dbdiscussion = new DiscussionImplDB();
 	private User user;
+	private Report report;
 
 	/**
 	 * Shows the activies of a certain user.
@@ -71,6 +74,10 @@ public class UserDiscussions extends JPanel {
 		nReport.setText("numReport");
 
 		deletebtn.setText("Cancella");
+		deletebtn.addActionListener(e -> {
+			if (report != null)
+				dbreport.removeReport(report.getIdReport());
+		});
 		ignorebtn.setText("Ignora");
 
 		javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(containerDialog);
@@ -122,27 +129,43 @@ public class UserDiscussions extends JPanel {
 		jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(
 				javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Attività"));
 		jPanel3.setAutoscrolls(true);
+
 		if (user.isModerator()) {
-			model = new DefaultTableModel(new Object[] { "Report", "Discussion", "ID" }, 0);
+			model = new DefaultTableModel(new Object[] { "Discussion", "Report", "ID" }, 0);
 			fillTableMod(jTable3);
+			jTable3.addMouseListener(new MouseAdapter() {
+				public void mousePressed(final MouseEvent mouseEvent) {
+					DiscussionImpl disc = dbdiscussion
+							.getDiscussion(Integer
+									.parseInt(jTable3.getModel().getValueAt(jTable3.getSelectedRow(), 2).toString()))
+							.get();
+					username.setText(new UserImplDB().getUser(disc.getIdUser()).get().getUsername());
+					nReport.setText(String.valueOf(dbreport.numberOfReport(report.getIdDiscuss().get())));
+
+//					reportDialog.getContentPane();
+//					reportDialog.setSize(600, 500);
+//					reportDialog.pack();
+//					reportDialog.setLocationRelativeTo(getParent());
+//					reportDialog.setVisible(true);
+				}
+			});
 
 		} else {
-			model = new DefaultTableModel(new Object[] { "Titolo", "Category", "ID" }, 0);
+			model = new DefaultTableModel(new Object[] { "Titolo", "Category", "ID", "N.Commenti" }, 0);
 			fillTable(jTable3);
+			jTable3.addMouseListener(new MouseAdapter() {
+				public void mousePressed(final MouseEvent mouseEvent) {
+					DiscussionImpl disc = dbdiscussion
+							.getDiscussion(Integer
+									.parseInt(jTable3.getModel().getValueAt(jTable3.getSelectedRow(), 2).toString()))
+							.get();
+					JFrame fr = new JFrame();
+					fr.setContentPane(new TopicPan(disc, user));
+					fr.pack();
+					fr.setVisible(true);
+				}
+			});
 		}
-
-		jTable3.addMouseListener(new MouseAdapter() {
-			public void mousePressed(final MouseEvent mouseEvent) {
-				DiscussionImpl disc = dbdiscussion
-						.getDiscussion(
-								Integer.parseInt(jTable3.getModel().getValueAt(jTable3.getSelectedRow(), 2).toString()))
-						.get();
-				JFrame fr = new JFrame();
-				fr.setContentPane(new TopicPan(disc, user));
-				fr.pack();
-				fr.setVisible(true);
-			}
-		});
 
 		jScrollPane13.setViewportView(jTable3);
 		if (jTable3.getColumnModel().getColumnCount() > 0) {
@@ -176,8 +199,8 @@ public class UserDiscussions extends JPanel {
 	private void fillTableMod(final JTable table) {
 		model.getDataVector().removeAllElements();
 		for (Report r : dbreport.getAll()) {
-			model.addRow(new Object[] { r.getDescrtiption(),
-					dbdiscussion.getDiscussion(r.getIdDiscuss().get()).get().getTitle(), r.getIdDiscuss().get() });
+			model.addRow(new Object[] { dbdiscussion.getDiscussion(r.getIdDiscuss().get()).get().getTitle(),
+					r.getDescrtiption(), r.getIdDiscuss().get() });
 		}
 		table.setModel(model);
 	}
@@ -185,7 +208,8 @@ public class UserDiscussions extends JPanel {
 	private void fillTable(final JTable table) {
 		model.getDataVector().removeAllElements();
 		for (DiscussionImpl d : dbdiscussion.getDiscussions(user.getId()).get()) {
-			model.addRow(new Object[] { d.getTitle(), d.getCategory().getName(), d.getIdDiscussion() });
+			model.addRow(new Object[] { d.getTitle(), d.getCategory().getName(), d.getIdDiscussion(),
+					dbcomment.getComments(d.getIdDiscussion()).get().size() });
 		}
 		table.setModel(model);
 	}
