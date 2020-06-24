@@ -53,7 +53,7 @@ public class StrikePan extends JPanel {
 		newStrike = new JButton();
 		plus = new JButton();
 		minus = new JButton();
-		
+
 		//Strike Dialog
 		strikedialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		strikedialog.setTitle("Modifica uno strike");
@@ -141,7 +141,8 @@ public class StrikePan extends JPanel {
 		strikesTable.getColumnModel().getColumn(0).setPreferredWidth(5);
 		strikesTable.getColumnModel().getColumn(1).setPreferredWidth(90);
 		strikesTable.getColumnModel().getColumn(2).setPreferredWidth(5);
-
+		strikesTable.getTableHeader().setReorderingAllowed(false);
+		
 		refreshTable();
 		DefaultTableCellRenderer center = new DefaultTableCellRenderer();
 		center.setHorizontalAlignment(JLabel.CENTER);

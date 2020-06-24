@@ -39,8 +39,6 @@ public class TipsPan extends JPanel {
 		tipsScroll.setEnabled(false);
 
 		importTips();
-		tipsPanel.setColumns(20);
-		tipsPanel.setRows(5);
 		tipsPanel.setWrapStyleWord(true);
 		tipsPanel.setLineWrap(true);
 		tipsPanel.setEnabled(false);
