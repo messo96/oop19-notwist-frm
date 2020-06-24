@@ -2,6 +2,8 @@ package view.topic.comment;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 
 import javax.swing.BorderFactory;
@@ -12,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JEditorPane;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
@@ -96,6 +99,15 @@ public class Comment extends JPanel {
 
 		menu.setText(".");
 		menu.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
+		
+		final JPopupMenu report = new JPopupMenu("Menu");
+		report.add("Segnala");
+		menu.addActionListener( new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+            	report.show(menu, menu.getWidth()/2, menu.getHeight()/2);
+            }
+        } );
+		
 
 		dateUser.setFont(new Font("Tahoma", 0, 14)); // NOI18N
 

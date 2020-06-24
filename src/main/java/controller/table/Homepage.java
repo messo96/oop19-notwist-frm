@@ -26,9 +26,6 @@ public class Homepage extends JPanel {
 		main_table.setViewportView(tableDiscussion.getTableDiscussion());
 		tableDiscussion.refreshTableDiscussion();
 
-		jTextField2.setText("Spazio per next - prev che non posso creare ora :C");
-		jTextField2.setBorder(new javax.swing.border.MatteBorder(null));
-
 		javax.swing.GroupLayout table_panelLayout = new javax.swing.GroupLayout(table_panel);
 		table_panel.setLayout(table_panelLayout);
 		table_panelLayout
