@@ -33,12 +33,9 @@ import controller.database.CategoryImplDB;
 import controller.database.DiscussionImplDB;
 import model.base.Category;
 import model.base.CategoryImpl;
-import model.base.DiscussionImpl;
 import model.base.User;
 
-import model.database.CategoryDB;
-import model.database.DiscussionDB;
-import model.database.Dao;
+
 import view.TableDiscussion;
 import view.util.RulesPan;
 import view.util.TipsPan;
