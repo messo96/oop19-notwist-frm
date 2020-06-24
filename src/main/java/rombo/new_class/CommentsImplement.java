@@ -13,7 +13,8 @@ public class CommentsImplement implements Comments {
 	private final Date data;
 	
 	/*Builder*/
-	public CommentsImplement(int IDUser, String Comment, Optional<Integer> IDComment,Optional<Integer> IDDiscussion, Date data) {
+	public CommentsImplement(int IDUser, String Comment, Optional<Integer> IDComment, Optional<Integer> IDDiscussion,
+			Date data) {
 		
 		this.IDUser = IDUser;
 		this.Comment = Comment;
@@ -39,8 +40,7 @@ public class CommentsImplement implements Comments {
 		
 		if(this.IDComment.isPresent()) {
 			return this.IDComment;
-		}
-		else {
+		} else {
 			return Optional.empty();
 		}
 	}
@@ -51,8 +51,7 @@ public class CommentsImplement implements Comments {
 		
 		if(this.IDDiscussion.isPresent()) {
 			return this.IDDiscussion;
-		}
-		else {
+		} else {
 			return Optional.empty();
 		}
 	}

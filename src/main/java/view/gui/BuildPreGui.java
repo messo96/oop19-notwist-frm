@@ -64,7 +64,7 @@ public class BuildPreGui extends JFrame {
         //Add register to card
         register_panel = new RegisterPan();
         register_panel.setVisible(true);
-        panelHolder.add(register_panel,"register_panel");
+		panelHolder.add(register_panel, "register_panel");
 
         //Adding the card!
         getContentPane().add(panelHolder, new AbsoluteConstraints(510, 40, 370, 480));

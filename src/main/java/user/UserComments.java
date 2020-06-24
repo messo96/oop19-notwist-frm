@@ -9,7 +9,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 
-public class UserComments extends JPanel{
+public class UserComments extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
 	/**

@@ -13,7 +13,7 @@ import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.TitledBorder;
 
-public class UserDiscussions extends JPanel{
+public class UserDiscussions extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
 	/**

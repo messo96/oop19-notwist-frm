@@ -28,7 +28,7 @@ import rombo.new_class.CommentsImplement;
 public class Comment extends JPanel {
 
 	/**
-	 * Creates a new comment
+	 * Creates a new comment.
 	 */
 
 	private static final long serialVersionUID = 1L;
@@ -36,7 +36,8 @@ public class Comment extends JPanel {
 	private ILikeDislikeDB dblike = new LikeDislikeImplCommentsDB();
 	private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 	private User user;
-	public Comment(final CommentsImplement com, User user) {
+
+	public Comment(final CommentsImplement com, final User user) {
 		initComponents(com);
 		this.user = user;
 	}
@@ -45,101 +46,106 @@ public class Comment extends JPanel {
 
 	private void initComponents(final CommentsImplement com) {
 
-		comment_panel = new JPanel();
-		comment_part = new JPanel();
-		n_likes = new JLabel();
+		commentPanel = new JPanel();
+		commentPart = new JPanel();
+		nLikes = new JLabel();
 		menu = new JButton();
 		Icon yes = new ImageIcon(this.getClass().getClassLoader().getResource("img/like.png"));
 		Icon no = new ImageIcon(this.getClass().getClassLoader().getResource("img/dislike.png"));
 		like = new JButton(yes);
 		dislike = new JButton(no);
-		date_user = new JLabel();
+		dateUser = new JLabel();
 		jScrollPane1 = new JScrollPane();
-		comment_area = new JEditorPane();
+		commentArea = new JEditorPane();
 
-		comment_panel.setLayout(new AbsoluteLayout());
+		commentPanel.setLayout(new AbsoluteLayout());
 
 		jScrollPane1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		jScrollPane1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 
 		// Comment area
-		comment_area.setText(com.getComment());
-		comment_area.setEditable(false);
-		comment_area.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
-		jScrollPane1.setViewportView(comment_area);
+		commentArea.setText(com.getComment());
+		commentArea.setEditable(false);
+		commentArea.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
+		jScrollPane1.setViewportView(commentArea);
 
-		n_likes.setFont(new Font("Tahoma", 0, 14)); // NOI18N
-		n_likes.setText(String.valueOf(
-				dblike.getLikes(com.getIDComment().get()) - dblike.getDislikes(com.getIDComment().get())));// Likes - dislikes
-		n_likes.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
+		nLikes.setFont(new Font("Tahoma", 0, 14)); // NOI18N
+		nLikes.setText(String
+				.valueOf(dblike.getLikes(com.getIDComment().get()) - dblike.getDislikes(com.getIDComment().get()))); // Likes
+																													// -
+																													// dislikes
+		nLikes.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
 
-		like.addActionListener(e ->{
+		like.addActionListener(e -> {
 			dblike.setLike(com.getIDComment().get(), user.getId());
-			n_likes.setText(String.valueOf(
-					dblike.getLikes(com.getIDComment().get()) - dblike.getDislikes(com.getIDComment().get())));// Likes - dislikes
-			
+			nLikes.setText(String
+					.valueOf(dblike.getLikes(com.getIDComment().get()) - dblike.getDislikes(com.getIDComment().get()))); // Likes
+																														// -
+																														// dislikes
+
 		});
-		
-		dislike.addActionListener(e ->{
+
+		dislike.addActionListener(e -> {
 			dblike.setDislike(com.getIDComment().get(), user.getId());
-			n_likes.setText(String.valueOf(
-					dblike.getLikes(com.getIDComment().get()) - dblike.getDislikes(com.getIDComment().get())));// Likes - dislikes
-			
+			nLikes.setText(String
+					.valueOf(dblike.getLikes(com.getIDComment().get()) - dblike.getDislikes(com.getIDComment().get()))); // Likes
+																														// -
+																														// dislikes
+
 		});
-		
-		
+
 		menu.setText(".");
 		menu.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
 
-		date_user.setFont(new Font("Tahoma", 0, 14)); // NOI18N
+		dateUser.setFont(new Font("Tahoma", 0, 14)); // NOI18N
 
 		// date_user.setText(this.discussion.getData() + "by " +
 		// dbuser.getUser(discussion.getIdUser()).get().getUsername());
-		date_user.setHorizontalAlignment(SwingConstants.RIGHT);
+		dateUser.setHorizontalAlignment(SwingConstants.RIGHT);
 
-		date_user.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
-		date_user.setText(sdf.format(com.getData()) + " by " + dbuser.getUser(com.getIDUser()).get().getUsername());
+		dateUser.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
+		dateUser.setText(sdf.format(com.getData()) + " by " + dbuser.getUser(com.getIDUser()).get().getUsername());
 
-		comment_area.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
-		jScrollPane1.setViewportView(comment_area);
-		GroupLayout comment_partLayout = new GroupLayout(comment_part);
+		commentArea.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
+		jScrollPane1.setViewportView(commentArea);
+		GroupLayout commentPartLayout = new GroupLayout(commentPart);
 
-		comment_partLayout.setAutoCreateContainerGaps(true);
-		comment_partLayout.setAutoCreateGaps(true);
-		comment_part.setLayout(comment_partLayout);
-		comment_partLayout.setHorizontalGroup(comment_partLayout.createSequentialGroup()
-				.addGroup(comment_partLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+		commentPartLayout.setAutoCreateContainerGaps(true);
+		commentPartLayout.setAutoCreateGaps(true);
+		commentPart.setLayout(commentPartLayout);
+		commentPartLayout.setHorizontalGroup(commentPartLayout.createSequentialGroup()
+				.addGroup(commentPartLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
 						.addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 720, GroupLayout.PREFERRED_SIZE)
 
-						.addGroup(comment_partLayout.createSequentialGroup().addComponent(n_likes)
+						.addGroup(commentPartLayout.createSequentialGroup().addComponent(nLikes)
 								.addComponent(like, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
 								.addComponent(dislike, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
-						.addComponent(date_user, GroupLayout.Alignment.TRAILING))
+						.addComponent(dateUser, GroupLayout.Alignment.TRAILING))
 				.addComponent(menu, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE));
 
-		comment_partLayout.setVerticalGroup(comment_partLayout.createSequentialGroup()
-				.addGroup(comment_partLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+		commentPartLayout.setVerticalGroup(commentPartLayout.createSequentialGroup()
+				.addGroup(commentPartLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 						.addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE)
 						.addComponent(menu, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
 
-				.addGroup(comment_partLayout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(n_likes)
+				.addGroup(commentPartLayout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(nLikes)
 						.addComponent(like, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
 						.addComponent(dislike, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
-						.addComponent(date_user)));
+						.addComponent(dateUser)));
 
-		comment_panel.add(comment_part, new AbsoluteConstraints(0, 0, 1080, -1));
+		commentPanel.add(commentPart, new AbsoluteConstraints(0, 0, 1080, -1));
 
-		add(comment_part);
+		add(commentPart);
 	}
 
-	private JPanel comment_part;
+	private JPanel commentPart;
 	private JButton menu;
-	private JPanel comment_panel;
+	private JPanel commentPanel;
 	private JButton like;
 	private JButton dislike;
-	private JLabel date_user;
-	private JLabel n_likes;
+	private JLabel dateUser;
+	private JLabel nLikes;
 	private JScrollPane jScrollPane1;
-	private JEditorPane comment_area;
+	private JEditorPane commentArea;
 
 }

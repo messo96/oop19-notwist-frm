@@ -72,7 +72,7 @@ public class RulesPan extends JPanel {
 	private JEditorPane rules_area;
 	private JPanel rules_panel;
 	
-	private void importRules(){
+	private void importRules() {
 			BufferedReader buf;
 			InputStreamReader in = new InputStreamReader(this.getClass().getResourceAsStream("/docs/Rules.txt"));
 			try {

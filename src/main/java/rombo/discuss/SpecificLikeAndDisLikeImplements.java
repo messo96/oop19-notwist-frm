@@ -27,12 +27,11 @@ public class SpecificLikeAndDisLikeImplements extends LikeAndDislikeImplements i
 
 
 	/*@Return a Optional about the comment, if the comment is not present return a Oprional.Empty.*/
-	public Optional<CommentsImplements> GetComment() {
+	public final Optional<CommentsImplements> GetComment() {
 		
-		if(this.Comment != null) {
+		if (this.Comment != null) {
 			return this.Comment;
-		}
-		else {
+		} else {
 			return Optional.empty();
 		}
 		

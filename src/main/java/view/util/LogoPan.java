@@ -8,7 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 
-public class LogoPan extends JPanel{
+public class LogoPan extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 

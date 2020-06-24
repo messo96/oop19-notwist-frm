@@ -11,36 +11,29 @@ import model.database.UserDB;
  * 
  *
  */
-public class UserImplDB {
-	
+public class UserImplDB implements IUserImplDB {
+
 	private UserDB dbu = new UserDB();
 
 	/**
-	 * get all users.
 	 * 
-	 * @return list of {@link User}
+	 * {@inheritDoc}
 	 */
 	public List<User> getAll() {
 		return dbu.read();
 	}
 
 	/**
-	 * get {@link User} from id.
 	 * 
-	 * @param idUser id of the user to find
-	 * @return Optional of {@link User} if exist, false otherwise
+	 * {@inheritDoc}
 	 */
 	public Optional<User> getUser(final Integer idUser) {
 		return dbu.read().stream().filter(u -> u.getId().equals(idUser)).findFirst();
 	}
 
 	/**
-	 * control if combination email-password correspond to a {@link User}.
 	 * 
-	 * @param email    of the user
-	 * @param password of the user
-	 * @return Optional of {@link User} if combination is correct, Optional empty
-	 *         otherwise
+	 * {@inheritDoc}
 	 */
 	public Optional<User> login(final String email, final String password) {
 		return dbu.read().stream().filter(u -> u.getEmail().equals(email) && u.getPassword().equals(password))
@@ -48,13 +41,8 @@ public class UserImplDB {
 	}
 
 	/**
-	 * create new user.
 	 * 
-	 * @param username of the new user
-	 * @param password of the new user
-	 * @param email    of the new user
-	 * @param isMod    boolean is moderator
-	 * @return true if registered correctly, false otherwise
+	 * {@inheritDoc}
 	 */
 	public boolean register(final String username, final String password, final String email, final boolean isMod) {
 		if (existUser(email)) {

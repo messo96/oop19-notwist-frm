@@ -33,9 +33,10 @@ import controller.database.UserImplDB;
 import model.base.User;
 
 import view.gui.BuildAfterGui;
+import view.gui.PreGui;
 
-public class LoginPan extends JPanel {
-	
+public class LoginPan extends JPanel implements PreGui {
+
 	private static final long serialVersionUID = 1L;
 	private UserImplDB dbuser = new UserImplDB();
 
@@ -185,10 +186,18 @@ public class LoginPan extends JPanel {
 		return this.login_button;
 	}
 
+	@Override
+	public String getUsername() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
 	public String getMail() {
 		return this.mail_field.getText();
 	}
 
+	@Override
 	public String getPassword() {
 		return this.pssw_field.getText();
 	}
@@ -212,4 +221,5 @@ public class LoginPan extends JPanel {
 	private JSeparator jSeparator2;
 	private JTextField mail_field;
 	private JPasswordField pssw_field;
+
 }

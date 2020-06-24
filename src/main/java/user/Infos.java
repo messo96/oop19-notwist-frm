@@ -4,7 +4,7 @@ import javax.swing.JPanel;
 
 import model.base.User;
 
-public class Infos extends JPanel{
+public class Infos extends JPanel {
 	
 
 	private static final long serialVersionUID = 1L;
