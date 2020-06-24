@@ -76,7 +76,7 @@ public class BuildAfterGui extends JFrame {
 		// Adding the card!
 		getContentPane().add(bodyHolder, new AbsoluteConstraints(0, 120, 1080, 490));
 
-		header_panel = new Header(tableDiscussion, bodyHolder);
+		header_panel = new Header(tableDiscussion, bodyHolder, user);
 		header_panel.setVisible(true);
 
 		getContentPane().add(header_panel, new AbsoluteConstraints(0, 20, 1080, -1));
