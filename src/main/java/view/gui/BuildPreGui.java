@@ -45,23 +45,23 @@ public class BuildPreGui extends JFrame {
         Image icon = Toolkit.getDefaultToolkit().getImage(this.getClass().getClassLoader().getResource("img/icon.jpg"));    
         setIconImage(icon);   
         //Get upper panel and add it to the main frame.
-        upper_panel = new UpperPan();
-        upper_panel.setVisible(true);
+        upperPanel = new UpperPan();
+        upperPanel.setVisible(true);
 
-        getContentPane().add(upper_panel, new AbsoluteConstraints(510, 0, 420, 40));
+        getContentPane().add(upperPanel, new AbsoluteConstraints(510, 0, 420, 40));
 
         //Card space.
         panelHolder.setLayout(new CardLayout());
 
         //Add login to card.
-        login_panel = new LoginPan();
-        login_panel.setVisible(true);
-        panelHolder.add(login_panel, "login");
+        loginPanel = new LoginPan();
+        loginPanel.setVisible(true);
+        panelHolder.add(loginPanel, "login");
 
         //Add register to card.
-        register_panel = new RegisterPan();
-        register_panel.setVisible(true);
-		panelHolder.add(register_panel, "register_panel");
+        registerPanel = new RegisterPan();
+        registerPanel.setVisible(true);
+		panelHolder.add(registerPanel, "registerPanel");
 
         //Adding card.
         getContentPane().add(panelHolder, new AbsoluteConstraints(510, 40, 370, 480));
@@ -130,9 +130,9 @@ public class BuildPreGui extends JFrame {
 
     
     private JPanel panelHolder;   
-    private LoginPan login_panel;
+    private LoginPan loginPanel;
     private LogoPan logo;
-    private UpperPan upper_panel;
-    private RegisterPan register_panel;
+    private UpperPan upperPanel;
+    private RegisterPan registerPanel;
 
 }
