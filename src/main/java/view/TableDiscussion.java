@@ -78,7 +78,7 @@ public class TableDiscussion {
 							.get();
 					JFrame fr = new JFrame();
 					Image icon = Toolkit.getDefaultToolkit()
-							.getImage(this.getClass().getClassLoader().getResource("img/icon.jpg.png"));
+							.getImage(this.getClass().getClassLoader().getResource("img/icon.jpg"));
 					fr.setIconImage(icon);
 					fr.setContentPane(new TopicPan(disc, user));
 					fr.setResizable(false);
