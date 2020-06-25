@@ -2,6 +2,8 @@ package view;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -75,7 +77,11 @@ public class TableDiscussion {
 							tableDiscussion.getModel().getValueAt(tableDiscussion.getSelectedRow(), 6).toString()))
 							.get();
 					JFrame fr = new JFrame();
+					Image icon = Toolkit.getDefaultToolkit()
+							.getImage(this.getClass().getClassLoader().getResource("img/icon.jpg.png"));
+					fr.setIconImage(icon);
 					fr.setContentPane(new TopicPan(disc, user));
+					fr.setResizable(false);
 					fr.pack();
 					fr.setVisible(true);
 				}

@@ -21,6 +21,7 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 
+import org.netbeans.lib.awtextra.AbsoluteConstraints;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
 
 import controller.database.LikeDislikeImplDiscussionDB;
@@ -138,7 +139,7 @@ public class Topic extends JPanel {
 								.addComponent(dislike, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 								.addComponent(dateUser)));
 
-		discussionPanel.add(discussionPart, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 1080, -1));
+		discussionPanel.add(discussionPart, new AbsoluteConstraints(20, 0, 1080, -1));
 
 		add(discussionPanel);
 	}

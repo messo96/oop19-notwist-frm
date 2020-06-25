@@ -1,6 +1,8 @@
 package user;
 
 import java.awt.Color;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -57,6 +59,10 @@ public class UserDiscussions extends JPanel {
 									.parseInt(discussionTable.getModel().getValueAt(discussionTable.getSelectedRow(), 2).toString()))
 							.get();
 					JFrame fr = new JFrame();
+					Image icon = Toolkit.getDefaultToolkit()
+							.getImage(this.getClass().getClassLoader().getResource("img/icon.jpg.png"));
+					fr.setIconImage(icon);
+					fr.setResizable(false);
 					fr.setContentPane(new TopicPan(disc, user));
 					fr.pack();
 					fr.setVisible(true);
