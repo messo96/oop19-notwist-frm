@@ -68,6 +68,8 @@ public class TableDiscussion {
 		tableDiscussion.getColumnModel().getColumn(4).setPreferredWidth(90);
 		tableDiscussion.getColumnModel().getColumn(5).setPreferredWidth(90);
 		tableDiscussion.removeColumn(tableDiscussion.getColumnModel().getColumn(6));
+		
+		tableDiscussion.getTableHeader().setReorderingAllowed(false);
 
 		tableDiscussion.addMouseListener(new MouseAdapter() {
 			public void mousePressed(final MouseEvent mouseEvent) {
